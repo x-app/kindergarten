@@ -84,8 +84,6 @@
 		12C794911B44232300918497 /* kindergarten */ = {
 			isa = PBXGroup;
 			children = (
-				12C794961B44232300918497 /* AppDelegate.h */,
-				12C794971B44232300918497 /* AppDelegate.m */,
 				12C794991B44232300918497 /* FirstViewController.h */,
 				12C7949A1B44232300918497 /* FirstViewController.m */,
 				12C7949C1B44232300918497 /* SecondViewController.h */,
@@ -101,6 +99,8 @@
 		12C794921B44232300918497 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				12C794961B44232300918497 /* AppDelegate.h */,
+				12C794971B44232300918497 /* AppDelegate.m */,
 				12C794931B44232300918497 /* Info.plist */,
 				12C794941B44232300918497 /* main.m */,
 			);
