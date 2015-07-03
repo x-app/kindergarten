@@ -17,6 +17,45 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    NSInteger visitTimes = 0;
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    visitTimes = [userDefaults integerForKey:@"visitTimes"];
+    
+    //for the first time test
+    visitTimes = 0;
+    //
+    
+    if (visitTimes == 0) {
+        
+        //create UI
+        CGRect windowFrame = [[UIScreen mainScreen] bounds];
+        UIWindow *theWindow = [[UIWindow alloc] initWithFrame:windowFrame];
+        [self setWindow:theWindow];
+        
+        CGRect buttonFrame = CGRectMake(80, 80, 80, 80);
+        UIButton* _insertButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        [_insertButton setFrame:buttonFrame];
+        
+        [_insertButton addTarget:self action:@selector(endOfWelcome:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [_insertButton setTitle:@"End" forState:UIControlStateNormal];
+        [[self window] addSubview:_insertButton];
+        
+        [[self window] setBackgroundColor:[UIColor whiteColor]];
+        [[self window] makeKeyAndVisible];
+
+        
+        visitTimes++;
+    }
+    
+    //存储时，除NSNumber类型使用对应的类型意外，其他的都是使用setObject:forKey:
+    [userDefaults setInteger:visitTimes forKey:@"visitTimes"];
+    
+    //这里建议同步存储到磁盘中，但是不是必须的
+    [userDefaults synchronize];
+    
     return YES;
 }
 
@@ -41,5 +80,17 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
+
+-(void) endOfWelcome:(id)sender
+{
+//    UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"Main.storyboard" bundle:nil];
+//    UIViewController* test2obj = [secondStoryBoard instantiateViewControllerWithIdentifier:@"test2"];  //test2为viewcontroller的StoryboardId
+//    [self.navigationController pushViewController:test2obj animated:YES];
+    
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    [self window].rootViewController = [mainStoryboard instantiateInitialViewController];
+}
+
 
 @end
