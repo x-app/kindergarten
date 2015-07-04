@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 
+//#import "MYBlurIntroductionView.h"
+
 @interface AppDelegate ()
 
 @end
@@ -34,6 +36,7 @@
         UIWindow *theWindow = [[UIWindow alloc] initWithFrame:windowFrame];
         [self setWindow:theWindow];
         
+        /*
         CGRect buttonFrame = CGRectMake(80, 80, 80, 80);
         UIButton* _insertButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         [_insertButton setFrame:buttonFrame];
@@ -45,8 +48,31 @@
         
         [[self window] setBackgroundColor:[UIColor whiteColor]];
         [[self window] makeKeyAndVisible];
-
+         */
         
+        CGFloat frameWidth = windowFrame.size.width;
+        CGFloat frameHeight = windowFrame.size.height;
+        //新建欢迎界面的四个界面
+        NSMutableArray *panels = [[NSMutableArray alloc] init];
+        for (int i = 1; i <= 4; i++) {
+            NSString *nibName = [NSString stringWithFormat:@"help_%d", i];
+            NSLog(@"%@", nibName);
+            MYIntroductionPanel *panel = [[MYIntroductionPanel alloc] initWithFrame:CGRectMake(0, 0, frameWidth, frameHeight) nibNamed:nibName];
+            [panels addObject:panel];
+        }
+        
+        //Create the introduction view and set its delegate
+        MYBlurIntroductionView *introductionView = [[MYBlurIntroductionView alloc] initWithFrame:CGRectMake(0, 0, frameWidth, frameHeight)];
+        
+        
+        introductionView.delegate = self;
+        [introductionView setBackgroundColor:[UIColor whiteColor]];
+
+        //Build the introduction with desired panels
+        [introductionView buildIntroductionWithPanels:panels];
+        
+        [[self window] addSubview:introductionView];
+
         visitTimes++;
     }
     
@@ -88,6 +114,18 @@
 //    UIViewController* test2obj = [secondStoryBoard instantiateViewControllerWithIdentifier:@"test2"];  //test2为viewcontroller的StoryboardId
 //    [self.navigationController pushViewController:test2obj animated:YES];
     
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    [self window].rootViewController = [mainStoryboard instantiateInitialViewController];
+}
+
+#pragma mark - MYIntroduction Delegate
+
+-(void)introduction:(MYBlurIntroductionView *)introductionView didChangeToPanel:(MYIntroductionPanel *)panel withIndex:(NSInteger)panelIndex{
+    NSLog(@"Introduction did change to panel %ld", (long)panelIndex);
+}
+
+-(void)introduction:(MYBlurIntroductionView *)introductionView didFinishWithType:(MYFinishType)finishType {
+    NSLog(@"Introduction did finish");
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     [self window].rootViewController = [mainStoryboard instantiateInitialViewController];
 }
