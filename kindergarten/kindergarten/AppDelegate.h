@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MYBlurIntroductionView.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, MYIntroductionDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
