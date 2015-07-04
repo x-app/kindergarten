@@ -87,7 +87,9 @@
 //    UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"Main.storyboard" bundle:nil];
 //    UIViewController* test2obj = [secondStoryBoard instantiateViewControllerWithIdentifier:@"test2"];  //test2为viewcontroller的StoryboardId
 //    [self.navigationController pushViewController:test2obj animated:YES];
-    
+    // 此处需要清除welcome元素
+    //..
+    //
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     [self window].rootViewController = [mainStoryboard instantiateInitialViewController];
 }

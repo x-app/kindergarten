@@ -418,6 +418,7 @@
 				12C794B71B44232300918497 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		12C794B81B44232300918497 /* Build configuration list for PBXNativeTarget "kindergartenTests" */ = {
 			isa = XCConfigurationList;
@@ -426,6 +427,7 @@
 				12C794BA1B44232300918497 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
