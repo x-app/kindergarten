@@ -23,8 +23,8 @@
 		12AC16151B4918C3007C247B /* UIViewController+RBStoryboardLink.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AC160F1B4918C3007C247B /* UIViewController+RBStoryboardLink.m */; };
 		12C794951B44232300918497 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C794941B44232300918497 /* main.m */; };
 		12C794981B44232300918497 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C794971B44232300918497 /* AppDelegate.m */; };
-		12C7949B1B44232300918497 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C7949A1B44232300918497 /* FirstViewController.m */; };
-		12C7949E1B44232300918497 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C7949D1B44232300918497 /* SecondViewController.m */; };
+		12C7949B1B44232300918497 /* BabyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C7949A1B44232300918497 /* BabyViewController.m */; };
+		12C7949E1B44232300918497 /* ClassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C7949D1B44232300918497 /* ClassViewController.m */; };
 		12C794A11B44232300918497 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12C7949F1B44232300918497 /* Main.storyboard */; };
 		12C794A31B44232300918497 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12C794A21B44232300918497 /* Images.xcassets */; };
 		12C794A61B44232300918497 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 12C794A41B44232300918497 /* LaunchScreen.xib */; };
@@ -81,10 +81,10 @@
 		12C794941B44232300918497 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		12C794961B44232300918497 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		12C794971B44232300918497 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		12C794991B44232300918497 /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
-		12C7949A1B44232300918497 /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
-		12C7949C1B44232300918497 /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
-		12C7949D1B44232300918497 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
+		12C794991B44232300918497 /* BabyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BabyViewController.h; sourceTree = "<group>"; };
+		12C7949A1B44232300918497 /* BabyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BabyViewController.m; sourceTree = "<group>"; };
+		12C7949C1B44232300918497 /* ClassViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassViewController.h; sourceTree = "<group>"; };
+		12C7949D1B44232300918497 /* ClassViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassViewController.m; sourceTree = "<group>"; };
 		12C794A01B44232300918497 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		12C794A21B44232300918497 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		12C794A51B44232300918497 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -164,19 +164,9 @@
 		12C794911B44232300918497 /* kindergarten */ = {
 			isa = PBXGroup;
 			children = (
-				12AC15DB1B48FBA9007C247B /* LoginViewController.h */,
-				12AC15DC1B48FBA9007C247B /* LoginViewController.m */,
-				12C794991B44232300918497 /* FirstViewController.h */,
-				12C7949A1B44232300918497 /* FirstViewController.m */,
-				12C7949C1B44232300918497 /* SecondViewController.h */,
-				12C7949D1B44232300918497 /* SecondViewController.m */,
-				12AC15F21B490BD1007C247B /* GartenViewController.h */,
-				12AC15F31B490BD1007C247B /* GartenViewController.m */,
-				12AC15F51B490D80007C247B /* MeViewController.h */,
-				12AC15F61B490D80007C247B /* MeViewController.m */,
+				12F630161B49302500BE67B6 /* Main Storyboard */,
+				12F630151B492FB700BE67B6 /* Login Storyboard */,
 				12C794A41B44232300918497 /* LaunchScreen.xib */,
-				12AC15D91B48FB4D007C247B /* Login.storyboard */,
-				12C7949F1B44232300918497 /* Main.storyboard */,
 				12C794A21B44232300918497 /* Images.xcassets */,
 				12AC16021B4918C3007C247B /* RBStoryboardLink */,
 				99D9092C1B47A745001F659D /* MYBlurIntroductionView */,
@@ -212,6 +202,32 @@
 				12C794B01B44232300918497 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		12F630151B492FB700BE67B6 /* Login Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				12AC15D91B48FB4D007C247B /* Login.storyboard */,
+				12AC15DB1B48FBA9007C247B /* LoginViewController.h */,
+				12AC15DC1B48FBA9007C247B /* LoginViewController.m */,
+			);
+			name = "Login Storyboard";
+			sourceTree = "<group>";
+		};
+		12F630161B49302500BE67B6 /* Main Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				12C7949F1B44232300918497 /* Main.storyboard */,
+				12C794991B44232300918497 /* BabyViewController.h */,
+				12C7949A1B44232300918497 /* BabyViewController.m */,
+				12C7949C1B44232300918497 /* ClassViewController.h */,
+				12C7949D1B44232300918497 /* ClassViewController.m */,
+				12AC15F21B490BD1007C247B /* GartenViewController.h */,
+				12AC15F31B490BD1007C247B /* GartenViewController.m */,
+				12AC15F51B490D80007C247B /* MeViewController.h */,
+				12AC15F61B490D80007C247B /* MeViewController.m */,
+			);
+			name = "Main Storyboard";
 			sourceTree = "<group>";
 		};
 		99ABD5951B47FC5800B8DB8B /* Resource */ = {
@@ -363,12 +379,12 @@
 				12AC16121B4918C3007C247B /* RBStoryboardPopoverSegue.m in Sources */,
 				12AC16101B4918C3007C247B /* RBStoryboardLink.m in Sources */,
 				12AC16131B4918C3007C247B /* RBStoryboardPushSegue.m in Sources */,
-				12C7949E1B44232300918497 /* SecondViewController.m in Sources */,
+				12C7949E1B44232300918497 /* ClassViewController.m in Sources */,
 				12AC15F71B490D80007C247B /* MeViewController.m in Sources */,
 				12C794981B44232300918497 /* AppDelegate.m in Sources */,
 				99D9092A1B47A73D001F659D /* MYBlurIntroductionView.m in Sources */,
 				12AC15DD1B48FBA9007C247B /* LoginViewController.m in Sources */,
-				12C7949B1B44232300918497 /* FirstViewController.m in Sources */,
+				12C7949B1B44232300918497 /* BabyViewController.m in Sources */,
 				12AC16111B4918C3007C247B /* RBStoryboardModalSegue.m in Sources */,
 				12AC16141B4918C3007C247B /* RBStoryboardSegue.m in Sources */,
 				12C794951B44232300918497 /* main.m in Sources */,

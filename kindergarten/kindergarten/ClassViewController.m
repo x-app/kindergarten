@@ -1,18 +1,18 @@
 //
-//  FirstViewController.m
+//  ClassViewController.m
 //  kindergarten
 //
 //  Created by slice on 15-7-1.
 //  Copyright (c) 2015年 xapp. All rights reserved.
 //
 
-#import "FirstViewController.h"
+#import "ClassViewController.h"
 
-@interface FirstViewController ()
+@interface ClassViewController ()
 
 @end
 
-@implementation FirstViewController
+@implementation ClassViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

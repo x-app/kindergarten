@@ -1,5 +1,5 @@
 //
-//  FirstViewController.h
+//  ClassViewController.h
 //  kindergarten
 //
 //  Created by slice on 15-7-1.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FirstViewController : UIViewController
+@interface ClassViewController : UIViewController
 
 
 @end

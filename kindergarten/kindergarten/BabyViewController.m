@@ -1,18 +1,18 @@
 //
-//  SecondViewController.m
+//  BabyViewController.m
 //  kindergarten
 //
 //  Created by slice on 15-7-1.
 //  Copyright (c) 2015年 xapp. All rights reserved.
 //
 
-#import "SecondViewController.h"
+#import "BabyViewController.h"
 
-@interface SecondViewController ()
+@interface BabyViewController ()
 
 @end
 
-@implementation SecondViewController
+@implementation BabyViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
