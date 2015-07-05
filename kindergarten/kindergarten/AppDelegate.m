@@ -26,12 +26,11 @@
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     visitTimes = [userDefaults integerForKey:@"visitTimes"];
     
-    //for the first time test
+//    for the first time test
     visitTimes = 0;
     //
     
     if (visitTimes == 0) {
-        
         //create UI
         CGRect windowFrame = [[UIScreen mainScreen] bounds];
         UIWindow *theWindow = [[UIWindow alloc] initWithFrame:windowFrame];
@@ -73,6 +72,9 @@
         [introductionView buildIntroductionWithPanels:panels];
         
         [[self window] addSubview:introductionView];
+    }
+    else{
+        [self introduction:nil didFinishWithType:0];
     }
     
     visitTimes++;
