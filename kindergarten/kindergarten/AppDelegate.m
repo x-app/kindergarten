@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "LoginViewController.h"
 
 //#import "MYBlurIntroductionView.h"
 
@@ -72,9 +73,9 @@
         [introductionView buildIntroductionWithPanels:panels];
         
         [[self window] addSubview:introductionView];
-
-        visitTimes++;
     }
+    
+    visitTimes++;
     
     //存储时，除NSNumber类型使用对应的类型意外，其他的都是使用setObject:forKey:
     [userDefaults setInteger:visitTimes forKey:@"visitTimes"];
@@ -128,8 +129,11 @@
 
 -(void)introduction:(MYBlurIntroductionView *)introductionView didFinishWithType:(MYFinishType)finishType {
     NSLog(@"Introduction did finish");
-    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    [self window].rootViewController = [mainStoryboard instantiateInitialViewController];
+    UIStoryboard *loginStoryboard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
+    [self window].rootViewController = [loginStoryboard instantiateInitialViewController];
+    
+    LoginViewController *loginViewController = (LoginViewController *)self.window.rootViewController;
+    loginViewController.appWindow = [self window];
 }
 
 

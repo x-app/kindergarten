@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		12AC15DA1B48FB4D007C247B /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12AC15D91B48FB4D007C247B /* Login.storyboard */; };
+		12AC15DD1B48FBA9007C247B /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AC15DC1B48FBA9007C247B /* LoginViewController.m */; };
+		12AC15EC1B48FCBC007C247B /* RBStoryboardLink.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AC15E01B48FCBC007C247B /* RBStoryboardLink.m */; };
+		12AC15ED1B48FCBC007C247B /* RBStoryboardModalSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AC15E31B48FCBC007C247B /* RBStoryboardModalSegue.m */; };
+		12AC15EE1B48FCBC007C247B /* RBStoryboardPopoverSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AC15E51B48FCBC007C247B /* RBStoryboardPopoverSegue.m */; };
+		12AC15EF1B48FCBC007C247B /* RBStoryboardPushSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AC15E71B48FCBC007C247B /* RBStoryboardPushSegue.m */; };
+		12AC15F01B48FCBC007C247B /* RBStoryboardSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AC15E91B48FCBC007C247B /* RBStoryboardSegue.m */; };
+		12AC15F11B48FCBC007C247B /* UIViewController+RBStoryboardLink.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AC15EB1B48FCBC007C247B /* UIViewController+RBStoryboardLink.m */; };
 		12C794951B44232300918497 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C794941B44232300918497 /* main.m */; };
 		12C794981B44232300918497 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C794971B44232300918497 /* AppDelegate.m */; };
 		12C7949B1B44232300918497 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C7949A1B44232300918497 /* FirstViewController.m */; };
@@ -38,6 +46,22 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		12AC15D91B48FB4D007C247B /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		12AC15DB1B48FBA9007C247B /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		12AC15DC1B48FBA9007C247B /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		12AC15DF1B48FCBC007C247B /* RBStoryboardLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBStoryboardLink.h; sourceTree = "<group>"; };
+		12AC15E01B48FCBC007C247B /* RBStoryboardLink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBStoryboardLink.m; sourceTree = "<group>"; };
+		12AC15E11B48FCBC007C247B /* RBStoryboardLinkSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBStoryboardLinkSource.h; sourceTree = "<group>"; };
+		12AC15E21B48FCBC007C247B /* RBStoryboardModalSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBStoryboardModalSegue.h; sourceTree = "<group>"; };
+		12AC15E31B48FCBC007C247B /* RBStoryboardModalSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBStoryboardModalSegue.m; sourceTree = "<group>"; };
+		12AC15E41B48FCBC007C247B /* RBStoryboardPopoverSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBStoryboardPopoverSegue.h; sourceTree = "<group>"; };
+		12AC15E51B48FCBC007C247B /* RBStoryboardPopoverSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBStoryboardPopoverSegue.m; sourceTree = "<group>"; };
+		12AC15E61B48FCBC007C247B /* RBStoryboardPushSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBStoryboardPushSegue.h; sourceTree = "<group>"; };
+		12AC15E71B48FCBC007C247B /* RBStoryboardPushSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBStoryboardPushSegue.m; sourceTree = "<group>"; };
+		12AC15E81B48FCBC007C247B /* RBStoryboardSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBStoryboardSegue.h; sourceTree = "<group>"; };
+		12AC15E91B48FCBC007C247B /* RBStoryboardSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBStoryboardSegue.m; sourceTree = "<group>"; };
+		12AC15EA1B48FCBC007C247B /* UIViewController+RBStoryboardLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+RBStoryboardLink.h"; sourceTree = "<group>"; };
+		12AC15EB1B48FCBC007C247B /* UIViewController+RBStoryboardLink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+RBStoryboardLink.m"; sourceTree = "<group>"; };
 		12C7948F1B44232300918497 /* kindergarten.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = kindergarten.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		12C794931B44232300918497 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		12C794941B44232300918497 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -85,6 +109,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		12AC15DE1B48FCBC007C247B /* RBStoryboardLink */ = {
+			isa = PBXGroup;
+			children = (
+				12AC15DF1B48FCBC007C247B /* RBStoryboardLink.h */,
+				12AC15E01B48FCBC007C247B /* RBStoryboardLink.m */,
+				12AC15E11B48FCBC007C247B /* RBStoryboardLinkSource.h */,
+				12AC15E21B48FCBC007C247B /* RBStoryboardModalSegue.h */,
+				12AC15E31B48FCBC007C247B /* RBStoryboardModalSegue.m */,
+				12AC15E41B48FCBC007C247B /* RBStoryboardPopoverSegue.h */,
+				12AC15E51B48FCBC007C247B /* RBStoryboardPopoverSegue.m */,
+				12AC15E61B48FCBC007C247B /* RBStoryboardPushSegue.h */,
+				12AC15E71B48FCBC007C247B /* RBStoryboardPushSegue.m */,
+				12AC15E81B48FCBC007C247B /* RBStoryboardSegue.h */,
+				12AC15E91B48FCBC007C247B /* RBStoryboardSegue.m */,
+				12AC15EA1B48FCBC007C247B /* UIViewController+RBStoryboardLink.h */,
+				12AC15EB1B48FCBC007C247B /* UIViewController+RBStoryboardLink.m */,
+			);
+			name = RBStoryboardLink;
+			path = Classes;
+			sourceTree = "<group>";
+		};
 		12C794861B44232300918497 = {
 			isa = PBXGroup;
 			children = (
@@ -106,6 +151,7 @@
 		12C794911B44232300918497 /* kindergarten */ = {
 			isa = PBXGroup;
 			children = (
+				12AC15DE1B48FCBC007C247B /* RBStoryboardLink */,
 				99D9092C1B47A745001F659D /* MYBlurIntroductionView */,
 				12C794991B44232300918497 /* FirstViewController.h */,
 				12C7949A1B44232300918497 /* FirstViewController.m */,
@@ -115,6 +161,9 @@
 				12C794A21B44232300918497 /* Images.xcassets */,
 				12C794A41B44232300918497 /* LaunchScreen.xib */,
 				12C794921B44232300918497 /* Supporting Files */,
+				12AC15D91B48FB4D007C247B /* Login.storyboard */,
+				12AC15DB1B48FBA9007C247B /* LoginViewController.h */,
+				12AC15DC1B48FBA9007C247B /* LoginViewController.m */,
 			);
 			path = kindergarten;
 			sourceTree = "<group>";
@@ -262,6 +311,7 @@
 				12C794A61B44232300918497 /* LaunchScreen.xib in Resources */,
 				99ABD5971B47FC9B00B8DB8B /* help_1.xib in Resources */,
 				12C794A31B44232300918497 /* Images.xcassets in Resources */,
+				12AC15DA1B48FB4D007C247B /* Login.storyboard in Resources */,
 				99ABD5921B47FC3500B8DB8B /* help_2.png in Resources */,
 				99ABD5A11B48030400B8DB8B /* help_2.xib in Resources */,
 				99ABD5931B47FC3500B8DB8B /* help_3.png in Resources */,
@@ -282,10 +332,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				12AC15F01B48FCBC007C247B /* RBStoryboardSegue.m in Sources */,
+				12AC15F11B48FCBC007C247B /* UIViewController+RBStoryboardLink.m in Sources */,
+				12AC15EF1B48FCBC007C247B /* RBStoryboardPushSegue.m in Sources */,
+				12AC15ED1B48FCBC007C247B /* RBStoryboardModalSegue.m in Sources */,
+				12AC15EC1B48FCBC007C247B /* RBStoryboardLink.m in Sources */,
+				12AC15EE1B48FCBC007C247B /* RBStoryboardPopoverSegue.m in Sources */,
 				99D9092B1B47A73D001F659D /* MYIntroductionPanel.m in Sources */,
 				12C7949E1B44232300918497 /* SecondViewController.m in Sources */,
 				12C794981B44232300918497 /* AppDelegate.m in Sources */,
 				99D9092A1B47A73D001F659D /* MYBlurIntroductionView.m in Sources */,
+				12AC15DD1B48FBA9007C247B /* LoginViewController.m in Sources */,
 				12C7949B1B44232300918497 /* FirstViewController.m in Sources */,
 				12C794951B44232300918497 /* main.m in Sources */,
 			);
