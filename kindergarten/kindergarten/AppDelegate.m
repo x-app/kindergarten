@@ -108,7 +108,7 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
-
+/*
 -(void) endOfWelcome:(id)sender
 {
 //    UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"Main.storyboard" bundle:nil];
@@ -119,7 +119,7 @@
     //
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     [self window].rootViewController = [mainStoryboard instantiateInitialViewController];
-}
+}*/
 
 #pragma mark - MYIntroduction Delegate
 

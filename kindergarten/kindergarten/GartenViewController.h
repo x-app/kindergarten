@@ -1,5 +1,5 @@
 //
-//  LoginViewController.h
+//  GartenViewController.h
 //  kindergarten
 //
 //  Created by slice on 15-7-5.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LoginViewController : UIViewController
-
-@property (nonatomic, weak) UIWindow* appWindow;
+@interface GartenViewController : UIViewController
 
 @end
