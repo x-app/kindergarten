@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="13F1096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
@@ -67,17 +67,22 @@
         <!--园区-->
         <scene sceneID="vhn-YV-WK1">
             <objects>
-                <viewController id="NsU-AB-aHN" customClass="GartenViewController" sceneMemberID="viewController">
+                <viewController id="NsU-AB-aHN" customClass="RBStoryboardLink" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="DE3-Uw-8hc"/>
                         <viewControllerLayoutGuide type="bottom" id="AJd-A4-kHI"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="pSc-MD-SUC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="园区" id="jYw-qu-KHQ"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="storyboardName" value="Garten"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="needsTopLayoutGuide" value="NO"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="needsBottomLayoutGuide" value="NO"/>
+                    </userDefinedRuntimeAttributes>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hP9-NU-TRw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -133,15 +138,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1ew-8n-WMN">
-                                <rect key="frame" x="67" y="487" width="73" height="30"/>
-                                <state key="normal" title="成长档案">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="I0Z-lt-eQ8" kind="custom" customClass="RBStoryboardPushSegue" id="Wlg-M8-47S"/>
-                                </connections>
-                            </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_top_bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="0rj-qq-4Uw">
                                 <rect key="frame" x="0.0" y="64" width="600" height="310"/>
                                 <constraints>
@@ -192,6 +188,18 @@
                                     </mask>
                                 </variation>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1ew-8n-WMN">
+                                <rect key="frame" x="67" y="487" width="73" height="30"/>
+                                <state key="normal" title="成长档案">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="16" y="385" width="73" height="30"/>
+                                </variation>
+                                <connections>
+                                    <segue destination="I0Z-lt-eQ8" kind="custom" customClass="RBStoryboardPushSegue" id="Wlg-M8-47S"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.94509810209274292" green="0.97647064924240112" blue="0.98431378602981567" alpha="1" colorSpace="deviceRGB"/>
                         <constraints>
