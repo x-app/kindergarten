@@ -472,11 +472,11 @@
     
     //[self presentViewController:[loginStoryboard instantiateInitialViewController] animated:YES];
     //[app window].rootViewController = [loginStoryboard instantiateInitialViewController];
-    [self dismiss:0];
+    //[self dismiss:0];
     
     NSLog(@"switch to login.storyboard");
-    //UIStoryboard *loginStoryboard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
-    //[self :[loginStoryboard instantiateInitialViewController] animated:NO completion:nil];
+    UIStoryboard *loginStoryboard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
+    [self presentViewController:[loginStoryboard instantiateInitialViewController] animated:NO completion:nil];
 }
 
 - (IBAction)forgetPswdAction:(id)sender {
