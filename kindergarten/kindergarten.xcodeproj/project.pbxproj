@@ -85,6 +85,7 @@
 		99ABD5A11B48030400B8DB8B /* help_2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99ABD59E1B48030400B8DB8B /* help_2.xib */; };
 		99ABD5A21B48030400B8DB8B /* help_3.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99ABD59F1B48030400B8DB8B /* help_3.xib */; };
 		99ABD5A31B48030400B8DB8B /* help_4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99ABD5A01B48030400B8DB8B /* help_4.xib */; };
+		99F17F491B4D5C3600866F8F /* bg_11.png in Resources */ = {isa = PBXBuildFile; fileRef = 99F17F481B4D5C3600866F8F /* bg_11.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -220,6 +221,7 @@
 		99ABD59E1B48030400B8DB8B /* help_2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = help_2.xib; path = Resource/help_2.xib; sourceTree = "<group>"; };
 		99ABD59F1B48030400B8DB8B /* help_3.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = help_3.xib; path = Resource/help_3.xib; sourceTree = "<group>"; };
 		99ABD5A01B48030400B8DB8B /* help_4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = help_4.xib; path = Resource/help_4.xib; sourceTree = "<group>"; };
+		99F17F481B4D5C3600866F8F /* bg_11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bg_11.png; path = Resource/bg_11.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -619,6 +621,7 @@
 		99ABD5951B47FC5800B8DB8B /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				99F17F481B4D5C3600866F8F /* bg_11.png */,
 				1266D5BF1B495B8A00E7253F /* head.jpg */,
 				1266D5C01B495B8A00E7253F /* home_top_bg.png */,
 				1266D5C11B495B8A00E7253F /* repeat_img.png */,
@@ -724,6 +727,7 @@
 				99ABD5911B47FC3500B8DB8B /* help_1.png in Resources */,
 				9997BA0E1B4D580E00B908B6 /* user_name_icon@2x.png in Resources */,
 				99ABD5A21B48030400B8DB8B /* help_3.xib in Resources */,
+				99F17F491B4D5C3600866F8F /* bg_11.png in Resources */,
 				9997BA101B4D580E00B908B6 /* CLLockVC.xib in Resources */,
 				9997BA1B1B4D580E00B908B6 /* MLTableAlertBackground.png in Resources */,
 				12F630191B4932C000BE67B6 /* Growup.storyboard in Resources */,
