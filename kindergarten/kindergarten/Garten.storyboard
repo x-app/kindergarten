@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="yUg-iF-nCL">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <scenes>
+        <!--园区-->
+        <scene sceneID="R37-QU-2KW">
+            <objects>
+                <viewController title="园区" id="yUg-iF-nCL" customClass="GartenViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="V3d-9w-nmh"/>
+                        <viewControllerLayoutGuide type="bottom" id="uSb-hy-7LX"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="v0g-C8-bCt">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_top_bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="ybr-1f-K3h">
+                                <rect key="frame" x="0.0" y="64" width="600" height="310"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="ybr-1f-K3h" secondAttribute="height" multiplier="720:372" id="blT-rF-HFe"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="head.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="51v-WQ-nDN">
+                                <rect key="frame" x="16" y="334" width="72" height="72"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="72" id="5QO-bZ-fLF"/>
+                                    <constraint firstAttribute="height" constant="72" id="gzz-mV-zNL"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="江苏省南京市南戈特幼儿园小1班" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HBm-9c-gwf">
+                                <rect key="frame" x="16" y="414" width="400" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="400" id="BWA-RO-vg8"/>
+                                    <constraint firstAttribute="height" constant="20" id="Eag-vy-fD8"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="赖楚妍" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D4F-ak-rbm" colorLabel="IBBuiltInLabel-Green">
+                                <rect key="frame" x="108" y="386" width="80" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="7nx-e9-8hc"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="repeat_img.png" translatesAutoresizingMaskIntoConstraints="NO" id="e02-qw-JFl">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="fPx-dY-uqO">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="50"/>
+                                    </constraint>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="fPx-dY-uqO"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="fPx-dY-uqO"/>
+                                    </mask>
+                                </variation>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.9450981021" green="0.97647064920000004" blue="0.98431378599999997" alpha="1" colorSpace="deviceRGB"/>
+                        <constraints>
+                            <constraint firstItem="D4F-ak-rbm" firstAttribute="bottom" secondItem="51v-WQ-nDN" secondAttribute="bottom" id="BpE-Zr-t9Q"/>
+                            <constraint firstItem="ybr-1f-K3h" firstAttribute="top" secondItem="V3d-9w-nmh" secondAttribute="bottom" id="DAS-5D-kek"/>
+                            <constraint firstItem="e02-qw-JFl" firstAttribute="leading" secondItem="v0g-C8-bCt" secondAttribute="leading" id="EPX-MO-RhN"/>
+                            <constraint firstItem="51v-WQ-nDN" firstAttribute="leading" secondItem="v0g-C8-bCt" secondAttribute="leading" constant="16" id="Ean-tR-pWC"/>
+                            <constraint firstItem="ybr-1f-K3h" firstAttribute="bottom" secondItem="51v-WQ-nDN" secondAttribute="bottom" constant="-32" id="QGU-1P-HqW"/>
+                            <constraint firstAttribute="trailing" secondItem="e02-qw-JFl" secondAttribute="trailing" id="QXX-lL-rCd"/>
+                            <constraint firstItem="HBm-9c-gwf" firstAttribute="leading" secondItem="51v-WQ-nDN" secondAttribute="leading" id="XoJ-jO-04t"/>
+                            <constraint firstItem="e02-qw-JFl" firstAttribute="top" secondItem="HBm-9c-gwf" secondAttribute="bottom" id="Ynw-N6-F2y"/>
+                            <constraint firstItem="D4F-ak-rbm" firstAttribute="leading" secondItem="51v-WQ-nDN" secondAttribute="trailing" constant="20" id="euu-no-I1F"/>
+                            <constraint firstItem="HBm-9c-gwf" firstAttribute="top" secondItem="51v-WQ-nDN" secondAttribute="bottom" constant="8" id="jJq-T7-RIa">
+                                <variation key="heightClass=regular-widthClass=compact" constant="4"/>
+                            </constraint>
+                            <constraint firstItem="ybr-1f-K3h" firstAttribute="leading" secondItem="v0g-C8-bCt" secondAttribute="leading" id="oDO-xG-97j"/>
+                            <constraint firstAttribute="trailing" secondItem="ybr-1f-K3h" secondAttribute="trailing" id="t0x-ge-N5C"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="e02-qw-JFl"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="EPX-MO-RhN"/>
+                                <exclude reference="QXX-lL-rCd"/>
+                                <exclude reference="Ynw-N6-F2y"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="e02-qw-JFl"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="EPX-MO-RhN"/>
+                                <include reference="QXX-lL-rCd"/>
+                                <include reference="Ynw-N6-F2y"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" id="d4b-9i-YN0"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bRD-sn-84k" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1527" y="-320.25"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="head.jpg" width="200" height="200"/>
+        <image name="home_top_bg.png" width="720" height="372"/>
+        <image name="repeat_img.png" width="60" height="80"/>
+    </resources>
+</document>
