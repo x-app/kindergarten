@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "LoginViewController.h"
+#import "LoginProfileViewController.h"
 
 //#import "MYBlurIntroductionView.h"
 
@@ -129,11 +129,13 @@
 
 -(void)introduction:(MYBlurIntroductionView *)introductionView didFinishWithType:(MYFinishType)finishType {
     NSLog(@"Introduction did finish");
-    UIStoryboard *loginStoryboard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
+    UIStoryboard *loginStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     [self window].rootViewController = [loginStoryboard instantiateInitialViewController];
     
-    LoginViewController *loginViewController = (LoginViewController *)self.window.rootViewController;
-    loginViewController.appWindow = [self window];
+    //LoginViewController *loginViewController = (LoginViewController *)self.window.rootViewController;
+    //loginViewController.appWindow = [self window];
+    //UINavigationController *loginVC = (UINavigationController *)self.window.rootViewController;
+    //loginVC. = [self window];
 }
 
 
