@@ -7,10 +7,10 @@
 //
 
 #import "LoginProfileViewController.h"
-#import "CoreLock/CLLockVC.h"
+#import "CLLockVC.h"
 #import "ASTextField.h"
 #import "AFHTTPRequestOperationManager.h"
-#import "MLTableAlert/MLTableAlert.h"
+#import "MLTableAlert.h"
 
 @interface LoginProfileViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
