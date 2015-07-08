@@ -2,28 +2,8 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
-        <!--班级-->
-        <scene sceneID="wg7-f3-ORb">
-            <objects>
-                <viewController id="8rJ-Kc-sve" customClass="ClassViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="L7p-HK-0SC"/>
-                        <viewControllerLayoutGuide type="bottom" id="Djb-ko-YwX"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="QS5-Rx-YEW">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="班级" id="OFt-me-Elw"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1528" y="338"/>
-        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
             <objects>
@@ -57,17 +37,17 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="HVI-Ti-RQT" kind="relationship" relationship="rootViewController" id="pBP-N8-gfK"/>
+                        <segue destination="vDF-iJ-BDa" kind="relationship" relationship="rootViewController" id="KOo-nH-V3h"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8iY-7D-JH6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="750" y="-320"/>
         </scene>
-        <!--园区-->
+        <!--Park Link-->
         <scene sceneID="vhn-YV-WK1">
             <objects>
-                <viewController id="NsU-AB-aHN" customClass="RBStoryboardLink" sceneMemberID="viewController">
+                <viewController title="Park Link" id="NsU-AB-aHN" customClass="RBStoryboardLink" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="DE3-Uw-8hc"/>
                         <viewControllerLayoutGuide type="bottom" id="AJd-A4-kHI"/>
@@ -77,7 +57,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="园区" id="jYw-qu-KHQ"/>
+                    <navigationItem key="navigationItem" id="jYw-qu-KHQ"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="string" keyPath="storyboardName" value="Garten"/>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="needsTopLayoutGuide" value="NO"/>
@@ -86,12 +66,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hP9-NU-TRw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1522" y="1022"/>
+            <point key="canvasLocation" x="1528" y="1022"/>
         </scene>
-        <!--我-->
+        <!--Me Link-->
         <scene sceneID="5Ku-kP-vx1">
             <objects>
-                <viewController id="feJ-rv-CXO" customClass="MeViewController" sceneMemberID="viewController">
+                <viewController title="Me Link" id="feJ-rv-CXO" customClass="RBStoryboardLink" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="03f-pR-dIq"/>
                         <viewControllerLayoutGuide type="bottom" id="8jn-wb-qAw"/>
@@ -101,7 +81,12 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="我" id="dKY-Sd-pcP"/>
+                    <navigationItem key="navigationItem" id="dKY-Sd-pcP"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="storyboardName" value="Me"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="needsTopLayoutGuide" value="NO"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="needsBottomLayoutGuide" value="NO"/>
+                    </userDefinedRuntimeAttributes>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7h2-IP-bXY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -119,152 +104,12 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="8rJ-Kc-sve" kind="relationship" relationship="rootViewController" id="myg-jx-ZNa"/>
+                        <segue destination="6Ga-vH-5rf" kind="relationship" relationship="rootViewController" id="hfp-DL-vLb"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GIr-iF-rQN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="750" y="338"/>
-        </scene>
-        <!--宝宝-->
-        <scene sceneID="Wtu-4e-DIv">
-            <objects>
-                <viewController id="HVI-Ti-RQT" customClass="BabyViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="2fL-Ge-NYc"/>
-                        <viewControllerLayoutGuide type="bottom" id="oPY-h6-AYQ"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="2ed-j4-IcP">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_top_bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="0rj-qq-4Uw">
-                                <rect key="frame" x="0.0" y="64" width="600" height="310"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="0rj-qq-4Uw" secondAttribute="height" multiplier="720:372" id="cwH-cz-qjK"/>
-                                </constraints>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="head.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="96D-Ie-IYH">
-                                <rect key="frame" x="16" y="334" width="72" height="72"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="72" id="TUz-iN-BYJ"/>
-                                    <constraint firstAttribute="width" constant="72" id="fbd-rF-O76"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="江苏省南京市南戈特幼儿园小1班" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xcS-yp-BPV">
-                                <rect key="frame" x="16" y="414" width="400" height="20"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="400" id="U1u-Ez-3xD"/>
-                                    <constraint firstAttribute="height" constant="20" id="hNW-OB-CbW"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="赖楚妍" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ySK-27-0lD" colorLabel="IBBuiltInLabel-Green">
-                                <rect key="frame" x="108" y="386" width="80" height="20"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="80" id="Heo-Qb-PIg"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <color key="textColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="repeat_img.png" translatesAutoresizingMaskIntoConstraints="NO" id="rdj-MC-dVe">
-                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="NP1-hg-S5Z">
-                                        <variation key="heightClass=regular-widthClass=compact" constant="50"/>
-                                    </constraint>
-                                </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="NP1-hg-S5Z"/>
-                                    </mask>
-                                </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
-                                    <mask key="constraints">
-                                        <include reference="NP1-hg-S5Z"/>
-                                    </mask>
-                                </variation>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1ew-8n-WMN">
-                                <rect key="frame" x="67" y="487" width="73" height="30"/>
-                                <state key="normal" title="成长档案">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="16" y="385" width="73" height="30"/>
-                                </variation>
-                                <connections>
-                                    <segue destination="I0Z-lt-eQ8" kind="custom" customClass="RBStoryboardPushSegue" id="Wlg-M8-47S"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" red="0.94509810209274292" green="0.97647064924240112" blue="0.98431378602981567" alpha="1" colorSpace="deviceRGB"/>
-                        <constraints>
-                            <constraint firstItem="96D-Ie-IYH" firstAttribute="leading" secondItem="2ed-j4-IcP" secondAttribute="leading" constant="16" id="48o-VK-JeI"/>
-                            <constraint firstItem="xcS-yp-BPV" firstAttribute="top" secondItem="96D-Ie-IYH" secondAttribute="bottom" constant="8" id="5Ov-N5-PL7">
-                                <variation key="heightClass=regular-widthClass=compact" constant="4"/>
-                            </constraint>
-                            <constraint firstItem="rdj-MC-dVe" firstAttribute="leading" secondItem="2ed-j4-IcP" secondAttribute="leading" id="Fze-Nk-UwB"/>
-                            <constraint firstItem="0rj-qq-4Uw" firstAttribute="top" secondItem="2fL-Ge-NYc" secondAttribute="bottom" id="NNI-NJ-azY"/>
-                            <constraint firstItem="0rj-qq-4Uw" firstAttribute="bottom" secondItem="96D-Ie-IYH" secondAttribute="bottom" constant="-32" id="Ras-ER-a2F"/>
-                            <constraint firstItem="ySK-27-0lD" firstAttribute="leading" secondItem="96D-Ie-IYH" secondAttribute="trailing" constant="20" id="SE4-zC-GLI"/>
-                            <constraint firstItem="0rj-qq-4Uw" firstAttribute="leading" secondItem="2ed-j4-IcP" secondAttribute="leading" id="d3p-ub-Oup"/>
-                            <constraint firstAttribute="trailing" secondItem="rdj-MC-dVe" secondAttribute="trailing" id="eqV-kJ-cqL"/>
-                            <constraint firstItem="rdj-MC-dVe" firstAttribute="top" secondItem="xcS-yp-BPV" secondAttribute="bottom" id="eyG-7R-7rg"/>
-                            <constraint firstItem="xcS-yp-BPV" firstAttribute="leading" secondItem="96D-Ie-IYH" secondAttribute="leading" id="ro4-Ae-CJF"/>
-                            <constraint firstAttribute="trailing" secondItem="0rj-qq-4Uw" secondAttribute="trailing" id="sWs-Pb-2vF"/>
-                            <constraint firstItem="ySK-27-0lD" firstAttribute="bottom" secondItem="96D-Ie-IYH" secondAttribute="bottom" id="uPp-Cv-tst"/>
-                        </constraints>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="rdj-MC-dVe"/>
-                            </mask>
-                            <mask key="constraints">
-                                <exclude reference="Fze-Nk-UwB"/>
-                                <exclude reference="eqV-kJ-cqL"/>
-                                <exclude reference="eyG-7R-7rg"/>
-                            </mask>
-                        </variation>
-                        <variation key="heightClass=regular-widthClass=compact">
-                            <mask key="subviews">
-                                <include reference="rdj-MC-dVe"/>
-                            </mask>
-                            <mask key="constraints">
-                                <include reference="Fze-Nk-UwB"/>
-                                <include reference="eqV-kJ-cqL"/>
-                                <include reference="eyG-7R-7rg"/>
-                            </mask>
-                        </variation>
-                    </view>
-                    <navigationItem key="navigationItem" title="宝宝" id="ni7-7q-8OP"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1ew-Jb-LXZ" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1527" y="-320.25"/>
-        </scene>
-        <!--Growup Link-->
-        <scene sceneID="Ybr-qx-j6o">
-            <objects>
-                <viewController title="Growup Link" id="I0Z-lt-eQ8" customClass="RBStoryboardLink" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="OnJ-Z2-dVt"/>
-                        <viewControllerLayoutGuide type="bottom" id="lta-wl-2DR"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Rh2-Uu-i10">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="string" keyPath="storyboardName" value="Growup"/>
-                    </userDefinedRuntimeAttributes>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="8dR-yk-5yB" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2204" y="-320"/>
         </scene>
         <!--园区-->
         <scene sceneID="bjb-Mn-Okh">
@@ -304,14 +149,59 @@
             </objects>
             <point key="canvasLocation" x="750" y="1706"/>
         </scene>
+        <!--Class Link-->
+        <scene sceneID="qjQ-x4-ove">
+            <objects>
+                <viewController title="Class Link" id="6Ga-vH-5rf" customClass="RBStoryboardLink" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="AxU-dg-JHj"/>
+                        <viewControllerLayoutGuide type="bottom" id="Tm8-0z-DUl"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ll0-uH-q9O">
+                        <rect key="frame" x="0.0" y="64" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="BuN-cU-C30"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="storyboardName" value="Class"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="needsTopLayoutGuide" value="NO"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="needsBottomLayoutGuide" value="NO"/>
+                    </userDefinedRuntimeAttributes>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aXI-rQ-sTe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1527" y="338"/>
+        </scene>
+        <!--Baby Link-->
+        <scene sceneID="k02-Bh-r0T">
+            <objects>
+                <viewController title="Baby Link" id="vDF-iJ-BDa" customClass="RBStoryboardLink" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Bvi-Ny-bqx"/>
+                        <viewControllerLayoutGuide type="bottom" id="5KS-5j-j0W"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="13I-AA-PWz">
+                        <rect key="frame" x="0.0" y="64" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="qid-YN-GWh"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="storyboardName" value="Baby"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="needsTopLayoutGuide" value="NO"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="needsBottomLayoutGuide" value="NO"/>
+                    </userDefinedRuntimeAttributes>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jbE-Hc-ObH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1527" y="-320"/>
+        </scene>
     </scenes>
     <resources>
         <image name="baby_icon_normal.png" width="32" height="32"/>
         <image name="class_icon_normal.png" width="32" height="32"/>
-        <image name="head.jpg" width="200" height="200"/>
-        <image name="home_top_bg.png" width="720" height="372"/>
         <image name="my_icon_normal.png" width="32" height="32"/>
         <image name="park_icon_normal.png" width="32" height="32"/>
-        <image name="repeat_img.png" width="60" height="80"/>
     </resources>
 </document>

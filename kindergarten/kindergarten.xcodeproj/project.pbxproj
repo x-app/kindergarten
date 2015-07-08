@@ -32,6 +32,9 @@
 		12C794A31B44232300918497 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12C794A21B44232300918497 /* Images.xcassets */; };
 		12C794A61B44232300918497 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 12C794A41B44232300918497 /* LaunchScreen.xib */; };
 		12C794B21B44232300918497 /* kindergartenTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C794B11B44232300918497 /* kindergartenTests.m */; };
+		12DEAC841B4D36E600C437BE /* Me.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12DEAC831B4D36E600C437BE /* Me.storyboard */; };
+		12DEAC871B4D3E8300C437BE /* Class.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12DEAC861B4D3E8300C437BE /* Class.storyboard */; };
+		12DEAC8A1B4D428300C437BE /* Baby.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12DEAC891B4D428300C437BE /* Baby.storyboard */; };
 		12E038251B4A91680021B266 /* Garten.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12E038241B4A91680021B266 /* Garten.storyboard */; };
 		12F630191B4932C000BE67B6 /* Growup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12F630181B4932C000BE67B6 /* Growup.storyboard */; };
 		99ABD5911B47FC3500B8DB8B /* help_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 99ABD58D1B47FC3500B8DB8B /* help_1.png */; };
@@ -99,6 +102,9 @@
 		12C794AB1B44232300918497 /* kindergartenTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = kindergartenTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		12C794B01B44232300918497 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		12C794B11B44232300918497 /* kindergartenTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = kindergartenTests.m; sourceTree = "<group>"; };
+		12DEAC831B4D36E600C437BE /* Me.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Me.storyboard; sourceTree = "<group>"; };
+		12DEAC861B4D3E8300C437BE /* Class.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Class.storyboard; sourceTree = "<group>"; };
+		12DEAC891B4D428300C437BE /* Baby.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Baby.storyboard; path = ../Baby.storyboard; sourceTree = "<group>"; };
 		12E038241B4A91680021B266 /* Garten.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Garten.storyboard; sourceTree = "<group>"; };
 		12F630181B4932C000BE67B6 /* Growup.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Growup.storyboard; sourceTree = "<group>"; };
 		99ABD58D1B47FC3500B8DB8B /* help_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = help_1.png; path = Resource/help_1.png; sourceTree = "<group>"; };
@@ -174,10 +180,13 @@
 		12C794911B44232300918497 /* kindergarten */ = {
 			isa = PBXGroup;
 			children = (
-				12E038231B4A915A0021B266 /* Garten Storyboard */,
 				12F630151B492FB700BE67B6 /* Login Storyboard */,
 				12F630161B49302500BE67B6 /* Main Storyboard */,
+				12DEAC8B1B4D428900C437BE /* Baby Storyboard */,
 				12F630171B49326C00BE67B6 /* Growup Storyboard */,
+				12DEAC881B4D3E8A00C437BE /* Class Storyboard */,
+				12E038231B4A915A0021B266 /* Garten Storyboard */,
+				12DEAC851B4D36EB00C437BE /* Me Storyboard */,
 				12C794A41B44232300918497 /* LaunchScreen.xib */,
 				12C794A21B44232300918497 /* Images.xcassets */,
 				12AC16021B4918C3007C247B /* RBStoryboardLink */,
@@ -216,10 +225,42 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		12DEAC851B4D36EB00C437BE /* Me Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				12DEAC831B4D36E600C437BE /* Me.storyboard */,
+				12AC15F51B490D80007C247B /* MeViewController.h */,
+				12AC15F61B490D80007C247B /* MeViewController.m */,
+			);
+			name = "Me Storyboard";
+			sourceTree = "<group>";
+		};
+		12DEAC881B4D3E8A00C437BE /* Class Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				12DEAC861B4D3E8300C437BE /* Class.storyboard */,
+				12C7949C1B44232300918497 /* ClassViewController.h */,
+				12C7949D1B44232300918497 /* ClassViewController.m */,
+			);
+			name = "Class Storyboard";
+			sourceTree = "<group>";
+		};
+		12DEAC8B1B4D428900C437BE /* Baby Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				12DEAC891B4D428300C437BE /* Baby.storyboard */,
+				12C794991B44232300918497 /* BabyViewController.h */,
+				12C7949A1B44232300918497 /* BabyViewController.m */,
+			);
+			name = "Baby Storyboard";
+			sourceTree = "<group>";
+		};
 		12E038231B4A915A0021B266 /* Garten Storyboard */ = {
 			isa = PBXGroup;
 			children = (
 				12E038241B4A91680021B266 /* Garten.storyboard */,
+				12AC15F21B490BD1007C247B /* GartenViewController.h */,
+				12AC15F31B490BD1007C247B /* GartenViewController.m */,
 			);
 			name = "Garten Storyboard";
 			sourceTree = "<group>";
@@ -238,14 +279,6 @@
 			isa = PBXGroup;
 			children = (
 				12C7949F1B44232300918497 /* Main.storyboard */,
-				12C794991B44232300918497 /* BabyViewController.h */,
-				12C7949A1B44232300918497 /* BabyViewController.m */,
-				12C7949C1B44232300918497 /* ClassViewController.h */,
-				12C7949D1B44232300918497 /* ClassViewController.m */,
-				12AC15F21B490BD1007C247B /* GartenViewController.h */,
-				12AC15F31B490BD1007C247B /* GartenViewController.m */,
-				12AC15F51B490D80007C247B /* MeViewController.h */,
-				12AC15F61B490D80007C247B /* MeViewController.m */,
 			);
 			name = "Main Storyboard";
 			sourceTree = "<group>";
@@ -381,6 +414,7 @@
 				12C794A61B44232300918497 /* LaunchScreen.xib in Resources */,
 				12E038251B4A91680021B266 /* Garten.storyboard in Resources */,
 				12AC15FF1B4917D3007C247B /* class_icon_normal.png in Resources */,
+				12DEAC841B4D36E600C437BE /* Me.storyboard in Resources */,
 				12AC16001B4917D3007C247B /* my_icon_normal.png in Resources */,
 				99ABD5971B47FC9B00B8DB8B /* help_1.xib in Resources */,
 				12C794A31B44232300918497 /* Images.xcassets in Resources */,
@@ -390,7 +424,9 @@
 				12AC15DA1B48FB4D007C247B /* Login.storyboard in Resources */,
 				1266D5C31B495B8A00E7253F /* home_top_bg.png in Resources */,
 				99ABD5921B47FC3500B8DB8B /* help_2.png in Resources */,
+				12DEAC8A1B4D428300C437BE /* Baby.storyboard in Resources */,
 				99ABD5A11B48030400B8DB8B /* help_2.xib in Resources */,
+				12DEAC871B4D3E8300C437BE /* Class.storyboard in Resources */,
 				99ABD5931B47FC3500B8DB8B /* help_3.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
