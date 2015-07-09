@@ -116,6 +116,9 @@
                                 <rect key="frame" x="35" y="134" width="250" height="45"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="questionFieldTouchDown:" destination="jUf-xS-7Cq" eventType="touchDown" id="Q0t-nN-MQf"/>
+                                </connections>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

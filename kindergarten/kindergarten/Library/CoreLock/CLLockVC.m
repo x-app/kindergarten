@@ -233,7 +233,7 @@
     //默认标题
     self.modifyCurrentTitle = CoreLockModifyNormalTitle;
     
-    if(CoreLockTypeModifyPwd == _type) {
+    if(CoreLockTypeModifyPwd == _type || CoreLockTypeSetPwd == _type) {
         
         _actionView.hidden = YES;
         
@@ -468,29 +468,29 @@
 
 - (IBAction)registerUserAction:(id)sender {
     NSLog(@"register a new account");
-    
-    
-    //[self presentViewController:[loginStoryboard instantiateInitialViewController] animated:YES];
-    //[app window].rootViewController = [loginStoryboard instantiateInitialViewController];
-    //[self dismiss:0];
-    
-    NSLog(@"switch to login.storyboard");
-    UIStoryboard *loginStoryboard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
-    [self presentViewController:[loginStoryboard instantiateInitialViewController] animated:NO completion:nil];
+    NSLog(@"switch to login.storyboard, mode: register");
+    [self switchToLogin];
 }
 
 - (IBAction)forgetPswdAction:(id)sender {
     NSLog(@"forget password");
-    [self dismiss:0];
+    NSLog(@"switch to login.storyboard, mode: forgetPswd");
+    [self switchToLogin];
     if(_forgetPwdBlock != nil) _forgetPwdBlock();
 }
 
-
-
-
-
-
-
+/**
+ * 切换到注册界面
+ */
+- (void)switchToLogin {
+    UIStoryboard *loginStoryboard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
+    if (loginStoryboard == nil) {
+        NSLog(@"login.storyboard is nil");
+        [self dismiss:0];
+        return;
+    }
+    [self presentViewController:[loginStoryboard instantiateInitialViewController] animated:NO completion:nil];
+}
 
 
 
