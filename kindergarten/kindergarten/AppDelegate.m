@@ -20,7 +20,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    
+    self.user = [[KGUser alloc] init];
     NSInteger visitTimes = 0;
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];

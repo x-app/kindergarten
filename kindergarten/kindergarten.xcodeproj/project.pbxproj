@@ -93,6 +93,8 @@
 		99ABD5A21B48030400B8DB8B /* help_3.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99ABD59F1B48030400B8DB8B /* help_3.xib */; };
 		99ABD5A31B48030400B8DB8B /* help_4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99ABD5A01B48030400B8DB8B /* help_4.xib */; };
 		99F17F491B4D5C3600866F8F /* bg_11.png in Resources */ = {isa = PBXBuildFile; fileRef = 99F17F481B4D5C3600866F8F /* bg_11.png */; };
+		99F17F551B4E91B800866F8F /* KGUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F17F541B4E91B800866F8F /* KGUser.m */; };
+		99F17F581B4E94B700866F8F /* KGChild.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F17F571B4E94B700866F8F /* KGChild.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -236,6 +238,10 @@
 		99ABD59F1B48030400B8DB8B /* help_3.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = help_3.xib; path = Resource/help_3.xib; sourceTree = "<group>"; };
 		99ABD5A01B48030400B8DB8B /* help_4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = help_4.xib; path = Resource/help_4.xib; sourceTree = "<group>"; };
 		99F17F481B4D5C3600866F8F /* bg_11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bg_11.png; path = Resource/bg_11.png; sourceTree = "<group>"; };
+		99F17F531B4E91B800866F8F /* KGUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KGUser.h; sourceTree = "<group>"; };
+		99F17F541B4E91B800866F8F /* KGUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KGUser.m; sourceTree = "<group>"; };
+		99F17F561B4E94B700866F8F /* KGChild.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KGChild.h; sourceTree = "<group>"; };
+		99F17F571B4E94B700866F8F /* KGChild.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KGChild.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -297,6 +303,7 @@
 		12C794911B44232300918497 /* kindergarten */ = {
 			isa = PBXGroup;
 			children = (
+				99F17F521B4E918D00866F8F /* Model */,
 				9997B9AB1B4D580100B908B6 /* Library */,
 				12F630151B492FB700BE67B6 /* Login Storyboard */,
 				12F630161B49302500BE67B6 /* Main Storyboard */,
@@ -670,6 +677,17 @@
 			name = Resource;
 			sourceTree = "<group>";
 		};
+		99F17F521B4E918D00866F8F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				99F17F531B4E91B800866F8F /* KGUser.h */,
+				99F17F541B4E91B800866F8F /* KGUser.m */,
+				99F17F561B4E94B700866F8F /* KGChild.h */,
+				99F17F571B4E94B700866F8F /* KGChild.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -840,6 +858,7 @@
 				9997BA141B4D580E00B908B6 /* CLLockInfoView.m in Sources */,
 				9997BA021B4D580E00B908B6 /* AFNetworkReachabilityManager.m in Sources */,
 				9997BA131B4D580E00B908B6 /* CLLockNavVC.m in Sources */,
+				99F17F581B4E94B700866F8F /* KGChild.m in Sources */,
 				9997BA161B4D580E00B908B6 /* CLLockLabel.m in Sources */,
 				12C7949B1B44232300918497 /* BabyViewController.m in Sources */,
 				12AC16111B4918C3007C247B /* RBStoryboardModalSegue.m in Sources */,
@@ -848,6 +867,7 @@
 				9997B9FF1B4D580E00B908B6 /* AFHTTPRequestOperation.m in Sources */,
 				9997BA1A1B4D580E00B908B6 /* CoreArchive.m in Sources */,
 				12AC16141B4918C3007C247B /* RBStoryboardSegue.m in Sources */,
+				99F17F551B4E91B800866F8F /* KGUser.m in Sources */,
 				9997BA011B4D580E00B908B6 /* AFHTTPSessionManager.m in Sources */,
 				12C794951B44232300918497 /* main.m in Sources */,
 				9997BA111B4D580E00B908B6 /* CALayer+Anim.m in Sources */,

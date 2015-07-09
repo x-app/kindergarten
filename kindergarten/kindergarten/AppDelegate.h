@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "MYBlurIntroductionView.h"
-
+#import "KGUser.h"
 @interface AppDelegate : UIResponder <UIApplicationDelegate, MYIntroductionDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
+@property (strong, nonatomic) KGUser *user;
 
 @end
 

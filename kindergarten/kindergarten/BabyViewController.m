@@ -8,6 +8,7 @@
 
 #import "BabyViewController.h"
 #import "CLLockVC.h"
+#import "AppDelegate.h"
 @interface BabyViewController ()
 @property (nonatomic) NSInteger viewAppearCount;
 @property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *func;
@@ -39,15 +40,16 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     NSLog(@"babyViewController did appear");
-    //if (!self.usrRegistered || !self.usrVerified) {
-//        NSLog(@"用户尚未注册或者验证没过");
-//        [CLLockVC showVerifyLockVCInVC:self forgetPwdBlock:^{
-//
-//        } successBlock:^(CLLockVC *lockVC, NSString *pwd) {
-//            NSLog(@"验证通过");
-//            [lockVC dismiss:1.0f];
-//        }];
-    //}
+    /*AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    if (!delegate.user.registered || !delegate.user.verified) {
+        NSLog(@"用户尚未注册或者验证没过");
+        [CLLockVC showVerifyLockVCInVC:self forgetPwdBlock:^{
+
+        } successBlock:^(CLLockVC *lockVC, NSString *pwd) {
+            NSLog(@"验证通过");
+            [lockVC dismiss:1.0f];
+        }];
+    }*/
 }
 
 - (void)didReceiveMemoryWarning {

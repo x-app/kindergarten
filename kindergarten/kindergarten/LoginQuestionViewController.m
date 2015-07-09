@@ -2,7 +2,7 @@
 //  LoginQuestionViewController.m
 //  kindergarten
 //
-//  Created by 庄小仙 on 15/7/7.
+//  Created by wangbin on 15/7/7.
 //  Copyright (c) 2015年 xapp. All rights reserved.
 //
 
@@ -12,6 +12,8 @@
 #import "AFHTTPRequestOperationManager.h"
 #import "MLTableAlert.h"
 #import "BabyViewController.h"
+#import "AppDelegate.h"
+
 @interface LoginQuestionViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *questionTextField;
 @property (weak, nonatomic) IBOutlet UITextField *answerTextField;
@@ -58,6 +60,9 @@
             [self dismissViewControllerAnimated:YES completion:nil];
             BabyViewController *bvc = [mainStoryboard instantiateInitialViewController];
             [self presentViewController:bvc animated:NO completion:nil];
+            AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+            //delegate.user.registered = YES;
+            //delegate.user.verified = YES;
         }];
     }
 }

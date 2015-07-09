@@ -2,7 +2,7 @@
 //  LoginQuestionViewController.h
 //  kindergarten
 //
-//  Created by 庄小仙 on 15/7/7.
+//  Created by wangbin on 15/7/7.
 //  Copyright (c) 2015年 xapp. All rights reserved.
 //
 
