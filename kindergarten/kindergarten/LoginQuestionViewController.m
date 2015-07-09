@@ -57,8 +57,6 @@
             [lockVC dismiss:0];
             [self dismissViewControllerAnimated:YES completion:nil];
             BabyViewController *bvc = [mainStoryboard instantiateInitialViewController];
-            bvc.usrRegistered = YES;
-            bvc.usrVerified = YES;
             [self presentViewController:bvc animated:NO completion:nil];
         }];
     }
