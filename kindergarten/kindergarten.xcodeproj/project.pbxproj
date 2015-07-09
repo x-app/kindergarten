@@ -95,6 +95,8 @@
 		99F17F491B4D5C3600866F8F /* bg_11.png in Resources */ = {isa = PBXBuildFile; fileRef = 99F17F481B4D5C3600866F8F /* bg_11.png */; };
 		99F17F551B4E91B800866F8F /* KGUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F17F541B4E91B800866F8F /* KGUser.m */; };
 		99F17F581B4E94B700866F8F /* KGChild.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F17F571B4E94B700866F8F /* KGChild.m */; };
+		99F17F5B1B4ECCCD00866F8F /* KGUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F17F5A1B4ECCCD00866F8F /* KGUtil.m */; };
+		99F17F5E1B4ED3D800866F8F /* KGConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F17F5D1B4ED3D800866F8F /* KGConst.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -242,6 +244,10 @@
 		99F17F541B4E91B800866F8F /* KGUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KGUser.m; sourceTree = "<group>"; };
 		99F17F561B4E94B700866F8F /* KGChild.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KGChild.h; sourceTree = "<group>"; };
 		99F17F571B4E94B700866F8F /* KGChild.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KGChild.m; sourceTree = "<group>"; };
+		99F17F591B4ECCCD00866F8F /* KGUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KGUtil.h; sourceTree = "<group>"; };
+		99F17F5A1B4ECCCD00866F8F /* KGUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KGUtil.m; sourceTree = "<group>"; };
+		99F17F5C1B4ECF4D00866F8F /* KGConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KGConst.h; sourceTree = "<group>"; };
+		99F17F5D1B4ED3D800866F8F /* KGConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KGConst.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -684,6 +690,10 @@
 				99F17F541B4E91B800866F8F /* KGUser.m */,
 				99F17F561B4E94B700866F8F /* KGChild.h */,
 				99F17F571B4E94B700866F8F /* KGChild.m */,
+				99F17F591B4ECCCD00866F8F /* KGUtil.h */,
+				99F17F5A1B4ECCCD00866F8F /* KGUtil.m */,
+				99F17F5C1B4ECF4D00866F8F /* KGConst.h */,
+				99F17F5D1B4ED3D800866F8F /* KGConst.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -865,7 +875,9 @@
 				9997BA241B4D580E00B908B6 /* MYBlurIntroductionView.m in Sources */,
 				9997B9361B4D54BE00B908B6 /* LoginProfileViewController.m in Sources */,
 				9997B9FF1B4D580E00B908B6 /* AFHTTPRequestOperation.m in Sources */,
+				99F17F5E1B4ED3D800866F8F /* KGConst.m in Sources */,
 				9997BA1A1B4D580E00B908B6 /* CoreArchive.m in Sources */,
+				99F17F5B1B4ECCCD00866F8F /* KGUtil.m in Sources */,
 				12AC16141B4918C3007C247B /* RBStoryboardSegue.m in Sources */,
 				99F17F551B4E91B800866F8F /* KGUser.m in Sources */,
 				9997BA011B4D580E00B908B6 /* AFHTTPSessionManager.m in Sources */,

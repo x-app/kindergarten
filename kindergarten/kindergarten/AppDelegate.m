@@ -104,6 +104,13 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+//    UIWindow *window = [[application windows] objectAtIndex:0];
+//    if ([window.rootViewController isKindOfClass:[UINavigationController class]]) {
+//        UINavigationController *nav = (UINavigationController *)window.rootViewController;
+//    }
+    //NSString *clsName =  NSStringFromClass([window.rootViewController class]);
+    //NSLog(@"become active: %@",clsName);
+    //NSLog(@"become active: %@",[[window.rootViewController class] description]);
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
