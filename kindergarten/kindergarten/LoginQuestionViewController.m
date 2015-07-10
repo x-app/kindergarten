@@ -61,11 +61,12 @@
             BabyViewController *bvc = [mainStoryboard instantiateInitialViewController];
             [self presentViewController:bvc animated:NO completion:nil];
             AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-            //delegate.user.registered = YES;
-            //delegate.user.verified = YES;
+            delegate.user.registered = YES;
+            delegate.user.verified = YES;
         }];
     }
 }
+
 - (IBAction)questionFieldTouchDown:(id)sender {
     NSLog(@"request kindergarten list");
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];

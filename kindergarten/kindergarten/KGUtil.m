@@ -8,6 +8,7 @@
 
 #import "KGUtil.h"
 #import "KGConst.h"
+#import "MBProgressHUD.h"
 #import <CommonCrypto/CommonDigest.h>
 
 @interface KGUtil()
@@ -41,6 +42,37 @@
     NSString *bodyStr = [NSString stringWithFormat:@"{\"dateTime\":\"%@\"}%@", dateStr, REQUEST_KEY];
     return [KGUtil getMD5Str:bodyStr];
 }
+
++ (void)showAlert:(NSString *)content inView:(id)view {
+    if (![view isKindOfClass:[UIView class]]) {
+        return;
+    }
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
+    
+    // Configure for text only and offset down
+    hud.mode = MBProgressHUDModeText;
+    hud.labelText = content;
+    hud.margin = 10.f;
+    hud.removeFromSuperViewOnHide = YES;
+    
+    [hud hide:YES afterDelay:3];
+}
+
+/*
++ (void)showAlert:(NSString *)content inView:(id)view {
+    if (![view isKindOfClass:[UIView class]]) {
+        return;
+    }
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
+    
+    // Configure for text only and offset down
+    hud.mode = MBProgressHUDModeText;
+    hud.labelText = content;
+    hud.margin = 10.f;
+    hud.removeFromSuperViewOnHide = YES;
+    
+    [hud hide:YES afterDelay:3];
+}*/
 
 
 

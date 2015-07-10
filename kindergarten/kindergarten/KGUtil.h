@@ -14,4 +14,8 @@
 
 + (NSString *)getRequestSign: (NSDate *)date;
 
++ (void)showAlert: (NSString *)content inView:(id)view;
+
+//+ (void)showAlert: (NSString *)content inView:(id)view;
+
 @end

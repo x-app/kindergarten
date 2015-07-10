@@ -11,6 +11,7 @@
 #import "ASTextField.h"
 #import "AFHTTPRequestOperationManager.h"
 #import "MLTableAlert.h"
+#import "KGUtil.h"
 
 @interface LoginProfileViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
@@ -105,7 +106,7 @@
         // show the alert
         [self.alert show];
         
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {        
         NSLog(@"Error: %@", error);
     }];
 }
@@ -130,7 +131,13 @@
 }
 */
 
+- (BOOL)navigationBar:(UINavigationBar *)navigationBar shouldPushItem:(UINavigationItem *)item {
+    return false;
+}
+
+
 - (IBAction)test:(id)sender {
+    [KGUtil showAlert:@"test" inView:self.view];
     NSLog(@"login did finish");
 }
 

@@ -97,6 +97,8 @@
 		99F17F581B4E94B700866F8F /* KGChild.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F17F571B4E94B700866F8F /* KGChild.m */; };
 		99F17F5B1B4ECCCD00866F8F /* KGUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F17F5A1B4ECCCD00866F8F /* KGUtil.m */; };
 		99F17F5E1B4ED3D800866F8F /* KGConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F17F5D1B4ED3D800866F8F /* KGConst.m */; };
+		99F17F621B4F51E400866F8F /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F17F611B4F51E400866F8F /* MBProgressHUD.m */; };
+		99F17F651B4F56DE00866F8F /* LoginSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F17F641B4F56DE00866F8F /* LoginSegue.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -248,6 +250,10 @@
 		99F17F5A1B4ECCCD00866F8F /* KGUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KGUtil.m; sourceTree = "<group>"; };
 		99F17F5C1B4ECF4D00866F8F /* KGConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KGConst.h; sourceTree = "<group>"; };
 		99F17F5D1B4ED3D800866F8F /* KGConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KGConst.m; sourceTree = "<group>"; };
+		99F17F601B4F51E400866F8F /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		99F17F611B4F51E400866F8F /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		99F17F631B4F56DE00866F8F /* LoginSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginSegue.h; sourceTree = "<group>"; };
+		99F17F641B4F56DE00866F8F /* LoginSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginSegue.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -417,6 +423,8 @@
 				9997B9341B4D54BE00B908B6 /* LoginQuestionViewController.h */,
 				9997B9351B4D54BE00B908B6 /* LoginQuestionViewController.m */,
 				12AC15D91B48FB4D007C247B /* Login.storyboard */,
+				99F17F631B4F56DE00866F8F /* LoginSegue.h */,
+				99F17F641B4F56DE00866F8F /* LoginSegue.m */,
 			);
 			name = "Login Storyboard";
 			sourceTree = "<group>";
@@ -440,6 +448,7 @@
 		9997B9AB1B4D580100B908B6 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				99F17F5F1B4F51E400866F8F /* MBProgressHUD */,
 				9997B9AC1B4D580E00B908B6 /* AFNetworking */,
 				9997B9C01B4D580E00B908B6 /* ASTextField */,
 				9997B9CC1B4D580E00B908B6 /* CoreLock */,
@@ -698,6 +707,16 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		99F17F5F1B4F51E400866F8F /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				99F17F601B4F51E400866F8F /* MBProgressHUD.h */,
+				99F17F611B4F51E400866F8F /* MBProgressHUD.m */,
+			);
+			name = MBProgressHUD;
+			path = Library/MBProgressHUD;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -872,8 +891,10 @@
 				9997BA161B4D580E00B908B6 /* CLLockLabel.m in Sources */,
 				12C7949B1B44232300918497 /* BabyViewController.m in Sources */,
 				12AC16111B4918C3007C247B /* RBStoryboardModalSegue.m in Sources */,
+				99F17F621B4F51E400866F8F /* MBProgressHUD.m in Sources */,
 				9997BA241B4D580E00B908B6 /* MYBlurIntroductionView.m in Sources */,
 				9997B9361B4D54BE00B908B6 /* LoginProfileViewController.m in Sources */,
+				99F17F651B4F56DE00866F8F /* LoginSegue.m in Sources */,
 				9997B9FF1B4D580E00B908B6 /* AFHTTPRequestOperation.m in Sources */,
 				99F17F5E1B4ED3D800866F8F /* KGConst.m in Sources */,
 				9997BA1A1B4D580E00B908B6 /* CoreArchive.m in Sources */,
