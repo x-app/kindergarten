@@ -21,6 +21,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     self.user = [[KGUser alloc] init];
+    self.user.verified = NO;
+    self.user.registered = NO;
     NSInteger visitTimes = 0;
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -111,6 +113,8 @@
     //NSString *clsName =  NSStringFromClass([window.rootViewController class]);
     //NSLog(@"become active: %@",clsName);
     //NSLog(@"become active: %@",[[window.rootViewController class] description]);
+    self.user.verified = NO;
+    NSLog(@"did become active in AppDelegate");
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

@@ -36,21 +36,40 @@
         }
         
     }
+//    
+//    [[NSNotificationCenter defaultCenter]
+//     addObserver:self
+//     selector:@selector(applicationDidBecomeActiveNotification:)
+//     name:UIApplicationDidBecomeActiveNotification
+//     object:[UIApplication sharedApplication]];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    NSLog(@"babyViewController did appear");
-    /*AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    if (!delegate.user.registered || !delegate.user.verified) {
-        NSLog(@"用户尚未注册或者验证没过");
-        [CLLockVC showVerifyLockVCInVC:self forgetPwdBlock:^{
-
-        } successBlock:^(CLLockVC *lockVC, NSString *pwd) {
-            NSLog(@"验证通过");
-            [lockVC dismiss:1.0f];
-        }];
-    }*/
-}
+//
+//- (void)viewDidDisappear:(BOOL)animated {
+//    NSLog(@"babyViewController did disappear");
+//    [super viewDidDisappear:animated];
+//}
+//
+//- (void)viewDidAppear:(BOOL)animated {
+//    NSLog(@"babyViewController did appear");
+//    [super viewDidAppear:animated];
+////    [[NSNotificationCenter defaultCenter]
+////     addObserver:self
+////     selector:@selector(applicationDidBecomeActiveNotification:)
+////     name:UIApplicationDidBecomeActiveNotification
+////     object:[UIApplication sharedApplication]];
+////    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+////    if (!delegate.user.verified && !delegate.user.registering) {
+////        NSLog(@"用户尚未注册或者验证没过");
+////        [CLLockVC showVerifyLockVCInVC:self forgetPwdBlock:^{
+////
+////        } successBlock:^(CLLockVC *lockVC, NSString *pwd) {
+////            NSLog(@"验证通过");
+////            delegate.user.verified = YES;
+////            [lockVC dismiss:1.0f];
+////        }];
+////    }
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

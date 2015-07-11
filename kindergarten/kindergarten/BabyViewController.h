@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface BabyViewController : UIViewController
+#import "KGUIViewController.h"
+@interface BabyViewController : KGUIViewController
 
 
 @end

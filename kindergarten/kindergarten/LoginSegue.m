@@ -7,18 +7,16 @@
 //
 
 #import "LoginSegue.h"
-
+#import "LoginViewContoller.h"
 @implementation LoginSegue
 
 - (void)perform
 {
     
-    UIViewController *current = self.sourceViewController;
-
-    
-    UIViewController *next = self.destinationViewController;
-    
-    //[current.navigationController pushViewController:next animated:YES];
+    LoginViewContoller *current = self.sourceViewController;
+    LoginViewContoller *next = self.destinationViewController;
+    next.fromVC = current.fromVC;
+    [current.navigationController pushViewController:next animated:YES];
     
 }
 

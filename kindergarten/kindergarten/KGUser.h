@@ -17,6 +17,7 @@
 @property (strong, nonatomic) NSString *deviceID;   //设备ID
 @property (nonatomic) BOOL registered;              //该用户已经注册
 @property (nonatomic) BOOL verified;                //该用户已经通过手势密码验证
+@property (nonatomic) BOOL registering; 
 
 @property (nonatomic) NSInteger questionID;         //密保问题编号
 @property (strong, nonatomic) NSString *question;   //密保问题
