@@ -492,9 +492,9 @@
     }
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     delegate.user.registering = YES;
-    [self dismissViewControllerAnimated:YES completion:^(void) {
+    [self dismissViewControllerAnimated:NO completion:^(void) {
         UINavigationController *loginNaviVC = (UINavigationController *)[loginStoryboard instantiateInitialViewController];
-        [self.vc presentViewController:loginNaviVC animated:NO completion:^(void) {
+        [self.vc presentViewController:loginNaviVC animated:YES completion:^(void) {
             UIViewController *lastViewController = [[loginNaviVC viewControllers] lastObject];
             LoginViewContoller *loginVC = (LoginViewContoller *)lastViewController;
             loginVC.fromVC = self.vc;
