@@ -43,8 +43,6 @@
 		12DEAD011B4D693300C437BE /* Baby.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12DEAD001B4D693300C437BE /* Baby.storyboard */; };
 		12E038251B4A91680021B266 /* Garten.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12E038241B4A91680021B266 /* Garten.storyboard */; };
 		12F630191B4932C000BE67B6 /* Growup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12F630181B4932C000BE67B6 /* Growup.storyboard */; };
-		9997B9361B4D54BE00B908B6 /* LoginProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9997B9331B4D54BE00B908B6 /* LoginProfileViewController.m */; };
-		9997B9371B4D54BE00B908B6 /* LoginQuestionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9997B9351B4D54BE00B908B6 /* LoginQuestionViewController.m */; };
 		9997B9FF1B4D580E00B908B6 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9997B9AE1B4D580E00B908B6 /* AFHTTPRequestOperation.m */; };
 		9997BA001B4D580E00B908B6 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9997B9B01B4D580E00B908B6 /* AFHTTPRequestOperationManager.m */; };
 		9997BA011B4D580E00B908B6 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9997B9B21B4D580E00B908B6 /* AFHTTPSessionManager.m */; };
@@ -99,6 +97,8 @@
 		99F17F5E1B4ED3D800866F8F /* KGConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F17F5D1B4ED3D800866F8F /* KGConst.m */; };
 		99F17F621B4F51E400866F8F /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F17F611B4F51E400866F8F /* MBProgressHUD.m */; };
 		99F17F651B4F56DE00866F8F /* LoginSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F17F641B4F56DE00866F8F /* LoginSegue.m */; };
+		99F17F681B50C3E800866F8F /* LoginViewContoller.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F17F671B50C3E800866F8F /* LoginViewContoller.m */; };
+		99F787801B50F4E5006F795A /* KGUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F7877F1B50F4E5006F795A /* KGUIViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -164,10 +164,6 @@
 		12DEAD001B4D693300C437BE /* Baby.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Baby.storyboard; sourceTree = "<group>"; };
 		12E038241B4A91680021B266 /* Garten.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Garten.storyboard; sourceTree = "<group>"; };
 		12F630181B4932C000BE67B6 /* Growup.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Growup.storyboard; sourceTree = "<group>"; };
-		9997B9321B4D54BE00B908B6 /* LoginProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginProfileViewController.h; sourceTree = "<group>"; };
-		9997B9331B4D54BE00B908B6 /* LoginProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginProfileViewController.m; sourceTree = "<group>"; };
-		9997B9341B4D54BE00B908B6 /* LoginQuestionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginQuestionViewController.h; sourceTree = "<group>"; };
-		9997B9351B4D54BE00B908B6 /* LoginQuestionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginQuestionViewController.m; sourceTree = "<group>"; };
 		9997B9AD1B4D580E00B908B6 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		9997B9AE1B4D580E00B908B6 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		9997B9AF1B4D580E00B908B6 /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -254,6 +250,10 @@
 		99F17F611B4F51E400866F8F /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		99F17F631B4F56DE00866F8F /* LoginSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginSegue.h; sourceTree = "<group>"; };
 		99F17F641B4F56DE00866F8F /* LoginSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginSegue.m; sourceTree = "<group>"; };
+		99F17F661B50C3E800866F8F /* LoginViewContoller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewContoller.h; sourceTree = "<group>"; };
+		99F17F671B50C3E800866F8F /* LoginViewContoller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewContoller.m; sourceTree = "<group>"; };
+		99F7877E1B50F4E5006F795A /* KGUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KGUIViewController.h; sourceTree = "<group>"; };
+		99F7877F1B50F4E5006F795A /* KGUIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KGUIViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -340,6 +340,8 @@
 				12C794971B44232300918497 /* AppDelegate.m */,
 				12C794931B44232300918497 /* Info.plist */,
 				12C794941B44232300918497 /* main.m */,
+				99F7877E1B50F4E5006F795A /* KGUIViewController.h */,
+				99F7877F1B50F4E5006F795A /* KGUIViewController.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -418,11 +420,9 @@
 		12F630151B492FB700BE67B6 /* Login Storyboard */ = {
 			isa = PBXGroup;
 			children = (
-				9997B9321B4D54BE00B908B6 /* LoginProfileViewController.h */,
-				9997B9331B4D54BE00B908B6 /* LoginProfileViewController.m */,
-				9997B9341B4D54BE00B908B6 /* LoginQuestionViewController.h */,
-				9997B9351B4D54BE00B908B6 /* LoginQuestionViewController.m */,
 				12AC15D91B48FB4D007C247B /* Login.storyboard */,
+				99F17F661B50C3E800866F8F /* LoginViewContoller.h */,
+				99F17F671B50C3E800866F8F /* LoginViewContoller.m */,
 				99F17F631B4F56DE00866F8F /* LoginSegue.h */,
 				99F17F641B4F56DE00866F8F /* LoginSegue.m */,
 			);
@@ -867,6 +867,7 @@
 				9997BA231B4D580E00B908B6 /* MLTableAlert.m in Sources */,
 				12AC16121B4918C3007C247B /* RBStoryboardPopoverSegue.m in Sources */,
 				9997BA171B4D580E00B908B6 /* CLLockMainView.m in Sources */,
+				99F17F681B50C3E800866F8F /* LoginViewContoller.m in Sources */,
 				12AC16101B4918C3007C247B /* RBStoryboardLink.m in Sources */,
 				9997BA251B4D580E00B908B6 /* MYIntroductionPanel.m in Sources */,
 				9997BA061B4D580E00B908B6 /* AFURLResponseSerialization.m in Sources */,
@@ -879,11 +880,11 @@
 				9997BA001B4D580E00B908B6 /* AFHTTPRequestOperationManager.m in Sources */,
 				12AC15F71B490D80007C247B /* MeViewController.m in Sources */,
 				9997BA031B4D580E00B908B6 /* AFSecurityPolicy.m in Sources */,
-				9997B9371B4D54BE00B908B6 /* LoginQuestionViewController.m in Sources */,
 				12C794981B44232300918497 /* AppDelegate.m in Sources */,
 				9997BA191B4D580E00B908B6 /* NSString+File.m in Sources */,
 				9997BA0F1B4D580E00B908B6 /* CLLockVC.m in Sources */,
 				9997BA081B4D580E00B908B6 /* ASTextField.m in Sources */,
+				99F787801B50F4E5006F795A /* KGUIViewController.m in Sources */,
 				9997BA051B4D580E00B908B6 /* AFURLRequestSerialization.m in Sources */,
 				9997BA141B4D580E00B908B6 /* CLLockInfoView.m in Sources */,
 				9997BA021B4D580E00B908B6 /* AFNetworkReachabilityManager.m in Sources */,
@@ -894,7 +895,6 @@
 				12AC16111B4918C3007C247B /* RBStoryboardModalSegue.m in Sources */,
 				99F17F621B4F51E400866F8F /* MBProgressHUD.m in Sources */,
 				9997BA241B4D580E00B908B6 /* MYBlurIntroductionView.m in Sources */,
-				9997B9361B4D54BE00B908B6 /* LoginProfileViewController.m in Sources */,
 				99F17F651B4F56DE00866F8F /* LoginSegue.m in Sources */,
 				9997B9FF1B4D580E00B908B6 /* AFHTTPRequestOperation.m in Sources */,
 				99F17F5E1B4ED3D800866F8F /* KGConst.m in Sources */,

@@ -7,15 +7,21 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "AFHTTPRequestOperationManager.h"
 @interface KGUtil : NSObject
 
 + (NSString *)getMD5Str: (NSString *)sourceStr;
 
++ (NSDictionary *)getRequestBody: (NSDate *)date;
 + (NSString *)getRequestSign: (NSDate *)date;
 
 + (void)showAlert: (NSString *)content inView:(id)view;
 
-//+ (void)showAlert: (NSString *)content inView:(id)view;
++ (void)showLoading: (id)view;
+
++ (void)postRequest: (NSString *)url
+         parameters:(id)parameters
+            success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+            failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 @end

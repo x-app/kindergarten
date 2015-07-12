@@ -12,7 +12,8 @@
 #import "CLLockLabel.h"
 #import "CLLockNavVC.h"
 #import "CLLockView.h"
-
+#import "LoginViewContoller.h"
+#import "AppDelegate.h"
 
 
 @interface CLLockVC ()
@@ -489,7 +490,32 @@
         [self dismiss:0];
         return;
     }
-    [self presentViewController:[loginStoryboard instantiateInitialViewController] animated:NO completion:nil];
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    delegate.user.registering = YES;
+    [self dismissViewControllerAnimated:NO completion:^(void) {
+        UINavigationController *loginNaviVC = (UINavigationController *)[loginStoryboard instantiateInitialViewController];
+        [self.vc presentViewController:loginNaviVC animated:YES completion:^(void) {
+            UIViewController *lastViewController = [[loginNaviVC viewControllers] lastObject];
+            LoginViewContoller *loginVC = (LoginViewContoller *)lastViewController;
+            loginVC.fromVC = self.vc;
+        }];
+    }];
+    //LoginViewContoller *loginVC = (LoginViewContoller *)[loginStoryboard instantiateInitialViewController];
+//    UINavigationController *loginNaviVC = (UINavigationController *)[loginStoryboard instantiateInitialViewController];
+//    UIViewController *lastViewController = [[loginNaviVC viewControllers] lastObject];
+//    LoginViewContoller *loginVC = (LoginViewContoller *)lastViewController;
+//    //loginVC.fromVC = self.vc;
+//    
+//    //loginStoryboard instantiateViewControllerWithIdentifier:
+//    
+//    //[self dismiss:0];
+//    //[self.vc dismissViewControllerAnimated:NO completion:nil];
+//    [self presentViewController:loginNaviVC animated:NO completion:^(void) {
+//        //loginVC.fromVC = self.vc;
+//        //loginNaviVC
+//        loginVC.fromVC = self.vc;
+//    }];
+    
 }
 
 

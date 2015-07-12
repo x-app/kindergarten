@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface GartenViewController : UIViewController
+#import "KGUIViewController.h"
+@interface GartenViewController : KGUIViewController
 
 @end

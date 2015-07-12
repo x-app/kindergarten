@@ -46,7 +46,7 @@
     hasPwd = NO;
     if(hasPwd){
         NSLog(@"已经设置过密码了，你可以验证或者修改密码");
-    }else{
+    } else {
         [CLLockVC showSettingLockVCInVC:self successBlock:^(CLLockVC *lockVC, NSString *pwd) {
             NSLog(@"密码设置成功");
             //[lockVC dismiss:1.0f];
@@ -56,10 +56,11 @@
 //                [lockVC dismiss:0];
 //                return;
 //            }
-            [lockVC dismiss:0];
             [self dismissViewControllerAnimated:YES completion:nil];
-            BabyViewController *bvc = [mainStoryboard instantiateInitialViewController];
-            [self presentViewController:bvc animated:NO completion:nil];
+            [lockVC dismiss:0];
+
+            //BabyViewController *bvc = [mainStoryboard instantiateInitialViewController];
+            //[self presentViewController:bvc animated:NO completion:nil];
             AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
             delegate.user.registered = YES;
             delegate.user.verified = YES;

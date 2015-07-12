@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface MeViewController : UIViewController
+#import "KGUIViewController.h"
+@interface MeViewController : KGUIViewController
 
 @end

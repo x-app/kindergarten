@@ -38,20 +38,6 @@
     }
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    NSLog(@"babyViewController did appear");
-    /*AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    if (!delegate.user.registered || !delegate.user.verified) {
-        NSLog(@"用户尚未注册或者验证没过");
-        [CLLockVC showVerifyLockVCInVC:self forgetPwdBlock:^{
-
-        } successBlock:^(CLLockVC *lockVC, NSString *pwd) {
-            NSLog(@"验证通过");
-            [lockVC dismiss:1.0f];
-        }];
-    }*/
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
