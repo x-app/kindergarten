@@ -84,17 +84,25 @@
 + (void)postRequest:(NSString *)url
          parameters:(id)parameters
             success:(void (^)(AFHTTPRequestOperation *, id))success
-            failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure {
+            failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
+             inView:(UIView *)view {
     NSLog(@"Post request to [%@] using [%@]", url, parameters);
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
+    MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:view];
+    [view addSubview:hud];
+    //HUD.delegate = self;
+    hud.labelText = @"Loading";
+    [hud show:YES];
     [manager POST:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [hud hide:YES];
         if (success != nil) {
             success(operation, responseObject);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [hud hide:YES];
         if (failure != nil) {
             failure(operation, error);
         }
