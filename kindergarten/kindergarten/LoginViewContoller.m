@@ -16,11 +16,6 @@
 #import "KGConst.h"
 @interface LoginViewContoller ()
 
-@property (weak, nonatomic) IBOutlet UITextField *idNoTextField;
-@property (weak, nonatomic) IBOutlet UITextField *nameTextField;
-@property (weak, nonatomic) IBOutlet UITextField *parkTextField;
-@property (weak, nonatomic) IBOutlet UITextField *qstnTextField;
-@property (weak, nonatomic) IBOutlet UITextField *nswrTextField;
 
 @property (strong, nonatomic) NSArray *parkList;
 @property (strong, nonatomic) MLTableAlert *tableAlert;
@@ -57,7 +52,7 @@
 - (void)setGesturePswd {
     BOOL hasPwd = [CLLockVC hasPwd];
     hasPwd = NO;
-    if(hasPwd){
+    if(hasPwd) {
         NSLog(@"已经设置过密码了，可以验证或者修改密码");
     } else {
         [CLLockVC showSettingLockVCInVC:self successBlock:^(CLLockVC *lockVC, NSString *pwd) {
@@ -97,73 +92,20 @@
         return;
     }
     NSLog(@"request kindergarten list");
-    NSDate *curDate = [[NSDate alloc] init];
-    NSDictionary *body = [KGUtil getRequestBody:curDate];
-    NSDictionary *params = @{@"uid": REQUEST_UID,@"sign": [KGUtil getRequestSign:curDate], @"body":body};
+    NSDictionary *body = [KGUtil getRequestBody:@{}];
+    NSDictionary *params = @{@"uid": REQUEST_UID,@"sign": [KGUtil getRequestSign:body], @"body":body};
     NSString *url = @"http://app.nugget-nj.com/kindergarten_index/queryKindergarten";
     [KGUtil postRequest:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON: %@", responseObject);
-        //        NSData *data  = (NSData *)responseObject;
-        //        NSString *rstring = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        //        NSLog(@"%@",rstring);
         NSArray *parkList = [responseObject objectForKey:@"objlist"];
         self.parkList = parkList;
         [self showParkList];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
     } inView:self.view];
-   /*
-    [manager POST:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"JSON: %@", responseObject);
-        //        NSData *data  = (NSData *)responseObject;
-        //        NSString *rstring = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        //        NSLog(@"%@",rstring);
-        NSArray *parkList = [responseObject objectForKey:@"objlist"];
-        self.parkList = parkList;
-        
-        self.tableAlert = [MLTableAlert tableAlertWithTitle:@"请选择注册的幼儿园" cancelButtonTitle:nil numberOfRows:^NSInteger(NSInteger section) {
-            return [parkList count];
-        } andCells:^UITableViewCell *(MLTableAlert *alert, NSIndexPath *indexPath) {
-            static NSString *CellIdentifier = @"CellIdentifier";
-            UITableViewCell *cell = [alert.table dequeueReusableCellWithIdentifier:CellIdentifier];
-            if (cell == nil) {
-                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-            }
-            NSDictionary *curPark = [parkList objectAtIndex:indexPath.row];
-            NSString *parkName = [curPark objectForKey:@"parkName"];
-            
-            cell.textLabel.text = parkName;
-            return cell;
-        }];
-        
-        
-        // Setting custom alert height
-        self.tableAlert.height = 350;
-        
-        // configure actions to perform
-        [self.tableAlert configureSelectionBlock:^(NSIndexPath *selectedIndex){
-            //self.resultLabel.text = [NSString stringWithFormat:@"Selected Index\nSection: %d Row: %d", selectedIndex.section, selectedIndex.row];
-            //NSString *selection = [NSString stringWithFormat:@"Selected Index\nSection: %d Row: %d", selectedIndex.section, selectedIndex.row];
-            //NSLog(@"%@", selection);
-            NSDictionary *curPark = [parkList objectAtIndex:selectedIndex.row];
-            NSString *parkName = [curPark objectForKey:@"parkName"];
-            self.parkTextField.text = parkName;
-            [self.parkTextField resignFirstResponder];
-            NSLog(@"hahaha");
-        } andCompletionBlock:^{
-            NSLog(@"cancelled");
-        }];
-        
-        // show the alert
-        [self.tableAlert show];
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
-    }];*/
 }
 
 - (void)showParkList {
-    //[self.tableAlert dealloc];
     self.tableAlert = nil;
     self.tableAlert = [MLTableAlert tableAlertWithTitle:@"请选择注册的幼儿园" cancelButtonTitle:nil numberOfRows:^NSInteger(NSInteger section) {
         return [self.parkList count];
@@ -186,11 +128,9 @@
     
     // configure actions to perform
     [self.tableAlert configureSelectionBlock:^(NSIndexPath *selectedIndex){
-        //self.resultLabel.text = [NSString stringWithFormat:@"Selected Index\nSection: %d Row: %d", selectedIndex.section, selectedIndex.row];
-        //NSString *selection = [NSString stringWithFormat:@"Selected Index\nSection: %d Row: %d", selectedIndex.section, selectedIndex.row];
-        //NSLog(@"%@", selection);
         NSDictionary *curPark = [self.parkList objectAtIndex:selectedIndex.row];
         NSString *parkName = [curPark objectForKey:@"parkName"];
+        NSString *appUrl = [curPark objectForKey:@"appUrl"];
         self.parkTextField.text = parkName;
         [self.parkTextField resignFirstResponder];
         NSLog(@"hahaha");
@@ -203,14 +143,17 @@
 }
 
 - (IBAction)qstnTextFieldTouchDown:(UITextField *)sender {
+    
 }
+
 - (IBAction)test:(UIButton *)sender {
-    //[KGUtil showAlert:@"hehehe" inView:self.view];
-    [KGUtil showLoading:self.view];
+
 }
+
 - (IBAction)setFakeProfile:(UIButton *)sender {
     self.nameTextField.text = @"黄晓伟";
     self.idNoTextField.text = @"350582197903050273";
+    self.parkTextField.text = @"江苏南京市南戈特幼儿园";
 }
 - (IBAction)jumpToMain:(UIButton *)sender {
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];

@@ -20,36 +20,45 @@
 
 + (NSString *)getMD5Str:(NSString *)sourceStr {
     NSData *source = [sourceStr dataUsingEncoding:NSUTF8StringEncoding ];
-    NSLog(@"%@", sourceStr);
+    NSLog(@"getMD5Str.source:%@", sourceStr);
     const char *cStr = [source bytes];
     unsigned char result[CC_MD5_DIGEST_LENGTH];
     CC_MD5(cStr, (CC_LONG)strlen(cStr), result);
-    NSLog(@"%s", result);
+    //NSLog(@"%s", result);
     NSMutableString *digest = [ NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH * 2 ];
     for (NSInteger i = 0; i < CC_MD5_DIGEST_LENGTH; i++) {
         [digest appendFormat: @"%02x", result[i]];
     }
-    NSLog(@"digest:%@", digest);
+    NSLog(@"getMD5Str.digest:%@", digest);
     return [NSString stringWithFormat:@"%@", digest];
 }
 
-+ (NSDictionary *)getRequestBody:(NSDate *)date {
++ (NSDictionary *)getRequestBody:(NSDictionary *)data {
+    NSDate *date = [[NSDate alloc] init];
     //现将时间转为2015-07-10 01:00:00的格式
     NSDateFormatter *df = [[NSDateFormatter alloc] init];
     [df setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSString *dateStr = [df stringFromDate:date];
-    NSDictionary *body = @{@"dateTime": dateStr};
-    return body;
+    NSMutableDictionary *body = [data mutableCopy];
+    [body setObject:dateStr forKey:@"dateTime"];
+    NSDictionary *result = [NSDictionary dictionaryWithDictionary:body];
+    return result;
 }
 
-+ (NSString *)getRequestSign:(NSDate *)date {
-    //现将时间转为2015-07-10 01:00:00的格式
-    NSDateFormatter *df = [[NSDateFormatter alloc] init];
-    [df setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    NSString *dateStr = [df stringFromDate:date];
++ (NSString *)getRequestSign:(NSDictionary *)body {
+    NSMutableArray *components = [[NSMutableArray alloc] init];
+    NSMutableString *bodyStr = [[NSMutableString alloc] init];
+    [bodyStr appendString:@"{"];
+    for (id key in [body allKeys]) {
+        NSString *value = [body valueForKey:key];
+        NSString *curCom = [NSString stringWithFormat:@"\"%@\":\"%@\"", key, value];
+        [components addObject:curCom];
+    }
+    [bodyStr appendString: [components componentsJoinedByString:@","]];
+    [bodyStr appendFormat:@"}"];
     //body串拼接
-    NSString *bodyStr = [NSString stringWithFormat:@"{\"dateTime\":\"%@\"}%@", dateStr, REQUEST_KEY];
-    return [KGUtil getMD5Str:bodyStr];
+    NSString *requestStr = [NSString stringWithFormat:@"%@%@", bodyStr, REQUEST_KEY];
+    return [KGUtil getMD5Str:requestStr];
 }
 
 + (void)showAlert:(NSString *)content inView:(id)view {
@@ -81,6 +90,7 @@
     
     //[HUD showWhileExecuting:@selector(myTask) onTarget:self withObject:nil animated:YES];
 }
+
 + (void)postRequest:(NSString *)url
          parameters:(id)parameters
             success:(void (^)(AFHTTPRequestOperation *, id))success

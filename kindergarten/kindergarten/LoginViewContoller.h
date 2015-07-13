@@ -12,4 +12,11 @@
 
 @property (strong, nonatomic) UIViewController *fromVC;
 
+
+@property (weak, nonatomic) IBOutlet UITextField *idNoTextField;
+@property (weak, nonatomic) IBOutlet UITextField *nameTextField;
+@property (weak, nonatomic) IBOutlet UITextField *parkTextField;
+@property (weak, nonatomic) IBOutlet UITextField *qstnTextField;
+@property (weak, nonatomic) IBOutlet UITextField *nswrTextField;
+
 @end

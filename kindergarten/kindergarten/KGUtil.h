@@ -12,8 +12,9 @@
 
 + (NSString *)getMD5Str: (NSString *)sourceStr;
 
-+ (NSDictionary *)getRequestBody: (NSDate *)date;
-+ (NSString *)getRequestSign: (NSDate *)date;
++ (NSDictionary *)getRequestBody: (NSDictionary *)data;
+
++ (NSString *)getRequestSign: (NSDictionary *)body;
 
 + (void)showAlert: (NSString *)content inView:(id)view;
 
