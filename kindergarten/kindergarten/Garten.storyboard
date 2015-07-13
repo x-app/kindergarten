@@ -36,7 +36,7 @@
                                     <constraint firstAttribute="width" constant="400" id="BWA-RO-vg8"/>
                                     <constraint firstAttribute="height" constant="20" id="Eag-vy-fD8"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -78,7 +78,9 @@
                             <constraint firstAttribute="trailing" secondItem="e02-qw-JFl" secondAttribute="trailing" id="QXX-lL-rCd"/>
                             <constraint firstItem="HBm-9c-gwf" firstAttribute="leading" secondItem="51v-WQ-nDN" secondAttribute="leading" id="XoJ-jO-04t"/>
                             <constraint firstItem="e02-qw-JFl" firstAttribute="top" secondItem="HBm-9c-gwf" secondAttribute="bottom" id="Ynw-N6-F2y"/>
-                            <constraint firstItem="D4F-ak-rbm" firstAttribute="leading" secondItem="51v-WQ-nDN" secondAttribute="trailing" constant="20" id="euu-no-I1F"/>
+                            <constraint firstItem="D4F-ak-rbm" firstAttribute="leading" secondItem="51v-WQ-nDN" secondAttribute="trailing" constant="20" id="euu-no-I1F">
+                                <variation key="heightClass=regular-widthClass=compact" constant="15"/>
+                            </constraint>
                             <constraint firstItem="HBm-9c-gwf" firstAttribute="top" secondItem="51v-WQ-nDN" secondAttribute="bottom" constant="8" id="jJq-T7-RIa">
                                 <variation key="heightClass=regular-widthClass=compact" constant="4"/>
                             </constraint>
@@ -111,7 +113,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bRD-sn-84k" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1527" y="-320.25"/>
+            <point key="canvasLocation" x="-1491" y="-672.75"/>
         </scene>
     </scenes>
     <resources>

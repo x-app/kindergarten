@@ -29,7 +29,7 @@
                                     <constraint firstAttribute="height" constant="20" id="2rh-aK-OMX"/>
                                     <constraint firstAttribute="width" constant="400" id="VP0-ud-vAL"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -83,7 +83,9 @@
                             <constraint firstItem="SYM-cL-hEw" firstAttribute="leading" secondItem="Lw4-nO-b8L" secondAttribute="leading" id="dTr-fp-bTb"/>
                             <constraint firstItem="u73-Tl-gtw" firstAttribute="leading" secondItem="Lw4-nO-b8L" secondAttribute="leading" constant="16" id="mEU-GK-31s"/>
                             <constraint firstAttribute="trailing" secondItem="bdy-gc-3wJ" secondAttribute="trailing" id="nwa-o7-bFZ"/>
-                            <constraint firstItem="Kwj-f6-wBL" firstAttribute="leading" secondItem="u73-Tl-gtw" secondAttribute="trailing" constant="20" id="xOk-gd-Inl"/>
+                            <constraint firstItem="Kwj-f6-wBL" firstAttribute="leading" secondItem="u73-Tl-gtw" secondAttribute="trailing" constant="20" id="xOk-gd-Inl">
+                                <variation key="heightClass=regular-widthClass=compact" constant="15"/>
+                            </constraint>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
