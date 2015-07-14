@@ -28,5 +28,5 @@
 
 + (NSString *)getServerIndexURL;
 + (NSString *)getServerAppURL;
-
++ (NSString *)getServerHtmlURL;
 @end

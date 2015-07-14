@@ -134,4 +134,8 @@
     return delegate.varible.server_app_url;
 }
 
++ (NSString *)getServerHtmlURL {
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    return delegate.varible.server_html_url;
+}
 @end

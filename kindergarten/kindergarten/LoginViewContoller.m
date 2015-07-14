@@ -175,8 +175,10 @@
         NSDictionary *curPark = [self.parkList objectAtIndex:selectedIndex.row];
         NSString *parkName = [curPark objectForKey:@"parkName"];
         NSString *appUrl = [curPark objectForKey:@"appUrl"];
+        NSString *htmlUrl = [curPark objectForKey:@"appHtmlUrl"];
         AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
         delegate.varible.server_app_url = appUrl;
+        delegate.varible.server_html_url = htmlUrl;
         self.parkTextField.text = parkName;
         [self.parkTextField resignFirstResponder];
     } andCompletionBlock:^{
