@@ -25,6 +25,6 @@
 @property (strong, nonatomic) NSString *question;   //密保问题
 @property (strong, nonatomic) NSString *answer;     //密保问题答案
 
-@property (strong, nonatomic) NSMutableArray *childs; //该用户的孩子
+@property (strong, nonatomic) NSMutableArray *childs;  //该用户的孩子
 
 @end
