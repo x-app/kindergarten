@@ -19,37 +19,51 @@
 
 
 + (NSString *)getMD5Str:(NSString *)sourceStr {
-    NSData *source = [sourceStr dataUsingEncoding:NSUTF8StringEncoding ];
-    NSLog(@"%@", sourceStr);
-    const char *cStr = [source bytes];
-    unsigned char result[CC_MD5_DIGEST_LENGTH];
+    //NSData *source = [sourceStr dataUsingEncoding:NSUTF8StringEncoding];
+    NSLog(@"getMD5Str.source:%@", sourceStr);
+    //const char *cStr = [source bytes];
+    const char *cStr = [sourceStr UTF8String];
+    //NSLog(@"%d%s", strlen(cStr), cStr);
+    unsigned char result[CC_MD5_DIGEST_LENGTH] = {};
+    //NSLog(@"result_1:%s", result);
+    //char hexDigits[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
     CC_MD5(cStr, (CC_LONG)strlen(cStr), result);
-    NSLog(@"%s", result);
-    NSMutableString *digest = [ NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH * 2 ];
+    NSMutableString *digest = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH * 2];
     for (NSInteger i = 0; i < CC_MD5_DIGEST_LENGTH; i++) {
         [digest appendFormat: @"%02x", result[i]];
+        //[digest appendFormat:@"%c", hexDigits[result[i] >> 4 & 0xf]];
+        //[digest appendFormat:@"%c", hexDigits[result[i] & 0xf]];
     }
-    NSLog(@"digest:%@", digest);
+    NSLog(@"getMD5Str.digest:%@", digest);
     return [NSString stringWithFormat:@"%@", digest];
 }
 
-+ (NSDictionary *)getRequestBody:(NSDate *)date {
++ (NSDictionary *)getRequestBody:(NSDictionary *)data {
+    NSDate *date = [[NSDate alloc] init];
     //现将时间转为2015-07-10 01:00:00的格式
     NSDateFormatter *df = [[NSDateFormatter alloc] init];
     [df setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSString *dateStr = [df stringFromDate:date];
-    NSDictionary *body = @{@"dateTime": dateStr};
-    return body;
+    NSMutableDictionary *body = [data mutableCopy];
+    [body setObject:dateStr forKey:@"dateTime"];
+    NSDictionary *result = [NSDictionary dictionaryWithDictionary:body];
+    return result;
 }
 
-+ (NSString *)getRequestSign:(NSDate *)date {
-    //现将时间转为2015-07-10 01:00:00的格式
-    NSDateFormatter *df = [[NSDateFormatter alloc] init];
-    [df setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    NSString *dateStr = [df stringFromDate:date];
-    //body串拼接
-    NSString *bodyStr = [NSString stringWithFormat:@"{\"dateTime\":\"%@\"}%@", dateStr, REQUEST_KEY];
-    return [KGUtil getMD5Str:bodyStr];
++ (NSString *)getRequestSign:(NSDictionary *)body {
+    NSMutableArray *components = [[NSMutableArray alloc] init];
+    NSMutableString *bodyStr = [[NSMutableString alloc] init];
+    [bodyStr appendString:@"{"];
+    for (id key in [body allKeys]) {
+        NSString *value = [body valueForKey:key];
+        NSString *curCom = [NSString stringWithFormat:@"\"%@\":\"%@\"", key, value];
+        [components addObject:curCom];
+    }
+    [bodyStr appendString: [components componentsJoinedByString:@","]];
+    [bodyStr appendFormat:@"}"];
+    //body串拼接key
+    NSString *requestStr = [NSString stringWithFormat:@"%@%@", bodyStr, REQUEST_KEY];
+    return [KGUtil getMD5Str:requestStr];
 }
 
 + (void)showAlert:(NSString *)content inView:(id)view {
@@ -81,20 +95,29 @@
     
     //[HUD showWhileExecuting:@selector(myTask) onTarget:self withObject:nil animated:YES];
 }
+
 + (void)postRequest:(NSString *)url
          parameters:(id)parameters
             success:(void (^)(AFHTTPRequestOperation *, id))success
-            failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure {
+            failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
+             inView:(UIView *)view {
     NSLog(@"Post request to [%@] using [%@]", url, parameters);
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
+    MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:view];
+    [view addSubview:hud];
+    //HUD.delegate = self;
+    hud.labelText = @"加载中";
+    [hud show:YES];
     [manager POST:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [hud hide:YES];
         if (success != nil) {
             success(operation, responseObject);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [hud hide:YES];
         if (failure != nil) {
             failure(operation, error);
         }
