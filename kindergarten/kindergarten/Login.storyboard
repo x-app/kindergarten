@@ -136,7 +136,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
-                                    <action selector="qstnTextFieldTouchDown:" destination="jUf-xS-7Cq" eventType="editingDidEnd" id="GWi-8s-WNa"/>
+                                    <action selector="qstnTextFieldTouchDown:" destination="jUf-xS-7Cq" eventType="touchDown" id="jlK-sJ-hma"/>
                                 </connections>
                             </textField>
                         </subviews>

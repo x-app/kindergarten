@@ -19,15 +19,20 @@
 
 
 + (NSString *)getMD5Str:(NSString *)sourceStr {
-    NSData *source = [sourceStr dataUsingEncoding:NSUTF8StringEncoding ];
+    //NSData *source = [sourceStr dataUsingEncoding:NSUTF8StringEncoding];
     NSLog(@"getMD5Str.source:%@", sourceStr);
-    const char *cStr = [source bytes];
-    unsigned char result[CC_MD5_DIGEST_LENGTH];
+    //const char *cStr = [source bytes];
+    const char *cStr = [sourceStr UTF8String];
+    //NSLog(@"%d%s", strlen(cStr), cStr);
+    unsigned char result[CC_MD5_DIGEST_LENGTH] = {};
+    //NSLog(@"result_1:%s", result);
+    //char hexDigits[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
     CC_MD5(cStr, (CC_LONG)strlen(cStr), result);
-    //NSLog(@"%s", result);
-    NSMutableString *digest = [ NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH * 2 ];
+    NSMutableString *digest = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH * 2];
     for (NSInteger i = 0; i < CC_MD5_DIGEST_LENGTH; i++) {
         [digest appendFormat: @"%02x", result[i]];
+        //[digest appendFormat:@"%c", hexDigits[result[i] >> 4 & 0xf]];
+        //[digest appendFormat:@"%c", hexDigits[result[i] & 0xf]];
     }
     NSLog(@"getMD5Str.digest:%@", digest);
     return [NSString stringWithFormat:@"%@", digest];
@@ -56,7 +61,7 @@
     }
     [bodyStr appendString: [components componentsJoinedByString:@","]];
     [bodyStr appendFormat:@"}"];
-    //body串拼接
+    //body串拼接key
     NSString *requestStr = [NSString stringWithFormat:@"%@%@", bodyStr, REQUEST_KEY];
     return [KGUtil getMD5Str:requestStr];
 }

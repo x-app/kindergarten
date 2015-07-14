@@ -18,6 +18,7 @@
 
 
 @property (strong, nonatomic) NSArray *parkList;
+@property (strong, nonatomic) NSArray *qstnList;
 @property (strong, nonatomic) MLTableAlert *tableAlert;
 
 @end
@@ -46,6 +47,10 @@
 }
 
 - (IBAction)finishQuestionAction:(UIButton *)sender {
+    if ([self.nswrTextField.text isEqualToString:@""]) {
+        [KGUtil showAlert:@"请设置您的密保问题答案" inView:self.view];
+        return;
+    }
     [self setGesturePswd];
 }
 
@@ -93,7 +98,7 @@
     }
     NSLog(@"request kindergarten list");
     NSDictionary *body = [KGUtil getRequestBody:@{}];
-    NSDictionary *params = @{@"uid": REQUEST_UID,@"sign": [KGUtil getRequestSign:body], @"body":body};
+    NSDictionary *params = @{@"uid": REQUEST_UID, @"sign": [KGUtil getRequestSign:body], @"body":body};
     NSString *url = @"http://app.nugget-nj.com/kindergarten_index/queryKindergarten";
     [KGUtil postRequest:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON: %@", responseObject);
@@ -106,6 +111,9 @@
 }
 
 - (void)showParkList {
+    if ([self.parkList count] == 0) {
+        return;
+    }
     self.tableAlert = nil;
     self.tableAlert = [MLTableAlert tableAlertWithTitle:@"请选择注册的幼儿园" cancelButtonTitle:nil numberOfRows:^NSInteger(NSInteger section) {
         return [self.parkList count];
@@ -142,8 +150,67 @@
     [self.tableAlert show];
 }
 
-- (IBAction)qstnTextFieldTouchDown:(UITextField *)sender {
+
+- (void)showQstnList {
+    if ([self.qstnList count] == 0) {
+        return;
+    }
+    self.tableAlert = nil;
+    self.tableAlert = [MLTableAlert tableAlertWithTitle:@"请选择密保问题" cancelButtonTitle:nil numberOfRows:^NSInteger(NSInteger section) {
+        return [self.qstnList count];
+    } andCells:^UITableViewCell *(MLTableAlert *alert, NSIndexPath *indexPath) {
+        static NSString *CellIdentifier = @"CellIdentifier";
+        UITableViewCell *cell = [alert.table dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        }
+        NSDictionary *curQuestion = [self.qstnList objectAtIndex:indexPath.row];
+        NSString *question = [curQuestion objectForKey:@"question"];
+        
+        cell.textLabel.text = question;
+        return cell;
+    }];
     
+    
+    // Setting custom alert height
+    self.tableAlert.height = 350;
+    
+    // configure actions to perform
+    [self.tableAlert configureSelectionBlock:^(NSIndexPath *selectedIndex){
+        NSDictionary *curQuestion = [self.qstnList objectAtIndex:selectedIndex.row];
+        NSString *question = [curQuestion objectForKey:@"question"];
+        NSString *questionId = [curQuestion objectForKey:@"questionId"];
+        self.qstnTextField.text = question;
+        [self.qstnTextField resignFirstResponder];
+    } andCompletionBlock:^{
+        NSLog(@"cancelled");
+    }];
+    
+    // show the alert
+    [self.tableAlert show];
+}
+- (IBAction)qstnTextFieldTouchDown:(UITextField *)sender {
+    if (self.parkList != nil && [self.parkList count] > 0) {
+        [self showQstnList];
+        return;
+    }
+    NSLog(@"request question list");
+    NSDictionary *body = [KGUtil getRequestBody:@{}];
+    NSDictionary *params = @{@"uid": REQUEST_UID, @"sign": [KGUtil getRequestSign:body], @"body":body};
+    //NSDictionary *body = @{@"dateTime":@"2015-07-13 23:22:46"};
+    //NSString *signp = KGUtil getMD5Str:<#(NSString *)#>
+    //NSString *re = [KGUtil getRequestSign:body];
+    //NSLog(@"%@",re);
+    //NSDictionary *params = @{@"uid":@"nugget",@"sign":@"18eda6be778fbd7d09442830685db1b4",@"body":body};
+    NSString *url = @"http://app.nugget-nj.com/nugget_app/system/queryQuestion";
+    [KGUtil postRequest:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"JSON: %@", responseObject);
+        NSArray *qstnList = [responseObject objectForKey:@"objlist"];
+        self.qstnList = qstnList;
+        [self showQstnList];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+    } inView:self.view];
 }
 
 - (IBAction)test:(UIButton *)sender {
