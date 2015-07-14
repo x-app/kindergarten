@@ -7,7 +7,7 @@
         <!--我-->
         <scene sceneID="fgm-yZ-m9u">
             <objects>
-                <viewController title="我" id="IxN-9I-X3R" sceneMemberID="viewController">
+                <viewController title="我" id="IxN-9I-X3R" customClass="MeViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ogR-q8-Kw5"/>
                         <viewControllerLayoutGuide type="bottom" id="DRX-pG-4nZ"/>
@@ -15,6 +15,14 @@
                     <view key="view" contentMode="scaleToFill" id="q9r-WP-HmS">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hm9-MB-p0N">
+                                <rect key="frame" x="109" y="116" width="46" height="30"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>

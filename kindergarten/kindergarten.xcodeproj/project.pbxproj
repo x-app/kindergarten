@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1212C5621B52613000C11BD2 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1212C5611B52613000C11BD2 /* WebViewController.m */; };
 		1266D5C21B495B8A00E7253F /* head.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1266D5BF1B495B8A00E7253F /* head.jpg */; };
 		1266D5C31B495B8A00E7253F /* home_top_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 1266D5C01B495B8A00E7253F /* home_top_bg.png */; };
 		1266D5C41B495B8A00E7253F /* repeat_img.png in Resources */ = {isa = PBXBuildFile; fileRef = 1266D5C11B495B8A00E7253F /* repeat_img.png */; };
@@ -112,6 +113,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1212C5601B52613000C11BD2 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		1212C5611B52613000C11BD2 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		1266D5BF1B495B8A00E7253F /* head.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = head.jpg; path = Resource/head.jpg; sourceTree = "<group>"; };
 		1266D5C01B495B8A00E7253F /* home_top_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = home_top_bg.png; path = Resource/home_top_bg.png; sourceTree = "<group>"; };
 		1266D5C11B495B8A00E7253F /* repeat_img.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = repeat_img.png; path = Resource/repeat_img.png; sourceTree = "<group>"; };
@@ -328,6 +331,8 @@
 				12C794A21B44232300918497 /* Images.xcassets */,
 				12AC16021B4918C3007C247B /* RBStoryboardLink */,
 				12C794921B44232300918497 /* Supporting Files */,
+				1212C5601B52613000C11BD2 /* WebViewController.h */,
+				1212C5611B52613000C11BD2 /* WebViewController.m */,
 			);
 			path = kindergarten;
 			sourceTree = "<group>";
@@ -893,6 +898,7 @@
 				9997BA161B4D580E00B908B6 /* CLLockLabel.m in Sources */,
 				12C7949B1B44232300918497 /* BabyViewController.m in Sources */,
 				12AC16111B4918C3007C247B /* RBStoryboardModalSegue.m in Sources */,
+				1212C5621B52613000C11BD2 /* WebViewController.m in Sources */,
 				99F17F621B4F51E400866F8F /* MBProgressHUD.m in Sources */,
 				9997BA241B4D580E00B908B6 /* MYBlurIntroductionView.m in Sources */,
 				99F17F651B4F56DE00866F8F /* LoginSegue.m in Sources */,

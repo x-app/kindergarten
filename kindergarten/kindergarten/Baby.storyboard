@@ -83,7 +83,7 @@
                                     </mask>
                                 </variation>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_messagebox.png" translatesAutoresizingMaskIntoConstraints="NO" id="LVv-fw-90e">
+                            <imageView tag="3" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_messagebox.png" translatesAutoresizingMaskIntoConstraints="NO" id="LVv-fw-90e">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="LVv-fw-90e" secondAttribute="height" multiplier="1:1" id="guR-vd-hOM"/>
@@ -99,7 +99,7 @@
                                     </mask>
                                 </variation>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_goin.png" translatesAutoresizingMaskIntoConstraints="NO" id="vTo-XD-1oa">
+                            <imageView tag="4" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_goin.png" translatesAutoresizingMaskIntoConstraints="NO" id="vTo-XD-1oa">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="vTo-XD-1oa" secondAttribute="height" multiplier="1:1" id="AK9-M2-HBB"/>
@@ -131,7 +131,7 @@
                                     </mask>
                                 </variation>
                             </imageView>
-                            <imageView tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_goout.png" translatesAutoresizingMaskIntoConstraints="NO" id="Vij-Jg-DDT">
+                            <imageView tag="5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_goout.png" translatesAutoresizingMaskIntoConstraints="NO" id="Vij-Jg-DDT">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Vij-Jg-DDT" secondAttribute="height" multiplier="1:1" id="TOM-bq-bg4"/>
@@ -212,9 +212,6 @@
                                         <include reference="248-E2-GQ6"/>
                                     </mask>
                                 </variation>
-                                <connections>
-                                    <segue destination="iXn-Qd-7dY" kind="show" id="mVH-Rq-ye9"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FrN-PG-L1n">
                                 <rect key="frame" x="57" y="467" width="73" height="30"/>
@@ -258,7 +255,7 @@
                                     </mask>
                                 </variation>
                             </button>
-                            <imageView tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_leave.png" translatesAutoresizingMaskIntoConstraints="NO" id="GiF-a3-w93">
+                            <imageView tag="6" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_leave.png" translatesAutoresizingMaskIntoConstraints="NO" id="GiF-a3-w93">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="GiF-a3-w93" secondAttribute="height" id="6Uc-C3-9Sv"/>
@@ -295,7 +292,7 @@
                                     </mask>
                                 </variation>
                             </button>
-                            <imageView tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_growdoc.png" translatesAutoresizingMaskIntoConstraints="NO" id="08R-93-MB6">
+                            <imageView tag="7" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_growdoc.png" translatesAutoresizingMaskIntoConstraints="NO" id="08R-93-MB6">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="08R-93-MB6" secondAttribute="height" id="WE0-AT-drw"/>
@@ -331,6 +328,9 @@
                                         <include reference="P4B-FJ-zRV"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <segue destination="iXn-Qd-7dY" kind="show" id="xNs-E3-8Ri"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.9450981021" green="0.97647064920000004" blue="0.98431378599999997" alpha="1" colorSpace="deviceRGB"/>
@@ -390,7 +390,9 @@
                             <constraint firstItem="7Wj-aj-lMR" firstAttribute="top" secondItem="Ke7-S9-mQ9" secondAttribute="bottom" constant="8" id="aXM-ew-2Gg">
                                 <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                             </constraint>
-                            <constraint firstItem="WVx-hD-5GG" firstAttribute="centerX" secondItem="rfp-ey-NBH" secondAttribute="centerX" constant="-0.5" id="csl-Sp-8Kb"/>
+                            <constraint firstItem="WVx-hD-5GG" firstAttribute="centerX" secondItem="rfp-ey-NBH" secondAttribute="centerX" constant="-0.5" id="csl-Sp-8Kb">
+                                <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                            </constraint>
                             <constraint firstItem="vTo-XD-1oa" firstAttribute="width" secondItem="vTo-XD-1oa" secondAttribute="height" multiplier="1:1" id="dBQ-m2-zDa"/>
                             <constraint firstItem="gll-bn-W8T" firstAttribute="bottom" secondItem="z3b-au-lEb" secondAttribute="bottom" constant="-32" id="f5T-U7-Dwr"/>
                             <constraint firstItem="WVx-hD-5GG" firstAttribute="top" secondItem="rfp-ey-NBH" secondAttribute="bottom" constant="20" id="fdg-fa-ARn">
@@ -570,6 +572,12 @@
                     <navigationItem key="navigationItem" id="ZHR-2d-GPa"/>
                     <connections>
                         <outletCollection property="func" destination="rfp-ey-NBH" id="F52-WD-8tK"/>
+                        <outletCollection property="func" destination="Ke7-S9-mQ9" id="cYL-ha-pAN"/>
+                        <outletCollection property="func" destination="LVv-fw-90e" id="3RC-mO-Fkx"/>
+                        <outletCollection property="func" destination="vTo-XD-1oa" id="2pL-gd-oZm"/>
+                        <outletCollection property="func" destination="Vij-Jg-DDT" id="sGs-HL-k5C"/>
+                        <outletCollection property="func" destination="GiF-a3-w93" id="hya-1W-xLy"/>
+                        <outletCollection property="func" destination="08R-93-MB6" id="XBG-Ac-Pcm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DKz-O2-YjN" sceneMemberID="firstResponder"/>
@@ -594,10 +602,10 @@
             </objects>
             <point key="canvasLocation" x="-213" y="-462"/>
         </scene>
-        <!--接送授权-->
+        <!--成长档案-->
         <scene sceneID="Ldi-vJ-vHp">
             <objects>
-                <viewController storyboardIdentifier="GrowupView" title="接送授权" id="iXn-Qd-7dY" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GrowupView" title="成长档案" id="iXn-Qd-7dY" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="317-LN-cN8"/>
                         <viewControllerLayoutGuide type="bottom" id="yeu-iQ-Mch"/>
@@ -605,7 +613,41 @@
                     <view key="view" contentMode="scaleToFill" id="wJ8-Bg-Uoq">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b5A-bh-hjW">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="b5A-bh-hjW" firstAttribute="top" secondItem="317-LN-cN8" secondAttribute="bottom" id="Mo9-fX-jTS"/>
+                            <constraint firstItem="b5A-bh-hjW" firstAttribute="leading" secondItem="wJ8-Bg-Uoq" secondAttribute="leading" id="Wly-4B-dCn"/>
+                            <constraint firstAttribute="bottom" secondItem="b5A-bh-hjW" secondAttribute="bottom" id="X0m-f0-pcx"/>
+                            <constraint firstAttribute="trailing" secondItem="b5A-bh-hjW" secondAttribute="trailing" id="rPf-S0-PtU"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="b5A-bh-hjW"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="Mo9-fX-jTS"/>
+                                <exclude reference="Wly-4B-dCn"/>
+                                <exclude reference="X0m-f0-pcx"/>
+                                <exclude reference="rPf-S0-PtU"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="b5A-bh-hjW"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="Mo9-fX-jTS"/>
+                                <include reference="Wly-4B-dCn"/>
+                                <include reference="X0m-f0-pcx"/>
+                                <include reference="rPf-S0-PtU"/>
+                            </mask>
+                        </variation>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rNc-wf-e1M" userLabel="First Responder" sceneMemberID="firstResponder"/>
