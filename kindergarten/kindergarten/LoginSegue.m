@@ -58,19 +58,4 @@
     } inView:current.view];
 }
 
-//
-//#pragma marks -- UIAlertViewDelegate --
-//-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-//    NSLog(@"click alert view");
-//    LoginViewContoller *current = self.sourceViewController;
-//    LoginViewContoller *next = self.destinationViewController;
-//    if (buttonIndex == 0) {
-//        [current.navigationController pushViewController:next animated:YES];
-//    } else {
-//        [current.navigationController dismissViewControllerAnimated:YES completion:nil];
-//    }
-//}
-
-
-
 @end

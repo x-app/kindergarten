@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LoginSegue : UIStoryboardSegue<UIAlertViewDelegate>
+@interface LoginSegue : UIStoryboardSegue
 
 @end
