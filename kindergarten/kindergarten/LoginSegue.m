@@ -8,6 +8,7 @@
 
 #import "LoginSegue.h"
 #import "LoginViewContoller.h"
+#import "AppDelegate.h"
 #import "KGUtil.h"
 #import "KGConst.h"
 @implementation LoginSegue
@@ -30,12 +31,26 @@
     NSDictionary *body = [KGUtil getRequestBody:profile];
     NSDictionary *params = @{@"uid": REQUEST_UID, @"sign": [KGUtil getRequestSign:body], @"body":body};
     NSString *url = @"http://app.nugget-nj.com/nugget_app/parent/regValid";
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     [KGUtil postRequest:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON: %@", responseObject);
         NSString *code = [responseObject objectForKey:@"code"];
         if ([code isEqualToString:@"000000"]) {
-            next.fromVC = current.fromVC;
-            [current.navigationController pushViewController:next animated:YES];
+            if (delegate.user.regMode == 0) {
+                UIAlertView *hint = [[UIAlertView alloc] initWithTitle:@"请确认" message:@"用户已经注册,你是否是要找回密码?" delegate:current.self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
+                [hint show];
+                //[hint release];
+                //[KGUtil showAlert:@"刚用户已经注册,你是否是要找回密码?" inView:current.view];
+            } else if (delegate.user.regMode == 1) {
+                NSDictionary *obj = [responseObject objectForKey:@"obj"];
+                delegate.user.question = [obj objectForKey:@"question"];
+                delegate.user.parentID = [obj objectForKey:@"parentid"];
+                delegate.user.uid = [obj objectForKey:@"iuId"];
+                delegate.user.answer = [obj objectForKey:@"answer"];
+                next.fromVC = current.fromVC;
+                //next.qstnTextField.text = question;
+                [current.navigationController pushViewController:next animated:YES];
+            }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);

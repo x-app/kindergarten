@@ -109,7 +109,7 @@
     MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:view];
     [view addSubview:hud];
     //HUD.delegate = self;
-    hud.labelText = @"Loading";
+    hud.labelText = @"加载中";
     [hud show:YES];
     [manager POST:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [hud hide:YES];

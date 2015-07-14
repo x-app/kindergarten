@@ -470,20 +470,20 @@
 - (IBAction)registerUserAction:(id)sender {
     NSLog(@"register a new account");
     NSLog(@"switch to login.storyboard, mode: register");
-    [self switchToLogin];
+    [self switchToLogin: 0];
 }
 
 - (IBAction)forgetPswdAction:(id)sender {
     NSLog(@"forget password");
     NSLog(@"switch to login.storyboard, mode: forgetPswd");
-    [self switchToLogin];
+    [self switchToLogin: 1];
     if(_forgetPwdBlock != nil) _forgetPwdBlock();
 }
 
 /**
  * 切换到注册界面
  */
-- (void)switchToLogin {
+- (void)switchToLogin:(NSInteger)mode {
     UIStoryboard *loginStoryboard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
     if (loginStoryboard == nil) {
         NSLog(@"login.storyboard is nil");
@@ -492,6 +492,7 @@
     }
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     delegate.user.registering = YES;
+    delegate.user.regMode = mode;
     [self dismissViewControllerAnimated:NO completion:^(void) {
         UINavigationController *loginNaviVC = (UINavigationController *)[loginStoryboard instantiateInitialViewController];
         [self.vc presentViewController:loginNaviVC animated:YES completion:^(void) {

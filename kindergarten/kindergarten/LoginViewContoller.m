@@ -41,6 +41,13 @@
     NSLog(@"LoginViewController did load");
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    AppDelegate* delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    if (![delegate.user.question isEqualToString:@""]) {
+        self.qstnTextField.text = delegate.user.question;
+    }
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -48,8 +55,36 @@
 
 - (IBAction)finishQuestionAction:(UIButton *)sender {
     if ([self.nswrTextField.text isEqualToString:@""]) {
-        [KGUtil showAlert:@"请设置您的密保问题答案" inView:self.view];
+        [KGUtil showAlert:@"请填写密保问题答案" inView:self.view];
         return;
+    }
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    if (delegate.user.regMode == 1) {
+        NSString *inputAnswer = self.nswrTextField.text;
+        NSString *md5Answer = [KGUtil getMD5Str:inputAnswer];
+        if (![delegate.user.answer isEqualToString:md5Answer]) {
+            [KGUtil showAlert:@"答案错误" inView:self.view];
+            return;
+        }
+    } else {
+        NSDictionary *profile = @{@"name": delegate.user.name,
+                                  @"idNo": delegate.user.idNo,
+                                  @"questionId":@2,
+                                  @"answer":@"888888",
+                                  @"pwd":@"a12345",
+                                  @"deviceId":@""};
+        NSDictionary *body = [KGUtil getRequestBody:profile];
+        NSDictionary *params = @{@"uid": REQUEST_UID, @"sign": [KGUtil getRequestSign:body], @"body":body};
+        NSString *url = @"http://app.nugget-nj.com/nugget_app/parent/register";
+        [KGUtil postRequest:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"JSON: %@", responseObject);
+            NSString *code = [responseObject objectForKey:@"code"];
+            if ([code isEqualToString:@"000000"]) {
+                
+            }
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"Error: %@", error);
+        } inView:self.view];
     }
     [self setGesturePswd];
 }
@@ -112,6 +147,7 @@
 
 - (void)showParkList {
     if ([self.parkList count] == 0) {
+        [self.parkTextField resignFirstResponder];
         return;
     }
     self.tableAlert = nil;
@@ -153,6 +189,7 @@
 
 - (void)showQstnList {
     if ([self.qstnList count] == 0) {
+        [self.qstnTextField resignFirstResponder];
         return;
     }
     self.tableAlert = nil;
@@ -190,6 +227,11 @@
     [self.tableAlert show];
 }
 - (IBAction)qstnTextFieldTouchDown:(UITextField *)sender {
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    if (![delegate.user.question isEqualToString:@""]) {
+        [self.qstnTextField resignFirstResponder];
+        return;
+    }
     if (self.parkList != nil && [self.parkList count] > 0) {
         [self showQstnList];
         return;
