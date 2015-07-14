@@ -44,6 +44,7 @@
 		12DEAD011B4D693300C437BE /* Baby.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12DEAD001B4D693300C437BE /* Baby.storyboard */; };
 		12E038251B4A91680021B266 /* Garten.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12E038241B4A91680021B266 /* Garten.storyboard */; };
 		12F630191B4932C000BE67B6 /* Growup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12F630181B4932C000BE67B6 /* Growup.storyboard */; };
+		996D322E1B55525200CB648B /* KGVarible.m in Sources */ = {isa = PBXBuildFile; fileRef = 996D322D1B55525200CB648B /* KGVarible.m */; };
 		9997B9FF1B4D580E00B908B6 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9997B9AE1B4D580E00B908B6 /* AFHTTPRequestOperation.m */; };
 		9997BA001B4D580E00B908B6 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9997B9B01B4D580E00B908B6 /* AFHTTPRequestOperationManager.m */; };
 		9997BA011B4D580E00B908B6 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9997B9B21B4D580E00B908B6 /* AFHTTPSessionManager.m */; };
@@ -167,6 +168,8 @@
 		12DEAD001B4D693300C437BE /* Baby.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Baby.storyboard; sourceTree = "<group>"; };
 		12E038241B4A91680021B266 /* Garten.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Garten.storyboard; sourceTree = "<group>"; };
 		12F630181B4932C000BE67B6 /* Growup.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Growup.storyboard; sourceTree = "<group>"; };
+		996D322C1B55525200CB648B /* KGVarible.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KGVarible.h; sourceTree = "<group>"; };
+		996D322D1B55525200CB648B /* KGVarible.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KGVarible.m; sourceTree = "<group>"; };
 		9997B9AD1B4D580E00B908B6 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		9997B9AE1B4D580E00B908B6 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		9997B9AF1B4D580E00B908B6 /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -333,6 +336,8 @@
 				12C794921B44232300918497 /* Supporting Files */,
 				1212C5601B52613000C11BD2 /* WebViewController.h */,
 				1212C5611B52613000C11BD2 /* WebViewController.m */,
+				99F7877E1B50F4E5006F795A /* KGUIViewController.h */,
+				99F7877F1B50F4E5006F795A /* KGUIViewController.m */,
 			);
 			path = kindergarten;
 			sourceTree = "<group>";
@@ -345,8 +350,6 @@
 				12C794971B44232300918497 /* AppDelegate.m */,
 				12C794931B44232300918497 /* Info.plist */,
 				12C794941B44232300918497 /* main.m */,
-				99F7877E1B50F4E5006F795A /* KGUIViewController.h */,
-				99F7877F1B50F4E5006F795A /* KGUIViewController.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -708,6 +711,8 @@
 				99F17F5A1B4ECCCD00866F8F /* KGUtil.m */,
 				99F17F5C1B4ECF4D00866F8F /* KGConst.h */,
 				99F17F5D1B4ED3D800866F8F /* KGConst.m */,
+				996D322C1B55525200CB648B /* KGVarible.h */,
+				996D322D1B55525200CB648B /* KGVarible.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -878,6 +883,7 @@
 				9997BA061B4D580E00B908B6 /* AFURLResponseSerialization.m in Sources */,
 				9997BA041B4D580E00B908B6 /* AFURLConnectionOperation.m in Sources */,
 				12AC16131B4918C3007C247B /* RBStoryboardPushSegue.m in Sources */,
+				996D322E1B55525200CB648B /* KGVarible.m in Sources */,
 				9997BA121B4D580E00B908B6 /* CoreLockConst.m in Sources */,
 				9997BA181B4D580E00B908B6 /* CLLockView.m in Sources */,
 				12C7949E1B44232300918497 /* ClassViewController.m in Sources */,

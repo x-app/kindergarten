@@ -10,7 +10,7 @@
 #import "KGConst.h"
 #import "MBProgressHUD.h"
 #import <CommonCrypto/CommonDigest.h>
-
+#import "AppDelegate.h"
 @interface KGUtil()
 
 @end
@@ -124,6 +124,14 @@
     }];
 }
 
++ (NSString *)getServerIndexURL {
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    return delegate.varible.server_index_url;
+}
 
++ (NSString *)getServerAppURL {
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    return delegate.varible.server_app_url;
+}
 
 @end

@@ -75,7 +75,8 @@
                                   @"deviceId":@""};
         NSDictionary *body = [KGUtil getRequestBody:profile];
         NSDictionary *params = @{@"uid": REQUEST_UID, @"sign": [KGUtil getRequestSign:body], @"body":body};
-        NSString *url = @"http://app.nugget-nj.com/nugget_app/parent/register";
+        //NSString *url = @"http://app.nugget-nj.com/nugget_app/parent/register";
+        NSString *url = [[KGUtil getServerAppURL] stringByAppendingString:@"/parent/register"];
         [KGUtil postRequest:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"JSON: %@", responseObject);
             NSString *code = [responseObject objectForKey:@"code"];
@@ -119,7 +120,6 @@
                 //[self dismissViewControllerAnimated:NO completion:nil];
                 //[self presentViewController:self.fromVC animated:YES completion:nil];
             }
-            
             //BabyViewController *bvc = [mainStoryboard instantiateInitialViewController];
             //[self presentViewController:bvc animated:NO completion:nil];
             
@@ -134,7 +134,7 @@
     NSLog(@"request kindergarten list");
     NSDictionary *body = [KGUtil getRequestBody:@{}];
     NSDictionary *params = @{@"uid": REQUEST_UID, @"sign": [KGUtil getRequestSign:body], @"body":body};
-    NSString *url = @"http://app.nugget-nj.com/kindergarten_index/queryKindergarten";
+    NSString *url = [[KGUtil getServerIndexURL] stringByAppendingString:@"/queryKindergarten"];
     [KGUtil postRequest:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON: %@", responseObject);
         NSArray *parkList = [responseObject objectForKey:@"objlist"];
@@ -175,9 +175,10 @@
         NSDictionary *curPark = [self.parkList objectAtIndex:selectedIndex.row];
         NSString *parkName = [curPark objectForKey:@"parkName"];
         NSString *appUrl = [curPark objectForKey:@"appUrl"];
+        AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        delegate.varible.server_app_url = appUrl;
         self.parkTextField.text = parkName;
         [self.parkTextField resignFirstResponder];
-        NSLog(@"hahaha");
     } andCompletionBlock:^{
         NSLog(@"cancelled");
     }];
@@ -244,7 +245,8 @@
     //NSString *re = [KGUtil getRequestSign:body];
     //NSLog(@"%@",re);
     //NSDictionary *params = @{@"uid":@"nugget",@"sign":@"18eda6be778fbd7d09442830685db1b4",@"body":body};
-    NSString *url = @"http://app.nugget-nj.com/nugget_app/system/queryQuestion";
+    //NSString *url = @"http://app.nugget-nj.com/nugget_app/system/queryQuestion";
+    NSString *url = [[KGUtil getServerAppURL] stringByAppendingString:@"/system/queryQuestion"];
     [KGUtil postRequest:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON: %@", responseObject);
         NSArray *qstnList = [responseObject objectForKey:@"objlist"];

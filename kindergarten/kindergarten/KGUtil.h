@@ -26,4 +26,7 @@
             failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
              inView:(UIView *)view;
 
++ (NSString *)getServerIndexURL;
++ (NSString *)getServerAppURL;
+
 @end

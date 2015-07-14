@@ -30,7 +30,8 @@
     NSDictionary *profile = @{@"name": current.nameTextField.text, @"idNo": current.idNoTextField.text};
     NSDictionary *body = [KGUtil getRequestBody:profile];
     NSDictionary *params = @{@"uid": REQUEST_UID, @"sign": [KGUtil getRequestSign:body], @"body":body};
-    NSString *url = @"http://app.nugget-nj.com/nugget_app/parent/regValid";
+    //NSString *url = @"http://app.nugget-nj.com/nugget_app/parent/regValid";
+    NSString *url = [[KGUtil getServerAppURL] stringByAppendingString:@"/parent/regValid"];
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     [KGUtil postRequest:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON: %@", responseObject);

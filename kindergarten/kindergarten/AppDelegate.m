@@ -25,6 +25,9 @@
     self.user.registered = NO;
     NSInteger visitTimes = 0;
     
+    self.varible = [[KGVarible alloc] init];
+    self.varible.server_index_url = @"http://app.nugget-nj.com/kindergarten_index";
+    
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     visitTimes = [userDefaults integerForKey:@"visitTimes"];
     
