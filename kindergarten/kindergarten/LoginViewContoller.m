@@ -271,6 +271,19 @@
     [self.navigationController dismissViewControllerAnimated:NO completion:nil];
 }
 
+
+#pragma marks -- UIAlertViewDelegate --
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    NSLog(@"click alert view");
+    if (buttonIndex == 0) {
+        [self.navigationController pushViewController:self.nextVC animated:YES];
+    } else {
+        AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        delegate.user.registering = NO;
+        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
 /*
 #pragma mark - Navigation
 

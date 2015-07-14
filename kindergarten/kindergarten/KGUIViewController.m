@@ -27,13 +27,14 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    NSLog(@"KGUIViewController:viewDidAppear");
     [self showVerifyLock];
     
-        [[NSNotificationCenter defaultCenter]
-         addObserver:self
-         selector:@selector(applicationDidBecomeActiveNotification:)
-         name:UIApplicationDidBecomeActiveNotification
-         object:[UIApplication sharedApplication]];
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+     selector:@selector(applicationDidBecomeActiveNotification:)
+     name:UIApplicationDidBecomeActiveNotification
+     object:[UIApplication sharedApplication]];
 }
 
 - (void)showVerifyLock {

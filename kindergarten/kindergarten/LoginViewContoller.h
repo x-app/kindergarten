@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LoginViewContoller : UIViewController
+@interface LoginViewContoller : UIViewController<UIAlertViewDelegate>
 
 @property (strong, nonatomic) UIViewController *fromVC;
-
+@property (strong, nonatomic) UIViewController *nextVC;
 
 @property (weak, nonatomic) IBOutlet UITextField *idNoTextField;
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
