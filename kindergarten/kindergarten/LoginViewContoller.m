@@ -33,6 +33,8 @@
     [self.nameTextField setupTextFieldWithIconName:@"user_name_icon.png"];
     [self.qstnTextField setupTextFieldWithIconName:@"password_icon"];
     [self.nswrTextField setupTextFieldWithIconName:@"user_name_icon.png"];
+    self.parkTextField.delegate = self;
+    self.qstnTextField.delegate = self;
     
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
     imageView.contentMode = UIViewContentModeScaleToFill;
@@ -279,13 +281,20 @@
 #pragma marks -- UIAlertViewDelegate --
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     NSLog(@"click alert view");
-    if (buttonIndex == 0) {
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    if (buttonIndex == 0) { //确定-直接进入忘记密码的模式
+        delegate.user.regMode = 1;
         [self.navigationController pushViewController:self.nextVC animated:YES];
-    } else {
-        AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    } else { //取消-返回main.storyboard
         delegate.user.registering = NO;
         [self.navigationController dismissViewControllerAnimated:YES completion:nil];
     }
+}
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+    //do somthing
+    NSLog(@"block text field begin editing");
+    return NO;
 }
 
 /*

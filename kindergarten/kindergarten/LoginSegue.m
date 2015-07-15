@@ -53,6 +53,8 @@
                 //next.qstnTextField.text = question;
                 [current.navigationController pushViewController:next animated:YES];
             }
+        } else {
+            [KGUtil showAlert:@"验证不通过, 请确保您的信息已注册" inView:current.self.view];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);

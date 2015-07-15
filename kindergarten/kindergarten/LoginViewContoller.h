@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LoginViewContoller : UIViewController<UIAlertViewDelegate>
+@interface LoginViewContoller : UIViewController<UIAlertViewDelegate, UITextFieldDelegate>
 
 @property (strong, nonatomic) UIViewController *fromVC;
 @property (strong, nonatomic) UIViewController *nextVC;
