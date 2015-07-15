@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1212C5621B52613000C11BD2 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1212C5611B52613000C11BD2 /* WebViewController.m */; };
+		122566651B56AA410007733E /* Child.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 122566641B56AA410007733E /* Child.storyboard */; };
 		1266D5C21B495B8A00E7253F /* head.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1266D5BF1B495B8A00E7253F /* head.jpg */; };
 		1266D5C31B495B8A00E7253F /* home_top_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 1266D5C01B495B8A00E7253F /* home_top_bg.png */; };
 		1266D5C41B495B8A00E7253F /* repeat_img.png in Resources */ = {isa = PBXBuildFile; fileRef = 1266D5C11B495B8A00E7253F /* repeat_img.png */; };
@@ -116,6 +117,7 @@
 /* Begin PBXFileReference section */
 		1212C5601B52613000C11BD2 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
 		1212C5611B52613000C11BD2 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
+		122566641B56AA410007733E /* Child.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Child.storyboard; sourceTree = "<group>"; };
 		1266D5BF1B495B8A00E7253F /* head.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = head.jpg; path = Resource/head.jpg; sourceTree = "<group>"; };
 		1266D5C01B495B8A00E7253F /* home_top_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = home_top_bg.png; path = Resource/home_top_bg.png; sourceTree = "<group>"; };
 		1266D5C11B495B8A00E7253F /* repeat_img.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = repeat_img.png; path = Resource/repeat_img.png; sourceTree = "<group>"; };
@@ -280,6 +282,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		122566661B56AA490007733E /* Child Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				122566641B56AA410007733E /* Child.storyboard */,
+			);
+			name = "Child Storyboard";
+			sourceTree = "<group>";
+		};
 		12AC16021B4918C3007C247B /* RBStoryboardLink */ = {
 			isa = PBXGroup;
 			children = (
@@ -328,6 +338,7 @@
 				12DEAC8B1B4D428900C437BE /* Baby Storyboard */,
 				12F630171B49326C00BE67B6 /* Growup Storyboard */,
 				12DEAC881B4D3E8A00C437BE /* Class Storyboard */,
+				122566661B56AA490007733E /* Child Storyboard */,
 				12E038231B4A915A0021B266 /* Garten Storyboard */,
 				12DEAC851B4D36EB00C437BE /* Me Storyboard */,
 				12C794A41B44232300918497 /* LaunchScreen.xib */,
@@ -851,6 +862,7 @@
 				12DEACFC1B4D682500C437BE /* home_leave.png in Resources */,
 				9997BA201B4D580E00B908B6 /* MLTableAlertButtonPressed@2x.png in Resources */,
 				99ABD5A11B48030400B8DB8B /* help_2.xib in Resources */,
+				122566651B56AA410007733E /* Child.storyboard in Resources */,
 				12DEAD011B4D693300C437BE /* Baby.storyboard in Resources */,
 				9997BA0D1B4D580E00B908B6 /* user_name_icon.png in Resources */,
 				12DEAC871B4D3E8300C437BE /* Class.storyboard in Resources */,

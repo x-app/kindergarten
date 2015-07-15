@@ -15,6 +15,7 @@
 @interface BabyViewController ()
 @property (nonatomic) NSInteger viewAppearCount;
 @property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *func;
+@property (weak, nonatomic) IBOutlet UIImageView *repeatImage;
 
 @property (strong, nonatomic)WebViewController *webVC;
 
@@ -35,6 +36,8 @@
     NSLog(@"BabyViewDidLoad");
     
     //self.viewAppearCount = 0;
+    self.repeatImage.image = [self.repeatImage.image resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0) resizingMode:UIImageResizingModeTile];
+    
     
     // Do any additional setup after loading the view, typically from a nib.
     for(int i=0; i<[self.func count]; i++)

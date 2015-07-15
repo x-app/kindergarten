@@ -7,21 +7,108 @@
 //
 
 #import "ClassViewController.h"
+#import "WebViewController.h"
+#import "KGUtil.h"
 
 @interface ClassViewController ()
+
+@property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *func;
+@property (weak, nonatomic) IBOutlet UIImageView *repeatImage;
+
+@property (strong, nonatomic)WebViewController *webVC;
 
 @end
 
 @implementation ClassViewController
 
+- (WebViewController*)webVC
+{
+    if(_webVC == nil)
+        _webVC = [[WebViewController alloc] init];
+    
+    return _webVC;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    for(int i=0; i<[self.func count]; i++)
+    {
+        UIImageView* v= self.func[i];
+        //[(UIControl *)v addTarget:self action:@selector(onImageClick:) forControlEvents:UIControlEventTouchUpInside];
+        UITapGestureRecognizer *singleTap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onImageClick:)];
+        [v addGestureRecognizer:singleTap1];
+    }
+
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (void)onImageClick:(UITapGestureRecognizer*) sender{
+    //NSLog(@"%ld", (long)sender.view.tag);
+    NSInteger tag = sender.view.tag;
+    
+    UIViewController *vc = nil;
+    //    CGRect windowFrame = [[UIScreen mainScreen] bounds];
+    
+    switch (tag){
+        case 1:{
+            UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Baby" bundle:nil];
+            vc = [storyBoard instantiateViewControllerWithIdentifier:@"PickupView"];
+            
+            [self.navigationController pushViewController:vc animated:YES];
+            break;
+        }
+        case 2:{
+            [self.navigationController pushViewController:[self webVC] animated:YES];
+            
+            NSString *body = [NSString stringWithFormat:@"c=%@&dt=%@&u=%@", @"2013110", [KGUtil getCompactDateStr], @"20141021172851000015"];
+            NSString *url = [KGUtil getRequestHtmlUrl:@"/health/givemedic" bodyStr:body];
+            
+            NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+            [[self webVC].webView loadRequest:request];
+            break;
+        }
+        case 3:{
+            [self.navigationController pushViewController:[self webVC] animated:YES];
+            
+            NSString *body = [NSString stringWithFormat:@"c=%@&dt=%@&u=%@", @"2013110", [KGUtil getCompactDateStr], @"20141021172851000015"];
+            NSString *url = [KGUtil getRequestHtmlUrl:@"/health/givemedic" bodyStr:body];
+            
+            NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+            [[self webVC].webView loadRequest:request];
+            break;
+        }
+        case 4:{
+            [self.navigationController pushViewController:[self webVC] animated:YES];
+            
+            NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.taobao.com"]];
+            [[self webVC].webView loadRequest:request];
+            break;
+        }
+        case 5:{
+            [self.navigationController pushViewController:[self webVC] animated:YES];
+            
+            NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.baidu.com"]];
+            [[self webVC].webView loadRequest:request];
+            break;
+        }
+        case 6:{
+            UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Child" bundle:nil];
+            vc = [storyBoard instantiateViewControllerWithIdentifier:@"ChildView"];
+            
+            [self.navigationController pushViewController:vc animated:YES];
+            break;
+        }
+        default:
+            break;
+    }
+    
+}
+
 
 @end
