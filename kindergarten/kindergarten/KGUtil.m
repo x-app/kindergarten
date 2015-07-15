@@ -66,6 +66,24 @@
     return [KGUtil getMD5Str:requestStr];
 }
 
++(NSString *)getRequestHtmlUrl:(NSString *)controller bodyStr:(NSString *)bodyStr{
+    NSString *str = [NSString stringWithFormat:@"%@%@", bodyStr, REQUEST_KEY];
+    NSString *sign = [KGUtil getMD5Str:str];
+    
+    NSString *SERVER_HTML_URL = [KGUtil getServerHtmlURL];//@"http://app.nugget-nj.com/nugget";
+    
+    NSString *requesturl = [NSString stringWithFormat:@"%@%@?%@&sign=%@", SERVER_HTML_URL, controller, bodyStr, sign];
+    
+    return requesturl;
+}
+
++(NSString *)getCompactDateStr{
+    NSDateFormatter *df = [[NSDateFormatter alloc] init];
+    [df setDateFormat:@"yyyyMMddHHmmss"];
+    NSString *dateStr = [df stringFromDate:[NSDate date]];
+    return dateStr;
+}
+
 + (void)showAlert:(NSString *)content inView:(id)view {
     if (![view isKindOfClass:[UIView class]]) {
         return;

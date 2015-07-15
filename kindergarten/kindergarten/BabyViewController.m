@@ -9,6 +9,7 @@
 #import "BabyViewController.h"
 #import "WebViewController.h"
 #import "CLLockVC.h"
+#import "KGUtil.h"
 #import "AppDelegate.h"
 
 @interface BabyViewController ()
@@ -61,31 +62,62 @@
         case 1:{
             UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Baby" bundle:nil];
             vc = [storyBoard instantiateViewControllerWithIdentifier:@"PickupView"];
+            
+            [self.navigationController pushViewController:vc animated:YES];
             break;
         }
-        case 2:{            
+        case 2:{
             [self.navigationController pushViewController:[self webVC] animated:YES];
-            NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.sina.com"]];
+            
+            NSString *body = [NSString stringWithFormat:@"c=%@&dt=%@&u=%@", @"2013110", [KGUtil getCompactDateStr], @"20141021172851000015"];
+            NSString *url = [KGUtil getRequestHtmlUrl:@"/health/givemedic" bodyStr:body];
+            
+            NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:url]];
             [[self webVC].webView loadRequest:request];
             break;
         }
         case 3:{
             [self.navigationController pushViewController:[self webVC] animated:YES];
+            
+            NSString *body = [NSString stringWithFormat:@"c=%@&dt=%@&u=%@", @"2013110", [KGUtil getCompactDateStr], @"20141021172851000015"];
+            NSString *url = [KGUtil getRequestHtmlUrl:@"/health/givemedic" bodyStr:body];
+            
+            NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+            [[self webVC].webView loadRequest:request];
+            break;
+        }
+        case 4:{
+            [self.navigationController pushViewController:[self webVC] animated:YES];
+            
+            NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.taobao.com"]];
+            [[self webVC].webView loadRequest:request];
+            break;
+        }
+        case 5:{
+            [self.navigationController pushViewController:[self webVC] animated:YES];
+            
             NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.baidu.com"]];
+            [[self webVC].webView loadRequest:request];
+            break;
+        }
+        case 6:{
+            [self.navigationController pushViewController:[self webVC] animated:YES];
+            
+            NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.qq.com"]];
             [[self webVC].webView loadRequest:request];
             break;
         }
         case 7:{
             UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Baby" bundle:nil];
             vc = [storyBoard instantiateViewControllerWithIdentifier:@"GrowupView"];
+            
+            [self.navigationController pushViewController:vc animated:YES];
             break;
         }
         default:
             break;
     }
-    
-    if(vc != nil)
-        [self.navigationController pushViewController:vc animated:YES];
+
 }
 
 @end
