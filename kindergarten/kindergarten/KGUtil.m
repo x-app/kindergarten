@@ -24,7 +24,8 @@
     //const char *cStr = [source bytes];
     const char *cStr = [sourceStr UTF8String];
     //NSLog(@"%d%s", strlen(cStr), cStr);
-    unsigned char result[CC_MD5_DIGEST_LENGTH] = {};
+    unsigned char result[CC_MD5_DIGEST_LENGTH];// = {};
+    //unsigned char *result;
     //NSLog(@"result_1:%s", result);
     //char hexDigits[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
     CC_MD5(cStr, (CC_LONG)strlen(cStr), result);
@@ -51,16 +52,19 @@
 }
 
 + (NSString *)getRequestSign:(NSDictionary *)body {
-    NSMutableArray *components = [[NSMutableArray alloc] init];
-    NSMutableString *bodyStr = [[NSMutableString alloc] init];
-    [bodyStr appendString:@"{"];
-    for (id key in [body allKeys]) {
-        NSString *value = [body valueForKey:key];
-        NSString *curCom = [NSString stringWithFormat:@"\"%@\":\"%@\"", key, value];
-        [components addObject:curCom];
-    }
-    [bodyStr appendString: [components componentsJoinedByString:@","]];
-    [bodyStr appendFormat:@"}"];
+    //NSMutableArray *components = [[NSMutableArray alloc] init];
+    //NSMutableString *bodyStr = [[NSMutableString alloc] init];
+    NSError *parseError = nil;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:body options:0 error:&parseError];
+    NSString *bodyStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+//    [bodyStr appendString:@"{"];
+//    for (id key in [body allKeys]) {
+//        NSString *value = [body valueForKey:key];
+//        NSString *curCom = [NSString stringWithFormat:@"\"%@\":\"%@\"", key, value];
+//        [components addObject:curCom];
+//    }
+//    [bodyStr appendString: [components componentsJoinedByString:@","]];
+//    [bodyStr appendFormat:@"}"];
     //body串拼接key
     NSString *requestStr = [NSString stringWithFormat:@"%@%@", bodyStr, REQUEST_KEY];
     return [KGUtil getMD5Str:requestStr];
@@ -141,6 +145,7 @@
         }
     }];
 }
+
 
 + (NSString *)getServerIndexURL {
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];

@@ -31,6 +31,9 @@
              inView:(UIView *)view;
 
 + (NSString *)getServerIndexURL;
+
 + (NSString *)getServerAppURL;
+
 + (NSString *)getServerHtmlURL;
+
 @end

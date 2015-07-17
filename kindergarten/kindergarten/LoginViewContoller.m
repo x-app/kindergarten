@@ -45,8 +45,10 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     AppDelegate* delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    if (![delegate.user.question isEqualToString:@""]) {
-        self.qstnTextField.text = delegate.user.question;
+    if (delegate.user.regMode == 1) {
+        if (![delegate.user.question isEqualToString:@""]) {
+            self.qstnTextField.text = delegate.user.question;
+        }
     }
 }
 
@@ -68,28 +70,34 @@
             [KGUtil showAlert:@"答案错误" inView:self.view];
             return;
         }
+        [self setGesturePswd];
     } else {
+        delegate.user.answer = self.nswrTextField.text;
         NSDictionary *profile = @{@"name": delegate.user.name,
                                   @"idNo": delegate.user.idNo,
-                                  @"questionId":@2,
-                                  @"answer":@"888888",
-                                  @"pwd":@"a12345",
+                                  @"questionId":@(delegate.user.questionID),
+                                  @"answer":delegate.user.answer,
+                                  @"pwd":@"123456",
                                   @"deviceId":@""};
         NSDictionary *body = [KGUtil getRequestBody:profile];
         NSDictionary *params = @{@"uid": REQUEST_UID, @"sign": [KGUtil getRequestSign:body], @"body":body};
+        //NSDictionary *params = @{@"uid": REQUEST_UID, @"sign": [KGUtil getRequestSign:body], @"body":body};
         //NSString *url = @"http://app.nugget-nj.com/nugget_app/parent/register";
         NSString *url = [[KGUtil getServerAppURL] stringByAppendingString:@"/parent/register"];
         [KGUtil postRequest:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"JSON: %@", responseObject);
             NSString *code = [responseObject objectForKey:@"code"];
             if ([code isEqualToString:@"000000"]) {
-                
+                //[KGUtil showAlert:@"注册成功" inView:self.view];
+                NSDictionary *obj = [responseObject objectForKey:@"obj"];
+                delegate.user.uid = [obj objectForKey:@"iuid"];
+                delegate.user.parentID = [(NSString *)[obj objectForKey:@"parentid"] integerValue];
+                [self setGesturePswd];
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);
         } inView:self.view];
     }
-    [self setGesturePswd];
 }
 
 - (void)setGesturePswd {
@@ -216,12 +224,14 @@
     
     // Setting custom alert height
     self.tableAlert.height = 350;
-    
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     // configure actions to perform
     [self.tableAlert configureSelectionBlock:^(NSIndexPath *selectedIndex){
         NSDictionary *curQuestion = [self.qstnList objectAtIndex:selectedIndex.row];
         NSString *question = [curQuestion objectForKey:@"question"];
-        NSString *questionId = [curQuestion objectForKey:@"questionId"];
+        NSString *questionID = [curQuestion objectForKey:@"questionId"];
+        delegate.user.question = question;
+        delegate.user.questionID = [questionID integerValue];
         self.qstnTextField.text = question;
         [self.qstnTextField resignFirstResponder];
     } andCompletionBlock:^{
@@ -233,11 +243,11 @@
 }
 - (IBAction)qstnTextFieldTouchDown:(UITextField *)sender {
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    if (![delegate.user.question isEqualToString:@""]) {
+    if (delegate.user.regMode == 1 && ![delegate.user.question isEqualToString:@""]) {
         [self.qstnTextField resignFirstResponder];
         return;
     }
-    if (self.parkList != nil && [self.parkList count] > 0) {
+    if (self.qstnList != nil && [self.qstnList count] > 0) {
         [self showQstnList];
         return;
     }
@@ -262,7 +272,9 @@
 }
 
 - (IBAction)test:(UIButton *)sender {
-
+    self.nameTextField.text = @"左玲玲";
+    self.idNoTextField.text = @"430421198608170228";
+    self.parkTextField.text = @"江苏南京市南戈特幼儿园";
 }
 
 - (IBAction)setFakeProfile:(UIButton *)sender {

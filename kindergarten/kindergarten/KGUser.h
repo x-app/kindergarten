@@ -13,9 +13,10 @@
 
 @property (strong, nonatomic) NSString *uid;        //用户编号
 @property (strong, nonatomic) NSString *name;       //姓名
-@property (strong, nonatomic) NSString *parentID;   //家长ID
+@property (nonatomic) NSInteger parentID;           //家长ID
 @property (strong, nonatomic) NSString *idNo;       //身份证号码
 @property (strong, nonatomic) NSString *deviceID;   //设备ID
+@property (nonatomic) NSInteger catagory;           //用户类别300-家长 301-教师 302-园长
 @property (nonatomic) BOOL registered;              //该用户已经注册
 @property (nonatomic) BOOL verified;                //该用户已经通过手势密码验证
 @property (nonatomic) BOOL registering;
@@ -26,5 +27,8 @@
 @property (strong, nonatomic) NSString *answer;     //密保问题答案
 
 @property (strong, nonatomic) NSMutableArray *childs;  //该用户的孩子
+
+
+- (NSDictionary *)getDictionary;
 
 @end
