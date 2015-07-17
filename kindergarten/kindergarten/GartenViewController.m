@@ -52,6 +52,7 @@
                 break;
         }
         case 2:{
+            [self webVC].title = @"菜谱";
             [self.navigationController pushViewController:[self webVC] animated:YES];
             
             NSString *body = [NSString stringWithFormat:@"c=%@&dt=%@&u=%@", @"2013110", [KGUtil getCompactDateStr], @"20141021172851000015"];
@@ -62,6 +63,7 @@
             break;
         }
         case 3:{
+            [self webVC].title = @"园长信箱";
             [self.navigationController pushViewController:[self webVC] animated:YES];
             
             NSString *body = [NSString stringWithFormat:@"c=%@&dt=%@&u=%@", @"2013110", [KGUtil getCompactDateStr], @"20141021172851000015"];

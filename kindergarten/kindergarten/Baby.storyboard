@@ -39,6 +39,11 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <exclude reference="LeV-RQ-EGE"/>
+                                    </mask>
+                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="赖楚妍" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZeP-b7-Bfi" colorLabel="IBBuiltInLabel-Green">
                                 <rect key="frame" x="108" y="342" width="80" height="20"/>
@@ -414,10 +419,12 @@
                             <constraint firstItem="Vij-Jg-DDT" firstAttribute="top" secondItem="WVx-hD-5GG" secondAttribute="bottom" id="ixp-sg-oJl">
                                 <variation key="heightClass=regular-widthClass=compact" constant="20"/>
                             </constraint>
-                            <constraint firstItem="9wf-lW-GFx" firstAttribute="top" secondItem="Qis-D9-Kie" secondAttribute="bottom" id="lRL-7O-J5B"/>
+                            <constraint firstItem="9wf-lW-GFx" firstAttribute="top" secondItem="Qis-D9-Kie" secondAttribute="bottom" id="lRL-7O-J5B">
+                                <variation key="heightClass=regular-widthClass=compact" constant="5"/>
+                            </constraint>
                             <constraint firstItem="LVv-fw-90e" firstAttribute="width" secondItem="rfp-ey-NBH" secondAttribute="width" id="nzG-zb-tjB"/>
                             <constraint firstItem="Qis-D9-Kie" firstAttribute="top" secondItem="z3b-au-lEb" secondAttribute="bottom" constant="8" id="o4n-qz-eJj">
-                                <variation key="heightClass=regular-widthClass=compact" constant="4"/>
+                                <variation key="heightClass=regular-widthClass=compact" constant="5"/>
                             </constraint>
                             <constraint firstItem="08R-93-MB6" firstAttribute="top" secondItem="FrN-PG-L1n" secondAttribute="bottom" constant="10" id="p29-bF-uPQ">
                                 <variation key="heightClass=regular-widthClass=compact" constant="20"/>

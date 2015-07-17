@@ -52,6 +52,7 @@
     
     switch (tag){
         case 1:{
+            [self webVC].title = @"公告";
             [self.navigationController pushViewController:[self webVC] animated:YES];
             
             NSString *body = [NSString stringWithFormat:@"c=%@&dt=%@&u=%@", @"2013110", [KGUtil getCompactDateStr], @"20141021172851000015"];
@@ -63,6 +64,7 @@
             break;
         }
         case 2:{
+            [self webVC].title = @"课程表";
             [self.navigationController pushViewController:[self webVC] animated:YES];
             
             NSString *body = [NSString stringWithFormat:@"c=%@&dt=%@&u=%@", @"2013110", [KGUtil getCompactDateStr], @"20141021172851000015"];
@@ -76,6 +78,7 @@
             break;
         }
         case 4:{
+            [self webVC].title = @"生日提醒";
             [self.navigationController pushViewController:[self webVC] animated:YES];
             
             NSString *body = [NSString stringWithFormat:@"c=%@&dt=%@&u=%@", @"2013110", [KGUtil getCompactDateStr], @"20141021172851000015"];
