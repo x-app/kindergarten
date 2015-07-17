@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WebViewController.h"
 
 @interface KGUIViewController : UIViewController
+
+- (WebViewController*)webVC;
 
 @end

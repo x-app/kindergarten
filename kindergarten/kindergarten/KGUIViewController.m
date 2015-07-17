@@ -16,6 +16,12 @@
 
 @implementation KGUIViewController
 
+- (WebViewController*)webVC
+{
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    return delegate.webVC;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.

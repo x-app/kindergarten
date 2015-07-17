@@ -7,7 +7,6 @@
 //
 
 #import "ClassViewController.h"
-#import "WebViewController.h"
 #import "KGUtil.h"
 
 @interface ClassViewController ()
@@ -15,23 +14,19 @@
 @property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *func;
 @property (weak, nonatomic) IBOutlet UIImageView *repeatImage;
 
-@property (strong, nonatomic)WebViewController *webVC;
-
 @end
 
 @implementation ClassViewController
 
-- (WebViewController*)webVC
-{
-    if(_webVC == nil)
-        _webVC = [[WebViewController alloc] init];
-    
-    return _webVC;
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    //设置scrollView背景
+    UIImage *backgroundImage = [UIImage imageNamed:@"repeat_img.png"];
+    UIColor *backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
+    [self.repeatImage setBackgroundColor:backgroundColor];
+    
     
     for(int i=0; i<[self.func count]; i++)
     {
@@ -57,44 +52,40 @@
     
     switch (tag){
         case 1:{
-            UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Baby" bundle:nil];
-            vc = [storyBoard instantiateViewControllerWithIdentifier:@"PickupView"];
+            [self.navigationController pushViewController:[self webVC] animated:YES];
             
-            [self.navigationController pushViewController:vc animated:YES];
+            NSString *body = [NSString stringWithFormat:@"c=%@&dt=%@&u=%@", @"2013110", [KGUtil getCompactDateStr], @"20141021172851000015"];
+            NSString *url = [KGUtil getRequestHtmlUrl:@"/message/bulletin" bodyStr:body];
+            
+            NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+            [[self webVC].webView loadRequest:request];
+
             break;
         }
         case 2:{
             [self.navigationController pushViewController:[self webVC] animated:YES];
             
             NSString *body = [NSString stringWithFormat:@"c=%@&dt=%@&u=%@", @"2013110", [KGUtil getCompactDateStr], @"20141021172851000015"];
-            NSString *url = [KGUtil getRequestHtmlUrl:@"/health/givemedic" bodyStr:body];
+            NSString *url = [KGUtil getRequestHtmlUrl:@"/book/lesson" bodyStr:body];
             
             NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:url]];
             [[self webVC].webView loadRequest:request];
             break;
         }
         case 3:{
-            [self.navigationController pushViewController:[self webVC] animated:YES];
-            
-            NSString *body = [NSString stringWithFormat:@"c=%@&dt=%@&u=%@", @"2013110", [KGUtil getCompactDateStr], @"20141021172851000015"];
-            NSString *url = [KGUtil getRequestHtmlUrl:@"/health/givemedic" bodyStr:body];
-            
-            NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:url]];
-            [[self webVC].webView loadRequest:request];
             break;
         }
         case 4:{
             [self.navigationController pushViewController:[self webVC] animated:YES];
             
-            NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.taobao.com"]];
+            NSString *body = [NSString stringWithFormat:@"c=%@&dt=%@&u=%@", @"2013110", [KGUtil getCompactDateStr], @"20141021172851000015"];
+            NSString *url = [KGUtil getRequestHtmlUrl:@"/book/birthday" bodyStr:body];
+            
+            NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:url]];
             [[self webVC].webView loadRequest:request];
             break;
         }
         case 5:{
-            [self.navigationController pushViewController:[self webVC] animated:YES];
-            
-            NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.baidu.com"]];
-            [[self webVC].webView loadRequest:request];
             break;
         }
         case 6:{

@@ -49,7 +49,7 @@
                                 <color key="textColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="repeat_img.png" translatesAutoresizingMaskIntoConstraints="NO" id="H5Q-Z9-4EZ">
+                            <imageView userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="H5Q-Z9-4EZ">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="f0b-En-tZr">
@@ -67,7 +67,7 @@
                                     </mask>
                                 </variation>
                             </imageView>
-                            <imageView tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_check.png" translatesAutoresizingMaskIntoConstraints="NO" id="uSs-Ae-YtD">
+                            <imageView tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="class_curriculum.png" translatesAutoresizingMaskIntoConstraints="NO" id="uSs-Ae-YtD">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="uSs-Ae-YtD" secondAttribute="height" multiplier="1:1" id="hrk-Gv-bbE"/>
@@ -83,7 +83,7 @@
                                     </mask>
                                 </variation>
                             </imageView>
-                            <imageView tag="3" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_messagebox.png" translatesAutoresizingMaskIntoConstraints="NO" id="CIX-XD-Pq6">
+                            <imageView tag="3" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="class_intro.png" translatesAutoresizingMaskIntoConstraints="NO" id="CIX-XD-Pq6">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="CIX-XD-Pq6" secondAttribute="height" multiplier="1:1" id="UrN-kQ-Xl9"/>
@@ -99,7 +99,7 @@
                                     </mask>
                                 </variation>
                             </imageView>
-                            <imageView tag="4" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_goin.png" translatesAutoresizingMaskIntoConstraints="NO" id="MCB-75-CGM">
+                            <imageView tag="4" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="class_birth.png" translatesAutoresizingMaskIntoConstraints="NO" id="MCB-75-CGM">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="MCB-75-CGM" secondAttribute="height" multiplier="1:1" id="yC3-ZU-1UB"/>
@@ -115,7 +115,7 @@
                                     </mask>
                                 </variation>
                             </imageView>
-                            <imageView tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_pickup.png" translatesAutoresizingMaskIntoConstraints="NO" id="zWU-pq-lk7">
+                            <imageView tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="class_announce.png" translatesAutoresizingMaskIntoConstraints="NO" id="zWU-pq-lk7">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="zWU-pq-lk7" secondAttribute="height" multiplier="1:1" id="h7m-gR-ah1"/>
@@ -131,7 +131,7 @@
                                     </mask>
                                 </variation>
                             </imageView>
-                            <imageView tag="5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_goout.png" translatesAutoresizingMaskIntoConstraints="NO" id="nEt-cQ-OMc">
+                            <imageView tag="5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="class_photo.png" translatesAutoresizingMaskIntoConstraints="NO" id="nEt-cQ-OMc">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="nEt-cQ-OMc" secondAttribute="height" multiplier="1:1" id="AbV-6U-z96"/>
@@ -252,7 +252,7 @@
                                     </mask>
                                 </variation>
                             </button>
-                            <imageView tag="6" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_leave.png" translatesAutoresizingMaskIntoConstraints="NO" id="fRN-bH-UEn">
+                            <imageView tag="6" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="class_grow.png" translatesAutoresizingMaskIntoConstraints="NO" id="fRN-bH-UEn">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="fRN-bH-UEn" secondAttribute="height" id="cRc-AM-LpY"/>
@@ -519,7 +519,7 @@
         <!--亲子成长-->
         <scene sceneID="ndS-J8-8lA">
             <objects>
-                <viewController title="亲子成长" id="fKc-t8-uGv" customClass="RBStoryboardLink" sceneMemberID="viewController">
+                <viewController title="亲子成长" hidesBottomBarWhenPushed="YES" id="fKc-t8-uGv" customClass="RBStoryboardLink" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="QJI-KZ-QgJ"/>
                         <viewControllerLayoutGuide type="bottom" id="FkG-kR-ryR"/>
@@ -541,14 +541,13 @@
         </scene>
     </scenes>
     <resources>
+        <image name="class_announce.png" width="111" height="111"/>
+        <image name="class_birth.png" width="111" height="111"/>
+        <image name="class_curriculum.png" width="111" height="111"/>
+        <image name="class_grow.png" width="111" height="111"/>
+        <image name="class_intro.png" width="111" height="111"/>
+        <image name="class_photo.png" width="111" height="111"/>
         <image name="head.jpg" width="200" height="200"/>
-        <image name="home_check.png" width="111" height="111"/>
-        <image name="home_goin.png" width="111" height="111"/>
-        <image name="home_goout.png" width="111" height="111"/>
-        <image name="home_leave.png" width="111" height="111"/>
-        <image name="home_messagebox.png" width="111" height="111"/>
-        <image name="home_pickup.png" width="111" height="111"/>
         <image name="home_top_bg.png" width="720" height="372"/>
-        <image name="repeat_img.png" width="60" height="80"/>
     </resources>
 </document>

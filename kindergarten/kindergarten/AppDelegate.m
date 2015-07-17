@@ -154,5 +154,16 @@
     //loginVC. = [self window];
 }
 
+#pragma mark - webvc
+- (WebViewController*)webVC
+{
+    if(_webVC == nil){
+        _webVC = [[WebViewController alloc] init];
+        
+        _webVC.hidesBottomBarWhenPushed = YES;
+    }
+    
+    return _webVC;
+}
 
 @end

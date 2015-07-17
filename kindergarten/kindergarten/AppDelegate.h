@@ -8,9 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "MYBlurIntroductionView.h"
+#import "WebViewController.h"
 #import "KGUser.h"
 #import "KGVarible.h"
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate, MYIntroductionDelegate>
+
+@property (strong, nonatomic)WebViewController *webVC;
 
 @property (strong, nonatomic) UIWindow *window;
 
