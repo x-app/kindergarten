@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "AFHTTPRequestOperationManager.h"
+#import "KGChild.h"
+#import "KGVarible.h"
+
 @interface KGUtil : NSObject
 
 + (NSString *)getMD5Str: (NSString *)sourceStr;
@@ -31,6 +34,9 @@
             success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
             failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
              inView:(UIView *)view;
+
++ (KGVarible *)getVarible;
++ (KGChild *)getCurChild;
 
 + (NSString *)getServerIndexURL;
 

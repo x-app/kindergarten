@@ -30,7 +30,6 @@
    
     self.repeatImage.image = [self.repeatImage.image resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0) resizingMode:UIImageResizingModeTile];
     
-    // Do any additional setup after loading the view, typically from a nib.
     for(int i=0; i<[self.func count]; i++)
     {
         UIImageView* v= self.func[i];
@@ -42,14 +41,13 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    if ([delegate.user.childs count] >= 1) {
-        KGChild *curChild = [delegate.user.childs objectAtIndex:0];
+    
+    KGChild *curChild = KGUtil.getCurChild;
+    if(curChild)
+    {
         self.babyNameLabel.text = curChild.name;
-        self.classNameLabel.text = [NSString stringWithFormat:@"%@%@", delegate.varible.parkName, curChild.className];
+        self.classNameLabel.text = [NSString stringWithFormat:@"%@%@", KGUtil.getVarible.parkName, curChild.className];
     }
-    //if (delegate)
-    //self.babyNameLabel.text =
 }
 
 - (void)didReceiveMemoryWarning {

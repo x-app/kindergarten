@@ -166,6 +166,19 @@
     }];
 }
 
++ (KGVarible *)getVarible{
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    return delegate.varible;
+}
+
++ (KGChild *)getCurChild {
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    if ([delegate.user.childs count] >= 1) {
+        KGChild *curChild = [delegate.user.childs objectAtIndex:0];
+        return curChild;
+    }
+    return nil;
+}
 
 + (NSString *)getServerIndexURL {
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];

@@ -505,6 +505,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="qMZ-sE-KoC"/>
                     <connections>
+                        <outlet property="babyNameLabel" destination="Mx3-eL-D9R" id="OPr-V5-7rR"/>
+                        <outlet property="classNameLabel" destination="XXF-Dw-ja3" id="MKm-lQ-ISR"/>
                         <outlet property="repeatImage" destination="H5Q-Z9-4EZ" id="klo-7T-dwX"/>
                         <outletCollection property="func" destination="zWU-pq-lk7" id="Xp2-cN-or8"/>
                         <outletCollection property="func" destination="uSs-Ae-YtD" id="AbU-xp-i84"/>
