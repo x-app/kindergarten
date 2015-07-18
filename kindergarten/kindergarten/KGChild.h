@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "KGUser.h"
+
 @interface KGChild : NSObject
 
 @property (strong, nonatomic) NSString *cid;        //小朋友编号

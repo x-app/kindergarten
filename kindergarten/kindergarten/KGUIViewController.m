@@ -33,7 +33,7 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    NSLog(@"KGUIViewController:viewDidAppear");
+    //NSLog(@"KGUIViewController:viewDidAppear");
     [self showVerifyLock];
     
     [[NSNotificationCenter defaultCenter]

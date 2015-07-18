@@ -56,7 +56,11 @@
 		12DEAD011B4D693300C437BE /* Baby.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12DEAD001B4D693300C437BE /* Baby.storyboard */; };
 		12E038251B4A91680021B266 /* Garten.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12E038241B4A91680021B266 /* Garten.storyboard */; };
 		12F630191B4932C000BE67B6 /* Growup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12F630181B4932C000BE67B6 /* Growup.storyboard */; };
+		9911C1F91B5A06C80080FFA9 /* default_img.png in Resources */ = {isa = PBXBuildFile; fileRef = 9911C1F81B5A06C80080FFA9 /* default_img.png */; };
+		9911C1FB1B5A07CB0080FFA9 /* image_placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 9911C1FA1B5A07CB0080FFA9 /* image_placeholder.png */; };
 		996D322E1B55525200CB648B /* KGVarible.m in Sources */ = {isa = PBXBuildFile; fileRef = 996D322D1B55525200CB648B /* KGVarible.m */; };
+		99709B6B1B59E45000150176 /* ChildTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99709B6A1B59E45000150176 /* ChildTableViewController.m */; };
+		99709B6E1B59E50A00150176 /* KGHomework.m in Sources */ = {isa = PBXBuildFile; fileRef = 99709B6D1B59E50A00150176 /* KGHomework.m */; };
 		9997B9FF1B4D580E00B908B6 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9997B9AE1B4D580E00B908B6 /* AFHTTPRequestOperation.m */; };
 		9997BA001B4D580E00B908B6 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9997B9B01B4D580E00B908B6 /* AFHTTPRequestOperationManager.m */; };
 		9997BA011B4D580E00B908B6 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9997B9B21B4D580E00B908B6 /* AFHTTPSessionManager.m */; };
@@ -192,8 +196,14 @@
 		12DEAD001B4D693300C437BE /* Baby.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Baby.storyboard; sourceTree = "<group>"; };
 		12E038241B4A91680021B266 /* Garten.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Garten.storyboard; sourceTree = "<group>"; };
 		12F630181B4932C000BE67B6 /* Growup.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Growup.storyboard; sourceTree = "<group>"; };
+		9911C1F81B5A06C80080FFA9 /* default_img.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = default_img.png; path = Resource/default_img.png; sourceTree = "<group>"; };
+		9911C1FA1B5A07CB0080FFA9 /* image_placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = image_placeholder.png; path = Resource/image_placeholder.png; sourceTree = "<group>"; };
 		996D322C1B55525200CB648B /* KGVarible.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KGVarible.h; sourceTree = "<group>"; };
 		996D322D1B55525200CB648B /* KGVarible.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KGVarible.m; sourceTree = "<group>"; };
+		99709B691B59E45000150176 /* ChildTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChildTableViewController.h; sourceTree = "<group>"; };
+		99709B6A1B59E45000150176 /* ChildTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChildTableViewController.m; sourceTree = "<group>"; };
+		99709B6C1B59E50A00150176 /* KGHomework.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KGHomework.h; sourceTree = "<group>"; };
+		99709B6D1B59E50A00150176 /* KGHomework.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KGHomework.m; sourceTree = "<group>"; };
 		9997B9AD1B4D580E00B908B6 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		9997B9AE1B4D580E00B908B6 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		9997B9AF1B4D580E00B908B6 /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -308,6 +318,8 @@
 			isa = PBXGroup;
 			children = (
 				122566641B56AA410007733E /* Child.storyboard */,
+				99709B691B59E45000150176 /* ChildTableViewController.h */,
+				99709B6A1B59E45000150176 /* ChildTableViewController.m */,
 			);
 			name = "Child Storyboard";
 			sourceTree = "<group>";
@@ -437,6 +449,8 @@
 		12DEACFF1B4D682C00C437BE /* funcicons */ = {
 			isa = PBXGroup;
 			children = (
+				9911C1F81B5A06C80080FFA9 /* default_img.png */,
+				9911C1FA1B5A07CB0080FFA9 /* image_placeholder.png */,
 				122566771B57F7780007733E /* park_intro.png */,
 				122566781B57F7780007733E /* park_menu.png */,
 				122566791B57F7780007733E /* park_messagebox.png */,
@@ -757,6 +771,8 @@
 				99F17F5D1B4ED3D800866F8F /* KGConst.m */,
 				996D322C1B55525200CB648B /* KGVarible.h */,
 				996D322D1B55525200CB648B /* KGVarible.m */,
+				99709B6C1B59E50A00150176 /* KGHomework.h */,
+				99709B6D1B59E50A00150176 /* KGHomework.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -864,6 +880,7 @@
 				9997BA101B4D580E00B908B6 /* CLLockVC.xib in Resources */,
 				9997BA1B1B4D580E00B908B6 /* MLTableAlertBackground.png in Resources */,
 				12DEACF91B4D682500C437BE /* home_goin.png in Resources */,
+				9911C1FB1B5A07CB0080FFA9 /* image_placeholder.png in Resources */,
 				12F630191B4932C000BE67B6 /* Growup.storyboard in Resources */,
 				12DEACFE1B4D682500C437BE /* home_pickup.png in Resources */,
 				122566741B57DE190007733E /* class_intro.png in Resources */,
@@ -887,6 +904,7 @@
 				12C794A31B44232300918497 /* Images.xcassets in Resources */,
 				12AC15FE1B4917D3007C247B /* baby_icon_normal.png in Resources */,
 				9997BA091B4D580E00B908B6 /* text_field.png in Resources */,
+				9911C1F91B5A06C80080FFA9 /* default_img.png in Resources */,
 				1266D5C21B495B8A00E7253F /* head.jpg in Resources */,
 				12DEACF81B4D682500C437BE /* home_check.png in Resources */,
 				1266D5C41B495B8A00E7253F /* repeat_img.png in Resources */,
@@ -933,6 +951,7 @@
 				9997BA231B4D580E00B908B6 /* MLTableAlert.m in Sources */,
 				12AC16121B4918C3007C247B /* RBStoryboardPopoverSegue.m in Sources */,
 				9997BA171B4D580E00B908B6 /* CLLockMainView.m in Sources */,
+				99709B6E1B59E50A00150176 /* KGHomework.m in Sources */,
 				99F17F681B50C3E800866F8F /* LoginViewContoller.m in Sources */,
 				12AC16101B4918C3007C247B /* RBStoryboardLink.m in Sources */,
 				9997BA251B4D580E00B908B6 /* MYIntroductionPanel.m in Sources */,
@@ -942,6 +961,7 @@
 				996D322E1B55525200CB648B /* KGVarible.m in Sources */,
 				9997BA121B4D580E00B908B6 /* CoreLockConst.m in Sources */,
 				9997BA181B4D580E00B908B6 /* CLLockView.m in Sources */,
+				99709B6B1B59E45000150176 /* ChildTableViewController.m in Sources */,
 				12C7949E1B44232300918497 /* ClassViewController.m in Sources */,
 				9997BA151B4D580E00B908B6 /* CLLockItemView.m in Sources */,
 				9997BA001B4D580E00B908B6 /* AFHTTPRequestOperationManager.m in Sources */,

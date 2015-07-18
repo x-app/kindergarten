@@ -17,8 +17,10 @@
 + (NSString *)getRequestSign: (NSDictionary *)body;
 
 +(NSString *)getRequestHtmlUrl:(NSString *)controller bodyStr:(NSString *)body;
-    
+
 + (NSString *)getCompactDateStr;
+
++ (NSString *)getDateStr: (NSDate *)date;
 
 + (void)showAlert: (NSString *)content inView:(id)view;
 

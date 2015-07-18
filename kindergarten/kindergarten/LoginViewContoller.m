@@ -88,16 +88,40 @@
             NSLog(@"JSON: %@", responseObject);
             NSString *code = [responseObject objectForKey:@"code"];
             if ([code isEqualToString:@"000000"]) {
-                //[KGUtil showAlert:@"注册成功" inView:self.view];
                 NSDictionary *obj = [responseObject objectForKey:@"obj"];
                 delegate.user.uid = [obj objectForKey:@"iuid"];
                 delegate.user.parentID = [(NSString *)[obj objectForKey:@"parentid"] integerValue];
                 [self setGesturePswd];
+                //下面开始查询幼儿信息
+//                NSString *childUrl = [[KGUtil getServerAppURL] stringByAppendingString:@"parent/queryChildInfo"];
+//                NSDictionary *data = @{@"iuid": delegate.user.uid};
+//                NSDictionary *childBody = [KGUtil getRequestBody:data];
+//                NSDictionary *childParams = @{@"uid": REQUEST_UID, @"sign": [KGUtil getRequestSign:childBody], @"body": body};
+//                [KGUtil postRequest:childUrl parameters:childParams success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//                    NSLog(@"JSON: %@", responseObject);
+//                    [self setGesturePswd];
+//                } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//                    //查询幼儿失败
+//                } inView:self.view];
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);
         } inView:self.view];
     }
+}
+
+- (void)queryChildInfo: (NSString *)uid {
+    //下面开始查询幼儿信息
+    NSString *url = [[KGUtil getServerAppURL] stringByAppendingString:@"parent/queryChildInfo"];
+    NSDictionary *data = @{@"iuid": uid};
+    NSDictionary *body = [KGUtil getRequestBody:data];
+    NSDictionary *childParams = @{@"uid": REQUEST_UID, @"sign": [KGUtil getRequestSign:body], @"body": body};
+    [KGUtil postRequest:url parameters:childParams success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"JSON: %@", responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        //查询幼儿失败
+    } inView:self.view];
+
 }
 
 - (void)setGesturePswd {

@@ -88,6 +88,13 @@
     return dateStr;
 }
 
++ (NSString *)getDateStr: (NSDate *)date {
+    NSDateFormatter *df = [[NSDateFormatter alloc] init];
+    [df setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSString *dateStr = [df stringFromDate:date];
+    return dateStr;
+}
+
 + (void)showAlert:(NSString *)content inView:(id)view {
     if (![view isKindOfClass:[UIView class]]) {
         return;
@@ -126,12 +133,13 @@
     NSLog(@"Post request to [%@] using [%@]", url, parameters);
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.requestSerializer.timeoutInterval = 10.0f;
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
     MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:view];
     [view addSubview:hud];
-    //HUD.delegate = self;
     hud.labelText = @"加载中";
+    hud.removeFromSuperViewOnHide = YES;
     [hud show:YES];
     [manager POST:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [hud hide:YES];
@@ -140,6 +148,18 @@
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [hud hide:YES];
+        MBProgressHUD *messageHUD = [MBProgressHUD showHUDAddedTo:view animated:YES];
+        messageHUD.mode = MBProgressHUDModeText;
+        NSString *content = @"";
+        if (error.code == -1001) {
+            content = @"请求已超时, 请检查网络设置, 稍后重试";
+        } else {
+            content = @"请求失败, 请稍后重试";
+        }
+        messageHUD.labelText = content;
+        messageHUD.margin = 10.f;
+        messageHUD.removeFromSuperViewOnHide = YES;
+        [messageHUD hide:YES afterDelay:2];
         if (failure != nil) {
             failure(operation, error);
         }
