@@ -14,7 +14,9 @@
     NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:
                           self.server_app_url, @"server_app_url",
                           self.server_index_url, @"server_index_url",
-                          self.server_html_url, @"server_html_url", nil];
+                          self.server_html_url, @"server_html_url",
+                          self.parkName, @"park_name",
+                          nil];
     return dict;
 }
 
@@ -22,6 +24,7 @@
     self.server_app_url = [dict objectForKey:@"server_app_url"];
     self.server_html_url = [dict objectForKey:@"server_html_url"];
     self.server_index_url = [dict objectForKey:@"server_index_url"];
+    self.parkName = [dict objectForKey:@"park_name"];
 }
 
 @end

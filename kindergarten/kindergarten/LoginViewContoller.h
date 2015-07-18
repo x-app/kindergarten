@@ -19,4 +19,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *qstnTextField;
 @property (weak, nonatomic) IBOutlet UITextField *nswrTextField;
 
+
+- (void)queryChildInfo: (NSString *)uid;
+
 @end

@@ -13,6 +13,7 @@
 
 - (instancetype)init {
     self = [super init];
+    self.childs = [[NSMutableArray alloc] init];
     return self;
 }
 

@@ -9,12 +9,14 @@
 #import "BabyViewController.h"
 #import "KGUtil.h"
 #import "AppDelegate.h"
-
+#import "KGChild.h"
 @interface BabyViewController ()
 
 @property (nonatomic) NSInteger viewAppearCount;
 @property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *func;
 @property (weak, nonatomic) IBOutlet UIImageView *repeatImage;
+@property (weak, nonatomic) IBOutlet UILabel *babyNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *classNameLabel;
 
 @end
 
@@ -36,6 +38,18 @@
         UITapGestureRecognizer *singleTap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onImageClick:)];
         [v addGestureRecognizer:singleTap1];
     }
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    if ([delegate.user.childs count] >= 1) {
+        KGChild *curChild = [delegate.user.childs objectAtIndex:0];
+        self.babyNameLabel.text = curChild.name;
+        self.classNameLabel.text = [NSString stringWithFormat:@"%@%@", delegate.varible.parkName, curChild.className];
+    }
+    //if (delegate)
+    //self.babyNameLabel.text =
 }
 
 - (void)didReceiveMemoryWarning {

@@ -46,19 +46,22 @@
             delegate.user.uid = [obj objectForKey:@"iuId"];
             delegate.user.answer = [obj objectForKey:@"answer"];
             next.fromVC = current.fromVC;
+            current.nextVC = next;
             if (delegate.user.regMode == 0) {
                 if (![delegate.user.question isEqualToString:@""]) { //用户的密保问题不为空, 说明已经注册过了
                     UIAlertView *hint = [[UIAlertView alloc] initWithTitle:@"请确认" message:@"当前用户已经注册,你是否是要找回密码?" delegate:current.self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
-                    current.nextVC = next;
+                    //current.nextVC = next;
                     [hint show];
                 } else {
-                    [current.navigationController pushViewController:next animated:YES];
+                    [current queryChildInfo: delegate.user.uid];
+                    //[current.navigationController pushViewController:next animated:YES];
                 }
                 //[hint release];
                 //[KGUtil showAlert:@"刚用户已经注册,你是否是要找回密码?" inView:current.view];
             } else if (delegate.user.regMode == 1) {
+                [current queryChildInfo: delegate.user.uid];
                 //next.qstnTextField.text = question;
-                [current.navigationController pushViewController:next animated:YES];
+                //[current.navigationController pushViewController:next animated:YES];
             }
         } else {
             [KGUtil showAlert:@"验证不通过, 请确保您的信息已注册" inView:current.self.view];

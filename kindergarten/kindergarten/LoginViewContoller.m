@@ -14,6 +14,7 @@
 #import "MLTableAlert.h"
 #import "KGUtil.h"
 #import "KGConst.h"
+#import "KGChild.h"
 @interface LoginViewContoller ()
 
 
@@ -112,16 +113,40 @@
 
 - (void)queryChildInfo: (NSString *)uid {
     //下面开始查询幼儿信息
-    NSString *url = [[KGUtil getServerAppURL] stringByAppendingString:@"parent/queryChildInfo"];
-    NSDictionary *data = @{@"iuid": uid};
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    NSString *url = [[KGUtil getServerAppURL] stringByAppendingString:@"/parent/queryChildInfo"];
+    NSDictionary *data = @{@"iuId": uid};
     NSDictionary *body = [KGUtil getRequestBody:data];
     NSDictionary *childParams = @{@"uid": REQUEST_UID, @"sign": [KGUtil getRequestSign:body], @"body": body};
     [KGUtil postRequest:url parameters:childParams success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON: %@", responseObject);
+        NSString *code = [responseObject objectForKey:@"code"];
+        if ([code isEqualToString:@"000000"]) {
+            NSArray *childs = [responseObject objectForKey:@"objlist"];
+            if ([childs count] == 0) {
+                //没有幼儿信息
+                [KGUtil showAlert:@"未查询到宝宝信息" inView:self.view];
+            } else {
+                for (int i = 0; i < [childs count]; i++) {
+                    //..
+                    
+                    NSDictionary *childInfo = (NSDictionary *)[childs objectAtIndex:i];
+                    KGChild *child = [[KGChild alloc] initWithName:[childInfo objectForKey:@"name"]
+                                                                id:[childInfo objectForKey:@"id"]
+                                                               sex:[[childInfo objectForKey:@"sex"] integerValue]
+                                                           classID:[childInfo objectForKey:@"classId"]
+                                                         className:[childInfo objectForKey:@"className"]
+                                                          birthday:[childInfo objectForKey:@"birthday"]];
+                    [delegate.user.childs addObject:child];
+                }
+                [self.navigationController pushViewController:self.nextVC animated:YES];
+            }
+        } else {
+            //失败
+        }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         //查询幼儿失败
     } inView:self.view];
-
 }
 
 - (void)setGesturePswd {
@@ -213,6 +238,7 @@
         AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
         delegate.varible.server_app_url = appUrl;
         delegate.varible.server_html_url = htmlUrl;
+        delegate.varible.parkName = parkName;
         [[NSUserDefaults standardUserDefaults] setObject:[delegate.varible toDictionary] forKey:@"varible"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         self.parkTextField.text = parkName;

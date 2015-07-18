@@ -14,6 +14,8 @@
 @property (nonatomic, strong) NSString *server_app_url;
 @property (nonatomic, strong) NSString *server_html_url;
 
+@property (nonatomic, strong) NSString *parkName;
+
 - (NSDictionary *)toDictionary;
 
 - (void)fromDictionary: (NSDictionary *)dict;

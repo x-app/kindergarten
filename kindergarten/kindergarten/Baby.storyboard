@@ -578,6 +578,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="ZHR-2d-GPa"/>
                     <connections>
+                        <outlet property="babyNameLabel" destination="ZeP-b7-Bfi" id="Xdt-7S-D34"/>
+                        <outlet property="classNameLabel" destination="Qis-D9-Kie" id="sDP-Su-YN3"/>
                         <outlet property="repeatImage" destination="9wf-lW-GFx" id="JyZ-kw-wm5"/>
                         <outletCollection property="func" destination="rfp-ey-NBH" id="F52-WD-8tK"/>
                         <outletCollection property="func" destination="Ke7-S9-mQ9" id="cYL-ha-pAN"/>

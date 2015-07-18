@@ -16,9 +16,15 @@
 @property (nonatomic) NSInteger sex;                //性别 0女 1男
 @property (strong, nonatomic) NSString *classID;    //班级ID
 @property (strong, nonatomic) NSString *className;  //班级名
-@property (strong, nonatomic) NSDate *birthday;     //生日
+@property (strong, nonatomic) NSString *birthday;   //生日
 @property (weak, nonatomic) KGUser* parent;         //家长
 
+- (instancetype)initWithName: (NSString *)name
+                          id: (NSString *)id
+                         sex: (NSInteger)sex
+                     classID: (NSString *)classID
+                   className: (NSString *)className
+                    birthday: (NSString *)birthday;
 
 - (NSDictionary *)toDictionary;
 
