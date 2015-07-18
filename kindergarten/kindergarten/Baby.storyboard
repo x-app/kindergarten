@@ -39,6 +39,11 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <exclude reference="LeV-RQ-EGE"/>
+                                    </mask>
+                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="赖楚妍" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZeP-b7-Bfi" colorLabel="IBBuiltInLabel-Green">
                                 <rect key="frame" x="108" y="342" width="80" height="20"/>
@@ -414,10 +419,12 @@
                             <constraint firstItem="Vij-Jg-DDT" firstAttribute="top" secondItem="WVx-hD-5GG" secondAttribute="bottom" id="ixp-sg-oJl">
                                 <variation key="heightClass=regular-widthClass=compact" constant="20"/>
                             </constraint>
-                            <constraint firstItem="9wf-lW-GFx" firstAttribute="top" secondItem="Qis-D9-Kie" secondAttribute="bottom" id="lRL-7O-J5B"/>
+                            <constraint firstItem="9wf-lW-GFx" firstAttribute="top" secondItem="Qis-D9-Kie" secondAttribute="bottom" id="lRL-7O-J5B">
+                                <variation key="heightClass=regular-widthClass=compact" constant="5"/>
+                            </constraint>
                             <constraint firstItem="LVv-fw-90e" firstAttribute="width" secondItem="rfp-ey-NBH" secondAttribute="width" id="nzG-zb-tjB"/>
                             <constraint firstItem="Qis-D9-Kie" firstAttribute="top" secondItem="z3b-au-lEb" secondAttribute="bottom" constant="8" id="o4n-qz-eJj">
-                                <variation key="heightClass=regular-widthClass=compact" constant="4"/>
+                                <variation key="heightClass=regular-widthClass=compact" constant="5"/>
                             </constraint>
                             <constraint firstItem="08R-93-MB6" firstAttribute="top" secondItem="FrN-PG-L1n" secondAttribute="bottom" constant="10" id="p29-bF-uPQ">
                                 <variation key="heightClass=regular-widthClass=compact" constant="20"/>
@@ -588,7 +595,7 @@
         <!--接送授权-->
         <scene sceneID="2PL-db-0ye">
             <objects>
-                <viewController storyboardIdentifier="PickupView" title="接送授权" id="ldc-JC-M6i" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PickupView" title="接送授权" hidesBottomBarWhenPushed="YES" id="ldc-JC-M6i" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uwg-Wv-Gv7"/>
                         <viewControllerLayoutGuide type="bottom" id="5yo-yp-0Dk"/>
@@ -606,7 +613,7 @@
         <!--成长档案-->
         <scene sceneID="Ldi-vJ-vHp">
             <objects>
-                <viewController storyboardIdentifier="GrowupView" title="成长档案" id="iXn-Qd-7dY" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GrowupView" title="成长档案" hidesBottomBarWhenPushed="YES" id="iXn-Qd-7dY" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="317-LN-cN8"/>
                         <viewControllerLayoutGuide type="bottom" id="yeu-iQ-Mch"/>
@@ -614,41 +621,7 @@
                     <view key="view" contentMode="scaleToFill" id="wJ8-Bg-Uoq">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b5A-bh-hjW">
-                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </webView>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="b5A-bh-hjW" firstAttribute="top" secondItem="317-LN-cN8" secondAttribute="bottom" id="Mo9-fX-jTS"/>
-                            <constraint firstItem="b5A-bh-hjW" firstAttribute="leading" secondItem="wJ8-Bg-Uoq" secondAttribute="leading" id="Wly-4B-dCn"/>
-                            <constraint firstAttribute="bottom" secondItem="b5A-bh-hjW" secondAttribute="bottom" id="X0m-f0-pcx"/>
-                            <constraint firstAttribute="trailing" secondItem="b5A-bh-hjW" secondAttribute="trailing" id="rPf-S0-PtU"/>
-                        </constraints>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="b5A-bh-hjW"/>
-                            </mask>
-                            <mask key="constraints">
-                                <exclude reference="Mo9-fX-jTS"/>
-                                <exclude reference="Wly-4B-dCn"/>
-                                <exclude reference="X0m-f0-pcx"/>
-                                <exclude reference="rPf-S0-PtU"/>
-                            </mask>
-                        </variation>
-                        <variation key="heightClass=regular-widthClass=compact">
-                            <mask key="subviews">
-                                <include reference="b5A-bh-hjW"/>
-                            </mask>
-                            <mask key="constraints">
-                                <include reference="Mo9-fX-jTS"/>
-                                <include reference="Wly-4B-dCn"/>
-                                <include reference="X0m-f0-pcx"/>
-                                <include reference="rPf-S0-PtU"/>
-                            </mask>
-                        </variation>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rNc-wf-e1M" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -666,6 +639,6 @@
         <image name="home_messagebox.png" width="111" height="111"/>
         <image name="home_pickup.png" width="111" height="111"/>
         <image name="home_top_bg.png" width="720" height="372"/>
-        <image name="repeat_img.png" width="60" height="80"/>
+        <image name="repeat_img.png" width="38" height="50"/>
     </resources>
 </document>

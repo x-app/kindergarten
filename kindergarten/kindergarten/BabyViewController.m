@@ -7,37 +7,26 @@
 //
 
 #import "BabyViewController.h"
-#import "WebViewController.h"
-#import "CLLockVC.h"
 #import "KGUtil.h"
 #import "AppDelegate.h"
 
 @interface BabyViewController ()
+
 @property (nonatomic) NSInteger viewAppearCount;
 @property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *func;
 @property (weak, nonatomic) IBOutlet UIImageView *repeatImage;
-
-@property (strong, nonatomic)WebViewController *webVC;
 
 @end
 
 @implementation BabyViewController
 
-- (WebViewController*)webVC
-{
-    if(_webVC == nil)
-        _webVC = [[WebViewController alloc] init];
 
-    return _webVC;
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSLog(@"BabyViewDidLoad");
-    
-    //self.viewAppearCount = 0;
+   
     self.repeatImage.image = [self.repeatImage.image resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0) resizingMode:UIImageResizingModeTile];
-    
     
     // Do any additional setup after loading the view, typically from a nib.
     for(int i=0; i<[self.func count]; i++)
@@ -70,6 +59,7 @@
             break;
         }
         case 2:{
+            [self webVC].title = @"晨检";
             [self.navigationController pushViewController:[self webVC] animated:YES];
             
             NSString *body = [NSString stringWithFormat:@"c=%@&dt=%@&u=%@", @"2013110", [KGUtil getCompactDateStr], @"20141021172851000015"];
@@ -80,33 +70,46 @@
             break;
         }
         case 3:{
+            [self webVC].title = @"信箱";
             [self.navigationController pushViewController:[self webVC] animated:YES];
             
             NSString *body = [NSString stringWithFormat:@"c=%@&dt=%@&u=%@", @"2013110", [KGUtil getCompactDateStr], @"20141021172851000015"];
-            NSString *url = [KGUtil getRequestHtmlUrl:@"/health/givemedic" bodyStr:body];
+            NSString *url = [KGUtil getRequestHtmlUrl:@"/message/parentsmess" bodyStr:body];
             
             NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:url]];
             [[self webVC].webView loadRequest:request];
             break;
         }
         case 4:{
+            [self webVC].title = @"进园";
             [self.navigationController pushViewController:[self webVC] animated:YES];
             
-            NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.taobao.com"]];
+            NSString *body = [NSString stringWithFormat:@"c=%@&dt=%@&u=%@", @"2013110", [KGUtil getCompactDateStr], @"20141021172851000015"];
+            NSString *url = [KGUtil getRequestHtmlUrl:@"/morningCheck/intopark" bodyStr:body];
+            
+            NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:url]];
             [[self webVC].webView loadRequest:request];
             break;
         }
         case 5:{
+            [self webVC].title = @"离园";
             [self.navigationController pushViewController:[self webVC] animated:YES];
             
-            NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.baidu.com"]];
+            NSString *body = [NSString stringWithFormat:@"c=%@&dt=%@&u=%@", @"2013110", [KGUtil getCompactDateStr], @"20141021172851000015"];
+            NSString *url = [KGUtil getRequestHtmlUrl:@"/morningCheck/outpark" bodyStr:body];
+            
+            NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:url]];
             [[self webVC].webView loadRequest:request];
             break;
         }
         case 6:{
+            [self webVC].title = @"请假";
             [self.navigationController pushViewController:[self webVC] animated:YES];
             
-            NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.qq.com"]];
+            NSString *body = [NSString stringWithFormat:@"c=%@&dt=%@&u=%@", @"2013110", [KGUtil getCompactDateStr], @"20141021172851000015"];
+            NSString *url = [KGUtil getRequestHtmlUrl:@"/holiday/askto" bodyStr:body];
+            
+            NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:url]];
             [[self webVC].webView loadRequest:request];
             break;
         }
