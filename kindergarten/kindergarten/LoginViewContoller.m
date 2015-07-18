@@ -189,6 +189,8 @@
         AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
         delegate.varible.server_app_url = appUrl;
         delegate.varible.server_html_url = htmlUrl;
+        [[NSUserDefaults standardUserDefaults] setObject:[delegate.varible toDictionary] forKey:@"varible"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         self.parkTextField.text = parkName;
         [self.parkTextField resignFirstResponder];
     } andCompletionBlock:^{
@@ -271,6 +273,8 @@
     } inView:self.view];
 }
 
+#pragma mark -- Test Actions --
+
 - (IBAction)test:(UIButton *)sender {
     self.nameTextField.text = @"左玲玲";
     self.idNoTextField.text = @"430421198608170228";
@@ -290,7 +294,7 @@
 }
 
 
-#pragma marks -- UIAlertViewDelegate --
+#pragma mark -- UIAlertViewDelegate --
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     NSLog(@"click alert view");
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -302,7 +306,7 @@
         [self.navigationController dismissViewControllerAnimated:YES completion:nil];
     }
 }
-
+#pragma mark -- UITextFieldDelegate --
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
     //do somthing
     NSLog(@"block text field begin editing");

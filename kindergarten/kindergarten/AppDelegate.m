@@ -77,11 +77,14 @@
         [introductionView buildIntroductionWithPanels:panels];
         
         [[self window] addSubview:introductionView];
-    }
-    else{
+    } else {
         [self introduction:nil didFinishWithType:0];
     }
     
+    NSDictionary *variDict = [userDefaults objectForKey:@"varible"];
+    if (variDict != nil) {
+        [self.varible fromDictionary:variDict];
+    }
     visitTimes++;
     
     //存储时，除NSNumber类型使用对应的类型意外，其他的都是使用setObject:forKey:

@@ -14,4 +14,8 @@
 @property (nonatomic, strong) NSString *server_app_url;
 @property (nonatomic, strong) NSString *server_html_url;
 
+- (NSDictionary *)toDictionary;
+
+- (void)fromDictionary: (NSDictionary *)dict;
+
 @end

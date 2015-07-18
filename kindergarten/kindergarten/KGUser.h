@@ -29,6 +29,8 @@
 @property (strong, nonatomic) NSMutableArray *childs;  //该用户的孩子
 
 
-- (NSDictionary *)getDictionary;
+- (NSDictionary *)toDictionary;
+
+- (void)fromDictionary: (NSDictionary *)dict;
 
 @end

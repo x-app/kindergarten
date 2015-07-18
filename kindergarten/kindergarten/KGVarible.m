@@ -10,4 +10,18 @@
 
 @implementation KGVarible
 
+- (NSDictionary *)toDictionary {
+    NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:
+                          self.server_app_url, @"server_app_url",
+                          self.server_index_url, @"server_index_url",
+                          self.server_html_url, @"server_html_url", nil];
+    return dict;
+}
+
+- (void)fromDictionary:(NSDictionary *)dict {
+    self.server_app_url = [dict objectForKey:@"server_app_url"];
+    self.server_html_url = [dict objectForKey:@"server_html_url"];
+    self.server_index_url = [dict objectForKey:@"server_index_url"];
+}
+
 @end

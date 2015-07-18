@@ -7,12 +7,53 @@
 //
 
 #import "KGUser.h"
+#import "KGChild.h"
 
 @implementation KGUser
 
--(instancetype)init {
+- (instancetype)init {
     self = [super init];
     return self;
+}
+
+- (NSDictionary *)toDictionary {
+    NSMutableArray *dictArray = [[NSMutableArray alloc] initWithCapacity:[self.childs count]];
+    for (int i = 0; i < [self.childs count]; i++) {
+        NSDictionary *childDict = [self.childs[i] toDictionary];
+        [dictArray addObject:childDict];
+    }
+    NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:
+                          self.name, @"name",
+                          self.idNo, @"idNo",
+                          self.parentID, @"parentID",
+                          self.question, @"question",
+                          self.questionID, @"questionID",
+                          self.deviceID, @"deviceID",
+                          self.catagory, @"catagory",
+                          self.answer, @"answer",
+                          self.registered, @"registered",
+                          self.childs, dictArray,
+                          nil];
+    
+    return dict;
+}
+
+- (void)fromDictionary:(NSDictionary *)dict {
+    self.name = [dict objectForKey:@"name"];
+    self.idNo = [dict objectForKey:@"idNo"];
+    self.parentID = [[dict objectForKey:@"parentID"] integerValue];
+    self.question = [dict objectForKey:@"question"];
+    self.questionID = [[dict objectForKey:@"questionID"] integerValue];
+    self.deviceID = [dict objectForKey:@"deviceID"];
+    self.catagory = [[dict objectForKey:@"catagory"] integerValue];
+    self.answer = [dict objectForKey:@"answer"];
+    self.registered = [[dict objectForKey: @"registered"] boolValue];
+    NSArray *childArray = [[dict objectForKey:@"childs"] array];
+    for (int i = 0; i < [childArray count]; i++) {
+        KGChild *child = [[KGChild alloc] init];
+        [child fromDictionary:childArray[i]];
+        [self.childs addObject:child];
+    }
 }
 
 @end

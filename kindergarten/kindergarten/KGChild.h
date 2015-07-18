@@ -18,4 +18,9 @@
 @property (strong, nonatomic) NSDate *birthday;     //生日
 @property (weak, nonatomic) KGUser* parent;         //家长
 
+
+- (NSDictionary *)toDictionary;
+
+- (void)fromDictionary: (NSDictionary *)dict;
+
 @end
