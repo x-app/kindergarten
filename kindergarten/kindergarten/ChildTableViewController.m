@@ -10,6 +10,7 @@
 #import "KGUtil.h"
 #import "KGConst.h"
 #import "AppDelegate.h"
+#import "KGImageDetailViewController.h"
 @interface ChildTableViewController ()
 
 @end
@@ -118,7 +119,6 @@
     
     return cell;
 }
-
 
 /*
 // Override to support conditional editing of the table view.

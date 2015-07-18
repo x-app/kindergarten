@@ -32,6 +32,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="NNh-cx-lvi" kind="push" id="hgA-Ze-DN7"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -44,6 +47,44 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qzp-Kp-j8R" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="517" y="269"/>
+        </scene>
+        <!--Image Detail View Controller-->
+        <scene sceneID="D0C-X5-xTD">
+            <objects>
+                <viewController id="NNh-cx-lvi" customClass="KGImageDetailViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="TVd-xk-tlz"/>
+                        <viewControllerLayoutGuide type="bottom" id="vfU-xu-62b"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fuk-cp-3r7">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0eB-fY-0G7">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </imageView>
+                            <label userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R96-5r-DSd">
+                                <rect key="frame" x="2" y="542" width="584" height="38"/>
+                                <color key="backgroundColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="R96-5r-DSd" firstAttribute="leading" secondItem="fuk-cp-3r7" secondAttribute="leading" id="7n4-Ew-Llf"/>
+                            <constraint firstAttribute="trailing" secondItem="R96-5r-DSd" secondAttribute="trailing" id="IEK-fL-siR"/>
+                            <constraint firstItem="vfU-xu-62b" firstAttribute="top" secondItem="R96-5r-DSd" secondAttribute="bottom" id="gNV-K5-nSn"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="ddr-cS-DfD"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AIy-mk-pMk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1209" y="269"/>
         </scene>
     </scenes>
 </document>
