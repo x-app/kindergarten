@@ -11,7 +11,7 @@
 @implementation KGHomework
 
 
-- (instancetype)initWithDesc:(NSString *)desc classId:(NSInteger)classId homeworkId:(NSInteger)homeworkId picUrl:(NSString *)picUrl smallPicUrl:(NSString *)smallPicUrl createAt:(NSDate *)createTime {
+- (instancetype)initWithDesc:(NSString *)desc classId:(NSInteger)classId homeworkId:(NSInteger)homeworkId picUrl:(NSString *)picUrl smallPicUrl:(NSString *)smallPicUrl createAt:(NSString *)createTime {
     self = [super init];
     if (self) {
         self.desc = desc;

@@ -38,7 +38,7 @@
         NSString *code = [responseObject objectForKey:@"code"];
         if ([code isEqualToString:@"000000"]) {
             NSDictionary *obj = [responseObject objectForKey:@"obj"];
-            delegate.user.catagory = [(NSString *)[obj objectForKey:@"catagory"] integerValue];
+            delegate.user.category = [(NSString *)[obj objectForKey:@"category"] integerValue];
             delegate.user.name = [obj objectForKey:@"name"];
             delegate.user.idNo = [obj objectForKey:@"idNo"];
             delegate.user.question = [obj objectForKey:@"question"];
