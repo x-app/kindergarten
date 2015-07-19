@@ -177,6 +177,24 @@
         KGChild *curChild = [delegate.user.childs objectAtIndex:0];
         return curChild;
     }
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSArray *curchilds = [userDefaults objectForKey:@"curchilds"];
+
+    for(int i=0; i<curchilds.count; i++)
+    {
+        NSDictionary *childInfo = (NSDictionary *)[curchilds objectAtIndex:i];
+        KGChild *curchild = [[KGChild alloc] initWithName:[childInfo objectForKey:@"name"]
+                                                       id:[childInfo objectForKey:@"id"]
+                                                      sex:[[childInfo objectForKey:@"sex"] integerValue]
+                                                  classID:[childInfo objectForKey:@"classId"]
+                                                className:[childInfo objectForKey:@"className"]
+                                                 birthday:[childInfo objectForKey:@"birthday"]];
+        [delegate.user.childs addObject:curchild];
+    }
+    if(delegate.user.childs.count > 0)
+        return delegate.user.childs[0];
+    
     return nil;
 }
 

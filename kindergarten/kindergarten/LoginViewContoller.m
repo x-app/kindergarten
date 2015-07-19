@@ -139,6 +139,12 @@
                                                           birthday:[childInfo objectForKey:@"birthday"]];
                     [delegate.user.childs addObject:child];
                 }
+                
+                if(childs.count > 0){
+                    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+                    [userDefaults setObject:childs forKey:@"curchilds"];
+                }
+                
                 [self.navigationController pushViewController:self.nextVC animated:YES];
             }
         } else {
