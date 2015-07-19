@@ -140,6 +140,10 @@
                     [delegate.user.childs addObject:child];
                 }
                 delegate.user.curChild = [delegate.user.childs objectAtIndex:0];
+                if(childs.count > 0){
+                    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+                    [userDefaults setObject:childs forKey:@"curchilds"];
+                }
                 [self.navigationController pushViewController:self.nextVC animated:YES];
             }
         } else {
