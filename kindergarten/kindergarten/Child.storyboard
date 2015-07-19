@@ -7,7 +7,7 @@
         <!--亲子成长-->
         <scene sceneID="XxY-u5-XVd">
             <objects>
-                <tableViewController storyboardIdentifier="ChildView" title="亲子成长" id="e7o-qH-B5h" customClass="ChildTableViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ChildView" title="亲子成长" hidesBottomBarWhenPushed="YES" id="e7o-qH-B5h" customClass="ChildTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="IDR-Kl-ysw">
                         <rect key="frame" x="0.0" y="64" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -51,7 +51,7 @@
         <!--Image Detail View Controller-->
         <scene sceneID="D0C-X5-xTD">
             <objects>
-                <viewController id="NNh-cx-lvi" customClass="KGImageDetailViewController" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="NNh-cx-lvi" customClass="KGImageDetailViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="TVd-xk-tlz"/>
                         <viewControllerLayoutGuide type="bottom" id="vfU-xu-62b"/>
@@ -60,7 +60,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0eB-fY-0G7">
+                            <imageView multipleTouchEnabled="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0eB-fY-0G7">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>

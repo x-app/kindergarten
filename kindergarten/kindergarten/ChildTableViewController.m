@@ -10,6 +10,7 @@
 #import "KGUtil.h"
 #import "KGConst.h"
 #import "AppDelegate.h"
+#import "KGChild.h"
 #import "KGImageDetailViewController.h"
 @interface ChildTableViewController ()
 
@@ -35,22 +36,22 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-//    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-//    NSDictionary *data = @{@"classID": @"",//delegate.user.curChild.classID,
-//                           @"pageIndex": @1,
-//                           @"pageSize":@10};
-//    NSDictionary *body = [KGUtil getRequestBody:data];
-//    NSDictionary *params = @{@"uid": REQUEST_UID, @"sign": [KGUtil getRequestSign:body], @"body":body};
-//    NSString *url = [[KGUtil getServerAppURL] stringByAppendingString:@"/system/pageQueryHomework"];
-//    [KGUtil postRequest:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        NSLog(@"JSON: %@", responseObject);
-//        NSString *code = [responseObject objectForKey:@"code"];
-//        if ([code isEqualToString:@"000000"]) {
-//            
-//        }
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        NSLog(@"Error: %@", error);
-//    } inView:self.view];
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    NSDictionary *data = @{@"classID": delegate.user.curChild.classID,
+                           @"pageIndex": @1,
+                           @"pageSize":@10};
+    NSDictionary *body = [KGUtil getRequestBody:data];
+    NSDictionary *params = @{@"uid": REQUEST_UID, @"sign": [KGUtil getRequestSign:body], @"body":body};
+    NSString *url = [[KGUtil getServerAppURL] stringByAppendingString:@"/system/pageQueryHomework"];
+    [KGUtil postRequest:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"JSON: %@", responseObject);
+        NSString *code = [responseObject objectForKey:@"code"];
+        if ([code isEqualToString:@"000000"]) {
+            
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+    } inView:self.view];
 }
 
 

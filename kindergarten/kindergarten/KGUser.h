@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class KGChild;
+
 @interface KGUser : NSObject
 
 @property (strong, nonatomic) NSString *uid;        //用户编号
@@ -26,7 +28,7 @@
 @property (strong, nonatomic) NSString *answer;     //密保问题答案
 
 @property (strong, nonatomic) NSMutableArray *childs;  //该用户的孩子
-//@property (strong, nonatomic) KGChild *curChild;
+@property (strong, nonatomic) KGChild *curChild;
 
 
 - (NSDictionary *)toDictionary;
