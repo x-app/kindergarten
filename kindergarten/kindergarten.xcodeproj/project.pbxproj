@@ -55,6 +55,9 @@
 		12DEACFE1B4D682500C437BE /* home_pickup.png in Resources */ = {isa = PBXBuildFile; fileRef = 12DEACF71B4D682500C437BE /* home_pickup.png */; };
 		12DEAD011B4D693300C437BE /* Baby.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12DEAD001B4D693300C437BE /* Baby.storyboard */; };
 		12E038251B4A91680021B266 /* Garten.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12E038241B4A91680021B266 /* Garten.storyboard */; };
+		12EAE0D81B5B65A50084680C /* GrowupTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12EAE0D71B5B65A50084680C /* GrowupTableViewController.m */; };
+		12EAE0DB1B5B8E550084680C /* GrowDocCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 12EAE0DA1B5B8E550084680C /* GrowDocCell.m */; };
+		12EAE0DE1B5B8FE90084680C /* GrowDoc.m in Sources */ = {isa = PBXBuildFile; fileRef = 12EAE0DD1B5B8FE90084680C /* GrowDoc.m */; };
 		12F630191B4932C000BE67B6 /* Growup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12F630181B4932C000BE67B6 /* Growup.storyboard */; };
 		9911C1F91B5A06C80080FFA9 /* default_img.png in Resources */ = {isa = PBXBuildFile; fileRef = 9911C1F81B5A06C80080FFA9 /* default_img.png */; };
 		9911C1FB1B5A07CB0080FFA9 /* image_placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 9911C1FA1B5A07CB0080FFA9 /* image_placeholder.png */; };
@@ -213,6 +216,12 @@
 		12DEACF71B4D682500C437BE /* home_pickup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = home_pickup.png; path = Resource/funcicons/home_pickup.png; sourceTree = "<group>"; };
 		12DEAD001B4D693300C437BE /* Baby.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Baby.storyboard; sourceTree = "<group>"; };
 		12E038241B4A91680021B266 /* Garten.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Garten.storyboard; sourceTree = "<group>"; };
+		12EAE0D61B5B65A50084680C /* GrowupTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GrowupTableViewController.h; sourceTree = "<group>"; };
+		12EAE0D71B5B65A50084680C /* GrowupTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GrowupTableViewController.m; sourceTree = "<group>"; };
+		12EAE0D91B5B8E550084680C /* GrowDocCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GrowDocCell.h; sourceTree = "<group>"; };
+		12EAE0DA1B5B8E550084680C /* GrowDocCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GrowDocCell.m; sourceTree = "<group>"; };
+		12EAE0DC1B5B8FE90084680C /* GrowDoc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GrowDoc.h; sourceTree = "<group>"; };
+		12EAE0DD1B5B8FE90084680C /* GrowDoc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GrowDoc.m; sourceTree = "<group>"; };
 		12F630181B4932C000BE67B6 /* Growup.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Growup.storyboard; sourceTree = "<group>"; };
 		9911C1F81B5A06C80080FFA9 /* default_img.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = default_img.png; path = Resource/default_img.png; sourceTree = "<group>"; };
 		9911C1FA1B5A07CB0080FFA9 /* image_placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = image_placeholder.png; path = Resource/image_placeholder.png; sourceTree = "<group>"; };
@@ -564,6 +573,12 @@
 			isa = PBXGroup;
 			children = (
 				12F630181B4932C000BE67B6 /* Growup.storyboard */,
+				12EAE0D91B5B8E550084680C /* GrowDocCell.h */,
+				12EAE0DA1B5B8E550084680C /* GrowDocCell.m */,
+				12EAE0D61B5B65A50084680C /* GrowupTableViewController.h */,
+				12EAE0D71B5B65A50084680C /* GrowupTableViewController.m */,
+				12EAE0DC1B5B8FE90084680C /* GrowDoc.h */,
+				12EAE0DD1B5B8FE90084680C /* GrowDoc.m */,
 			);
 			name = "Growup Storyboard";
 			sourceTree = "<group>";
@@ -1064,15 +1079,18 @@
 				996D322E1B55525200CB648B /* KGVarible.m in Sources */,
 				9997BA121B4D580E00B908B6 /* CoreLockConst.m in Sources */,
 				9911C2261B5A6BA50080FFA9 /* SDWebImageDownloader.m in Sources */,
+				12EAE0DB1B5B8E550084680C /* GrowDocCell.m in Sources */,
 				9911C2281B5A6BA50080FFA9 /* SDWebImageManager.m in Sources */,
 				9997BA181B4D580E00B908B6 /* CLLockView.m in Sources */,
 				9911C22B1B5A6BA50080FFA9 /* UIImage+GIF.m in Sources */,
 				99709B6B1B59E45000150176 /* ChildTableViewController.m in Sources */,
 				12C7949E1B44232300918497 /* ClassViewController.m in Sources */,
+				12EAE0D81B5B65A50084680C /* GrowupTableViewController.m in Sources */,
 				9911C22A1B5A6BA50080FFA9 /* UIButton+WebCache.m in Sources */,
 				9911C2271B5A6BA50080FFA9 /* SDWebImageDownloaderOperation.m in Sources */,
 				9997BA151B4D580E00B908B6 /* CLLockItemView.m in Sources */,
 				9997BA001B4D580E00B908B6 /* AFHTTPRequestOperationManager.m in Sources */,
+				12EAE0DE1B5B8FE90084680C /* GrowDoc.m in Sources */,
 				12AC15F71B490D80007C247B /* MeViewController.m in Sources */,
 				9997BA031B4D580E00B908B6 /* AFSecurityPolicy.m in Sources */,
 				9911C2301B5A6BA50080FFA9 /* UIView+WebCacheOperation.m in Sources */,

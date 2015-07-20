@@ -11,9 +11,13 @@
 #import "MBProgressHUD.h"
 #import <CommonCrypto/CommonDigest.h>
 #import "AppDelegate.h"
+
+static NSArray *month_cn;
+
 @interface KGUtil()
 
 @end
+
 
 @implementation KGUtil
 
@@ -166,6 +170,20 @@
     }];
 }
 
+// 发送KG的数据请求
++ (void)postKGRequest:(NSString *)curl
+         body:(NSDictionary *)body
+            success:(void (^)(AFHTTPRequestOperation *, id))success
+            failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
+             inView:(UIView *)view {
+    NSString *url = [[KGUtil getServerAppURL] stringByAppendingString:curl];
+
+    NSDictionary *bodyhasdate = [KGUtil getRequestBody:body];
+    NSDictionary *params = @{@"uid": REQUEST_UID, @"sign": [KGUtil getRequestSign:bodyhasdate], @"body":bodyhasdate};
+    
+    [KGUtil postRequest:url parameters:params success:success failure:failure inView:view];
+}
+
 + (KGVarible *)getVarible{
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     return delegate.varible;
@@ -196,6 +214,16 @@
         return delegate.user.childs[0];
     
     return nil;
+}
+
++ (NSString *)getMonthZn:(NSInteger)index{
+    if(month_cn == nil)
+        month_cn = @[@"一月", @"二月", @"三月", @"四月", @"五月", @"六月", @"七月", @"八月", @"九月", @"十月", @"十一月", @"十二月"];
+    
+    
+    if(index < 1 || index > 12)
+        return @"";
+    return [month_cn objectAtIndex:(index-1)];
 }
 
 + (NSString *)getServerIndexURL {

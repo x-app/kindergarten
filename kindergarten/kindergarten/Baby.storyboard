@@ -615,7 +615,7 @@
         <!--成长档案-->
         <scene sceneID="Ldi-vJ-vHp">
             <objects>
-                <viewController storyboardIdentifier="GrowupView" title="成长档案" hidesBottomBarWhenPushed="YES" id="iXn-Qd-7dY" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GrowupView" title="成长档案" hidesBottomBarWhenPushed="YES" id="iXn-Qd-7dY" customClass="RBStoryboardLink" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="317-LN-cN8"/>
                         <viewControllerLayoutGuide type="bottom" id="yeu-iQ-Mch"/>
@@ -625,6 +625,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="storyboardName" value="Growup"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="needsTopLayoutGuide" value="NO"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="needsBottomLayoutGuide" value="NO"/>
+                    </userDefinedRuntimeAttributes>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rNc-wf-e1M" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

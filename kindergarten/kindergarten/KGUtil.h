@@ -35,8 +35,16 @@
             failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
              inView:(UIView *)view;
 
++ (void)postKGRequest:(NSString *)curl
+                 body:(NSDictionary *)body
+              success:(void (^)(AFHTTPRequestOperation *, id))success
+              failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
+               inView:(UIView *)view;
+
 + (KGVarible *)getVarible;
 + (KGChild *)getCurChild;
+
++ (NSString *)getMonthZn:(NSInteger)index;
 
 + (NSString *)getServerIndexURL;
 

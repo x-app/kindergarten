@@ -127,6 +127,8 @@
                 //没有幼儿信息
                 [KGUtil showAlert:@"未查询到宝宝信息" inView:self.view];
             } else {
+                [delegate.user.childs removeAllObjects];
+                
                 for (int i = 0; i < [childs count]; i++) {
                     //..
                     
