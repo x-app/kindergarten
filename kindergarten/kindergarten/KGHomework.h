@@ -15,13 +15,13 @@
 @property (strong, nonatomic) NSString *desc;
 @property (nonatomic) NSInteger classId;
 @property (nonatomic) NSInteger homeworkId;
-@property (strong, nonatomic) NSDate *createTime;
+@property (strong, nonatomic) NSString *createTime;
 
 - (instancetype)initWithDesc: (NSString *)desc
                      classId: (NSInteger)classId
                   homeworkId: (NSInteger)homeworkId
                       picUrl: (NSString *)picUrl
                  smallPicUrl: (NSString *)smallPicUrl
-                    createAt: (NSDate *)createTime;
+                    createAt: (NSString *)createTime;
 
 @end

@@ -10,7 +10,10 @@
 #import "KGUtil.h"
 #import "KGConst.h"
 #import "AppDelegate.h"
+#import "KGChild.h"
+#import "HomeworkTableViewCell.h"
 #import "KGImageDetailViewController.h"
+#import "UIImageView+WebCache.h"
 @interface ChildTableViewController ()
 
 @end
@@ -20,12 +23,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.homeworks = [[NSMutableArray alloc] init];
-    for (int i = 0; i < 20; i++) {
+    //self.homeworks = [[NSMutableArray alloc] init];
+    /*for (int i = 0; i < 20; i++) {
         NSString *hwDesc = [NSString stringWithFormat:@"homework%d", i];
         KGHomework *hw = [[KGHomework alloc] initWithDesc: hwDesc classId:10001 homeworkId:i picUrl:@"test" smallPicUrl:@"test" createAt: [[NSDate alloc] init]];
         [self.homeworks addObject:hw];
-    }
+    }*/
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -36,7 +39,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
 //    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-//    NSDictionary *data = @{@"classID": @"",//delegate.user.curChild.classID,
+//    NSDictionary *data = @{@"classID": [[KGUtil getCurChild] classID],
 //                           @"pageIndex": @1,
 //                           @"pageSize":@10};
 //    NSDictionary *body = [KGUtil getRequestBody:data];
@@ -46,11 +49,21 @@
 //        NSLog(@"JSON: %@", responseObject);
 //        NSString *code = [responseObject objectForKey:@"code"];
 //        if ([code isEqualToString:@"000000"]) {
-//            
+//            NSArray *homeworkArray = (NSArray *)[responseObject objectForKey:@"objlist"];
+//            for (int i = 0; i < [homeworkArray count]; i++) {
+//                NSDictionary *hwDict = [homeworkArray objectAtIndex:i];
+//                KGHomework *homework = [[KGHomework alloc] initWithDesc:[hwDict objectForKey:@"description"]
+//                                                                classId:[[hwDict objectForKey:@"classId"] integerValue]
+//                                                             homeworkId:[[hwDict objectForKey:@"homeworkId"] integerValue]
+//                                                                 picUrl:[hwDict objectForKey:@"picUrl"]
+//                                                            smallPicUrl:[hwDict objectForKey:@"smallPicUrl"]
+//                                                               createAt:[hwDict objectForKey:@"createTime"]];
+//                [self.homeworks addObject:homework];
+//            }
 //        }
 //    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
 //        NSLog(@"Error: %@", error);
-//    } inView:self.view];
+//    } inView:self.tableView];
 }
 
 
@@ -107,18 +120,32 @@
 */
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"homeWorkCell" forIndexPath:indexPath];
+    /*UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"homeworkCell" forIndexPath:indexPath];
     
     KGHomework *homework = (KGHomework *)[self.homeworks objectAtIndex:indexPath.row];
     if (homework) {
         cell.textLabel.text = homework.desc;
         cell.detailTextLabel.text = [KGUtil getDateStr:homework.createTime];
         cell.imageView.image = [UIImage imageNamed:@"image_placeholder"];
-    }
+    }*/
     // Configure the cell...
     
+    HomeworkTableViewCell *cell = (HomeworkTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"homeworkCell" forIndexPath:indexPath];
+    KGHomework *homework = (KGHomework *)[self.homeworks objectAtIndex:indexPath.row];
+    if (homework) {
+        //cell.picImageView.image = [UIImage imageNamed:@"image_placeholder"];
+        cell.descLabel.text = homework.desc;
+        cell.timeLabel.text = homework.createTime;//[KGUtil getDateStr:homework.createTime];
+        cell.smallPicUrl = homework.smallPicUrl;
+        cell.picUrl = homework.picUrl;
+        NSString *smallPicUrl = [NSString stringWithFormat:@"%@%@", [KGUtil getServerAppURL], homework.smallPicUrl];
+        [cell.picImageView sd_setImageWithURL:[NSURL URLWithString:smallPicUrl]
+                             placeholderImage:[UIImage imageNamed:@"image_placeholder"]
+                                      options:SDWebImageRefreshCached];
+    }
     return cell;
 }
+
 
 /*
 // Override to support conditional editing of the table view.
@@ -154,14 +181,24 @@
 }
 */
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"showDetail"]) {
+        if ([segue.destinationViewController isKindOfClass:[KGImageDetailViewController class]]
+            && [sender isKindOfClass:[HomeworkTableViewCell class]]) {
+            HomeworkTableViewCell *curCell = (HomeworkTableViewCell *)sender;
+            KGImageDetailViewController *detailVC = (KGImageDetailViewController *)segue.destinationViewController;
+            NSString *picUrl = [NSString stringWithFormat:@"%@%@", [KGUtil getServerAppURL], curCell.picUrl];
+            detailVC.imageURL = picUrl;
+            detailVC.imageDesc = curCell.descLabel.text;
+        }
+    }
 }
-*/
+
 
 @end

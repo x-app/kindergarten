@@ -30,7 +30,7 @@
                           self.question, @"question",
                           self.questionID, @"questionID",
                           self.deviceID, @"deviceID",
-                          self.catagory, @"catagory",
+                          self.category, @"category",
                           self.answer, @"answer",
                           self.registered, @"registered",
                           self.childs, dictArray,
@@ -46,7 +46,7 @@
     self.question = [dict objectForKey:@"question"];
     self.questionID = [[dict objectForKey:@"questionID"] integerValue];
     self.deviceID = [dict objectForKey:@"deviceID"];
-    self.catagory = [[dict objectForKey:@"catagory"] integerValue];
+    self.category = [[dict objectForKey:@"category"] integerValue];
     self.answer = [dict objectForKey:@"answer"];
     self.registered = [[dict objectForKey: @"registered"] boolValue];
     NSArray *childArray = [[dict objectForKey:@"childs"] array];

@@ -79,6 +79,7 @@
 		9911C22F1B5A6BA50080FFA9 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 9911C21E1B5A6BA50080FFA9 /* UIImageView+WebCache.m */; };
 		9911C2301B5A6BA50080FFA9 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9911C2201B5A6BA50080FFA9 /* UIView+WebCacheOperation.m */; };
 		9911C2331B5A84C10080FFA9 /* UIImageView+UIActivityIndicatorForSDWebImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 9911C2321B5A84C10080FFA9 /* UIImageView+UIActivityIndicatorForSDWebImage.m */; };
+		9911C2361B5BC4F10080FFA9 /* HomeworkTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9911C2351B5BC4F10080FFA9 /* HomeworkTableViewCell.m */; };
 		996D322E1B55525200CB648B /* KGVarible.m in Sources */ = {isa = PBXBuildFile; fileRef = 996D322D1B55525200CB648B /* KGVarible.m */; };
 		99709B6B1B59E45000150176 /* ChildTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99709B6A1B59E45000150176 /* ChildTableViewController.m */; };
 		99709B6E1B59E50A00150176 /* KGHomework.m in Sources */ = {isa = PBXBuildFile; fileRef = 99709B6D1B59E50A00150176 /* KGHomework.m */; };
@@ -262,6 +263,8 @@
 		9911C2201B5A6BA50080FFA9 /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
 		9911C2311B5A84C10080FFA9 /* UIImageView+UIActivityIndicatorForSDWebImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+UIActivityIndicatorForSDWebImage.h"; sourceTree = "<group>"; };
 		9911C2321B5A84C10080FFA9 /* UIImageView+UIActivityIndicatorForSDWebImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+UIActivityIndicatorForSDWebImage.m"; sourceTree = "<group>"; };
+		9911C2341B5BC4F10080FFA9 /* HomeworkTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeworkTableViewCell.h; sourceTree = "<group>"; };
+		9911C2351B5BC4F10080FFA9 /* HomeworkTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeworkTableViewCell.m; sourceTree = "<group>"; };
 		996D322C1B55525200CB648B /* KGVarible.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KGVarible.h; sourceTree = "<group>"; };
 		996D322D1B55525200CB648B /* KGVarible.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KGVarible.m; sourceTree = "<group>"; };
 		99709B691B59E45000150176 /* ChildTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChildTableViewController.h; sourceTree = "<group>"; };
@@ -386,6 +389,8 @@
 				99709B6A1B59E45000150176 /* ChildTableViewController.m */,
 				9911C1FC1B5A62D40080FFA9 /* KGImageDetailViewController.h */,
 				9911C1FD1B5A62D40080FFA9 /* KGImageDetailViewController.m */,
+				9911C2341B5BC4F10080FFA9 /* HomeworkTableViewCell.h */,
+				9911C2351B5BC4F10080FFA9 /* HomeworkTableViewCell.m */,
 			);
 			name = "Child Storyboard";
 			sourceTree = "<group>";
@@ -1064,6 +1069,7 @@
 			files = (
 				12AC16151B4918C3007C247B /* UIViewController+RBStoryboardLink.m in Sources */,
 				12AC15F41B490BD1007C247B /* GartenViewController.m in Sources */,
+				9911C2361B5BC4F10080FFA9 /* HomeworkTableViewCell.m in Sources */,
 				9997BA231B4D580E00B908B6 /* MLTableAlert.m in Sources */,
 				9911C2291B5A6BA50080FFA9 /* SDWebImagePrefetcher.m in Sources */,
 				12AC16121B4918C3007C247B /* RBStoryboardPopoverSegue.m in Sources */,

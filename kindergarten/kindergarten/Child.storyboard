@@ -2,38 +2,56 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="e7o-qH-B5h">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--亲子成长-->
         <scene sceneID="XxY-u5-XVd">
             <objects>
-                <tableViewController storyboardIdentifier="ChildView" title="亲子成长" id="e7o-qH-B5h" customClass="ChildTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="IDR-Kl-ysw">
+                <tableViewController storyboardIdentifier="ChildView" title="亲子成长" hidesBottomBarWhenPushed="YES" id="e7o-qH-B5h" customClass="ChildTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="71" sectionHeaderHeight="22" sectionFooterHeight="22" id="IDR-Kl-ysw">
                         <rect key="frame" x="0.0" y="64" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="homeWorkCell" textLabel="uDS-Fp-kZN" detailTextLabel="sVr-b0-Rhp" style="IBUITableViewCellStyleSubtitle" id="0Nh-Bz-9pi">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="homeworkCell" rowHeight="71" id="0Nh-Bz-9pi" customClass="HomeworkTableViewCell">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0Nh-Bz-9pi" id="gGp-mq-vhe">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uDS-Fp-kZN">
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wh0-Q9-c9o">
+                                            <rect key="frame" x="0.0" y="0.0" width="184" height="70.5"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gts-EX-nuL">
+                                            <rect key="frame" x="216" y="8" width="366" height="38"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sVr-b0-Rhp">
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ecS-hn-XMR">
+                                            <rect key="frame" x="435" y="41" width="147" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="Gts-EX-nuL" firstAttribute="leading" secondItem="wh0-Q9-c9o" secondAttribute="trailing" constant="12" id="19h-CC-EEB"/>
+                                        <constraint firstAttribute="trailing" secondItem="ecS-hn-XMR" secondAttribute="trailing" constant="18" id="66y-GE-BLu"/>
+                                        <constraint firstAttribute="bottom" secondItem="wh0-Q9-c9o" secondAttribute="bottom" constant="2" id="8vH-7r-PnJ"/>
+                                        <constraint firstItem="wh0-Q9-c9o" firstAttribute="top" secondItem="gGp-mq-vhe" secondAttribute="top" constant="2" id="9jQ-HQ-fmq"/>
+                                        <constraint firstItem="Gts-EX-nuL" firstAttribute="top" secondItem="gGp-mq-vhe" secondAttribute="top" constant="12" id="HZD-LZ-fHX"/>
+                                        <constraint firstAttribute="trailing" secondItem="Gts-EX-nuL" secondAttribute="trailing" constant="12" id="Vb1-hU-aQt"/>
+                                        <constraint firstAttribute="bottom" secondItem="ecS-hn-XMR" secondAttribute="bottom" constant="2" id="gxR-a8-9fZ"/>
+                                        <constraint firstItem="wh0-Q9-c9o" firstAttribute="leading" secondItem="gGp-mq-vhe" secondAttribute="leading" constant="2" id="hak-Dl-wps"/>
+                                        <constraint firstItem="Gts-EX-nuL" firstAttribute="width" secondItem="wh0-Q9-c9o" secondAttribute="height" multiplier="5:2" id="zB4-Bw-2vz"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="NNh-cx-lvi" kind="push" id="hgA-Ze-DN7"/>
+                                    <outlet property="descLabel" destination="Gts-EX-nuL" id="1li-uN-Scr"/>
+                                    <outlet property="picImageView" destination="wh0-Q9-c9o" id="3D5-vm-S7L"/>
+                                    <outlet property="timeLabel" destination="ecS-hn-XMR" id="WbM-CV-9ow"/>
+                                    <segue destination="NNh-cx-lvi" kind="show" identifier="showDetail" id="hgA-Ze-DN7"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -51,7 +69,7 @@
         <!--Image Detail View Controller-->
         <scene sceneID="D0C-X5-xTD">
             <objects>
-                <viewController id="NNh-cx-lvi" customClass="KGImageDetailViewController" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="NNh-cx-lvi" customClass="KGImageDetailViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="TVd-xk-tlz"/>
                         <viewControllerLayoutGuide type="bottom" id="vfU-xu-62b"/>
@@ -60,7 +78,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0eB-fY-0G7">
+                            <imageView multipleTouchEnabled="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0eB-fY-0G7">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>

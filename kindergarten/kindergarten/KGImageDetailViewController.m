@@ -17,8 +17,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.imageURL = @"http://i1.hoopchina.com.cn/u/1306/16/662/31662/4c3059fc.gif";
-    self.imageDesc = @"MJ block";
+    //self.imageURL = @"http://i1.hoopchina.com.cn/u/1306/16/662/31662/4c3059fc.gif";
+    //self.imageDesc = @"MJ block";
     // Do any additional setup after loading the view.
 }
 

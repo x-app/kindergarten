@@ -141,12 +141,11 @@
                                                           birthday:[childInfo objectForKey:@"birthday"]];
                     [delegate.user.childs addObject:child];
                 }
-                
+                delegate.user.curChild = [delegate.user.childs objectAtIndex:0];
                 if(childs.count > 0){
                     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
                     [userDefaults setObject:childs forKey:@"curchilds"];
                 }
-                
                 [self.navigationController pushViewController:self.nextVC animated:YES];
             }
         } else {
@@ -358,7 +357,8 @@
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     if (buttonIndex == 0) { //确定-直接进入忘记密码的模式
         delegate.user.regMode = 1;
-        [self.navigationController pushViewController:self.nextVC animated:YES];
+        [self queryChildInfo:delegate.user.uid];
+        //[self.navigationController pushViewController:self.nextVC animated:YES];
     } else { //取消-返回main.storyboard
         delegate.user.registering = NO;
         [self.navigationController dismissViewControllerAnimated:YES completion:nil];
