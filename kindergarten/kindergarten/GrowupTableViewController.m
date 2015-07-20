@@ -112,15 +112,55 @@
 {
     GrowDocCell *cell = (GrowDocCell *)[tableView dequeueReusableCellWithIdentifier:@"GrowDocCell"];
     
-    GrowDoc *doc = (self.docs)[indexPath.row];
+    NSInteger index = indexPath.row;
+    GrowDoc *doc = (self.docs)[index];
     
     NSString *day = [doc.date substringWithRange:NSMakeRange(8,2)];
     NSString *month = [doc.date substringWithRange:NSMakeRange(5,2)];
+    NSString *text = nil;
     
-//    NSString *dateStr = [df stringFromDate:date];
+    if(index == 0)
+    {
+        NSDateFormatter *df = [[NSDateFormatter alloc] init];
+        [df setDateFormat:@"yyyy-MM-dd"];
+        NSString *dateStr = [df stringFromDate:[NSDate date]];
+
+        if([[doc.date substringToIndex:10] isEqualToString:dateStr])
+        {
+            text = @"今天";
+        }
+    }
+    
+    if(index-1 >= 0)
+    {
+        GrowDoc *lastDoc = (self.docs)[index-1];
+        if([[lastDoc.date substringToIndex:10] isEqualToString:[doc.date substringToIndex:10]])
+        {
+            text = @"";
+        }
+    }
+    
     cell.docid = doc.docid;
-    cell.dateLabel.text = day;
-    cell.monLabel.text = [KGUtil getMonthZn:[month integerValue]];
+    if(text == nil)
+    {
+        text = [day stringByAppendingString:[KGUtil getMonthZn:[month integerValue]]];
+        NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:text];
+        [str addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:13] range:NSMakeRange(2,2)];
+        cell.dateLabel.attributedText = str;
+    }
+    else{
+        cell.dateLabel.text = text;
+    }
+//    if([month isEqualToString:@"天"])
+//    {
+//        [cell.monLabel setFont:[UIFont boldSystemFontOfSize:28]];
+//        [cell.monLabel sizeToFit];
+//        cell.monLabel.text = month;
+//    }
+//    else
+//    {
+//        cell.monLabel.text = [KGUtil getMonthZn:[month integerValue]];
+//    }
     cell.descLabel.text = doc.content;
     cell.imgView.image = [UIImage imageNamed:@"image_placeholder"];
 //    cell.imgView.image = [self imageForRating:doc.pic];
@@ -157,29 +197,7 @@
     return 103;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-//    GrowDocCell * cell = (GrowDocCell *)[tableView cellForRowAtIndexPath:indexPath];
-//    
-//    GrowDoc *curDoc = nil;
-//    for (int i=0; i<[self.docs count]; i++) {
-//        GrowDoc *doc = self.docs[i];
-//        if(doc.docid == cell.docid)
-//        {
-//            curDoc = doc;
-//            break;
-//        }
-//    }
-//    
-//    if(curDoc != nil)
-//    {
-//        KGImageDetailViewController *detailViewController = [[KGImageDetailViewController alloc] init];
-//        
-//        NSString *picurl = [NSString stringWithFormat:@"%@%@", [KGUtil getServerAppURL], curDoc.picurl];
-//        detailViewController.imageURL = picurl;
-//        detailViewController.imageDesc = curDoc.content;
-//        [self.navigationController pushViewController:detailViewController animated:YES];
-//    }
-}
+//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{}
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -202,7 +220,6 @@
         NSString *picurl = [NSString stringWithFormat:@"%@%@", [KGUtil getServerAppURL], curDoc.picurl];
         detailViewController.imageURL = picurl;
         detailViewController.imageDesc = curDoc.content;
-       // [self.navigationController pushViewController:detailViewController animated:YES];
     }
 }
 
