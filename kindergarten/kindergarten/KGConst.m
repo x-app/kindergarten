@@ -12,3 +12,5 @@
 NSString *const REQUEST_KEY = @"AbDJKME9KUIJHFDNjhdiosfHIkljmklJKJklIOWERjkljk890934sdfsjLjk+sff";
 
 NSString *const REQUEST_UID = @"nugget";
+
+const int KG_PAGE_SIZE = 10;

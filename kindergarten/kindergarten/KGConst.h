@@ -13,4 +13,6 @@ extern NSString *const REQUEST_KEY;
 extern NSString *const REQUEST_UID;
 extern NSString *const REQUEST_URL_INDEX;
 
+extern const int KG_PAGE_SIZE;
+
 #endif
