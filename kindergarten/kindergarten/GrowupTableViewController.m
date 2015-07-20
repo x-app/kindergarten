@@ -140,7 +140,7 @@
         }
     }
     
-    cell.docid = doc.docid;
+    
     if(text == nil)
     {
         text = [day stringByAppendingString:[KGUtil getMonthZn:[month integerValue]]];
@@ -151,21 +151,13 @@
     else{
         cell.dateLabel.text = text;
     }
-//    if([month isEqualToString:@"天"])
-//    {
-//        [cell.monLabel setFont:[UIFont boldSystemFontOfSize:28]];
-//        [cell.monLabel sizeToFit];
-//        cell.monLabel.text = month;
-//    }
-//    else
-//    {
-//        cell.monLabel.text = [KGUtil getMonthZn:[month integerValue]];
-//    }
-    cell.descLabel.text = doc.content;
-    cell.imgView.image = [UIImage imageNamed:@"image_placeholder"];
-//    cell.imgView.image = [self imageForRating:doc.pic];
     
-//    [cell.descLabel sizeToFit];
+    cell.docid = doc.docid;
+    cell.descLabel.text = doc.content;
+    
+    cell.imgView.image = [UIImage imageNamed:@"image_placeholder"];
+    cell.imgView.contentMode = UIViewContentModeScaleAspectFill;
+    cell.imgView.clipsToBounds = YES;
     
     if (doc.smallpicurl) {
         __block UIActivityIndicatorView *activityIndicator;
