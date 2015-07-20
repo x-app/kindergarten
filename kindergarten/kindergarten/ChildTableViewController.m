@@ -23,6 +23,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+//    UIEdgeInsets edgeInset = self.tableView.separatorInset;
+//    self.tableView.separatorInset = UIEdgeInsetsMake(edgeInset.top, 0, edgeInset.bottom, edgeInset.right);
+    //[self.tableView setSeparatorInset:UIEdgeInsetsZero];
+    //self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    
     //self.homeworks = [[NSMutableArray alloc] init];
     /*for (int i = 0; i < 20; i++) {
         NSString *hwDesc = [NSString stringWithFormat:@"homework%d", i];
@@ -139,6 +144,8 @@
         cell.smallPicUrl = homework.smallPicUrl;
         cell.picUrl = homework.picUrl;
         NSString *smallPicUrl = [NSString stringWithFormat:@"%@%@", [KGUtil getServerAppURL], homework.smallPicUrl];
+        cell.picImageView.contentMode = UIViewContentModeScaleAspectFill;
+        cell.picImageView.clipsToBounds = YES;
         [cell.picImageView sd_setImageWithURL:[NSURL URLWithString:smallPicUrl]
                              placeholderImage:[UIImage imageNamed:@"image_placeholder"]
                                       options:SDWebImageRefreshCached];
@@ -146,6 +153,28 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+//    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+//        NSLog(@"aaaa");
+//        [self.tableView setSeparatorInset:UIEdgeInsetsZero];
+//    }
+//    
+//    if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
+//        NSLog(@"bbbb");
+//        [self.tableView setLayoutMargins:UIEdgeInsetsZero];
+//    }
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        NSLog(@"set separator");
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+    if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {
+        [cell setPreservesSuperviewLayoutMargins:NO];
+    }
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        NSLog(@"set layout margin");
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
+}
 
 /*
 // Override to support conditional editing of the table view.

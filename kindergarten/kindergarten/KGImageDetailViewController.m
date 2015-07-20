@@ -17,6 +17,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //self.imageView.contentMode = UIViewContentModeScaleAspectFill;
     //self.imageURL = @"http://i1.hoopchina.com.cn/u/1306/16/662/31662/4c3059fc.gif";
     //self.imageDesc = @"MJ block";
     // Do any additional setup after loading the view.
