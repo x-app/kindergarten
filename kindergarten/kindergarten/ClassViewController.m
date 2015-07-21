@@ -8,8 +8,7 @@
 
 #import "ClassViewController.h"
 #import "KGUtil.h"
-#import "KGConst.h"
-#import "ChildTableViewController.h"
+
 @interface ClassViewController ()
 
 @property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *func;
@@ -108,38 +107,7 @@
         case 6:{
             UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Child" bundle:nil];
             vc = [storyBoard instantiateViewControllerWithIdentifier:@"ChildView"];
-            ChildTableViewController *childVC = (ChildTableViewController *)vc;
-            if (childVC == nil) {
-                break;
-            }
-            NSDictionary *data = @{@"classID": [[KGUtil getCurChild] classID],
-                                   @"pageIndex": @1,
-                                   @"pageSize":@10};
-            NSDictionary *body = [KGUtil getRequestBody:data];
-            NSDictionary *params = @{@"uid": REQUEST_UID, @"sign": [KGUtil getRequestSign:body], @"body":body};
-            NSString *url = [[KGUtil getServerAppURL] stringByAppendingString:@"/system/pageQueryHomework"];
-            [KGUtil postRequest:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                NSLog(@"JSON: %@", responseObject);
-                NSString *code = [responseObject objectForKey:@"code"];
-                if ([code isEqualToString:@"000000"]) {
-                    NSArray *homeworkArray = (NSArray *)[responseObject objectForKey:@"objlist"];
-                    childVC.homeworks = [[NSMutableArray alloc] initWithCapacity:[homeworkArray count]];
-                    for (int i = 0; i < [homeworkArray count]; i++) {
-                        NSDictionary *hwDict = [homeworkArray objectAtIndex:i];
-                        KGHomework *homework = [[KGHomework alloc] initWithDesc:[hwDict objectForKey:@"description"]
-                                                                        classId:[[hwDict objectForKey:@"classId"] integerValue]
-                                                                     homeworkId:[[hwDict objectForKey:@"homeworkId"] integerValue]
-                                                                         picUrl:[hwDict objectForKey:@"picUrl"]
-                                                                    smallPicUrl:[hwDict objectForKey:@"smallPicUrl"]
-                                                                       createAt:[hwDict objectForKey:@"createTime"]];
-                        [childVC.homeworks addObject:homework];
-                    }
-                    [self.navigationController pushViewController:childVC animated:YES];
-                }
-            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                NSLog(@"Error: %@", error);
-            } inView:childVC.tableView
-             showHud:true];
+            [self.navigationController pushViewController:vc animated:YES];
             break;
         }
         default:

@@ -54,7 +54,6 @@
                                     <outlet property="descLabel" destination="Gts-EX-nuL" id="1li-uN-Scr"/>
                                     <outlet property="picImageView" destination="wh0-Q9-c9o" id="3D5-vm-S7L"/>
                                     <outlet property="timeLabel" destination="ecS-hn-XMR" id="WbM-CV-9ow"/>
-                                    <segue destination="NNh-cx-lvi" kind="show" identifier="showDetail" id="hgA-Ze-DN7"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
