@@ -13,7 +13,7 @@
 @property (nonatomic, strong) NSString* docid;
 
 @property (nonatomic, weak) IBOutlet UILabel *dateLabel;
-@property (nonatomic, weak) IBOutlet UILabel *monLabel;
+//@property (nonatomic, weak) IBOutlet UILabel *monLabel;
 @property (nonatomic, weak) IBOutlet UILabel *descLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *imgView;
 

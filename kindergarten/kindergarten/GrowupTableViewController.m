@@ -9,14 +9,16 @@
 #import "GrowupTableViewController.h"
 #import "UIImageView+UIActivityIndicatorForSDWebImage.h"
 #import "KGImageDetailViewController.h"
+#import "MJRefresh.h"
 #import "GrowDocCell.h"
 #import "GrowDoc.h"
 #import "KGUtil.h"
 #import "KGChild.h"
 #import "KGConst.h"
 
-@interface GrowupTableViewController ()
 
+@interface GrowupTableViewController ()
+@property (nonatomic) NSInteger curPageIndex;
 @end
 
 @implementation GrowupTableViewController
@@ -27,18 +29,32 @@
     self.docs = [[NSMutableArray alloc] init];
     
     self.tableView.separatorStyle = NO;
+    
+    self.curPageIndex = 0;
 
-    [self reloadTable];
+    //[self loadNewData];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    // 设置下拉刷新
+    self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [self loadNewData];
+    }];
+    [self.tableView.header beginRefreshing];
+    
+    // 设置上拉刷新
+    self.tableView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        [self loadNewData];
+    }];
+    // 首次不显示
+    self.tableView.footer.hidden = YES;
 }
 
-- (void) viewDidAppear:(BOOL)animated{
-//    [self reloadTable];
+- (void)viewDidAppear:(BOOL)animated{
 }
 
 - (void)didReceiveMemoryWarning {
@@ -46,13 +62,13 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)reloadTable{
+- (void)loadNewData{
     NSDateFormatter *df = [[NSDateFormatter alloc] init];
     [df setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     
     KGChild *curchild = [KGUtil getCurChild];
     NSDictionary *profile = @{@"childId": curchild.cid,
-                              @"pageIndex": @"0",
+                              @"pageIndex": [NSString stringWithFormat:@"%ld", (long)self.curPageIndex],
                               @"pageSize": [NSString stringWithFormat:@"%d", KG_PAGE_SIZE]
                               };
     
@@ -62,11 +78,13 @@
         NSString *code = [responseObject objectForKey:@"code"];
         if ([code isEqualToString:@"000000"]) {
             NSDictionary *obj = [responseObject objectForKey:@"obj"];
-            NSInteger pageCount = [[obj objectForKey:@"pageTotalCnt"] integerValue];
+            NSInteger pageTotalCount = [[obj objectForKey:@"pageTotalCnt"] integerValue];
             
             NSArray *objlist = [responseObject objectForKey:@"objlist"];
             
             [self.docs removeAllObjects];
+            
+            //NSInteger count = 0;
             for(int i=0; i<[objlist count]; i++)
             {
                 NSDictionary *monthdata = objlist[i];
@@ -85,15 +103,30 @@
 //                    growdoc.content = @"测试测试试test test test测试中文测试中文测试中文测试中文";
                     
                     [self.docs addObject:growdoc];
+                    //count++;
                 }
             }
             
             [self.tableView reloadData];
             
+            self.tableView.footer.hidden = NO;
+            [self.tableView.header endRefreshing];
+            [self.tableView.footer endRefreshing];
+            if(self.curPageIndex + objlist.count < pageTotalCount)
+            {
+                self.curPageIndex += objlist.count;
+            }
+            else{
+                [self.tableView.footer noticeNoMoreData];
+            }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
-    } inView:self.view];
+        
+        [self.tableView.header endRefreshing];
+        [self.tableView.footer endRefreshing];
+    } inView:self.view
+     showHud:false];
 
 }
 
@@ -112,20 +145,57 @@
 {
     GrowDocCell *cell = (GrowDocCell *)[tableView dequeueReusableCellWithIdentifier:@"GrowDocCell"];
     
-    GrowDoc *doc = (self.docs)[indexPath.row];
+    NSInteger index = indexPath.row;
+    GrowDoc *doc = (self.docs)[index];
     
     NSString *day = [doc.date substringWithRange:NSMakeRange(8,2)];
     NSString *month = [doc.date substringWithRange:NSMakeRange(5,2)];
+    NSString *text = nil;
     
-//    NSString *dateStr = [df stringFromDate:date];
+    NSDateFormatter *df = [[NSDateFormatter alloc] init];
+    [df setDateFormat:@"yyyy-MM-dd"];
+    if(index == 0)
+    {
+        NSString *dateStr = [df stringFromDate:[NSDate date]];
+        if([[doc.date substringToIndex:10] isEqualToString:dateStr])
+        {
+            text = @"今天";
+        }
+    }
+    
+    NSString *yesdateStr = [df stringFromDate:[NSDate dateWithTimeIntervalSinceNow:-(24*60*60)]];
+    if([[doc.date substringToIndex:10] isEqualToString:yesdateStr])
+    {
+        text = @"昨天";
+    }
+    
+    if(index >= 1)
+    {
+        GrowDoc *lastDoc = (self.docs)[index-1];
+        if([[lastDoc.date substringToIndex:10] isEqualToString:[doc.date substringToIndex:10]])
+        {
+            text = @"";
+        }
+    }
+    
+    
+    if(text == nil)
+    {
+        text = [day stringByAppendingString:[KGUtil getMonthZn:[month integerValue]]];
+        NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:text];
+        [str addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:13] range:NSMakeRange(2,2)];
+        cell.dateLabel.attributedText = str;
+    }
+    else{
+        cell.dateLabel.text = text;
+    }
+    
     cell.docid = doc.docid;
-    cell.dateLabel.text = day;
-    cell.monLabel.text = [KGUtil getMonthZn:[month integerValue]];
     cell.descLabel.text = doc.content;
-    cell.imgView.image = [UIImage imageNamed:@"image_placeholder"];
-//    cell.imgView.image = [self imageForRating:doc.pic];
     
-//    [cell.descLabel sizeToFit];
+    cell.imgView.image = [UIImage imageNamed:@"image_placeholder"];
+    cell.imgView.contentMode = UIViewContentModeScaleAspectFill;
+    cell.imgView.clipsToBounds = YES;
     
     if (doc.smallpicurl) {
         __block UIActivityIndicatorView *activityIndicator;
@@ -157,54 +227,8 @@
     return 103;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-//    GrowDocCell * cell = (GrowDocCell *)[tableView cellForRowAtIndexPath:indexPath];
-//    
-//    GrowDoc *curDoc = nil;
-//    for (int i=0; i<[self.docs count]; i++) {
-//        GrowDoc *doc = self.docs[i];
-//        if(doc.docid == cell.docid)
-//        {
-//            curDoc = doc;
-//            break;
-//        }
-//    }
-//    
-//    if(curDoc != nil)
-//    {
-//        KGImageDetailViewController *detailViewController = [[KGImageDetailViewController alloc] init];
-//        
-//        NSString *picurl = [NSString stringWithFormat:@"%@%@", [KGUtil getServerAppURL], curDoc.picurl];
-//        detailViewController.imageURL = picurl;
-//        detailViewController.imageDesc = curDoc.content;
-//        [self.navigationController pushViewController:detailViewController animated:YES];
-//    }
-}
+//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{}
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    GrowDocCell * cell = (GrowDocCell *)sender;
-    
-    GrowDoc *curDoc = nil;
-    for (int i=0; i<[self.docs count]; i++) {
-        GrowDoc *doc = self.docs[i];
-        if(doc.docid == cell.docid)
-        {
-            curDoc = doc;
-            break;
-        }
-    }
-    
-    if(curDoc != nil)
-    {
-        KGImageDetailViewController *detailViewController = segue.destinationViewController;;
-        
-        NSString *picurl = [NSString stringWithFormat:@"%@%@", [KGUtil getServerAppURL], curDoc.picurl];
-        detailViewController.imageURL = picurl;
-        detailViewController.imageDesc = curDoc.content;
-       // [self.navigationController pushViewController:detailViewController animated:YES];
-    }
-}
 
 /*
 // Override to support conditional editing of the table view.
@@ -240,14 +264,30 @@
 }
 */
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark - Navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    GrowDocCell * cell = (GrowDocCell *)sender;
+    
+    GrowDoc *curDoc = nil;
+    for (int i=0; i<[self.docs count]; i++) {
+        GrowDoc *doc = self.docs[i];
+        if(doc.docid == cell.docid)
+        {
+            curDoc = doc;
+            break;
+        }
+    }
+    
+    if(curDoc != nil)
+    {
+        KGImageDetailViewController *detailViewController = segue.destinationViewController;;
+        
+        NSString *picurl = [NSString stringWithFormat:@"%@%@", [KGUtil getServerAppURL], curDoc.picurl];
+        detailViewController.imageURL = picurl;
+        detailViewController.imageDesc = curDoc.content;
+    }
 }
-*/
 
 @end

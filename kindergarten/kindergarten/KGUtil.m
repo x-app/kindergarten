@@ -133,25 +133,36 @@ static NSArray *month_cn;
          parameters:(id)parameters
             success:(void (^)(AFHTTPRequestOperation *, id))success
             failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
-             inView:(UIView *)view {
+             inView:(UIView *)view
+           showHud:(BOOL)showHud{
     NSLog(@"Post request to [%@] using [%@]", url, parameters);
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.requestSerializer.timeoutInterval = 10.0f;
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
-    MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:view];
-    [view addSubview:hud];
-    hud.labelText = @"加载中";
-    hud.removeFromSuperViewOnHide = YES;
-    [hud show:YES];
+    
+    MBProgressHUD *hud = nil;
+    if(showHud)
+    {
+        hud = [[MBProgressHUD alloc] initWithView:view];
+        [view addSubview:hud];
+        hud.labelText = @"加载中";
+        hud.removeFromSuperViewOnHide = YES;
+        [hud show:YES];
+    }
+    
     [manager POST:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        [hud hide:YES];
+        if(showHud)
+            [hud hide:YES];
+        
         if (success != nil) {
             success(operation, responseObject);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [hud hide:YES];
+        if(showHud)
+            [hud hide:YES];
+        
         MBProgressHUD *messageHUD = [MBProgressHUD showHUDAddedTo:view animated:YES];
         messageHUD.mode = MBProgressHUDModeText;
         NSString *content = @"";
@@ -175,13 +186,14 @@ static NSArray *month_cn;
          body:(NSDictionary *)body
             success:(void (^)(AFHTTPRequestOperation *, id))success
             failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
-             inView:(UIView *)view {
+             inView:(UIView *)view
+            showHud:(BOOL)showHud{
     NSString *url = [[KGUtil getServerAppURL] stringByAppendingString:curl];
 
     NSDictionary *bodyhasdate = [KGUtil getRequestBody:body];
     NSDictionary *params = @{@"uid": REQUEST_UID, @"sign": [KGUtil getRequestSign:bodyhasdate], @"body":bodyhasdate};
     
-    [KGUtil postRequest:url parameters:params success:success failure:failure inView:view];
+    [KGUtil postRequest:url parameters:params success:success failure:failure inView:view showHud:showHud];
 }
 
 + (KGVarible *)getVarible{
