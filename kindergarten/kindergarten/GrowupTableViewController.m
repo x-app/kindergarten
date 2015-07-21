@@ -145,7 +145,22 @@
 {
     GrowDocCell *cell = (GrowDocCell *)[tableView dequeueReusableCellWithIdentifier:@"GrowDocCell"];
     
-    NSInteger index = indexPath.row;
+    if(indexPath.row == 0)
+    {
+        cell.dateLabel.text = @"今天";
+        cell.docid = @"";
+        cell.descLabel.text = @"";
+    
+        cell.imgView.image = [UIImage imageNamed:@"image_placeholder"];
+        UITapGestureRecognizer *singleTap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onAddClick:)];
+        [cell.imgView addGestureRecognizer:singleTap1];
+
+        return cell;
+    }
+    
+    
+    
+    NSInteger index = indexPath.row-1;
     GrowDoc *doc = (self.docs)[index];
     
     NSString *day = [doc.date substringWithRange:NSMakeRange(8,2)];
@@ -155,11 +170,12 @@
     NSDateFormatter *df = [[NSDateFormatter alloc] init];
     [df setDateFormat:@"yyyy-MM-dd"];
     if(index == 0)
-    {
+    {//首个记录如果为当天，不显示日期
         NSString *dateStr = [df stringFromDate:[NSDate date]];
         if([[doc.date substringToIndex:10] isEqualToString:dateStr])
         {
-            text = @"今天";
+//            text = @"今天";
+            text = @"";
         }
     }
     
@@ -169,6 +185,7 @@
         text = @"昨天";
     }
     
+    // 同一天的日期只显示一次，进行过滤
     if(index >= 1)
     {
         GrowDoc *lastDoc = (self.docs)[index-1];
@@ -177,7 +194,6 @@
             text = @"";
         }
     }
-    
     
     if(text == nil)
     {
@@ -270,6 +286,7 @@
 {
     GrowDocCell * cell = (GrowDocCell *)sender;
     
+    
     GrowDoc *curDoc = nil;
     for (int i=0; i<[self.docs count]; i++) {
         GrowDoc *doc = self.docs[i];
@@ -288,6 +305,11 @@
         detailViewController.imageURL = picurl;
         detailViewController.imageDesc = curDoc.content;
     }
+}
+
+#pragma mark
+- (void)onAddClick:(UITapGestureRecognizer*) sender{
+    NSLog(@"click");
 }
 
 @end

@@ -22,7 +22,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="287" height="89"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Jxr-Yt-eqK">
+                                        <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Jxr-Yt-eqK">
                                             <rect key="frame" x="81" y="8" width="93" height="93"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="Jxr-Yt-eqK" secondAttribute="height" multiplier="1:1" id="SE3-K7-ZGJ"/>
@@ -31,7 +31,7 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="测试测试试测试测试测试测试测试测试测试测试测试测试测试测test test test测试中文" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mLk-my-Nj9">
                                             <rect key="frame" x="179" y="8" width="136" height="53"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="18" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LVg-nM-AG1">
@@ -40,7 +40,7 @@
                                                 <constraint firstAttribute="width" constant="65" id="bpu-B8-U2m"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -59,7 +59,6 @@
                                     <outlet property="dateLabel" destination="LVg-nM-AG1" id="LNd-uC-RD0"/>
                                     <outlet property="descLabel" destination="mLk-my-Nj9" id="HbA-fr-TFb"/>
                                     <outlet property="imgView" destination="Jxr-Yt-eqK" id="r2I-Pi-eAC"/>
-                                    <segue destination="2gV-Q7-u7C" kind="push" id="RPd-pa-ZTe"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
