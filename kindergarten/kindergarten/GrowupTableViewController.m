@@ -9,6 +9,8 @@
 #import "GrowupTableViewController.h"
 #import "UIImageView+UIActivityIndicatorForSDWebImage.h"
 #import "KGImageDetailViewController.h"
+#import "PBImageInfo.h"
+#import "PBViewController.h"
 #import "MJRefresh.h"
 #import "GrowDocCell.h"
 #import "GrowDoc.h"
@@ -18,7 +20,10 @@
 
 
 @interface GrowupTableViewController ()
+
+@property (nonatomic, strong) NSMutableArray *pbImgInfos;
 @property (nonatomic) NSInteger curPageIndex;
+
 @end
 
 @implementation GrowupTableViewController
@@ -27,6 +32,8 @@
     [super viewDidLoad];
     
     self.docs = [[NSMutableArray alloc] init];
+    
+    self.pbImgInfos = [[NSMutableArray alloc] init];
     
     self.tableView.separatorStyle = NO;
     
@@ -100,9 +107,15 @@
                                                                docid:[doc objectForKey:@"growthArchiveId"]
                                                               picurl:[doc objectForKey:@"picUrl"]
                                                          smallpicurl:[doc objectForKey:@"smallPicUrl"]];
-//                    growdoc.content = @"测试测试试test test test测试中文测试中文测试中文测试中文";
-                    
                     [self.docs addObject:growdoc];
+                    
+                    PBImageInfo *iInfo = [[PBImageInfo alloc] init];
+                    NSString *picurl = [NSString stringWithFormat:@"%@%@", [KGUtil getServerAppURL], growdoc.picurl];
+                    iInfo.imageURL = picurl;
+                    iInfo.imageTitle = growdoc.date;
+                    iInfo.imageDesc = growdoc.content;
+                    [self.pbImgInfos addObject:iInfo];
+
                     //count++;
                 }
             }
@@ -138,7 +151,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.docs count];
+    return [self.docs count] + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -157,8 +170,6 @@
 
         return cell;
     }
-    
-    
     
     NSInteger index = indexPath.row-1;
     GrowDoc *doc = (self.docs)[index];
@@ -243,7 +254,22 @@
     return 103;
 }
 
-//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.row < 1 || indexPath.row-1 >= [self.docs count]) {
+        return;
+    }
+    
+//    GrowDoc *curDoc = (GrowDoc *)[self.docs objectAtIndex:(indexPath.row-1)];
+    
+//    if(curDoc != nil)
+//    {
+        PBViewController *pbVC = [[PBViewController alloc] init];
+        pbVC.index = indexPath.row-1;
+        pbVC.handleVC = self;
+        pbVC.imageInfos = self.pbImgInfos;
+        [pbVC show];
+//    }
+}
 
 
 /*
