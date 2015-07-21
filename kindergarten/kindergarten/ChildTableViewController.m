@@ -23,6 +23,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self loadTableData];
+    
 //    UIEdgeInsets edgeInset = self.tableView.separatorInset;
 //    self.tableView.separatorInset = UIEdgeInsetsMake(edgeInset.top, 0, edgeInset.bottom, edgeInset.right);
     //[self.tableView setSeparatorInset:UIEdgeInsetsZero];
@@ -40,6 +42,37 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (void)loadTableData {
+    NSDictionary *data = @{@"classID": [[KGUtil getCurChild] classID],
+                           @"pageIndex": @1,
+                           @"pageSize":@10};
+    NSDictionary *body = [KGUtil getRequestBody:data];
+    NSDictionary *params = @{@"uid": REQUEST_UID, @"sign": [KGUtil getRequestSign:body], @"body":body};
+    NSString *url = [[KGUtil getServerAppURL] stringByAppendingString:@"/system/pageQueryHomework"];
+    [KGUtil postRequest:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"JSON: %@", responseObject);
+        NSString *code = [responseObject objectForKey:@"code"];
+        if ([code isEqualToString:@"000000"]) {
+            self.homeworks = nil;
+            NSArray *homeworkArray = (NSArray *)[responseObject objectForKey:@"objlist"];
+            self.homeworks = [[NSMutableArray alloc] initWithCapacity:[homeworkArray count]];
+            for (int i = 0; i < [homeworkArray count]; i++) {
+                NSDictionary *hwDict = [homeworkArray objectAtIndex:i];
+                KGHomework *homework = [[KGHomework alloc] initWithDesc:[hwDict objectForKey:@"description"]
+                                                                classId:[[hwDict objectForKey:@"classId"] integerValue]
+                                                             homeworkId:[[hwDict objectForKey:@"homeworkId"] integerValue]
+                                                                 picUrl:[hwDict objectForKey:@"picUrl"]
+                                                            smallPicUrl:[hwDict objectForKey:@"smallPicUrl"]
+                                                               createAt:[hwDict objectForKey:@"createTime"]];
+                [self.homeworks addObject:homework];
+            }
+            [self.tableView reloadData];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+    } inView:self.tableView];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
