@@ -138,7 +138,8 @@
                 }
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 NSLog(@"Error: %@", error);
-            } inView:childVC.tableView];
+            } inView:childVC.tableView
+             showHud:true];
             break;
         }
         default:

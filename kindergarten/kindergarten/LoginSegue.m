@@ -68,7 +68,8 @@
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
-    } inView:current.view];
+    } inView:current.view
+     showHud:true];
 }
 
 @end

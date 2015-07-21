@@ -33,13 +33,15 @@
          parameters:(id)parameters
             success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
             failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
-             inView:(UIView *)view;
+             inView:(UIView *)view
+            showHud:(BOOL)showHud;
 
 + (void)postKGRequest:(NSString *)curl
                  body:(NSDictionary *)body
               success:(void (^)(AFHTTPRequestOperation *, id))success
               failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
-               inView:(UIView *)view;
+               inView:(UIView *)view
+              showHud:(BOOL)showHud;
 
 + (KGVarible *)getVarible;
 + (KGChild *)getCurChild;

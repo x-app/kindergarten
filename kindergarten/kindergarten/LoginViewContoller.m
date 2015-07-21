@@ -107,7 +107,8 @@
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);
-        } inView:self.view];
+        } inView:self.view
+         showHud:true];
     }
 }
 
@@ -153,7 +154,8 @@
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         //查询幼儿失败
-    } inView:self.view];
+    } inView:self.view
+     showHud:true];
 }
 
 - (void)setGesturePswd {
@@ -208,7 +210,8 @@
         [self showParkList];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
-    } inView:self.view];
+    } inView:self.view
+     showHud:true];
 }
 
 - (void)showParkList {
@@ -327,7 +330,8 @@
         [self showQstnList];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
-    } inView:self.view];
+    } inView:self.view
+     showHud:true];
 }
 
 #pragma mark -- Test Actions --
