@@ -14,6 +14,7 @@
 #import "HomeworkTableViewCell.h"
 #import "KGImageDetailViewController.h"
 #import "UIImageView+WebCache.h"
+#import "PBViewController.h"
 @interface ChildTableViewController ()
 
 @end
@@ -72,7 +73,7 @@
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
-    } inView:self.tableView];
+    } inView:self.tableView showHud:YES];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -242,6 +243,29 @@
     return YES;
 }
 */
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row >= [self.homeworks count] || indexPath.row < 0) {
+        return;
+    }
+    KGHomework *hw = (KGHomework *)[self.homeworks objectAtIndex:indexPath.row];
+    if (hw == nil) {
+        return;
+    }
+    NSMutableArray *imageInfos = [[NSMutableArray alloc] initWithCapacity:1];
+    PBImageInfo *iInfo = [[PBImageInfo alloc] init];
+    iInfo.imageURL = [NSString stringWithFormat:@"%@%@", [KGUtil getServerAppURL], hw.picUrl];
+    iInfo.imageTitle = hw.createTime;
+    iInfo.imageDesc = hw.desc;
+    [imageInfos addObject:iInfo];
+    PBViewController *pbVC = [[PBViewController alloc] init];
+    pbVC.index = 0;
+    pbVC.handleVC = self;
+    pbVC.imageInfos = imageInfos;
+    [pbVC show];
+    
+}
 
 
 #pragma mark - Navigation
