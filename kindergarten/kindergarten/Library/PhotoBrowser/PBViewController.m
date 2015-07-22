@@ -20,6 +20,14 @@
     [super viewDidLoad];
     [self vcPrepare];
     self.navigationController.delegate = self;
+    
+    UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0 , 100, 44)];
+    titleLabel.backgroundColor = [UIColor clearColor];  //设置Label背景透明
+    titleLabel.font = [UIFont boldSystemFontOfSize:12];  //设置文本字体与大小
+    titleLabel.textColor = [UIColor whiteColor];  //设置文本颜色
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    titleLabel.text = @"";
+    self.navigationItem.titleView = titleLabel;
     // Do any additional setup after loading the view.
 }
 
@@ -321,6 +329,12 @@
     //NSString *text = [NSString stringWithFormat:@"%@ / %@", @(page + 1) , @(self.pageCount)];
     PBImageInfo *curImgInfo = (PBImageInfo *)[self.imageInfos objectAtIndex:self.page];
     NSString *text = curImgInfo.imageTitle;
+    
+    UILabel *titleLabel = (UILabel *)self.navigationItem.titleView;
+    if (titleLabel != nil) {
+        titleLabel.text = text;
+    }
+    
 //    dispatch_async(dispatch_get_main_queue(), ^{
 //        
 //        self.topBarLabel.text = text;
