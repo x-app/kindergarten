@@ -40,13 +40,13 @@
 
     // 设置下拉刷新
     self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [self loadTableData];
+        [self loadTableData:YES];
     }];
     [self.tableView.header beginRefreshing];
     
     // 设置上拉刷新
     self.tableView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        [self loadTableData];
+        [self loadTableData:NO];
     }];
     // 首次不显示
     self.tableView.footer.hidden = YES;
@@ -69,7 +69,7 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
-- (void)loadTableData {
+- (void)loadTableData: (BOOL)loadAll {
     NSDictionary *data = @{@"classID": [[KGUtil getCurChild] classID],
                            @"pageIndex": @(self.pageIndex),
                            @"pageSize": @(10)};
@@ -91,12 +91,13 @@
         NSLog(@"JSON: %@", responseObject);
         NSString *code = [responseObject objectForKey:@"code"];
         if ([code isEqualToString:@"000000"]) {
-            //[self.homeworks removeAllObjects];
-            //self.homeworks = nil;
             NSDictionary *obj = [responseObject objectForKey:@"obj"];
             NSInteger pageTotalCount = [[obj objectForKey:@"pageTotalCnt"] integerValue];
             NSArray *homeworkArray = (NSArray *)[responseObject objectForKey:@"objlist"];
-            //self.homeworks = [[NSMutableArray alloc] initWithCapacity:[homeworkArray count]];
+            if (loadAll == YES) {
+                [self.homeworks removeAllObjects];
+                self.homeworks = [[NSMutableArray alloc] initWithCapacity:[homeworkArray count]];;
+            }
             for (int i = 0; i < [homeworkArray count]; i++) {
                 NSDictionary *hwDict = [homeworkArray objectAtIndex:i];
                 KGHomework *homework = [[KGHomework alloc] initWithDesc:[hwDict objectForKey:@"description"]
