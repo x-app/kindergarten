@@ -8,7 +8,7 @@
 
 #import "GartenViewController.h"
 #import "KGUtil.h"
-
+#import "ChildTableViewController.h"
 
 @interface GartenViewController ()
 @property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *func;
@@ -87,6 +87,13 @@
             break;
         }
         case 4:{
+            UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Child" bundle:nil];
+            UIViewController *vc = [storyBoard instantiateViewControllerWithIdentifier:@"ChildView"];
+            ChildTableViewController *cvc = (ChildTableViewController *)vc;
+            if (cvc != nil) {
+                cvc.type = TEACHER;
+                [self.navigationController pushViewController:cvc animated:YES];
+            }
             break;
         }
         default:

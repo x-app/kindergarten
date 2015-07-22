@@ -31,6 +31,12 @@
     
     self.pageIndex = 1;
     //[self loadTableData];
+    
+    if (self.type == HOMEWORK) {
+        self.title = @"亲子成长";
+    } else if (self.type == TEACHER) {
+        self.title = @"教师风采";
+    }
 
     // 设置下拉刷新
     self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
@@ -69,7 +75,18 @@
                            @"pageSize": @(10)};
     NSDictionary *body = [KGUtil getRequestBody:data];
     NSDictionary *params = @{@"uid": REQUEST_UID, @"sign": [KGUtil getRequestSign:body], @"body":body};
-    NSString *url = [[KGUtil getServerAppURL] stringByAppendingString:@"/system/pageQueryHomework"];
+    NSString *urlSuffix = @"";
+    if (self.type == HOMEWORK) {
+        urlSuffix = @"/system/pageQueryHomework";
+    } else if (self.type == TEACHER) {
+        urlSuffix = @"/system/pageQueryTeacherDesc";
+    } else {
+        NSLog(@"wrong type");
+        [self.tableView.header endRefreshing];
+        [self.tableView.footer endRefreshing];
+        return;
+    }
+    NSString *url = [[KGUtil getServerAppURL] stringByAppendingString:urlSuffix];
     [KGUtil postRequest:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON: %@", responseObject);
         NSString *code = [responseObject objectForKey:@"code"];

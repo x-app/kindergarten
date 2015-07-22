@@ -8,10 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum {
+    HOMEWORK,
+    TEACHER
+} ChildViewType;
+
 @interface ChildTableViewController : UITableViewController
 
 @property (strong, nonatomic) NSMutableArray *homeworks;
 
 @property (nonatomic) NSInteger pageIndex;
 
+@property (nonatomic) ChildViewType type;
 @end

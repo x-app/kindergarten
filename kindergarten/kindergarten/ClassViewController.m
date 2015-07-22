@@ -8,7 +8,7 @@
 
 #import "ClassViewController.h"
 #import "KGUtil.h"
-
+#import "ChildTableViewController.h"
 @interface ClassViewController ()
 
 @property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *func;
@@ -107,7 +107,11 @@
         case 6:{
             UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Child" bundle:nil];
             vc = [storyBoard instantiateViewControllerWithIdentifier:@"ChildView"];
-            [self.navigationController pushViewController:vc animated:YES];
+            ChildTableViewController *cvc = (ChildTableViewController *)vc;
+            if (cvc != nil) {
+                cvc.type = HOMEWORK;
+                [self.navigationController pushViewController:cvc animated:YES];
+            }
             break;
         }
         default:

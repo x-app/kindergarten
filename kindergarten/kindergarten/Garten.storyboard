@@ -376,6 +376,24 @@
             </objects>
             <point key="canvasLocation" x="-1491" y="-672.75"/>
         </scene>
+        <!--教师风采-->
+        <scene sceneID="UJU-J3-D8y">
+            <objects>
+                <viewController title="教师风采" id="KIr-Gd-tXf" customClass="RBStoryboardLink" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Pys-Ak-4d7"/>
+                        <viewControllerLayoutGuide type="bottom" id="cmY-IW-Y9n"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Twr-oy-FUv">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4y5-Ue-Chr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-803" y="-673"/>
+        </scene>
     </scenes>
     <resources>
         <image name="head.jpg" width="200" height="200"/>
