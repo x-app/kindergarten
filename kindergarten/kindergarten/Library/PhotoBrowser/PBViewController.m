@@ -19,6 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self vcPrepare];
+    self.navigationController.delegate = self;
     // Do any additional setup after loading the view.
 }
 
@@ -52,16 +53,24 @@
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    //[self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
-
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self setNavigationBarStyle];
+}
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     //[self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
+- (void)restoreNavigationBarStyle {
+    self.navigationController.navigationBar.tintColor = nil;
+    self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
+    self.navigationController.navigationBar.translucent = NO;
+}
 
 
 /*
@@ -155,7 +164,7 @@
 
 -(void)singleTap{
     
-    CGFloat h = _topBarView.frame.size.height;
+    /*CGFloat h = _topBarView.frame.size.height;
     
     BOOL show = _topBarView.tag == 0;
     
@@ -167,7 +176,10 @@
         
         [_topBarView setNeedsLayout];
         [_topBarView layoutIfNeeded];
-    }];
+    }];*/
+    BOOL isHidden = [self.navigationController.navigationBar isHidden];
+    [self.navigationController setNavigationBarHidden:!isHidden animated:YES];
+    [self setNavigationBarStyle];
     
     [self.scrollView.subviews enumerateObjectsUsingBlock:^(UIView *subView, NSUInteger idx, BOOL *stop) {
         
@@ -291,12 +303,12 @@
     //NSString *text = [NSString stringWithFormat:@"%@ / %@", @(page + 1) , @(self.pageCount)];
     PBImageInfo *curImgInfo = (PBImageInfo *)[self.imageInfos objectAtIndex:self.page];
     NSString *text = curImgInfo.imageTitle;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        
-        self.topBarLabel.text = text;
-        [self.topBarLabel setNeedsLayout];
-        [self.topBarLabel layoutIfNeeded];
-    });
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        
+//        self.topBarLabel.text = text;
+//        [self.topBarLabel setNeedsLayout];
+//        [self.topBarLabel layoutIfNeeded];
+//    });
     
     dispatch_async(dispatch_get_main_queue(), ^{
         

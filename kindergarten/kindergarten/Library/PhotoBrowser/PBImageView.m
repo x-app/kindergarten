@@ -31,8 +31,9 @@
     }
     [super setImage:image];
     
+    //self.calF = UIScreen
     //确定frame
-    [self calFrame];
+    //[self calFrame];
     
     self.contentMode = UIViewContentModeScaleAspectFit;
     
@@ -43,6 +44,7 @@
 /*
  *  确定frame
  */
+/*
 -(void)calFrame{
     
     CGSize size = self.image.size;
@@ -106,9 +108,11 @@
     }
     CGFloat x = self.screenCenter.x - w *.5f;
     CGFloat y = self.screenCenter.y - h * .5f;
-    CGRect frame = (CGRect){CGPointMake(x, y),CGSizeMake(w, h)};
+    CGRect frame = (CGRect){CGPointMake(x, y),CGSizeMake(calW,calH)};
        
-    self.calF = frame;
+    //self.calF = frame;
+    self.calF = CGRectMake(0, 0, superW, superH);
+    NSLog(@"image frame: %f %f %f %f",self.calF.origin.x, self.calF.origin.y, self.calF.size.width, self.calF.size.height);
 }
 
 
@@ -138,7 +142,7 @@
 
     return _screenCenter;
 }
-
+*/
 
 
 @end

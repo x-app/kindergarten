@@ -88,12 +88,12 @@
     if(self.imageInfo == nil) return;
     
     //创建imageView
-    UIImage *img_placeholder = [UIImage imageNamed:@"PBResource.bundle/empty_picture"];
-    UIImage *image = [self remakeImageWithFullSize:img_placeholder size:[UIScreen mainScreen].bounds.size zoom:0.3f];
+    //UIImage *img_placeholder = [UIImage imageNamed:@"PBResource.bundle/empty_picture"];
+    //UIImage *image = [self remakeImageWithFullSize:img_placeholder size:[UIScreen mainScreen].bounds.size zoom:0.3f];
     
-    self.photoImageView.image = image;
+    //self.photoImageView.image = image;
     
-    if(image == nil) return;
+    //if(image == nil) return;
     
     /*[self.photoImageView imageWithUrlStr:_photoModel.image_HD_U phImage:image progressBlock:^(NSInteger receivedSize, NSInteger expectedSize) {
         
@@ -115,7 +115,7 @@
     __block UIActivityIndicatorView *activityIndicator;
     __weak UIImageView *weakImageView = self.photoImageView;
     [self.photoImageView sd_setImageWithURL:[NSURL URLWithString:self.imageInfo.imageURL]
-                      placeholderImage:nil
+                      placeholderImage:[UIImage imageNamed:@"PBResource.bundle/empty_picture"]
                                options:SDWebImageProgressiveDownload
                               progress:^(NSInteger receivedSize, NSInteger expectedSize) {
                                   NSLog(@">>>>");
@@ -141,8 +141,7 @@
     //self.photoImageView.frame = self.imageInfo.sourceFrame;
     
 
-    self.photoImageView.frame = self.photoImageView.calF;
-
+    self.photoImageView.frame = [[UIScreen mainScreen] bounds]; //self.photoImageView.calF;
     
     
     //标题

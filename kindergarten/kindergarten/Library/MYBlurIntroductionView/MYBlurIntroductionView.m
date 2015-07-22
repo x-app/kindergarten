@@ -315,13 +315,11 @@
         self.alpha = 0;
     } completion:^(BOOL finished){
         if (finished) {
+            [self removeFromSuperview];
             if ([(id)delegate respondsToSelector:@selector(introduction:didFinishWithType:)]) {
                 [delegate introduction:self didFinishWithType:MYFinishTypeSkipButton];
             }
-            
-            [self removeFromSuperview];
         }
-        
     }];
 }
 
