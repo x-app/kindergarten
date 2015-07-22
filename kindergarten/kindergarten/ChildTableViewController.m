@@ -15,6 +15,9 @@
 #import "KGImageDetailViewController.h"
 #import "UIImageView+WebCache.h"
 #import "PBViewController.h"
+#import "MJRefresh.h"
+#import "KGHomework.h"
+
 @interface ChildTableViewController ()
 
 @end
@@ -24,8 +27,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self loadTableData];
+    self.homeworks = [[NSMutableArray alloc] init];
     
+    self.pageIndex = 1;
+    //[self loadTableData];
+
+    // 设置下拉刷新
+    self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [self loadTableData];
+    }];
+    [self.tableView.header beginRefreshing];
+    
+    // 设置上拉刷新
+    self.tableView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        [self loadTableData];
+    }];
+    // 首次不显示
+    self.tableView.footer.hidden = YES;
 //    UIEdgeInsets edgeInset = self.tableView.separatorInset;
 //    self.tableView.separatorInset = UIEdgeInsetsMake(edgeInset.top, 0, edgeInset.bottom, edgeInset.right);
     //[self.tableView setSeparatorInset:UIEdgeInsetsZero];
@@ -47,8 +65,8 @@
 
 - (void)loadTableData {
     NSDictionary *data = @{@"classID": [[KGUtil getCurChild] classID],
-                           @"pageIndex": @1,
-                           @"pageSize":@10};
+                           @"pageIndex": @(self.pageIndex),
+                           @"pageSize": @(10)};
     NSDictionary *body = [KGUtil getRequestBody:data];
     NSDictionary *params = @{@"uid": REQUEST_UID, @"sign": [KGUtil getRequestSign:body], @"body":body};
     NSString *url = [[KGUtil getServerAppURL] stringByAppendingString:@"/system/pageQueryHomework"];
@@ -56,9 +74,12 @@
         NSLog(@"JSON: %@", responseObject);
         NSString *code = [responseObject objectForKey:@"code"];
         if ([code isEqualToString:@"000000"]) {
-            self.homeworks = nil;
+            //[self.homeworks removeAllObjects];
+            //self.homeworks = nil;
+            NSDictionary *obj = [responseObject objectForKey:@"obj"];
+            NSInteger pageTotalCount = [[obj objectForKey:@"pageTotalCnt"] integerValue];
             NSArray *homeworkArray = (NSArray *)[responseObject objectForKey:@"objlist"];
-            self.homeworks = [[NSMutableArray alloc] initWithCapacity:[homeworkArray count]];
+            //self.homeworks = [[NSMutableArray alloc] initWithCapacity:[homeworkArray count]];
             for (int i = 0; i < [homeworkArray count]; i++) {
                 NSDictionary *hwDict = [homeworkArray objectAtIndex:i];
                 KGHomework *homework = [[KGHomework alloc] initWithDesc:[hwDict objectForKey:@"description"]
@@ -70,10 +91,30 @@
                 [self.homeworks addObject:homework];
             }
             [self.tableView reloadData];
+            
+            self.tableView.footer.hidden = NO;
+            [self.tableView.header endRefreshing];
+            [self.tableView.footer endRefreshing];
+            if (self.homeworks.count < pageTotalCount) {
+                self.pageIndex += 1;
+            } else {
+                [self.tableView.footer noticeNoMoreData];
+            }
+//            self.pageIndex += 1;
+//            if (homeworkArray.count == 0) {
+//                [self.tableView.footer noticeNoMoreData];
+//            }
+//            if (self.pageIndex + homeworkArray.count < pageTotalCount) {
+//                self.pageIndex += homeworkArray.count;
+//            } else {
+//                [self.tableView.footer noticeNoMoreData];
+//            }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
-    } inView:self.tableView showHud:YES];
+        [self.tableView.header endRefreshing];
+        [self.tableView.footer endRefreshing];
+    } inView:self.tableView showHud:NO];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -198,14 +239,12 @@
 //        [self.tableView setLayoutMargins:UIEdgeInsetsZero];
 //    }
     if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
-        NSLog(@"set separator");
         [cell setSeparatorInset:UIEdgeInsetsZero];
     }
     if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {
         [cell setPreservesSuperviewLayoutMargins:NO];
     }
     if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
-        NSLog(@"set layout margin");
         [cell setLayoutMargins:UIEdgeInsetsZero];
     }
 }
@@ -249,22 +288,20 @@
     if (indexPath.row >= [self.homeworks count] || indexPath.row < 0) {
         return;
     }
-    KGHomework *hw = (KGHomework *)[self.homeworks objectAtIndex:indexPath.row];
-    if (hw == nil) {
-        return;
+    NSMutableArray *imageInfos = [[NSMutableArray alloc] initWithCapacity:[self.homeworks count]];
+    for (int i = 0; i < [self.homeworks count]; i++) {
+        KGHomework *hw = (KGHomework *)[self.homeworks objectAtIndex:i];
+        PBImageInfo *iInfo = [[PBImageInfo alloc] init];
+        iInfo.imageURL = [NSString stringWithFormat:@"%@%@", [KGUtil getServerAppURL], hw.picUrl];
+        iInfo.imageTitle = hw.createTime;
+        iInfo.imageDesc = hw.desc;
+        [imageInfos addObject:iInfo];
     }
-    NSMutableArray *imageInfos = [[NSMutableArray alloc] initWithCapacity:1];
-    PBImageInfo *iInfo = [[PBImageInfo alloc] init];
-    iInfo.imageURL = [NSString stringWithFormat:@"%@%@", [KGUtil getServerAppURL], hw.picUrl];
-    iInfo.imageTitle = hw.createTime;
-    iInfo.imageDesc = hw.desc;
-    [imageInfos addObject:iInfo];
     PBViewController *pbVC = [[PBViewController alloc] init];
-    pbVC.index = 0;
+    pbVC.index = indexPath.row;
     pbVC.handleVC = self;
     pbVC.imageInfos = imageInfos;
     [pbVC show];
-    
 }
 
 

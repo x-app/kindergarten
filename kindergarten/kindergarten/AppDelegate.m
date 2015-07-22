@@ -8,7 +8,8 @@
 
 #import "AppDelegate.h"
 #import "LoginProfileViewController.h"
-
+#import "UIViewController+TopMostViewController.h"
+#import "CLLockVC.h"
 //#import "MYBlurIntroductionView.h"
 
 @interface AppDelegate ()
@@ -121,6 +122,20 @@
     //NSLog(@"become active: %@",[[window.rootViewController class] description]);
     self.user.verified = NO;
     NSLog(@"did become active in AppDelegate");
+    UIViewController *tmVC = [[UIApplication sharedApplication] topMostViewController];
+    if (tmVC == nil) {
+        NSLog(@"top most vc is nil");
+    }
+    if (!self.user.verified && !self.user.registering) {
+        NSLog(@"用户尚未注册或者验证没过");
+        [CLLockVC showVerifyLockVCInVC:tmVC forgetPwdBlock:^{
+            
+        } successBlock:^(CLLockVC *lockVC, NSString *pwd) {
+            NSLog(@"验证通过");
+            self.user.verified = YES;
+            [lockVC dismiss:1.0f];
+        }];
+    }
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

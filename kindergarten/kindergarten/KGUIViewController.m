@@ -31,7 +31,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+/*
 - (void)viewDidAppear:(BOOL)animated {
     //NSLog(@"KGUIViewController:viewDidAppear");
     [self showVerifyLock];
@@ -67,7 +67,7 @@
 
 - (void)viewDidDisappear:(BOOL)animated {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
+}*/
 
 /*
 #pragma mark - Navigation

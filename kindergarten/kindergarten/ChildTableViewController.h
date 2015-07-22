@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "KGHomework.h"
+
 @interface ChildTableViewController : UITableViewController
 
 @property (strong, nonatomic) NSMutableArray *homeworks;
+
+@property (nonatomic) NSInteger pageIndex;
 
 @end

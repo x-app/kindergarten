@@ -381,7 +381,7 @@
     
     CLLockNavVC *navVC = [[CLLockNavVC alloc] initWithRootViewController:lockVC];
     
-    [vc presentViewController:navVC animated:YES completion:nil];
+    [vc presentViewController:navVC animated:NO completion:nil];
 
     
     return lockVC;

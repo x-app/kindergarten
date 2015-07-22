@@ -107,6 +107,8 @@
 		9911C2DA1B5E825C0080FFA9 /* PBScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9911C2D11B5E825C0080FFA9 /* PBScrollView.m */; };
 		9911C2DB1B5E825C0080FFA9 /* PBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9911C2D31B5E825C0080FFA9 /* PBViewController.m */; };
 		9911C2DC1B5E825C0080FFA9 /* PBViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9911C2D41B5E825C0080FFA9 /* PBViewController.xib */; };
+		9911C2EA1B5F36990080FFA9 /* UIViewController+TopMostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9911C2E91B5F36990080FFA9 /* UIViewController+TopMostViewController.m */; };
+		9911C2ED1B5F37A00080FFA9 /* KGUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9911C2EC1B5F37A00080FFA9 /* KGUIViewController.m */; };
 		996D322E1B55525200CB648B /* KGVarible.m in Sources */ = {isa = PBXBuildFile; fileRef = 996D322D1B55525200CB648B /* KGVarible.m */; };
 		99709B6B1B59E45000150176 /* ChildTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99709B6A1B59E45000150176 /* ChildTableViewController.m */; };
 		99709B6E1B59E50A00150176 /* KGHomework.m in Sources */ = {isa = PBXBuildFile; fileRef = 99709B6D1B59E50A00150176 /* KGHomework.m */; };
@@ -165,7 +167,6 @@
 		99F17F621B4F51E400866F8F /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F17F611B4F51E400866F8F /* MBProgressHUD.m */; };
 		99F17F651B4F56DE00866F8F /* LoginSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F17F641B4F56DE00866F8F /* LoginSegue.m */; };
 		99F17F681B50C3E800866F8F /* LoginViewContoller.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F17F671B50C3E800866F8F /* LoginViewContoller.m */; };
-		99F787801B50F4E5006F795A /* KGUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F7877F1B50F4E5006F795A /* KGUIViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -343,6 +344,10 @@
 		9911C2D21B5E825C0080FFA9 /* PBViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBViewController.h; sourceTree = "<group>"; };
 		9911C2D31B5E825C0080FFA9 /* PBViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBViewController.m; sourceTree = "<group>"; };
 		9911C2D41B5E825C0080FFA9 /* PBViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PBViewController.xib; sourceTree = "<group>"; };
+		9911C2E81B5F36990080FFA9 /* UIViewController+TopMostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+TopMostViewController.h"; sourceTree = "<group>"; };
+		9911C2E91B5F36990080FFA9 /* UIViewController+TopMostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+TopMostViewController.m"; sourceTree = "<group>"; };
+		9911C2EB1B5F37A00080FFA9 /* KGUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KGUIViewController.h; sourceTree = "<group>"; };
+		9911C2EC1B5F37A00080FFA9 /* KGUIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KGUIViewController.m; sourceTree = "<group>"; };
 		996D322C1B55525200CB648B /* KGVarible.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KGVarible.h; sourceTree = "<group>"; };
 		996D322D1B55525200CB648B /* KGVarible.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KGVarible.m; sourceTree = "<group>"; };
 		99709B691B59E45000150176 /* ChildTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChildTableViewController.h; sourceTree = "<group>"; };
@@ -437,8 +442,6 @@
 		99F17F641B4F56DE00866F8F /* LoginSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginSegue.m; sourceTree = "<group>"; };
 		99F17F661B50C3E800866F8F /* LoginViewContoller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewContoller.h; sourceTree = "<group>"; };
 		99F17F671B50C3E800866F8F /* LoginViewContoller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewContoller.m; sourceTree = "<group>"; };
-		99F7877E1B50F4E5006F795A /* KGUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KGUIViewController.h; sourceTree = "<group>"; };
-		99F7877F1B50F4E5006F795A /* KGUIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KGUIViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -530,8 +533,8 @@
 				12C794921B44232300918497 /* Supporting Files */,
 				1212C5601B52613000C11BD2 /* WebViewController.h */,
 				1212C5611B52613000C11BD2 /* WebViewController.m */,
-				99F7877E1B50F4E5006F795A /* KGUIViewController.h */,
-				99F7877F1B50F4E5006F795A /* KGUIViewController.m */,
+				9911C2EB1B5F37A00080FFA9 /* KGUIViewController.h */,
+				9911C2EC1B5F37A00080FFA9 /* KGUIViewController.m */,
 			);
 			path = kindergarten;
 			sourceTree = "<group>";
@@ -824,9 +827,20 @@
 			path = Library/PhotoBrowser;
 			sourceTree = "<group>";
 		};
+		9911C2E71B5F36990080FFA9 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				9911C2E81B5F36990080FFA9 /* UIViewController+TopMostViewController.h */,
+				9911C2E91B5F36990080FFA9 /* UIViewController+TopMostViewController.m */,
+			);
+			name = Category;
+			path = Library/Category;
+			sourceTree = "<group>";
+		};
 		9997B9AB1B4D580100B908B6 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				9911C2E71B5F36990080FFA9 /* Category */,
 				9911C2C71B5E825B0080FFA9 /* PhotoBrowser */,
 				12EAE11D1B5D3A270084680C /* MJRefresh */,
 				9911C1FF1B5A6BA50080FFA9 /* SDWebImage */,
@@ -1152,7 +1166,7 @@
 				TargetAttributes = {
 					12C7948E1B44232300918497 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = K73PX8C368;
+						DevelopmentTeam = F2XHB7EMWM;
 					};
 					12C794AA1B44232300918497 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -1290,6 +1304,7 @@
 				12AC16131B4918C3007C247B /* RBStoryboardPushSegue.m in Sources */,
 				12EAE14D1B5D3A270084680C /* MJRefreshFooter.m in Sources */,
 				996D322E1B55525200CB648B /* KGVarible.m in Sources */,
+				9911C2ED1B5F37A00080FFA9 /* KGUIViewController.m in Sources */,
 				12EAE14A1B5D3A270084680C /* MJRefreshAutoFooter.m in Sources */,
 				9997BA121B4D580E00B908B6 /* CoreLockConst.m in Sources */,
 				9911C2261B5A6BA50080FFA9 /* SDWebImageDownloader.m in Sources */,
@@ -1322,7 +1337,6 @@
 				12EAE15B1B5D3A270084680C /* UIScrollView+MJRefresh.m in Sources */,
 				9997BA0F1B4D580E00B908B6 /* CLLockVC.m in Sources */,
 				9997BA081B4D580E00B908B6 /* ASTextField.m in Sources */,
-				99F787801B50F4E5006F795A /* KGUIViewController.m in Sources */,
 				9997BA051B4D580E00B908B6 /* AFURLRequestSerialization.m in Sources */,
 				9997BA141B4D580E00B908B6 /* CLLockInfoView.m in Sources */,
 				9997BA021B4D580E00B908B6 /* AFNetworkReachabilityManager.m in Sources */,
@@ -1340,6 +1354,7 @@
 				99F17F651B4F56DE00866F8F /* LoginSegue.m in Sources */,
 				9997B9FF1B4D580E00B908B6 /* AFHTTPRequestOperation.m in Sources */,
 				99F17F5E1B4ED3D800866F8F /* KGConst.m in Sources */,
+				9911C2EA1B5F36990080FFA9 /* UIViewController+TopMostViewController.m in Sources */,
 				9997BA1A1B4D580E00B908B6 /* CoreArchive.m in Sources */,
 				12EAE1521B5D3A270084680C /* MJRefreshBackGifFooter.m in Sources */,
 				99F17F5B1B4ECCCD00866F8F /* KGUtil.m in Sources */,
