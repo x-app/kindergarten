@@ -8,8 +8,7 @@
 
 #import "AppDelegate.h"
 #import "LoginProfileViewController.h"
-#import "UIViewController+TopMostViewController.h"
-#import "CLLockVC.h"
+#import "KGUtil.h"
 //#import "MYBlurIntroductionView.h"
 
 @interface AppDelegate ()
@@ -122,7 +121,8 @@
     //NSLog(@"become active: %@",[[window.rootViewController class] description]);
     self.user.verified = NO;
     NSLog(@"did become active in AppDelegate");
-    UIViewController *tmVC = [[UIApplication sharedApplication] topMostViewController];
+    [KGUtil lockTopMostVC];
+    /*UIViewController *tmVC = [[UIApplication sharedApplication] topMostViewController];
     if (tmVC == nil) {
         NSLog(@"top most vc is nil");
     }
@@ -135,7 +135,7 @@
             self.user.verified = YES;
             [lockVC dismiss:1.0f];
         }];
-    }
+    }*/
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
@@ -165,7 +165,7 @@
     NSLog(@"Introduction did finish");
     UIStoryboard *loginStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     [self window].rootViewController = [loginStoryboard instantiateInitialViewController];
-    
+    [KGUtil lockTopMostVC];
     //LoginViewController *loginViewController = (LoginViewController *)self.window.rootViewController;
     //loginViewController.appWindow = [self window];
     //UINavigationController *loginVC = (UINavigationController *)self.window.rootViewController;

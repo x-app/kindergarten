@@ -12,7 +12,7 @@
 #import "PBItemView.h"
 
 
-@interface PBViewController : UIViewController
+@interface PBViewController : UIViewController<UINavigationControllerDelegate>
 
 
 
@@ -23,16 +23,6 @@
 
 /** scrollView */
 @property (weak, nonatomic) IBOutlet  PBScrollView *scrollView;
-
-
-/** 顶部条管理视图 */
-@property (weak, nonatomic) IBOutlet UIView *topBarView;
-
-/** 顶部label */
-@property (weak, nonatomic) IBOutlet UILabel *topBarLabel;
-
-
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topBarHeightC;
 
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *scrollViewRightMarginC;

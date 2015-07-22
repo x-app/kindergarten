@@ -11,7 +11,8 @@
 #import "MBProgressHUD.h"
 #import <CommonCrypto/CommonDigest.h>
 #import "AppDelegate.h"
-
+#import "UIViewController+TopMostViewController.h"
+#import "CLLockVC.h"
 static NSArray *month_cn;
 
 @interface KGUtil()
@@ -251,5 +252,23 @@ static NSArray *month_cn;
 + (NSString *)getServerHtmlURL {
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     return delegate.varible.server_html_url;
+}
+
++ (void)lockTopMostVC {
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    UIViewController *tmVC = [[UIApplication sharedApplication] topMostViewController];
+    if (tmVC == nil) {
+        NSLog(@"top most vc is nil");
+    }
+    if (!delegate.user.verified && !delegate.user.registering) {
+        NSLog(@"用户尚未注册或者验证没过");
+        [CLLockVC showVerifyLockVCInVC:tmVC forgetPwdBlock:^{
+            
+        } successBlock:^(CLLockVC *lockVC, NSString *pwd) {
+            NSLog(@"验证通过");
+            delegate.user.verified = YES;
+            [lockVC dismiss:1.0f];
+        }];
+    }
 }
 @end

@@ -19,6 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self vcPrepare];
+    self.navigationController.delegate = self;
     // Do any additional setup after loading the view.
 }
 
@@ -55,13 +56,38 @@
     //[self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
-
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self setNavigationBarStyle];
+}
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self setNavigationBarStyle];
     //[self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
+-(void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    NSLog(@"in delegate!");
+    if (viewController == self) {
+        [self setNavigationBarStyle];
+    } else {
+        [self restoreNavigationBarStyle];
+    }
+}
+
+- (void)setNavigationBarStyle {
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.translucent = YES;
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
+    //self.navigationItem.leftBarButtonItem.tintColor = [UIColor redColor];
+}
+
+- (void)restoreNavigationBarStyle {
+    self.navigationController.navigationBar.tintColor = nil;
+    self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
+    self.navigationController.navigationBar.translucent = NO;
+}
 
 
 /*
@@ -155,7 +181,7 @@
 
 -(void)singleTap{
     
-    CGFloat h = _topBarView.frame.size.height;
+    /*CGFloat h = _topBarView.frame.size.height;
     
     BOOL show = _topBarView.tag == 0;
     
@@ -167,9 +193,10 @@
         
         [_topBarView setNeedsLayout];
         [_topBarView layoutIfNeeded];
-    }];
-    
-    [self.navigationController setNavigationBarHidden:show animated:YES];
+    }];*/
+    BOOL isHidden = [self.navigationController.navigationBar isHidden];
+    [self.navigationController setNavigationBarHidden:!isHidden animated:YES];
+    [self setNavigationBarStyle];
     
     [self.scrollView.subviews enumerateObjectsUsingBlock:^(UIView *subView, NSUInteger idx, BOOL *stop) {
         
@@ -293,12 +320,12 @@
     //NSString *text = [NSString stringWithFormat:@"%@ / %@", @(page + 1) , @(self.pageCount)];
     PBImageInfo *curImgInfo = (PBImageInfo *)[self.imageInfos objectAtIndex:self.page];
     NSString *text = curImgInfo.imageTitle;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        
-        self.topBarLabel.text = text;
-        [self.topBarLabel setNeedsLayout];
-        [self.topBarLabel layoutIfNeeded];
-    });
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        
+//        self.topBarLabel.text = text;
+//        [self.topBarLabel setNeedsLayout];
+//        [self.topBarLabel layoutIfNeeded];
+//    });
     
     dispatch_async(dispatch_get_main_queue(), ^{
         

@@ -54,4 +54,6 @@
 
 + (NSString *)getServerHtmlURL;
 
++ (void)lockTopMostVC;
+
 @end
