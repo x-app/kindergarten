@@ -49,13 +49,13 @@
     
     // 设置下拉刷新
     self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [self loadNewData];
+        [self loadNewData:true];
     }];
     [self.tableView.header beginRefreshing];
     
     // 设置上拉刷新
     self.tableView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        [self loadNewData];
+        [self loadNewData:false];
     }];
     // 首次不显示
     self.tableView.footer.hidden = YES;
@@ -69,7 +69,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)loadNewData{
+- (void)loadNewData:(BOOL)isNew{
     NSDateFormatter *df = [[NSDateFormatter alloc] init];
     [df setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     
@@ -81,7 +81,7 @@
     
     NSString *curl = @"/parent/pageQueryGrowthArchiveNew";
     [KGUtil postKGRequest:curl body:profile success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"JSON: %@", responseObject);
+//        NSLog(@"JSON: %@", responseObject);
         NSString *code = [responseObject objectForKey:@"code"];
         if ([code isEqualToString:@"000000"]) {
             NSDictionary *obj = [responseObject objectForKey:@"obj"];
@@ -89,7 +89,10 @@
             
             NSArray *objlist = [responseObject objectForKey:@"objlist"];
             
-            [self.docs removeAllObjects];
+            if(isNew){
+                [self.docs removeAllObjects];
+                [self.pbImgInfos removeAllObjects];
+            }
             
             //NSInteger count = 0;
             for(int i=0; i<[objlist count]; i++)
