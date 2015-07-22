@@ -9,6 +9,7 @@
 #import "ClassViewController.h"
 #import "KGUtil.h"
 #import "ChildTableViewController.h"
+#import "IntroductionViewController.h"
 @interface ClassViewController ()
 
 @property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *func;
@@ -88,6 +89,13 @@
             break;
         }
         case 3:{
+            UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Introduction" bundle:nil];
+            UIViewController *vc = [storyBoard instantiateViewControllerWithIdentifier:@"IntroductionView"];
+            IntroductionViewController *ivc = (IntroductionViewController *)vc;
+            if (ivc != nil) {
+                ivc.type = CLASS;
+                [self.navigationController pushViewController:ivc animated:YES];
+            }
             break;
         }
         case 4:{

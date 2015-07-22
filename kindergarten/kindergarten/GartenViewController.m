@@ -9,7 +9,7 @@
 #import "GartenViewController.h"
 #import "KGUtil.h"
 #import "ChildTableViewController.h"
-
+#import "IntroductionViewController.h"
 @interface GartenViewController ()
 @property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *func;
 @property (weak, nonatomic) IBOutlet UIImageView *repeatImage;
@@ -62,7 +62,14 @@
     
     switch (tag){
         case 1:{
-                break;
+            UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Introduction" bundle:nil];
+            UIViewController *vc = [storyBoard instantiateViewControllerWithIdentifier:@"IntroductionView"];
+            IntroductionViewController *ivc = (IntroductionViewController *)vc;
+            if (ivc != nil) {
+                ivc.type = GARTEN;
+                [self.navigationController pushViewController:ivc animated:YES];
+            }
+            break;
         }
         case 2:{
             [self webVC].title = @"菜谱";
