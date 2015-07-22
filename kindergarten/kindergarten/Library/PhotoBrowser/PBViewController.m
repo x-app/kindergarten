@@ -63,7 +63,24 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self setNavigationBarStyle];
     //[self.navigationController setNavigationBarHidden:YES animated:YES];
+}
+
+-(void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    NSLog(@"in delegate!");
+    if (viewController == self) {
+        [self setNavigationBarStyle];
+    } else {
+        [self restoreNavigationBarStyle];
+    }
+}
+
+- (void)setNavigationBarStyle {
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.translucent = YES;
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
+    //self.navigationItem.leftBarButtonItem.tintColor = [UIColor redColor];
 }
 
 - (void)restoreNavigationBarStyle {
@@ -71,6 +88,7 @@
     self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
     self.navigationController.navigationBar.translucent = NO;
 }
+
 
 
 /*
