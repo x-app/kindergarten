@@ -376,42 +376,6 @@
             </objects>
             <point key="canvasLocation" x="-1491" y="-672.75"/>
         </scene>
-        <!--教师风采-->
-        <scene sceneID="UJU-J3-D8y">
-            <objects>
-                <viewController title="教师风采" id="KIr-Gd-tXf" customClass="RBStoryboardLink" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Pys-Ak-4d7"/>
-                        <viewControllerLayoutGuide type="bottom" id="cmY-IW-Y9n"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Twr-oy-FUv">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4y5-Ue-Chr" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-803" y="-673"/>
-        </scene>
-        <!--Storyboard Link-->
-        <scene sceneID="W1T-P6-B2K">
-            <objects>
-                <viewController id="QlT-ps-wgt" customClass="RBStoryboardLink" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="oXk-Qg-yKZ"/>
-                        <viewControllerLayoutGuide type="bottom" id="fj0-9P-JG9"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="djB-qE-RAB">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Jxc-Jd-LUN" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-803" y="11"/>
-        </scene>
     </scenes>
     <resources>
         <image name="head.jpg" width="200" height="200"/>

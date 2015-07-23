@@ -13,6 +13,9 @@
 
 @interface AppDelegate ()
 
+//app退出激活状态时的时间(按home键退出,下拉通知菜单, 上拉控制中心时触发)
+@property (nonatomic, strong) NSDate *resignActiveTime;
+
 @end
 
 @implementation AppDelegate
@@ -34,26 +37,13 @@
 //    for the first time test
     //visitTimes = 0;
     //
+    self.resignActiveTime = nil;
     
     if (visitTimes == 0) {
         //create UI
         CGRect windowFrame = [[UIScreen mainScreen] bounds];
         UIWindow *theWindow = [[UIWindow alloc] initWithFrame:windowFrame];
         [self setWindow:theWindow];
-        
-        /*
-        CGRect buttonFrame = CGRectMake(80, 80, 80, 80);
-        UIButton* _insertButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        [_insertButton setFrame:buttonFrame];
-        
-        [_insertButton addTarget:self action:@selector(endOfWelcome:) forControlEvents:UIControlEventTouchUpInside];
-        
-        [_insertButton setTitle:@"End" forState:UIControlStateNormal];
-        [[self window] addSubview:_insertButton];
-        
-        [[self window] setBackgroundColor:[UIColor whiteColor]];
-        [[self window] makeKeyAndVisible];
-         */
         
         CGFloat frameWidth = windowFrame.size.width;
         CGFloat frameHeight = windowFrame.size.height;
@@ -97,6 +87,7 @@
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
+    self.resignActiveTime = [[NSDate alloc] init];
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
 }
@@ -121,7 +112,10 @@
     //NSLog(@"become active: %@",[[window.rootViewController class] description]);
     self.user.verified = NO;
     NSLog(@"did become active in AppDelegate");
-    [KGUtil lockTopMostVC];
+    NSDate *curTime = [[NSDate alloc] init];
+    if (self.resignActiveTime == nil || [curTime timeIntervalSinceDate:self.resignActiveTime] > 10) {
+        [KGUtil lockTopMostVC];
+    }
     /*UIViewController *tmVC = [[UIApplication sharedApplication] topMostViewController];
     if (tmVC == nil) {
         NSLog(@"top most vc is nil");

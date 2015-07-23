@@ -85,7 +85,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="资料填写" id="12u-q9-ucv">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="TQN-c2-Vrn">
+                        <barButtonItem key="rightBarButtonItem" style="done" id="TQN-c2-Vrn">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ong-I3-1VE">
                                 <rect key="frame" x="-23" y="-15" width="71" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -153,7 +153,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="密保问题" id="AuD-f5-L1D">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="uyk-0Y-9OM">
+                        <barButtonItem key="rightBarButtonItem" style="done" id="uyk-0Y-9OM">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="0fS-WH-fOZ">
                                 <rect key="frame" x="-23" y="-15" width="71" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
