@@ -52,7 +52,13 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    
+    CGRect barFrame = self.navigationController.navigationBar.frame;
+    NSLog(@"barFrame frame: %f %f %f %f", barFrame.origin.x, barFrame.origin.y,
+          barFrame.size.width, barFrame.size.height);
+    NSLog(@"textview frame: %f %f %f %f", self.introTextView.frame.origin.x, self.introTextView.frame.origin.y,
+          self.introTextView.frame.size.width, self.introTextView.frame.size.height);
+    NSLog(@"imageview frame: %f %f %f %f", self.introImageView.frame.origin.x, self.introImageView.frame.origin.y,
+          self.introImageView.frame.size.width, self.introImageView.frame.size.height);
 }
 
 - (void)queryIntroductionData {

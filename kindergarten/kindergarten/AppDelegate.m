@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "LoginProfileViewController.h"
 #import "KGUtil.h"
 //#import "MYBlurIntroductionView.h"
 

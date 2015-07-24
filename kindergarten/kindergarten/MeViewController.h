@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "KGUIViewController.h"
-@interface MeViewController : KGUIViewController
+
+@interface MeViewController : KGUIViewController<UITableViewDataSource, UITableViewDelegate>
+
+
+@property (weak, nonatomic) IBOutlet UITableView *funcTableView;
 
 @end
