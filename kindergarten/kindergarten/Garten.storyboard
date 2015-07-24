@@ -363,8 +363,10 @@
                     <navigationItem key="navigationItem" id="d4b-9i-YN0"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
-                        <outlet property="babyNameLabel" destination="D4F-ak-rbm" id="7DD-XP-AHz"/>
-                        <outlet property="classNameLabel" destination="HBm-9c-gwf" id="Aqo-iq-JNu"/>
+                        <outlet property="babyNameLabel" destination="D4F-ak-rbm" id="9Ws-4L-QCK"/>
+                        <outlet property="babyPortraitImageView" destination="51v-WQ-nDN" id="kg2-8d-fUz"/>
+                        <outlet property="classNameLabel" destination="HBm-9c-gwf" id="rfb-46-Fi9"/>
+                        <outlet property="headerBgImageView" destination="ybr-1f-K3h" id="jY6-ie-eYo"/>
                         <outlet property="repeatImage" destination="e02-qw-JFl" id="D8l-fH-hqc"/>
                         <outletCollection property="func" destination="6ga-m6-jd5" id="mnq-xc-QxO"/>
                         <outletCollection property="func" destination="dWY-Lr-RMm" id="ofZ-H7-Syu"/>

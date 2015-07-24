@@ -111,6 +111,7 @@
 		9911C2ED1B5F37A00080FFA9 /* KGUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9911C2EC1B5F37A00080FFA9 /* KGUIViewController.m */; };
 		99688A341B6261D300AA7A41 /* as_password_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 99688A321B6261D300AA7A41 /* as_password_icon.png */; };
 		99688A351B6261D300AA7A41 /* as_password_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 99688A331B6261D300AA7A41 /* as_password_icon@2x.png */; };
+		99688A391B62854A00AA7A41 /* VPImageCropperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99688A381B62854A00AA7A41 /* VPImageCropperViewController.m */; };
 		996D322E1B55525200CB648B /* KGVarible.m in Sources */ = {isa = PBXBuildFile; fileRef = 996D322D1B55525200CB648B /* KGVarible.m */; };
 		99709B6B1B59E45000150176 /* ChildTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99709B6A1B59E45000150176 /* ChildTableViewController.m */; };
 		99709B6E1B59E50A00150176 /* KGHomework.m in Sources */ = {isa = PBXBuildFile; fileRef = 99709B6D1B59E50A00150176 /* KGHomework.m */; };
@@ -357,6 +358,8 @@
 		9911C2EC1B5F37A00080FFA9 /* KGUIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KGUIViewController.m; sourceTree = "<group>"; };
 		99688A321B6261D300AA7A41 /* as_password_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = as_password_icon.png; sourceTree = "<group>"; };
 		99688A331B6261D300AA7A41 /* as_password_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "as_password_icon@2x.png"; sourceTree = "<group>"; };
+		99688A371B62854A00AA7A41 /* VPImageCropperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPImageCropperViewController.h; sourceTree = "<group>"; };
+		99688A381B62854A00AA7A41 /* VPImageCropperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPImageCropperViewController.m; sourceTree = "<group>"; };
 		996D322C1B55525200CB648B /* KGVarible.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KGVarible.h; sourceTree = "<group>"; };
 		996D322D1B55525200CB648B /* KGVarible.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KGVarible.m; sourceTree = "<group>"; };
 		99709B691B59E45000150176 /* ChildTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChildTableViewController.h; sourceTree = "<group>"; };
@@ -856,9 +859,20 @@
 			path = Library/Category;
 			sourceTree = "<group>";
 		};
+		99688A361B62854A00AA7A41 /* VPImageCropper */ = {
+			isa = PBXGroup;
+			children = (
+				99688A371B62854A00AA7A41 /* VPImageCropperViewController.h */,
+				99688A381B62854A00AA7A41 /* VPImageCropperViewController.m */,
+			);
+			name = VPImageCropper;
+			path = Library/VPImageCropper;
+			sourceTree = "<group>";
+		};
 		9997B9AB1B4D580100B908B6 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				99688A361B62854A00AA7A41 /* VPImageCropper */,
 				9911C2E71B5F36990080FFA9 /* Category */,
 				9911C2C71B5E825B0080FFA9 /* PhotoBrowser */,
 				12EAE11D1B5D3A270084680C /* MJRefresh */,
@@ -1318,6 +1332,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				99688A391B62854A00AA7A41 /* VPImageCropperViewController.m in Sources */,
 				12AC16151B4918C3007C247B /* UIViewController+RBStoryboardLink.m in Sources */,
 				12AC15F41B490BD1007C247B /* GartenViewController.m in Sources */,
 				9911C2361B5BC4F10080FFA9 /* HomeworkTableViewCell.m in Sources */,

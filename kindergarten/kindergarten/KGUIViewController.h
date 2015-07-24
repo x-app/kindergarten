@@ -9,8 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "WebViewController.h"
 
+#define ORIGINAL_MAX_WIDTH 640.0f
+
 @interface KGUIViewController : UIViewController
 
 - (WebViewController*)webVC;
+@property (weak, nonatomic) IBOutlet UILabel *babyNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *classNameLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *babyPortraitImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *headerBgImageView;
 
 @end
