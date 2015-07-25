@@ -13,6 +13,8 @@
 #import "VPImageCropperViewController.h"
 @interface KGUIViewController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate,VPImageCropperDelegate>
 
+@property (nonatomic) NSInteger tapImageTag;
+
 @end
 
 @implementation KGUIViewController
@@ -25,13 +27,25 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.headerBgImageView.userInteractionEnabled = YES;
     self.babyPortraitImageView.userInteractionEnabled = YES;
     UITapGestureRecognizer *portraitTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(editPortrait)];
     [self.babyPortraitImageView addGestureRecognizer:portraitTap];
+    UITapGestureRecognizer *headerBgTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(editHeaderBg)];
+    [self.headerBgImageView addGestureRecognizer:headerBgTap];
     // Do any additional setup after loading the view.
 }
 
+- (void)editHeaderBg {
+    self.tapImageTag = 1;
+    [self editImageAction];
+}
 - (void)editPortrait {
+    self.tapImageTag = 0;
+    [self editImageAction];
+}
+
+- (void)editImageAction {
     UIActionSheet *choiceSheet = [[UIActionSheet alloc] initWithTitle:nil
                                                              delegate:self
                                                     cancelButtonTitle:@"取消"
@@ -95,10 +109,17 @@
 
 #pragma mark VPImageCropperDelegate
 - (void)imageCropper:(VPImageCropperViewController *)cropperViewController didFinished:(UIImage *)editedImage {
-    self.babyPortraitImageView.image = editedImage;
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSData* imageData = [NSKeyedArchiver archivedDataWithRootObject:editedImage];
-    [userDefaults setObject:imageData forKey:@"babyPortraitImage"];
+    NSString *storeKeyName = @"";
+    if (self.tapImageTag == 0) {
+        storeKeyName = @"babyPortraitImage";
+        self.babyPortraitImageView.image = editedImage;
+    } else if (self.tapImageTag == 1) {
+        storeKeyName = @"headerBgImage";
+        self.headerBgImageView.image = editedImage;
+    }
+    [userDefaults setObject:imageData forKey:storeKeyName];
     [userDefaults synchronize];
     [cropperViewController dismissViewControllerAnimated:YES completion:^{
         // TO DO
@@ -283,6 +304,14 @@
         UIImage *pImage = (UIImage *)[NSKeyedUnarchiver unarchiveObjectWithData: pImageData];
         if (pImage != nil) {
             self.babyPortraitImageView.image = pImage;
+        }
+    }
+    
+    NSData *hImageData = (NSData *)[userDefaults objectForKey:@"headerBgImage"];
+    if (hImageData != nil) {
+        UIImage *hImage = (UIImage *)[NSKeyedUnarchiver unarchiveObjectWithData: hImageData];
+        if (hImage != nil) {
+            self.headerBgImageView.image = hImage;
         }
     }
 }
