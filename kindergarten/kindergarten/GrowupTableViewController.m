@@ -17,17 +17,29 @@
 #import "KGUtil.h"
 #import "KGChild.h"
 #import "KGConst.h"
+#import "KGPicPicker.h"
 
-
-@interface GrowupTableViewController ()
+@interface GrowupTableViewController() <UIActionSheetDelegate, KGPicPickerDelegate>
 
 @property (nonatomic, strong)UITapGestureRecognizer *singleImgTap;
 @property (nonatomic, strong) NSMutableArray *pbImgInfos;
 @property (nonatomic) NSInteger curPageIndex;
 
+@property (nonatomic) KGPicPicker *kgpp;
 @end
 
 @implementation GrowupTableViewController
+
+- (KGPicPicker*)kgpp
+{
+    if(!_kgpp)
+    {
+        _kgpp = [[KGPicPicker alloc] initWithUIVC:self];
+        _kgpp.delegate = self;
+    }
+    
+    return _kgpp;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -352,7 +364,30 @@
 
 #pragma mark
 - (void)onAddClick:(UITapGestureRecognizer*) sender{
-    NSLog(@"click");
+    UIActionSheet *choiceSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                             delegate:self
+                                                    cancelButtonTitle:@"取消"
+                                               destructiveButtonTitle:nil
+                                                    otherButtonTitles:@"拍照", @"从相册中选取", nil];
+    [choiceSheet showInView:self.view];
+}
+
+#pragma mark UIActionSheetDelegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0) {
+        // 拍照
+        [self.kgpp takePhoto];
+        
+    } else if (buttonIndex == 1) {
+        // 从相册中选取
+        [self.kgpp selectPhoto];
+    }
+}
+
+#pragma mark - KGPicPickerDelegate
+- (void)doPicPicked:(UIImage *)image
+{
+    NSLog(@"get image");
 }
 
 @end
