@@ -27,6 +27,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.headerBgImageView.userInteractionEnabled = YES;
     self.babyPortraitImageView.userInteractionEnabled = YES;
     UITapGestureRecognizer *portraitTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(editPortrait)];

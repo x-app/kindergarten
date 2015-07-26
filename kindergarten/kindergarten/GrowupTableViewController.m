@@ -67,6 +67,11 @@
 - (void)viewDidAppear:(BOOL)animated{
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    // 去除cell选中状态
+    [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:NO];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -85,6 +90,9 @@
     NSString *curl = @"/parent/pageQueryGrowthArchiveNew";
     [KGUtil postKGRequest:curl body:profile success:^(AFHTTPRequestOperation *operation, id responseObject) {
 //        NSLog(@"JSON: %@", responseObject);
+        //if(!self.isViewLoaded)
+          //  return;
+        
         NSString *code = [responseObject objectForKey:@"code"];
         if ([code isEqualToString:@"000000"]) {
             NSDictionary *obj = [responseObject objectForKey:@"obj"];
@@ -238,11 +246,11 @@
         __weak UIImageView *weakImageView = cell.imgView;
         NSString *picurl = [NSString stringWithFormat:@"%@%@", [KGUtil getServerAppURL], doc.smallpicurl];
         [cell.imgView sd_setImageWithURL:[NSURL URLWithString:picurl]
-                          placeholderImage:nil
+                          placeholderImage:[UIImage imageNamed:@"image_placeholder"]
                                    options:SDWebImageProgressiveDownload
                                   progress:^(NSInteger receivedSize, NSInteger expectedSize) {
                                       if (!activityIndicator) {
-                                          activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+                                          activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
                                           [weakImageView addSubview:activityIndicator];
                                           activityIndicator.center = weakImageView.center;
                                           [activityIndicator startAnimating];

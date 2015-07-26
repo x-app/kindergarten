@@ -39,6 +39,9 @@
          (UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert)];
     }
     
+    // 修复Push到下一级右上角可恶的黑条
+    self.window.backgroundColor = [UIColor whiteColor];
+    
     self.user = [[KGUser alloc] init];
     self.user.verified = NO;
     self.user.registered = NO;
