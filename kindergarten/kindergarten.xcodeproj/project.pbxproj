@@ -116,6 +116,8 @@
 		996D322E1B55525200CB648B /* KGVarible.m in Sources */ = {isa = PBXBuildFile; fileRef = 996D322D1B55525200CB648B /* KGVarible.m */; };
 		99709B6B1B59E45000150176 /* ChildTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99709B6A1B59E45000150176 /* ChildTableViewController.m */; };
 		99709B6E1B59E50A00150176 /* KGHomework.m in Sources */ = {isa = PBXBuildFile; fileRef = 99709B6D1B59E50A00150176 /* KGHomework.m */; };
+		9990FB391B650EEE006A80F7 /* LFRoundProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9990FB361B650EEE006A80F7 /* LFRoundProgressView.m */; };
+		9990FB3A1B650EEE006A80F7 /* PBProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9990FB381B650EEE006A80F7 /* PBProgressView.m */; };
 		9997B9FF1B4D580E00B908B6 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9997B9AE1B4D580E00B908B6 /* AFHTTPRequestOperation.m */; };
 		9997BA001B4D580E00B908B6 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9997B9B01B4D580E00B908B6 /* AFHTTPRequestOperationManager.m */; };
 		9997BA011B4D580E00B908B6 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9997B9B21B4D580E00B908B6 /* AFHTTPSessionManager.m */; };
@@ -369,6 +371,10 @@
 		99709B6A1B59E45000150176 /* ChildTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChildTableViewController.m; sourceTree = "<group>"; };
 		99709B6C1B59E50A00150176 /* KGHomework.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KGHomework.h; sourceTree = "<group>"; };
 		99709B6D1B59E50A00150176 /* KGHomework.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KGHomework.m; sourceTree = "<group>"; };
+		9990FB351B650EEE006A80F7 /* LFRoundProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFRoundProgressView.h; sourceTree = "<group>"; };
+		9990FB361B650EEE006A80F7 /* LFRoundProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFRoundProgressView.m; sourceTree = "<group>"; };
+		9990FB371B650EEE006A80F7 /* PBProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBProgressView.h; sourceTree = "<group>"; };
+		9990FB381B650EEE006A80F7 /* PBProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBProgressView.m; sourceTree = "<group>"; };
 		9997B9AD1B4D580E00B908B6 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		9997B9AE1B4D580E00B908B6 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		9997B9AF1B4D580E00B908B6 /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -836,6 +842,10 @@
 		9911C2C71B5E825B0080FFA9 /* PhotoBrowser */ = {
 			isa = PBXGroup;
 			children = (
+				9990FB351B650EEE006A80F7 /* LFRoundProgressView.h */,
+				9990FB361B650EEE006A80F7 /* LFRoundProgressView.m */,
+				9990FB371B650EEE006A80F7 /* PBProgressView.h */,
+				9990FB381B650EEE006A80F7 /* PBProgressView.m */,
 				9911C2C81B5E825B0080FFA9 /* PBImageInfo.h */,
 				9911C2C91B5E825B0080FFA9 /* PBImageInfo.m */,
 				9911C2CA1B5E825B0080FFA9 /* PBImageView.h */,
@@ -1347,6 +1357,7 @@
 				9911C2291B5A6BA50080FFA9 /* SDWebImagePrefetcher.m in Sources */,
 				12EAE1531B5D3A270084680C /* MJRefreshBackNormalFooter.m in Sources */,
 				12EAE14C1B5D3A270084680C /* MJRefreshComponent.m in Sources */,
+				9990FB3A1B650EEE006A80F7 /* PBProgressView.m in Sources */,
 				12AC16121B4918C3007C247B /* RBStoryboardPopoverSegue.m in Sources */,
 				12EAE14B1B5D3A270084680C /* MJRefreshBackFooter.m in Sources */,
 				12EAE1511B5D3A270084680C /* MJRefreshAutoStateFooter.m in Sources */,
@@ -1368,6 +1379,7 @@
 				99D55A541B5FC92A00C508A3 /* IntroductionViewController.m in Sources */,
 				9997BA121B4D580E00B908B6 /* CoreLockConst.m in Sources */,
 				9911C2261B5A6BA50080FFA9 /* SDWebImageDownloader.m in Sources */,
+				9990FB391B650EEE006A80F7 /* LFRoundProgressView.m in Sources */,
 				12EAE1551B5D3A270084680C /* MJRefreshGifHeader.m in Sources */,
 				12EAE0DB1B5B8E550084680C /* GrowDocCell.m in Sources */,
 				9911C2DA1B5E825C0080FFA9 /* PBScrollView.m in Sources */,

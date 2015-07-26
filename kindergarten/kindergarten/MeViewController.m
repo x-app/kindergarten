@@ -11,6 +11,8 @@
 #import "MeFunction.h"
 #import "CLLockVC.h"
 #import "KGUtil.h"
+#import "SDWebImageManager.h"
+#import "MBProgressHUD.h"
 
 @interface MeViewController ()
 
@@ -44,7 +46,7 @@
     changePswd.icon = @"password_icon.png";
     
     MeFunction *settings = [[MeFunction alloc] init];
-    settings.type = SETTINGS;
+    settings.type = CLEAR_CACHE;
     settings.title = @"清除缓存";
     settings.cellId = @"clearCacheCell";
     settings.icon = @"setting_icon.png";
@@ -153,6 +155,12 @@
     }
 }
 
+- (void)clearAppCache {
+    [[[SDWebImageManager sharedManager] imageCache] clearDisk];
+    [[[SDWebImageManager sharedManager] imageCache] clearMemory];
+    [[NSURLCache sharedURLCache] removeAllCachedResponses];
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row >= [self.functions count] || indexPath.row < 0) {
         return;
@@ -163,12 +171,21 @@
             BOOL hasPwd = [CLLockVC hasPwd];
             if(!hasPwd) {
                 NSLog(@"你还没有设置密码，请先设置密码");
-                
             } else {
                 [CLLockVC showModifyLockVCInVC:self successBlock:^(CLLockVC *lockVC, NSString *pwd) {
                     [lockVC dismiss:.5f];
                 }];
             }
+            break;
+        }
+            
+        case CLEAR_CACHE: {
+            MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+            [self.navigationController.view addSubview:hud];
+            
+            hud.mode = MBProgressHUDModeDeterminate;
+            [hud showWhileExecuting:@selector(clearAppCache) onTarget:self withObject:nil animated:YES];
+            [self.funcTableView deselectRowAtIndexPath:[self.funcTableView indexPathForSelectedRow] animated:NO];
             break;
         }
             

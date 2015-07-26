@@ -7,11 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import <UIKit/UIKit.h>
 @interface PBImageInfo : NSObject
 
 @property (strong, nonatomic) NSString *imageURL;
 @property (strong, nonatomic) NSString *imageTitle;
 @property (strong, nonatomic) NSString *imageDesc;
+
+@property (nonatomic) UIImage *placeHolder;
 
 @end

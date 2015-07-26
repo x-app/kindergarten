@@ -132,7 +132,8 @@
     self.user.verified = NO;
     NSLog(@"did become active in AppDelegate");
     NSDate *curTime = [[NSDate alloc] init];
-    if (self.resignActiveTime == nil || [curTime timeIntervalSinceDate:self.resignActiveTime] > 10) {
+    //第一次进入系统或者非激活状态超过一分钟，返回时需要重新lock
+    if (self.resignActiveTime == nil || [curTime timeIntervalSinceDate:self.resignActiveTime] > 60) {
         [KGUtil lockTopMostVC];
     }
     /*UIViewController *tmVC = [[UIApplication sharedApplication] topMostViewController];

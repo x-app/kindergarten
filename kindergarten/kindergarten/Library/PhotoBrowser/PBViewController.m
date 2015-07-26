@@ -76,7 +76,7 @@
 }
 
 -(void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
-    NSLog(@"in delegate!");
+    //NSLog(@"in delegate!");
     if (viewController == self) {
         [self setNavigationBarStyle];
     } else {
