@@ -21,6 +21,7 @@
 
 @interface GrowupTableViewController ()
 
+@property (nonatomic, strong)UITapGestureRecognizer *singleImgTap;
 @property (nonatomic, strong) NSMutableArray *pbImgInfos;
 @property (nonatomic) NSInteger curPageIndex;
 
@@ -38,6 +39,8 @@
     self.tableView.separatorStyle = NO;
     
     self.curPageIndex = 0;
+    
+    self.singleImgTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onAddClick:)];
 
     //[self loadNewData];
     
@@ -168,10 +171,13 @@
         cell.descLabel.text = @"";
     
         cell.imgView.image = [UIImage imageNamed:@"image_placeholder"];
-        UITapGestureRecognizer *singleTap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onAddClick:)];
-        [cell.imgView addGestureRecognizer:singleTap1];
+        
+        [cell.imgView addGestureRecognizer:self.singleImgTap];
 
         return cell;
+    }
+    else{
+        [cell.imgView removeGestureRecognizer:self.singleImgTap];
     }
     
     NSInteger index = indexPath.row-1;
