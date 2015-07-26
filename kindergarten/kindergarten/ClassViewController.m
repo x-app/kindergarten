@@ -14,8 +14,8 @@
 
 @property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *func;
 @property (weak, nonatomic) IBOutlet UIImageView *repeatImage;
-@property (weak, nonatomic) IBOutlet UILabel *babyNameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *classNameLabel;
+//@property (weak, nonatomic) IBOutlet UILabel *babyNameLabel;
+//@property (weak, nonatomic) IBOutlet UILabel *classNameLabel;
 
 @end
 
@@ -44,12 +44,12 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    KGChild *curChild = KGUtil.getCurChild;
-    if(curChild)
-    {
-        self.babyNameLabel.text = curChild.name;
-        self.classNameLabel.text = [NSString stringWithFormat:@"%@%@", KGUtil.getVarible.parkName, curChild.className];
-    }
+//    KGChild *curChild = KGUtil.getCurChild;
+//    if(curChild)
+//    {
+//        self.babyNameLabel.text = curChild.name;
+//        self.classNameLabel.text = [NSString stringWithFormat:@"%@%@", KGUtil.getVarible.parkName, curChild.className];
+//    }
 }
 
 - (void)didReceiveMemoryWarning {

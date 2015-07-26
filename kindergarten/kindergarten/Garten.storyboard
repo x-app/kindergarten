@@ -363,8 +363,10 @@
                     <navigationItem key="navigationItem" id="d4b-9i-YN0"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
-                        <outlet property="babyNameLabel" destination="D4F-ak-rbm" id="7DD-XP-AHz"/>
-                        <outlet property="classNameLabel" destination="HBm-9c-gwf" id="Aqo-iq-JNu"/>
+                        <outlet property="babyNameLabel" destination="D4F-ak-rbm" id="9Ws-4L-QCK"/>
+                        <outlet property="babyPortraitImageView" destination="51v-WQ-nDN" id="kg2-8d-fUz"/>
+                        <outlet property="classNameLabel" destination="HBm-9c-gwf" id="rfb-46-Fi9"/>
+                        <outlet property="headerBgImageView" destination="ybr-1f-K3h" id="jY6-ie-eYo"/>
                         <outlet property="repeatImage" destination="e02-qw-JFl" id="D8l-fH-hqc"/>
                         <outletCollection property="func" destination="6ga-m6-jd5" id="mnq-xc-QxO"/>
                         <outletCollection property="func" destination="dWY-Lr-RMm" id="ofZ-H7-Syu"/>
@@ -375,42 +377,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bRD-sn-84k" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1491" y="-672.75"/>
-        </scene>
-        <!--教师风采-->
-        <scene sceneID="UJU-J3-D8y">
-            <objects>
-                <viewController title="教师风采" id="KIr-Gd-tXf" customClass="RBStoryboardLink" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Pys-Ak-4d7"/>
-                        <viewControllerLayoutGuide type="bottom" id="cmY-IW-Y9n"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Twr-oy-FUv">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4y5-Ue-Chr" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-803" y="-673"/>
-        </scene>
-        <!--Storyboard Link-->
-        <scene sceneID="W1T-P6-B2K">
-            <objects>
-                <viewController id="QlT-ps-wgt" customClass="RBStoryboardLink" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="oXk-Qg-yKZ"/>
-                        <viewControllerLayoutGuide type="bottom" id="fj0-9P-JG9"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="djB-qE-RAB">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Jxc-Jd-LUN" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-803" y="11"/>
         </scene>
     </scenes>
     <resources>

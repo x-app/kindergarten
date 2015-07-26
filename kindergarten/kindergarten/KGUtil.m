@@ -260,6 +260,10 @@ static NSArray *month_cn;
     if (tmVC == nil) {
         NSLog(@"top most vc is nil");
     }
+    if ([tmVC isKindOfClass:[CLLockVC class]]) {
+        NSLog(@"already locked");
+        return;
+    }
     if (!delegate.user.verified && !delegate.user.registering) {
         NSLog(@"用户尚未注册或者验证没过");
         [CLLockVC showVerifyLockVCInVC:tmVC forgetPwdBlock:^{

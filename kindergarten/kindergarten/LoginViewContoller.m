@@ -30,9 +30,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.parkTextField setupTextFieldWithIconName:@"user_name_icon.png"];
-    [self.idNoTextField setupTextFieldWithIconName:@"password_icon"];
+    [self.idNoTextField setupTextFieldWithIconName:@"as_password_icon.png"];
     [self.nameTextField setupTextFieldWithIconName:@"user_name_icon.png"];
-    [self.qstnTextField setupTextFieldWithIconName:@"password_icon"];
+    [self.qstnTextField setupTextFieldWithIconName:@"as_password_icon.png"];
     [self.nswrTextField setupTextFieldWithIconName:@"user_name_icon.png"];
     self.parkTextField.delegate = self;
     self.qstnTextField.delegate = self;

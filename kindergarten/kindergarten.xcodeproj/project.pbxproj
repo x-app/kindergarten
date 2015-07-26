@@ -109,6 +109,9 @@
 		9911C2DC1B5E825C0080FFA9 /* PBViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9911C2D41B5E825C0080FFA9 /* PBViewController.xib */; };
 		9911C2EA1B5F36990080FFA9 /* UIViewController+TopMostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9911C2E91B5F36990080FFA9 /* UIViewController+TopMostViewController.m */; };
 		9911C2ED1B5F37A00080FFA9 /* KGUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9911C2EC1B5F37A00080FFA9 /* KGUIViewController.m */; };
+		99688A341B6261D300AA7A41 /* as_password_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 99688A321B6261D300AA7A41 /* as_password_icon.png */; };
+		99688A351B6261D300AA7A41 /* as_password_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 99688A331B6261D300AA7A41 /* as_password_icon@2x.png */; };
+		99688A391B62854A00AA7A41 /* VPImageCropperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99688A381B62854A00AA7A41 /* VPImageCropperViewController.m */; };
 		996D322E1B55525200CB648B /* KGVarible.m in Sources */ = {isa = PBXBuildFile; fileRef = 996D322D1B55525200CB648B /* KGVarible.m */; };
 		99709B6B1B59E45000150176 /* ChildTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99709B6A1B59E45000150176 /* ChildTableViewController.m */; };
 		99709B6E1B59E50A00150176 /* KGHomework.m in Sources */ = {isa = PBXBuildFile; fileRef = 99709B6D1B59E50A00150176 /* KGHomework.m */; };
@@ -124,8 +127,6 @@
 		9997BA081B4D580E00B908B6 /* ASTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 9997B9C21B4D580E00B908B6 /* ASTextField.m */; };
 		9997BA091B4D580E00B908B6 /* text_field.png in Resources */ = {isa = PBXBuildFile; fileRef = 9997B9C51B4D580E00B908B6 /* text_field.png */; };
 		9997BA0A1B4D580E00B908B6 /* text_field@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9997B9C61B4D580E00B908B6 /* text_field@2x.png */; };
-		9997BA0B1B4D580E00B908B6 /* password_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9997B9C81B4D580E00B908B6 /* password_icon.png */; };
-		9997BA0C1B4D580E00B908B6 /* password_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9997B9C91B4D580E00B908B6 /* password_icon@2x.png */; };
 		9997BA0D1B4D580E00B908B6 /* user_name_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9997B9CA1B4D580E00B908B6 /* user_name_icon.png */; };
 		9997BA0E1B4D580E00B908B6 /* user_name_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9997B9CB1B4D580E00B908B6 /* user_name_icon@2x.png */; };
 		9997BA0F1B4D580E00B908B6 /* CLLockVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9997B9CE1B4D580E00B908B6 /* CLLockVC.m */; };
@@ -161,6 +162,11 @@
 		99ABD5A31B48030400B8DB8B /* help_4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99ABD5A01B48030400B8DB8B /* help_4.xib */; };
 		99D55A501B5FC8AF00C508A3 /* Introduction.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 99D55A4F1B5FC8AF00C508A3 /* Introduction.storyboard */; };
 		99D55A541B5FC92A00C508A3 /* IntroductionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99D55A531B5FC92A00C508A3 /* IntroductionViewController.m */; };
+		99D55A571B61222900C508A3 /* MeFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 99D55A561B61222900C508A3 /* MeFunction.m */; };
+		99D55A5C1B61248E00C508A3 /* about_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 99D55A581B61248E00C508A3 /* about_icon.png */; };
+		99D55A5D1B61248E00C508A3 /* feedback_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 99D55A591B61248E00C508A3 /* feedback_icon.png */; };
+		99D55A5E1B61248E00C508A3 /* password_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 99D55A5A1B61248E00C508A3 /* password_icon.png */; };
+		99D55A5F1B61248E00C508A3 /* setting_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 99D55A5B1B61248E00C508A3 /* setting_icon.png */; };
 		99F17F491B4D5C3600866F8F /* bg_11.png in Resources */ = {isa = PBXBuildFile; fileRef = 99F17F481B4D5C3600866F8F /* bg_11.png */; };
 		99F17F551B4E91B800866F8F /* KGUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F17F541B4E91B800866F8F /* KGUser.m */; };
 		99F17F581B4E94B700866F8F /* KGChild.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F17F571B4E94B700866F8F /* KGChild.m */; };
@@ -350,6 +356,10 @@
 		9911C2E91B5F36990080FFA9 /* UIViewController+TopMostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+TopMostViewController.m"; sourceTree = "<group>"; };
 		9911C2EB1B5F37A00080FFA9 /* KGUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KGUIViewController.h; sourceTree = "<group>"; };
 		9911C2EC1B5F37A00080FFA9 /* KGUIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KGUIViewController.m; sourceTree = "<group>"; };
+		99688A321B6261D300AA7A41 /* as_password_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = as_password_icon.png; sourceTree = "<group>"; };
+		99688A331B6261D300AA7A41 /* as_password_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "as_password_icon@2x.png"; sourceTree = "<group>"; };
+		99688A371B62854A00AA7A41 /* VPImageCropperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPImageCropperViewController.h; sourceTree = "<group>"; };
+		99688A381B62854A00AA7A41 /* VPImageCropperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPImageCropperViewController.m; sourceTree = "<group>"; };
 		996D322C1B55525200CB648B /* KGVarible.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KGVarible.h; sourceTree = "<group>"; };
 		996D322D1B55525200CB648B /* KGVarible.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KGVarible.m; sourceTree = "<group>"; };
 		99709B691B59E45000150176 /* ChildTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChildTableViewController.h; sourceTree = "<group>"; };
@@ -379,8 +389,6 @@
 		9997B9C21B4D580E00B908B6 /* ASTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASTextField.m; sourceTree = "<group>"; };
 		9997B9C51B4D580E00B908B6 /* text_field.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = text_field.png; sourceTree = "<group>"; };
 		9997B9C61B4D580E00B908B6 /* text_field@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "text_field@2x.png"; sourceTree = "<group>"; };
-		9997B9C81B4D580E00B908B6 /* password_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = password_icon.png; sourceTree = "<group>"; };
-		9997B9C91B4D580E00B908B6 /* password_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "password_icon@2x.png"; sourceTree = "<group>"; };
 		9997B9CA1B4D580E00B908B6 /* user_name_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user_name_icon.png; sourceTree = "<group>"; };
 		9997B9CB1B4D580E00B908B6 /* user_name_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user_name_icon@2x.png"; sourceTree = "<group>"; };
 		9997B9CD1B4D580E00B908B6 /* CLLockVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLLockVC.h; sourceTree = "<group>"; };
@@ -432,6 +440,12 @@
 		99D55A4F1B5FC8AF00C508A3 /* Introduction.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Introduction.storyboard; sourceTree = "<group>"; };
 		99D55A521B5FC92A00C508A3 /* IntroductionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroductionViewController.h; sourceTree = "<group>"; };
 		99D55A531B5FC92A00C508A3 /* IntroductionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroductionViewController.m; sourceTree = "<group>"; };
+		99D55A551B61222900C508A3 /* MeFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeFunction.h; sourceTree = "<group>"; };
+		99D55A561B61222900C508A3 /* MeFunction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeFunction.m; sourceTree = "<group>"; };
+		99D55A581B61248E00C508A3 /* about_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = about_icon.png; path = Resource/about_icon.png; sourceTree = "<group>"; };
+		99D55A591B61248E00C508A3 /* feedback_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = feedback_icon.png; path = Resource/feedback_icon.png; sourceTree = "<group>"; };
+		99D55A5A1B61248E00C508A3 /* password_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = password_icon.png; path = Resource/password_icon.png; sourceTree = "<group>"; };
+		99D55A5B1B61248E00C508A3 /* setting_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = setting_icon.png; path = Resource/setting_icon.png; sourceTree = "<group>"; };
 		99F17F481B4D5C3600866F8F /* bg_11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bg_11.png; path = Resource/bg_11.png; sourceTree = "<group>"; };
 		99F17F531B4E91B800866F8F /* KGUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KGUser.h; sourceTree = "<group>"; };
 		99F17F541B4E91B800866F8F /* KGUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KGUser.m; sourceTree = "<group>"; };
@@ -580,6 +594,8 @@
 				12DEAC831B4D36E600C437BE /* Me.storyboard */,
 				12AC15F51B490D80007C247B /* MeViewController.h */,
 				12AC15F61B490D80007C247B /* MeViewController.m */,
+				99D55A551B61222900C508A3 /* MeFunction.h */,
+				99D55A561B61222900C508A3 /* MeFunction.m */,
 			);
 			name = "Me Storyboard";
 			sourceTree = "<group>";
@@ -843,9 +859,20 @@
 			path = Library/Category;
 			sourceTree = "<group>";
 		};
+		99688A361B62854A00AA7A41 /* VPImageCropper */ = {
+			isa = PBXGroup;
+			children = (
+				99688A371B62854A00AA7A41 /* VPImageCropperViewController.h */,
+				99688A381B62854A00AA7A41 /* VPImageCropperViewController.m */,
+			);
+			name = VPImageCropper;
+			path = Library/VPImageCropper;
+			sourceTree = "<group>";
+		};
 		9997B9AB1B4D580100B908B6 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				99688A361B62854A00AA7A41 /* VPImageCropper */,
 				9911C2E71B5F36990080FFA9 /* Category */,
 				9911C2C71B5E825B0080FFA9 /* PhotoBrowser */,
 				12EAE11D1B5D3A270084680C /* MJRefresh */,
@@ -920,8 +947,8 @@
 		9997B9C71B4D580E00B908B6 /* icon */ = {
 			isa = PBXGroup;
 			children = (
-				9997B9C81B4D580E00B908B6 /* password_icon.png */,
-				9997B9C91B4D580E00B908B6 /* password_icon@2x.png */,
+				99688A321B6261D300AA7A41 /* as_password_icon.png */,
+				99688A331B6261D300AA7A41 /* as_password_icon@2x.png */,
 				9997B9CA1B4D580E00B908B6 /* user_name_icon.png */,
 				9997B9CB1B4D580E00B908B6 /* user_name_icon@2x.png */,
 			);
@@ -1090,6 +1117,10 @@
 				99ABD58E1B47FC3500B8DB8B /* help_2.png */,
 				99ABD58F1B47FC3500B8DB8B /* help_3.png */,
 				99ABD5901B47FC3500B8DB8B /* help_4.png */,
+				99D55A581B61248E00C508A3 /* about_icon.png */,
+				99D55A591B61248E00C508A3 /* feedback_icon.png */,
+				99D55A5A1B61248E00C508A3 /* password_icon.png */,
+				99D55A5B1B61248E00C508A3 /* setting_icon.png */,
 			);
 			name = Resource;
 			sourceTree = "<group>";
@@ -1225,7 +1256,10 @@
 				99F17F491B4D5C3600866F8F /* bg_11.png in Resources */,
 				9997BA101B4D580E00B908B6 /* CLLockVC.xib in Resources */,
 				9997BA1B1B4D580E00B908B6 /* MLTableAlertBackground.png in Resources */,
+				99D55A5C1B61248E00C508A3 /* about_icon.png in Resources */,
 				12DEACF91B4D682500C437BE /* home_goin.png in Resources */,
+				99D55A5D1B61248E00C508A3 /* feedback_icon.png in Resources */,
+				99688A351B6261D300AA7A41 /* as_password_icon@2x.png in Resources */,
 				9911C1FB1B5A07CB0080FFA9 /* image_placeholder.png in Resources */,
 				12F630191B4932C000BE67B6 /* Growup.storyboard in Resources */,
 				12DEACFE1B4D682500C437BE /* home_pickup.png in Resources */,
@@ -1237,7 +1271,6 @@
 				99D55A501B5FC8AF00C508A3 /* Introduction.storyboard in Resources */,
 				12E038251B4A91680021B266 /* Garten.storyboard in Resources */,
 				1225667B1B57F7780007733E /* park_intro.png in Resources */,
-				9997BA0B1B4D580E00B908B6 /* password_icon.png in Resources */,
 				9997BA1E1B4D580E00B908B6 /* MLTableAlertButton@2x.png in Resources */,
 				12AC15FF1B4917D3007C247B /* class_icon_normal.png in Resources */,
 				12DEAC841B4D36E600C437BE /* Me.storyboard in Resources */,
@@ -1245,18 +1278,20 @@
 				9997BA1D1B4D580E00B908B6 /* MLTableAlertButton.png in Resources */,
 				12DEACFB1B4D682500C437BE /* home_growdoc.png in Resources */,
 				12DEACFA1B4D682500C437BE /* home_goout.png in Resources */,
-				9997BA0C1B4D580E00B908B6 /* password_icon@2x.png in Resources */,
 				9997BA1F1B4D580E00B908B6 /* MLTableAlertButtonPressed.png in Resources */,
 				12AC16001B4917D3007C247B /* my_icon_normal.png in Resources */,
 				9911C2D81B5E825C0080FFA9 /* PBItemView.xib in Resources */,
+				99688A341B6261D300AA7A41 /* as_password_icon.png in Resources */,
 				99ABD5971B47FC9B00B8DB8B /* help_1.xib in Resources */,
 				12C794A31B44232300918497 /* Images.xcassets in Resources */,
+				99D55A5F1B61248E00C508A3 /* setting_icon.png in Resources */,
 				12AC15FE1B4917D3007C247B /* baby_icon_normal.png in Resources */,
 				9911C2DC1B5E825C0080FFA9 /* PBViewController.xib in Resources */,
 				9997BA091B4D580E00B908B6 /* text_field.png in Resources */,
 				9911C1F91B5A06C80080FFA9 /* default_img.png in Resources */,
 				1266D5C21B495B8A00E7253F /* head.jpg in Resources */,
 				12DEACF81B4D682500C437BE /* home_check.png in Resources */,
+				99D55A5E1B61248E00C508A3 /* password_icon.png in Resources */,
 				1266D5C41B495B8A00E7253F /* repeat_img.png in Resources */,
 				122566701B57DE190007733E /* class_announce.png in Resources */,
 				122566721B57DE190007733E /* class_curriculum.png in Resources */,
@@ -1297,6 +1332,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				99688A391B62854A00AA7A41 /* VPImageCropperViewController.m in Sources */,
 				12AC16151B4918C3007C247B /* UIViewController+RBStoryboardLink.m in Sources */,
 				12AC15F41B490BD1007C247B /* GartenViewController.m in Sources */,
 				9911C2361B5BC4F10080FFA9 /* HomeworkTableViewCell.m in Sources */,
@@ -1392,6 +1428,7 @@
 				9997BA071B4D580E00B908B6 /* AFURLSessionManager.m in Sources */,
 				9911C2241B5A6BA50080FFA9 /* SDWebImageCompat.m in Sources */,
 				12EAE1541B5D3A270084680C /* MJRefreshBackStateFooter.m in Sources */,
+				99D55A571B61222900C508A3 /* MeFunction.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

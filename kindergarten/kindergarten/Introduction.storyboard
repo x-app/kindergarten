@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Introduction View Controller-->
@@ -17,26 +16,53 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" text="无介绍内容" translatesAutoresizingMaskIntoConstraints="NO" id="aJs-BR-bQ2">
-                                <rect key="frame" x="0.0" y="376" width="600" height="213"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="image_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="U5U-ab-bn5">
-                                <rect key="frame" x="0.0" y="64" width="616" height="309"/>
-                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aHc-7G-KvO">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <subviews>
+                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="U5U-ab-bn5">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="250"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="250" id="sw5-dE-sCr"/>
+                                        </constraints>
+                                    </imageView>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" editable="NO" text="暂无介绍" translatesAutoresizingMaskIntoConstraints="NO" id="aJs-BR-bQ2">
+                                        <rect key="frame" x="0.0" y="250" width="600" height="286"/>
+                                        <color key="backgroundColor" red="0.94730508207070707" green="0.94730508207070707" blue="0.94730508207070707" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" address="YES"/>
+                                    </textView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="aJs-BR-bQ2" firstAttribute="top" secondItem="U5U-ab-bn5" secondAttribute="bottom" id="Hk2-s6-DYA"/>
+                                    <constraint firstItem="aJs-BR-bQ2" firstAttribute="top" secondItem="aHc-7G-KvO" secondAttribute="top" id="NEW-h5-2Wk"/>
+                                    <constraint firstAttribute="bottom" secondItem="aJs-BR-bQ2" secondAttribute="bottom" id="PRg-81-C0C"/>
+                                    <constraint firstAttribute="trailing" secondItem="U5U-ab-bn5" secondAttribute="trailing" id="QT0-s5-PMr"/>
+                                    <constraint firstAttribute="trailing" secondItem="aJs-BR-bQ2" secondAttribute="trailing" id="WXb-dt-FGV"/>
+                                    <constraint firstItem="U5U-ab-bn5" firstAttribute="top" secondItem="aHc-7G-KvO" secondAttribute="top" id="Z9g-gM-DXB"/>
+                                    <constraint firstAttribute="bottom" secondItem="aJs-BR-bQ2" secondAttribute="bottom" id="ZQU-lB-WmI"/>
+                                    <constraint firstItem="aJs-BR-bQ2" firstAttribute="leading" secondItem="aHc-7G-KvO" secondAttribute="leading" id="pkU-ju-YZm"/>
+                                    <constraint firstItem="aJs-BR-bQ2" firstAttribute="leading" secondItem="aHc-7G-KvO" secondAttribute="leading" id="rM9-ln-LER"/>
+                                    <constraint firstAttribute="trailing" secondItem="aJs-BR-bQ2" secondAttribute="trailing" id="wTQ-em-zbh"/>
+                                    <constraint firstItem="U5U-ab-bn5" firstAttribute="leading" secondItem="aHc-7G-KvO" secondAttribute="leading" id="xHW-U8-yGE"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="NEW-h5-2Wk"/>
+                                        <exclude reference="PRg-81-C0C"/>
+                                        <exclude reference="WXb-dt-FGV"/>
+                                        <exclude reference="rM9-ln-LER"/>
+                                    </mask>
+                                </variation>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="SKz-A3-42u" firstAttribute="top" secondItem="aJs-BR-bQ2" secondAttribute="bottom" constant="2" id="DbO-b0-eyF"/>
-                            <constraint firstItem="aJs-BR-bQ2" firstAttribute="leading" secondItem="hOf-yv-GwT" secondAttribute="leading" constant="2" id="GuG-Vr-xCe"/>
-                            <constraint firstAttribute="trailing" secondItem="U5U-ab-bn5" secondAttribute="trailing" constant="2" id="NYb-NM-myp"/>
-                            <constraint firstAttribute="trailing" secondItem="aJs-BR-bQ2" secondAttribute="trailing" constant="2" id="R6v-0h-xtI"/>
-                            <constraint firstItem="U5U-ab-bn5" firstAttribute="leading" secondItem="hOf-yv-GwT" secondAttribute="leading" constant="2" id="T8E-EE-wWy"/>
-                            <constraint firstItem="aJs-BR-bQ2" firstAttribute="top" secondItem="U5U-ab-bn5" secondAttribute="bottom" id="edb-iI-pov"/>
-                            <constraint firstItem="U5U-ab-bn5" firstAttribute="top" secondItem="ywm-B2-d5d" secondAttribute="bottom" constant="2" id="rNu-Ot-E9g"/>
-                            <constraint firstItem="U5U-ab-bn5" firstAttribute="height" secondItem="hOf-yv-GwT" secondAttribute="height" multiplier="2:5" id="yoL-mJ-xg9"/>
+                            <constraint firstItem="SKz-A3-42u" firstAttribute="top" secondItem="aHc-7G-KvO" secondAttribute="bottom" id="aJS-he-98r"/>
+                            <constraint firstItem="aHc-7G-KvO" firstAttribute="top" secondItem="ywm-B2-d5d" secondAttribute="bottom" id="dQn-or-NPj"/>
+                            <constraint firstItem="aHc-7G-KvO" firstAttribute="leading" secondItem="hOf-yv-GwT" secondAttribute="leading" id="hri-Ru-kTJ"/>
+                            <constraint firstAttribute="trailing" secondItem="aHc-7G-KvO" secondAttribute="trailing" id="iRW-sz-URm"/>
                         </constraints>
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>

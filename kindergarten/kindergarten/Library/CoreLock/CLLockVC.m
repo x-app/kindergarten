@@ -312,7 +312,7 @@
  */
 +(instancetype)showSettingLockVCInVC:(UIViewController *)vc successBlock:(void(^)(CLLockVC *lockVC,NSString *pwd))successBlock{
     
-    CLLockVC *lockVC = [self lockVC:vc];
+    CLLockVC *lockVC = [self lockVC:vc withType:CoreLockTypeSetPwd];
     
     lockVC.title = @"设置密码";
     
@@ -334,7 +334,7 @@
 +(instancetype)showVerifyLockVCInVC:(UIViewController *)vc forgetPwdBlock:(void(^)())forgetPwdBlock successBlock:(void(^)(CLLockVC *lockVC, NSString *pwd))successBlock{
     
     
-    CLLockVC *lockVC = [self lockVC:vc];
+    CLLockVC *lockVC = [self lockVC:vc withType:CoreLockTypeVeryfiPwd];
     
     lockVC.title = @"手势解锁";
     
@@ -352,11 +352,11 @@
 
 
 /*
- *  展示验证密码输入框
+ *  展示修改密码输入框
  */
 +(instancetype)showModifyLockVCInVC:(UIViewController *)vc successBlock:(void(^)(CLLockVC *lockVC, NSString *pwd))successBlock{
     
-    CLLockVC *lockVC = [self lockVC:vc];
+    CLLockVC *lockVC = [self lockVC:vc withType:CoreLockTypeModifyPwd];
     
     lockVC.title = @"修改密码";
     
@@ -369,11 +369,7 @@
     return lockVC;
 }
 
-
-
-
-
-+(instancetype)lockVC:(UIViewController *)vc{
++(instancetype)lockVC:(UIViewController *)vc withType:(CoreLockType)type{
     
     CLLockVC *lockVC = [[CLLockVC alloc] init];
 
@@ -381,8 +377,13 @@
     
     CLLockNavVC *navVC = [[CLLockNavVC alloc] initWithRootViewController:lockVC];
     
-    [vc presentViewController:navVC animated:NO completion:nil];
-
+    
+    //if (type == CoreLockTypeModifyPwd) {
+    //    lockVC.hidesBottomBarWhenPushed = YES;
+    //    [vc.navigationController pushViewController:lockVC animated:YES];
+    //} else {
+        [vc presentViewController:navVC animated:NO completion:nil];
+    //}
     
     return lockVC;
 }
