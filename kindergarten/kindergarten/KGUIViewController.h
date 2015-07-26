@@ -9,8 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "WebViewController.h"
 
-#define ORIGINAL_MAX_WIDTH 640.0f
-
 @interface KGUIViewController : UIViewController
 
 - (WebViewController*)webVC;
