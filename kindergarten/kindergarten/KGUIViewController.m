@@ -51,6 +51,7 @@
                                                     cancelButtonTitle:@"取消"
                                                destructiveButtonTitle:nil
                                                     otherButtonTitles:@"拍照", @"从相册中选取", nil];
+    choiceSheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
     [choiceSheet showInView:self.view];
 }
 

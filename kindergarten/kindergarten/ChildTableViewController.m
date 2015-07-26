@@ -241,7 +241,7 @@
         cell.picImageView.clipsToBounds = YES;
         [cell.picImageView sd_setImageWithURL:[NSURL URLWithString:smallPicUrl]
                              placeholderImage:[UIImage imageNamed:@"image_placeholder"]
-                                      options:SDWebImageRefreshCached];
+                                      options:SDWebImageProgressiveDownload];
     }
     return cell;
 }
@@ -313,12 +313,15 @@
         iInfo.imageURL = [NSString stringWithFormat:@"%@%@", [KGUtil getServerAppURL], hw.picUrl];
         iInfo.imageTitle = hw.createTime;
         iInfo.imageDesc = hw.desc;
+        HomeworkTableViewCell *cell = (HomeworkTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+        iInfo.placeHolder = cell.picImageView.image;
         [imageInfos addObject:iInfo];
     }
     PBViewController *pbVC = [[PBViewController alloc] init];
     pbVC.index = indexPath.row;
     pbVC.handleVC = self;
     pbVC.imageInfos = imageInfos;
+    //pbVC.placeHolder = cell.imageView.image;
     [pbVC show];
 }
 

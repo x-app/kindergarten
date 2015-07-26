@@ -7,14 +7,14 @@
 
 #import "PBItemView.h"
 #import "UIImageView+WebCache.h"
-
+#import "PBProgressView.h"
 @interface PBItemView ()<UIScrollViewDelegate>{
     CGFloat _zoomScale;
 }
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
-//@property (weak, nonatomic) IBOutlet PBPGView *progressView;
+@property (weak, nonatomic) IBOutlet PBProgressView *progressView;
 
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
 
@@ -112,24 +112,40 @@
         }
     }];*/
     
-    __block UIActivityIndicatorView *activityIndicator;
-    __weak UIImageView *weakImageView = self.photoImageView;
+    //__block UIActivityIndicatorView *activityIndicator;
+    __block CGRect windowFrame = [[UIScreen mainScreen] bounds];
+    CGRect placeholderFrame = CGRectMake(windowFrame.size.width / 2 - 50, windowFrame.size.height / 2 - 50, 100, 100);
+    self.photoImageView.frame = placeholderFrame;
+    //__weak UIImageView *weakImageView = self.photoImageView;
     [self.photoImageView sd_setImageWithURL:[NSURL URLWithString:self.imageInfo.imageURL]
-                      placeholderImage:[UIImage imageNamed:@"PBResource.bundle/empty_picture"]
-                               options:SDWebImageProgressiveDownload
+                      //placeholderImage:[UIImage imageNamed:@"PBResource.bundle/empty_picture"]
+                        placeholderImage:self.imageInfo.placeHolder
+                               options:SDWebImageLowPriority | SDWebImageRetryFailed//SDWebImageProgressiveDownload
                               progress:^(NSInteger receivedSize, NSInteger expectedSize) {
-                                  NSLog(@">>>>");
-                                  if (!activityIndicator) {
+                                  //self.photoImageView.frame = placeholderFrame;
+                                  NSLog(@">>>>%f", (double)receivedSize/expectedSize);
+                                  /*if (!activityIndicator) {
                                       activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
                                       [weakImageView addSubview:activityIndicator];
-                                      activityIndicator.center = weakImageView.center;
+                                      activityIndicator.center = CGPointMake(50.0, 50.0);//CGPointMake(windowFrame.size.width / 2.0, windowFrame.size.height / 2.0);
+                                      //activityIndicator.center = weakImageView.center;
                                       [activityIndicator startAnimating];
-                                  }
+                                  }*/
+                                  _progressView.hidden = NO;
+                                  
+                                  CGFloat progress = receivedSize /((CGFloat)expectedSize);
+                                  
+                                  _progressView.progress = progress;
                               }
                              completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                 self.photoImageView.frame = windowFrame;
+
                                  NSLog(@"load image compelted");
-                                 [activityIndicator removeFromSuperview];
-                                 activityIndicator = nil;
+                                 //[activityIndicator removeFromSuperview];
+                                 //activityIndicator = nil;
+                                 if(image!=nil && _progressView.progress <1.0f) {
+                                     _progressView.progress = 1.0f;
+                                 }
                                  self.hasImage = image !=nil;
                              }];
     
@@ -139,9 +155,8 @@
     
     
     //self.photoImageView.frame = self.imageInfo.sourceFrame;
-    
 
-    self.photoImageView.frame = [[UIScreen mainScreen] bounds]; //self.photoImageView.calF;
+    //self.photoImageView.frame = [[UIScreen mainScreen] bounds]; //self.photoImageView.calF;
     
     
     //标题

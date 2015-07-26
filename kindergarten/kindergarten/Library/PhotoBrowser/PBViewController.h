@@ -19,8 +19,6 @@
 /** 外部操作控制器 */
 @property (nonatomic,weak) UIViewController *handleVC;
 
-
-
 /** scrollView */
 @property (weak, nonatomic) IBOutlet  PBScrollView *scrollView;
 
