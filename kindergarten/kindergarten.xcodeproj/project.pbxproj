@@ -20,6 +20,7 @@
 		1225667C1B57F7780007733E /* park_menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 122566781B57F7780007733E /* park_menu.png */; };
 		1225667D1B57F7780007733E /* park_messagebox.png in Resources */ = {isa = PBXBuildFile; fileRef = 122566791B57F7780007733E /* park_messagebox.png */; };
 		1225667E1B57F7780007733E /* park_teachers.png in Resources */ = {isa = PBXBuildFile; fileRef = 1225667A1B57F7780007733E /* park_teachers.png */; };
+		125090F21B650CD80046F40E /* KGPicPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 125090F11B650CD80046F40E /* KGPicPicker.m */; };
 		1266D5C21B495B8A00E7253F /* head.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1266D5BF1B495B8A00E7253F /* head.jpg */; };
 		1266D5C31B495B8A00E7253F /* home_top_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 1266D5C01B495B8A00E7253F /* home_top_bg.png */; };
 		1266D5C41B495B8A00E7253F /* repeat_img.png in Resources */ = {isa = PBXBuildFile; fileRef = 1266D5C11B495B8A00E7253F /* repeat_img.png */; };
@@ -204,6 +205,8 @@
 		122566781B57F7780007733E /* park_menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = park_menu.png; path = Resource/funcicons/park_menu.png; sourceTree = "<group>"; };
 		122566791B57F7780007733E /* park_messagebox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = park_messagebox.png; path = Resource/funcicons/park_messagebox.png; sourceTree = "<group>"; };
 		1225667A1B57F7780007733E /* park_teachers.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = park_teachers.png; path = Resource/funcicons/park_teachers.png; sourceTree = "<group>"; };
+		125090F01B650CD80046F40E /* KGPicPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KGPicPicker.h; sourceTree = "<group>"; };
+		125090F11B650CD80046F40E /* KGPicPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KGPicPicker.m; sourceTree = "<group>"; };
 		1266D5BF1B495B8A00E7253F /* head.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = head.jpg; path = Resource/head.jpg; sourceTree = "<group>"; };
 		1266D5C01B495B8A00E7253F /* home_top_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = home_top_bg.png; path = Resource/home_top_bg.png; sourceTree = "<group>"; };
 		1266D5C11B495B8A00E7253F /* repeat_img.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = repeat_img.png; path = Resource/repeat_img.png; sourceTree = "<group>"; };
@@ -561,6 +564,8 @@
 				1212C5611B52613000C11BD2 /* WebViewController.m */,
 				9911C2EB1B5F37A00080FFA9 /* KGUIViewController.h */,
 				9911C2EC1B5F37A00080FFA9 /* KGUIViewController.m */,
+				125090F01B650CD80046F40E /* KGPicPicker.h */,
+				125090F11B650CD80046F40E /* KGPicPicker.m */,
 			);
 			path = kindergarten;
 			sourceTree = "<group>";
@@ -1344,6 +1349,7 @@
 			files = (
 				99688A391B62854A00AA7A41 /* VPImageCropperViewController.m in Sources */,
 				12AC16151B4918C3007C247B /* UIViewController+RBStoryboardLink.m in Sources */,
+				125090F21B650CD80046F40E /* KGPicPicker.m in Sources */,
 				12AC15F41B490BD1007C247B /* GartenViewController.m in Sources */,
 				9911C2361B5BC4F10080FFA9 /* HomeworkTableViewCell.m in Sources */,
 				9997BA231B4D580E00B908B6 /* MLTableAlert.m in Sources */,
