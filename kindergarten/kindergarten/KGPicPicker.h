@@ -22,7 +22,7 @@
 
 @property(nonatomic,assign) id <KGPicPickerDelegate> delegate;
 
--(instancetype)initWithUIVC:(UIViewController *)uiVC;
+-(instancetype)initWithUIVC:(UIViewController *)uiVC needCrop:(BOOL)needCrop;
 
 -(void)takePhoto;
 

@@ -43,6 +43,13 @@
                inView:(UIView *)view
               showHud:(BOOL)showHud;
 
++ (void)uploadImage:(NSString *)curl
+              image:(UIImage *)image
+            success:(void (^)(AFHTTPRequestOperation *, id))success
+            failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
+             inView:(UIView *)view
+            showHud:(BOOL)showHud;
+
 + (KGVarible *)getVarible;
 + (KGChild *)getCurChild;
 

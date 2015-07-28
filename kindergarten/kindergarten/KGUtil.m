@@ -198,6 +198,73 @@ static NSArray *month_cn;
     [KGUtil postRequest:url parameters:params success:success failure:failure inView:view showHud:showHud];
 }
 
++ (void)uploadImage:(NSString *)curl
+              image:(UIImage *)image
+            success:(void (^)(AFHTTPRequestOperation *, id))success
+            failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
+             inView:(UIView *)view
+            showHud:(BOOL)showHud
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    manager.requestSerializer.timeoutInterval = 30.0f;
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
+    
+    KGChild *curchild = [KGUtil getCurChild];
+    NSString *childid = [NSString stringWithFormat:@"%@", curchild.cid];
+    NSData *curchilddata = [childid dataUsingEncoding:NSUTF8StringEncoding];
+
+    NSString *description = @"中文测试";
+    NSString *desc_encoded = [description stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSData* descdata = [desc_encoded dataUsingEncoding:NSUTF8StringEncoding];
+    
+    NSString *url = [[KGUtil getServerAppURL] stringByAppendingString:curl];
+    NSData* data = UIImagePNGRepresentation(image);
+    NSLog(@"update image size is %lu", (unsigned long)[data length]);
+    
+    MBProgressHUD *hud = nil;
+    if(showHud)
+    {
+        hud = [[MBProgressHUD alloc] initWithView:view];
+        [view addSubview:hud];
+        hud.labelText = @"正在上传...";
+        hud.removeFromSuperViewOnHide = YES;
+        [hud show:YES];
+    }
+    
+    [manager POST:url parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        [formData appendPartWithFormData:curchilddata name:@"childId"];
+        [formData appendPartWithFormData:descdata name:@"description"];
+        [formData appendPartWithFileData:data name:@"picUrl" fileName:@"upload.jpg" mimeType:@"image/jpeg"];
+    } success:^(AFHTTPRequestOperation *operation,id responseObject) {
+        if(showHud)
+            [hud hide:YES];
+        
+        if (success != nil) {
+            success(operation, responseObject);
+        }
+    } failure:^(AFHTTPRequestOperation *operation,NSError *error) {
+        if(showHud)
+            [hud hide:YES];
+        
+        MBProgressHUD *messageHUD = [MBProgressHUD showHUDAddedTo:view animated:YES];
+        messageHUD.mode = MBProgressHUDModeText;
+        NSString *content = @"";
+        if (error.code == -1001) {
+            content = @"请求已超时, 请检查网络设置, 稍后重试";
+        } else {
+            content = @"请求失败, 请稍后重试";
+        }
+        messageHUD.labelText = content;
+        messageHUD.margin = 10.f;
+        messageHUD.removeFromSuperViewOnHide = YES;
+        [messageHUD hide:YES afterDelay:2];
+        if (failure != nil) {
+            failure(operation, error);
+        }
+    }];
+}
+
 + (KGVarible *)getVarible{
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     return delegate.varible;

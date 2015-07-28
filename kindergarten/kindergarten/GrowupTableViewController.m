@@ -34,7 +34,7 @@
 {
     if(!_kgpp)
     {
-        _kgpp = [[KGPicPicker alloc] initWithUIVC:self];
+        _kgpp = [[KGPicPicker alloc] initWithUIVC:self needCrop:FALSE];
         _kgpp.delegate = self;
     }
     
@@ -140,6 +140,7 @@
                     iInfo.imageURL = picurl;
                     iInfo.imageTitle = growdoc.date;
                     iInfo.imageDesc = growdoc.content;
+                    iInfo.placeHolder = [UIImage imageNamed:@"default_img"];
                     [self.pbImgInfos addObject:iInfo];
 
                     //count++;
@@ -272,10 +273,12 @@
                                      NSLog(@"load image compelted");
                                      [activityIndicator removeFromSuperview];
                                      activityIndicator = nil;
+                                     
+                                     PBImageInfo *imageInfo = (PBImageInfo*)[self.pbImgInfos objectAtIndex:indexPath.row-1];
+                                     imageInfo.placeHolder = image;
                                  }];
            }
 
-    
     return cell;
 }
 
@@ -287,19 +290,13 @@
     if (indexPath.row < 1 || indexPath.row-1 >= [self.docs count]) {
         return;
     }
-    
-//    GrowDoc *curDoc = (GrowDoc *)[self.docs objectAtIndex:(indexPath.row-1)];
-    
-//    if(curDoc != nil)
-//    {
-        PBViewController *pbVC = [[PBViewController alloc] init];
-        pbVC.index = indexPath.row-1;
-        pbVC.handleVC = self;
-        pbVC.imageInfos = self.pbImgInfos;
-        [pbVC show];
-//    }
-}
 
+    PBViewController *pbVC = [[PBViewController alloc] init];
+    pbVC.index = indexPath.row-1;
+    pbVC.handleVC = self;
+    pbVC.imageInfos = self.pbImgInfos;
+    [pbVC show];
+}
 
 /*
 // Override to support conditional editing of the table view.
@@ -387,7 +384,21 @@
 #pragma mark - KGPicPickerDelegate
 - (void)doPicPicked:(UIImage *)image
 {
-    NSLog(@"get image");
+//    NSLog(@"get image");
+    [KGUtil uploadImage:@"/system/insertGrowthArchive"
+                  image:image
+                success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                    NSString *code = [responseObject objectForKey:@"code"];
+                    if ([code isEqualToString:@"000000"]) {
+                        NSLog(@"succ");
+                        //reload
+                        [self loadNewData:true];
+                    }
+                }
+                failure:^(AFHTTPRequestOperation *operation, NSError *error) {                            NSLog(@"Error: %@", error);
+                }
+                 inView:self.view
+                showHud:true];
 }
 
 @end

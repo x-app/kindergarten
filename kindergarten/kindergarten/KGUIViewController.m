@@ -31,7 +31,7 @@
 {
     if(!_kgpp)
     {
-        _kgpp = [[KGPicPicker alloc] initWithUIVC:self];
+        _kgpp = [[KGPicPicker alloc] initWithUIVC:self needCrop:YES];
         _kgpp.delegate = self;
     }
 
