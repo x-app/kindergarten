@@ -71,6 +71,80 @@
             </objects>
             <point key="canvasLocation" x="193" y="267"/>
         </scene>
+        <!--Growup Edit View Controller-->
+        <scene sceneID="f1R-FP-WjC">
+            <objects>
+                <viewController storyboardIdentifier="GrowDocEdit" id="xQU-ji-BOg" customClass="GrowupEditViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="csQ-gv-Gw9"/>
+                        <viewControllerLayoutGuide type="bottom" id="Cde-A9-AbN"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="sz1-tv-Wio">
+                        <rect key="frame" x="0.0" y="64" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="记录宝宝的成长..." translatesAutoresizingMaskIntoConstraints="NO" id="Wgv-Ak-0we">
+                                <rect key="frame" x="0.0" y="64" width="320" height="160"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Wgv-Ak-0we" secondAttribute="height" multiplier="2:1" id="cO7-qh-IOE"/>
+                                </constraints>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PId-eq-R5G">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="fsS-M6-jrB"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem id="lyp-8a-F78">
+                                        <barButtonItem key="leftBarButtonItem" title="取消" id="HPE-VE-OST">
+                                            <connections>
+                                                <action selector="onCancel:" destination="xQU-ji-BOg" id="20V-VP-vwn"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="发送" id="btc-Gw-MYu">
+                                            <connections>
+                                                <action selector="onSend:" destination="xQU-ji-BOg" id="N9p-NG-Xz6"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FHF-4u-Fkj">
+                                <rect key="frame" x="10" y="232" width="80" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="3ra-MN-zWC"/>
+                                    <constraint firstAttribute="width" secondItem="FHF-4u-Fkj" secondAttribute="height" multiplier="1:1" id="k05-Xi-OHZ"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="PId-eq-R5G" firstAttribute="top" secondItem="sz1-tv-Wio" secondAttribute="top" id="2Hz-MI-WpA"/>
+                            <constraint firstAttribute="trailing" secondItem="Wgv-Ak-0we" secondAttribute="trailing" id="4Dw-xY-ahp"/>
+                            <constraint firstItem="Wgv-Ak-0we" firstAttribute="top" secondItem="PId-eq-R5G" secondAttribute="bottom" id="9vd-bJ-0BY"/>
+                            <constraint firstItem="FHF-4u-Fkj" firstAttribute="top" secondItem="Wgv-Ak-0we" secondAttribute="bottom" constant="8" id="XQa-tg-Fwo"/>
+                            <constraint firstItem="FHF-4u-Fkj" firstAttribute="leading" secondItem="sz1-tv-Wio" secondAttribute="leading" constant="10" id="bwx-Iv-cUE"/>
+                            <constraint firstItem="PId-eq-R5G" firstAttribute="leading" secondItem="sz1-tv-Wio" secondAttribute="leading" id="htw-iL-2kf"/>
+                            <constraint firstItem="Wgv-Ak-0we" firstAttribute="leading" secondItem="sz1-tv-Wio" secondAttribute="leading" id="jcK-Tj-sbK"/>
+                            <constraint firstAttribute="trailing" secondItem="PId-eq-R5G" secondAttribute="trailing" id="v4g-9D-hDn"/>
+                        </constraints>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="imgView" destination="FHF-4u-Fkj" id="2B5-nh-nyc"/>
+                        <outlet property="textView" destination="Wgv-Ak-0we" id="2qw-65-hZy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xYB-Ep-sys" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="574" y="267"/>
+        </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

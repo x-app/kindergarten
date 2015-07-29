@@ -18,8 +18,9 @@
 #import "KGChild.h"
 #import "KGConst.h"
 #import "KGPicPicker.h"
+#import "GrowupEditViewController.h"
 
-@interface GrowupTableViewController() <UIActionSheetDelegate, KGPicPickerDelegate>
+@interface GrowupTableViewController() <UIActionSheetDelegate, KGPicPickerDelegate, KGPostImageDelegate>
 
 @property (nonatomic, strong)UITapGestureRecognizer *singleImgTap;
 @property (nonatomic, strong) NSMutableArray *pbImgInfos;
@@ -382,20 +383,17 @@
 - (void)doPicPicked:(UIImage *)image
 {
 //    NSLog(@"get image");
-    [KGUtil uploadImage:@"/system/insertGrowthArchive"
-                  image:image
-                success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                    NSString *code = [responseObject objectForKey:@"code"];
-                    if ([code isEqualToString:@"000000"]) {
-                        NSLog(@"succ");
-                        //reload
-                        [self loadNewData:true];
-                    }
-                }
-                failure:^(AFHTTPRequestOperation *operation, NSError *error) {                            NSLog(@"Error: %@", error);
-                }
-                 inView:self.view
-                showHud:true];
+    if(image == nil)
+        return;
+    
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Growup" bundle:nil];
+    GrowupEditViewController *vc = (GrowupEditViewController *)[storyBoard instantiateViewControllerWithIdentifier:@"GrowDocEdit"];
+    
+    vc.image = image;
+    vc.delegate = self;
+    [self presentViewController:vc animated:YES
+                          completion:^(void){
+                          }];
 }
 
 #pragma mark - delete cell
@@ -452,5 +450,11 @@
     [self.docs removeObjectAtIndex:indexPath.row-1];
     [self.pbImgInfos removeObjectAtIndex:indexPath.row-1];
     [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+}
+
+
+#pragma mark - KGPostImageDelegate
+- (void)reloadData {
+    [self loadNewData:YES];
 }
 @end

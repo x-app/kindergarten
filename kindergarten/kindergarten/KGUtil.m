@@ -200,6 +200,7 @@ static NSArray *month_cn;
 
 + (void)uploadImage:(NSString *)curl
               image:(UIImage *)image
+        description:(NSString *)description
             success:(void (^)(AFHTTPRequestOperation *, id))success
             failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
              inView:(UIView *)view
@@ -214,7 +215,6 @@ static NSArray *month_cn;
     NSString *childid = [NSString stringWithFormat:@"%@", curchild.cid];
     NSData *curchilddata = [childid dataUsingEncoding:NSUTF8StringEncoding];
 
-    NSString *description = @"中文测试";
     NSString *desc_encoded = [description stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSData* descdata = [desc_encoded dataUsingEncoding:NSUTF8StringEncoding];
     
