@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import <UIKit/UIKit.h>
 @interface KGHomework : NSObject
 
 @property (strong, nonatomic) NSString *picUrl;
@@ -16,6 +16,8 @@
 @property (nonatomic) NSInteger classId;
 @property (nonatomic) NSInteger homeworkId;
 @property (strong, nonatomic) NSString *createTime;
+
+@property (strong, nonatomic) UIImage *coverImage;
 
 - (instancetype)initWithDesc: (NSString *)desc
                      classId: (NSInteger)classId

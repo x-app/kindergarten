@@ -117,9 +117,10 @@
     CGRect placeholderFrame = CGRectMake(windowFrame.size.width / 2 - 50, windowFrame.size.height / 2 - 50, 100, 100);
     self.photoImageView.frame = placeholderFrame;
     //__weak UIImageView *weakImageView = self.photoImageView;
+    UIImage *placeHolder = (self.imageInfo.placeHolder == nil) ? [UIImage imageNamed:@"PBResource.bundle/empty_picture"] : self.imageInfo.placeHolder;
     [self.photoImageView sd_setImageWithURL:[NSURL URLWithString:self.imageInfo.imageURL]
                       //placeholderImage:[UIImage imageNamed:@"PBResource.bundle/empty_picture"]
-                        placeholderImage:self.imageInfo.placeHolder
+                        placeholderImage:placeHolder
                                options:SDWebImageLowPriority | SDWebImageRetryFailed//SDWebImageProgressiveDownload
                               progress:^(NSInteger receivedSize, NSInteger expectedSize) {
                                   //self.photoImageView.frame = placeholderFrame;
@@ -161,7 +162,12 @@
     
     //标题
     //_titleLabel.text = self.imageInfo.imageTitle;
-    _descLabel.text = self.imageInfo.imageDesc;
+    if (self.imageInfo.imageDesc == nil || [self.imageInfo.imageDesc isKindOfClass:[NSNull class]] || [self.imageInfo.imageDesc isEqualToString:@""]) {
+        _descLabel.hidden = YES;
+    } else {
+        _descLabel.hidden = NO;
+        _descLabel.text = self.imageInfo.imageDesc;
+    }
 }
 
 -(UIImage *)remakeImageWithFullSize:(UIImage *)image size:(CGSize)fullSize zoom:(CGFloat)zoom{

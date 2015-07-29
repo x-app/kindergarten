@@ -119,6 +119,11 @@
 		99709B6E1B59E50A00150176 /* KGHomework.m in Sources */ = {isa = PBXBuildFile; fileRef = 99709B6D1B59E50A00150176 /* KGHomework.m */; };
 		9990FB391B650EEE006A80F7 /* LFRoundProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9990FB361B650EEE006A80F7 /* LFRoundProgressView.m */; };
 		9990FB3A1B650EEE006A80F7 /* PBProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9990FB381B650EEE006A80F7 /* PBProgressView.m */; };
+		9990FB3D1B6677BE006A80F7 /* Album.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9990FB3C1B6677BE006A80F7 /* Album.storyboard */; };
+		9990FB401B675814006A80F7 /* AlbumCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9990FB3F1B675814006A80F7 /* AlbumCollectionViewController.m */; };
+		9990FB431B67B152006A80F7 /* KGActivityAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 9990FB421B67B152006A80F7 /* KGActivityAlbum.m */; };
+		9990FB461B67B182006A80F7 /* KGActivityAlbumInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 9990FB451B67B182006A80F7 /* KGActivityAlbumInfo.m */; };
+		9990FB491B67BF1E006A80F7 /* AlbumCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9990FB481B67BF1E006A80F7 /* AlbumCollectionViewCell.m */; };
 		9997B9FF1B4D580E00B908B6 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9997B9AE1B4D580E00B908B6 /* AFHTTPRequestOperation.m */; };
 		9997BA001B4D580E00B908B6 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9997B9B01B4D580E00B908B6 /* AFHTTPRequestOperationManager.m */; };
 		9997BA011B4D580E00B908B6 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9997B9B21B4D580E00B908B6 /* AFHTTPSessionManager.m */; };
@@ -377,6 +382,15 @@
 		9990FB361B650EEE006A80F7 /* LFRoundProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFRoundProgressView.m; sourceTree = "<group>"; };
 		9990FB371B650EEE006A80F7 /* PBProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBProgressView.h; sourceTree = "<group>"; };
 		9990FB381B650EEE006A80F7 /* PBProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBProgressView.m; sourceTree = "<group>"; };
+		9990FB3C1B6677BE006A80F7 /* Album.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Album.storyboard; sourceTree = "<group>"; };
+		9990FB3E1B675814006A80F7 /* AlbumCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumCollectionViewController.h; sourceTree = "<group>"; };
+		9990FB3F1B675814006A80F7 /* AlbumCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumCollectionViewController.m; sourceTree = "<group>"; };
+		9990FB411B67B152006A80F7 /* KGActivityAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KGActivityAlbum.h; sourceTree = "<group>"; };
+		9990FB421B67B152006A80F7 /* KGActivityAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KGActivityAlbum.m; sourceTree = "<group>"; };
+		9990FB441B67B182006A80F7 /* KGActivityAlbumInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KGActivityAlbumInfo.h; sourceTree = "<group>"; };
+		9990FB451B67B182006A80F7 /* KGActivityAlbumInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KGActivityAlbumInfo.m; sourceTree = "<group>"; };
+		9990FB471B67BF1E006A80F7 /* AlbumCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumCollectionViewCell.h; sourceTree = "<group>"; };
+		9990FB481B67BF1E006A80F7 /* AlbumCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumCollectionViewCell.m; sourceTree = "<group>"; };
 		9997B9AD1B4D580E00B908B6 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		9997B9AE1B4D580E00B908B6 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		9997B9AF1B4D580E00B908B6 /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -552,6 +566,7 @@
 				12F630151B492FB700BE67B6 /* Login Storyboard */,
 				12F630161B49302500BE67B6 /* Main Storyboard */,
 				12DEAC8B1B4D428900C437BE /* Baby Storyboard */,
+				9990FB3B1B667788006A80F7 /* Album Storyboard */,
 				12F630171B49326C00BE67B6 /* Growup Storyboard */,
 				12DEAC881B4D3E8A00C437BE /* Class Storyboard */,
 				122566661B56AA490007733E /* Child Storyboard */,
@@ -882,6 +897,22 @@
 			);
 			name = VPImageCropper;
 			path = Library/VPImageCropper;
+			sourceTree = "<group>";
+		};
+		9990FB3B1B667788006A80F7 /* Album Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				9990FB3C1B6677BE006A80F7 /* Album.storyboard */,
+				9990FB3E1B675814006A80F7 /* AlbumCollectionViewController.h */,
+				9990FB3F1B675814006A80F7 /* AlbumCollectionViewController.m */,
+				9990FB411B67B152006A80F7 /* KGActivityAlbum.h */,
+				9990FB421B67B152006A80F7 /* KGActivityAlbum.m */,
+				9990FB441B67B182006A80F7 /* KGActivityAlbumInfo.h */,
+				9990FB451B67B182006A80F7 /* KGActivityAlbumInfo.m */,
+				9990FB471B67BF1E006A80F7 /* AlbumCollectionViewCell.h */,
+				9990FB481B67BF1E006A80F7 /* AlbumCollectionViewCell.m */,
+			);
+			name = "Album Storyboard";
 			sourceTree = "<group>";
 		};
 		9997B9AB1B4D580100B908B6 /* Library */ = {
@@ -1325,6 +1356,7 @@
 				12DEACFC1B4D682500C437BE /* home_leave.png in Resources */,
 				9997BA201B4D580E00B908B6 /* MLTableAlertButtonPressed@2x.png in Resources */,
 				99ABD5A11B48030400B8DB8B /* help_2.xib in Resources */,
+				9990FB3D1B6677BE006A80F7 /* Album.storyboard in Resources */,
 				1225667C1B57F7780007733E /* park_menu.png in Resources */,
 				122566731B57DE190007733E /* class_grow.png in Resources */,
 				122566751B57DE190007733E /* class_photo.png in Resources */,
@@ -1361,6 +1393,7 @@
 				9911C2291B5A6BA50080FFA9 /* SDWebImagePrefetcher.m in Sources */,
 				12EAE1531B5D3A270084680C /* MJRefreshBackNormalFooter.m in Sources */,
 				12EAE14C1B5D3A270084680C /* MJRefreshComponent.m in Sources */,
+				9990FB431B67B152006A80F7 /* KGActivityAlbum.m in Sources */,
 				9990FB3A1B650EEE006A80F7 /* PBProgressView.m in Sources */,
 				12AC16121B4918C3007C247B /* RBStoryboardPopoverSegue.m in Sources */,
 				12EAE14B1B5D3A270084680C /* MJRefreshBackFooter.m in Sources */,
@@ -1370,6 +1403,7 @@
 				99709B6E1B59E50A00150176 /* KGHomework.m in Sources */,
 				9911C2331B5A84C10080FFA9 /* UIImageView+UIActivityIndicatorForSDWebImage.m in Sources */,
 				99F17F681B50C3E800866F8F /* LoginViewContoller.m in Sources */,
+				9990FB491B67BF1E006A80F7 /* AlbumCollectionViewCell.m in Sources */,
 				9911C2D61B5E825C0080FFA9 /* PBImageView.m in Sources */,
 				12AC16101B4918C3007C247B /* RBStoryboardLink.m in Sources */,
 				9997BA251B4D580E00B908B6 /* MYIntroductionPanel.m in Sources */,
@@ -1411,6 +1445,7 @@
 				9911C2231B5A6BA50080FFA9 /* SDImageCache.m in Sources */,
 				9911C2211B5A6BA50080FFA9 /* MKAnnotationView+WebCache.m in Sources */,
 				12EAE15B1B5D3A270084680C /* UIScrollView+MJRefresh.m in Sources */,
+				9990FB401B675814006A80F7 /* AlbumCollectionViewController.m in Sources */,
 				9997BA0F1B4D580E00B908B6 /* CLLockVC.m in Sources */,
 				9997BA081B4D580E00B908B6 /* ASTextField.m in Sources */,
 				9997BA051B4D580E00B908B6 /* AFURLRequestSerialization.m in Sources */,
@@ -1433,6 +1468,7 @@
 				9911C2EA1B5F36990080FFA9 /* UIViewController+TopMostViewController.m in Sources */,
 				9997BA1A1B4D580E00B908B6 /* CoreArchive.m in Sources */,
 				12EAE1521B5D3A270084680C /* MJRefreshBackGifFooter.m in Sources */,
+				9990FB461B67B182006A80F7 /* KGActivityAlbumInfo.m in Sources */,
 				99F17F5B1B4ECCCD00866F8F /* KGUtil.m in Sources */,
 				9911C2221B5A6BA50080FFA9 /* NSData+ImageContentType.m in Sources */,
 				9911C2D71B5E825C0080FFA9 /* PBItemView.m in Sources */,

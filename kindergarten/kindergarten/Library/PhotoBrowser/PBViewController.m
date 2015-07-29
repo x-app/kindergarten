@@ -28,6 +28,8 @@
     titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.text = @"";
     self.navigationItem.titleView = titleLabel;
+    
+    self.scrollView.backgroundColor = [UIColor blackColor];
     // Do any additional setup after loading the view.
 }
 
