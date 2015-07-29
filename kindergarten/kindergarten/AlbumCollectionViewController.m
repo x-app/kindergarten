@@ -13,6 +13,9 @@
 #import "KGActivityAlbum.h"
 #import "KGActivityAlbumInfo.h"
 #import "AlbumCollectionViewCell.h"
+#import "UIImageView+WebCache.h"
+#import "PBImageInfo.h"
+#import "PBViewController.h"
 @interface AlbumCollectionViewController ()
 
 @property (nonatomic) NSInteger pageIndex;
@@ -29,24 +32,24 @@ static NSString * const reuseIdentifier = @"AlbumCell";
     // self.clearsSelectionOnViewWillAppear = NO;
     
     self.pageIndex = 1;
-    
-    [self.collectionView registerClass:[AlbumCollectionViewCell class] forCellWithReuseIdentifier:@"AlbumCell"];
+
+    //[self.collectionView registerClass:[AlbumCollectionViewCell class] forCellWithReuseIdentifier:@"AlbumCell"];
     
     // 设置下拉刷新
     self.collectionView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [self loadAlbumData];
+        [self loadAlbumData:YES];
     }];
     [self.collectionView.header beginRefreshing];
     
     // 设置上拉刷新
     self.collectionView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        [self loadAlbumData];
+        [self loadAlbumData:NO];
     }];
     // 首次不显示
     self.collectionView.footer.hidden = YES;
     
     // Register cell classes
-    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
+    //[self.collectionView registerClass:[AlbumCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
     
     // Do any additional setup after loading the view.
 }
@@ -63,7 +66,7 @@ static NSString * const reuseIdentifier = @"AlbumCell";
     return _activityAlbums;
 }
 
-- (void)loadAlbumData {
+- (void)loadAlbumData:(BOOL)loadAll {
     NSDictionary *data = @{@"classId": [[KGUtil getCurChild] classID],
                            @"pageIndex": @(self.pageIndex),
                            @"pageSize": @(10)};
@@ -78,6 +81,10 @@ static NSString * const reuseIdentifier = @"AlbumCell";
             NSDictionary *obj = [responseObject objectForKey:@"obj"];
             NSInteger pageTotalCount = [[obj objectForKey:@"pageTotalCnt"] integerValue];
             NSArray *albumArray = (NSArray *)[responseObject objectForKey:@"objlist"];
+            if (loadAll == YES) {
+                [self.activityAlbums removeAllObjects];
+                self.activityAlbums = [[NSMutableArray alloc] initWithCapacity:[albumArray count]];;
+            }
             for (int i = 0; i < albumArray.count; i++) {
                 NSDictionary *curAlbum = [albumArray objectAtIndex:i];
                 KGActivityAlbum *kgAlbum = [[KGActivityAlbum alloc] init];
@@ -111,6 +118,8 @@ static NSString * const reuseIdentifier = @"AlbumCell";
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
+        [self.collectionView.header endRefreshing];
+        [self.collectionView.footer endRefreshing];
     } inView:self.collectionView showHud:NO];
 }
 
@@ -125,7 +134,7 @@ static NSString * const reuseIdentifier = @"AlbumCell";
 */
 
 #pragma mark <UICollectionViewDataSource>
-
+/*
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return self.activityAlbums.count;
 }
@@ -138,17 +147,62 @@ static NSString * const reuseIdentifier = @"AlbumCell";
     }
     KGActivityAlbum *curAlbum = (KGActivityAlbum *)[self.activityAlbums objectAtIndex:section];
     return [curAlbum.albumInfos count];
+}*/
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    return 1;
+}
+//- (void)registerClass:(Class)cellClass forCellWithReuseIdentifier:(NSString *)identifier {
+
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return self.activityAlbums.count;
 }
 
-- (AlbumCollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    AlbumCollectionViewCell *cell = (AlbumCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-    cell.backgroundColor = [UIColor blackColor];
-    KGActivityAlbum *curAlbum = (KGActivityAlbum *)[self.activityAlbums objectAtIndex:indexPath.section];
-    cell.albumNameLabel.text = @"aaaaa";//curAlbum.dirName;
-    cell.albumImageView.image = [UIImage imageNamed:@"image_placeholder"];
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    AlbumCollectionViewCell *cell = (AlbumCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"AlbumCell" forIndexPath:indexPath];
+    //cell.backgroundColor = [UIColor blackColor];
+    KGActivityAlbum *curAlbum = (KGActivityAlbum *)[self.activityAlbums objectAtIndex:indexPath.row];
+    cell.albumNameLabel.text = curAlbum.dirName;
+    NSString *coverUrl = [curAlbum getCoverUrl];
+    if ([coverUrl isEqualToString:@""]) {
+        cell.albumImageView.image = [UIImage imageNamed:@"image_placeholder"];
+    } else {
+        NSString *url = [NSString stringWithFormat:@"%@%@", [KGUtil getServerAppURL], coverUrl];
+        [cell.albumImageView sd_setImageWithURL:[NSURL URLWithString:url]
+                               placeholderImage:[UIImage imageNamed:@"image_placeholder"]
+                                        options:SDWebImageProgressiveDownload
+                                      completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                      }];
+    }
     // Configure the cell
     
     return cell;
+}
+//- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath;
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row >= [self.activityAlbums count] || indexPath.row < 0) {
+        return;
+    }
+    KGActivityAlbum *curAlbum = (KGActivityAlbum *)[self.activityAlbums objectAtIndex:indexPath.row];
+    if (curAlbum == nil) {
+        return;
+    }
+    NSMutableArray *imageInfos = [[NSMutableArray alloc] initWithCapacity:[curAlbum.albumInfos count]];
+    for (int i = 0; i < [curAlbum.albumInfos count]; i++) {
+        KGActivityAlbumInfo *aInfo = (KGActivityAlbumInfo *)[curAlbum.albumInfos objectAtIndex:i];
+        PBImageInfo *iInfo = [[PBImageInfo alloc] init];
+        iInfo.imageURL = [NSString stringWithFormat:@"%@%@", [KGUtil getServerAppURL], aInfo.picUrl];
+        iInfo.imageTitle = [NSString stringWithFormat:@"%ld/%ld", (long)(i + 1), (long)curAlbum.albumInfos.count];
+        iInfo.imageDesc = aInfo.desc;
+        [imageInfos addObject:iInfo];
+    }
+    PBViewController *pbVC = [[PBViewController alloc] init];
+    pbVC.index = 0;
+    pbVC.handleVC = self;
+    pbVC.imageInfos = imageInfos;
+    [pbVC show];
 }
 
 #pragma mark <UICollectionViewDelegate>
@@ -186,12 +240,19 @@ static NSString * const reuseIdentifier = @"AlbumCell";
 //定义每个UICollectionView 的大小
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(100, 100);
+    CGFloat unitWidth = 150;
+    CGFloat unitMargin = 5;
+    CGFloat screenWidth = [[UIScreen mainScreen] bounds].size.width;
+    NSLog(@"%f  %f", [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height);
+    NSUInteger numInARow = (int)((screenWidth - unitMargin) / (unitMargin + unitWidth));
+    CGFloat realWith = (screenWidth - unitMargin) / numInARow - unitMargin;
+    return CGSizeMake(realWith, realWith);
 }
+
 //定义每个UICollectionView 的 margin
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    return UIEdgeInsetsMake(5, 5, 5, 5);
+    return UIEdgeInsetsMake(5, 2.5, 5, 2.5);
 }
 
 @end

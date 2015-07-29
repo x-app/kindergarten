@@ -16,4 +16,6 @@
 @property (nonatomic) NSInteger dirId;
 @property (nonatomic) NSInteger picCount;
 
+- (NSString *)getCoverUrl;
+
 @end
