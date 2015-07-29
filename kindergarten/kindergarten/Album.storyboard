@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <scenes>
+        <!--活动相册-->
+        <scene sceneID="XBn-lT-cTz">
+            <objects>
+                <collectionViewController storyboardIdentifier="ActivityAlbum" title="活动相册" hidesBottomBarWhenPushed="YES" id="z0w-zg-J17" customClass="AlbumCollectionViewController" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="Sih-Lx-FgT">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="eTv-Qa-Dwt">
+                            <size key="itemSize" width="197" height="183"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="AlbumCell" reuseIdentifier="AlbumCell" id="PGe-4b-LAB" customClass="AlbumCollectionViewCell">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="197" height="183"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Jlg-YE-OTW">
+                                            <rect key="frame" x="0.0" y="0.0" width="197" height="153"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PCF-cc-4J7">
+                                            <rect key="frame" x="0.0" y="153" width="197" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="30" id="blP-rE-dLF"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <constraints>
+                                    <constraint firstItem="PCF-cc-4J7" firstAttribute="leading" secondItem="PGe-4b-LAB" secondAttribute="leading" id="6Gr-e6-bDI"/>
+                                    <constraint firstItem="Jlg-YE-OTW" firstAttribute="top" secondItem="PGe-4b-LAB" secondAttribute="top" id="Jn8-5D-rxR"/>
+                                    <constraint firstItem="PCF-cc-4J7" firstAttribute="top" secondItem="Jlg-YE-OTW" secondAttribute="bottom" id="Lhz-OE-tc7"/>
+                                    <constraint firstAttribute="trailing" secondItem="PCF-cc-4J7" secondAttribute="trailing" id="TIl-e1-Z6L"/>
+                                    <constraint firstAttribute="bottom" secondItem="PCF-cc-4J7" secondAttribute="bottom" id="U93-Wy-ALB"/>
+                                    <constraint firstAttribute="trailing" secondItem="Jlg-YE-OTW" secondAttribute="trailing" id="awK-Pb-1DD"/>
+                                    <constraint firstItem="Jlg-YE-OTW" firstAttribute="leading" secondItem="PGe-4b-LAB" secondAttribute="leading" id="jMR-7j-8na"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="albumImageView" destination="Jlg-YE-OTW" id="lAU-Un-XLJ"/>
+                                    <outlet property="albumNameLabel" destination="PCF-cc-4J7" id="WVq-OF-hwb"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="z0w-zg-J17" id="9pj-im-vAr"/>
+                            <outlet property="delegate" destination="z0w-zg-J17" id="1df-XF-wXH"/>
+                        </connections>
+                    </collectionView>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2oI-tT-Oag" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="323" y="314"/>
+        </scene>
+    </scenes>
+</document>

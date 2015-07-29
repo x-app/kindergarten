@@ -239,9 +239,13 @@
         NSString *smallPicUrl = [NSString stringWithFormat:@"%@%@", [KGUtil getServerAppURL], homework.smallPicUrl];
         cell.picImageView.contentMode = UIViewContentModeScaleAspectFill;
         cell.picImageView.clipsToBounds = YES;
+        homework.coverImage = [UIImage imageNamed:@"image_placeholder"];
         [cell.picImageView sd_setImageWithURL:[NSURL URLWithString:smallPicUrl]
                              placeholderImage:[UIImage imageNamed:@"image_placeholder"]
-                                      options:SDWebImageProgressiveDownload];
+                                      options:SDWebImageProgressiveDownload
+                                    completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                        homework.coverImage = image;
+                                    }];
     }
     return cell;
 }
@@ -313,8 +317,7 @@
         iInfo.imageURL = [NSString stringWithFormat:@"%@%@", [KGUtil getServerAppURL], hw.picUrl];
         iInfo.imageTitle = hw.createTime;
         iInfo.imageDesc = hw.desc;
-        HomeworkTableViewCell *cell = (HomeworkTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
-        iInfo.placeHolder = cell.picImageView.image;
+        iInfo.placeHolder = hw.coverImage;
         [imageInfos addObject:iInfo];
     }
     PBViewController *pbVC = [[PBViewController alloc] init];

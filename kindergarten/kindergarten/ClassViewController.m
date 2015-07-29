@@ -110,6 +110,9 @@
             break;
         }
         case 5:{
+            UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Album" bundle:nil];
+            vc = [storyBoard instantiateViewControllerWithIdentifier:@"ActivityAlbum"];
+            [self.navigationController pushViewController:vc animated:YES];
             break;
         }
         case 6:{
