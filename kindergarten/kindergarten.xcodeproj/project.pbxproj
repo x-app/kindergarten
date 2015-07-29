@@ -649,8 +649,6 @@
 		12DEACFF1B4D682C00C437BE /* funcicons */ = {
 			isa = PBXGroup;
 			children = (
-				9911C1F81B5A06C80080FFA9 /* default_img.png */,
-				9911C1FA1B5A07CB0080FFA9 /* image_placeholder.png */,
 				122566771B57F7780007733E /* park_intro.png */,
 				122566781B57F7780007733E /* park_menu.png */,
 				122566791B57F7780007733E /* park_messagebox.png */,
@@ -1147,6 +1145,8 @@
 			isa = PBXGroup;
 			children = (
 				12DEACFF1B4D682C00C437BE /* funcicons */,
+				9911C1F81B5A06C80080FFA9 /* default_img.png */,
+				9911C1FA1B5A07CB0080FFA9 /* image_placeholder.png */,
 				99F17F481B4D5C3600866F8F /* bg_11.png */,
 				1266D5BF1B495B8A00E7253F /* head.jpg */,
 				1266D5C01B495B8A00E7253F /* home_top_bg.png */,

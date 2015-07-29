@@ -17,17 +17,29 @@
 #import "KGUtil.h"
 #import "KGChild.h"
 #import "KGConst.h"
+#import "KGPicPicker.h"
 
-
-@interface GrowupTableViewController ()
+@interface GrowupTableViewController() <UIActionSheetDelegate, KGPicPickerDelegate>
 
 @property (nonatomic, strong)UITapGestureRecognizer *singleImgTap;
 @property (nonatomic, strong) NSMutableArray *pbImgInfos;
 @property (nonatomic) NSInteger curPageIndex;
 
+@property (nonatomic) KGPicPicker *kgpp;
 @end
 
 @implementation GrowupTableViewController
+
+- (KGPicPicker*)kgpp
+{
+    if(!_kgpp)
+    {
+        _kgpp = [[KGPicPicker alloc] initWithUIVC:self needCrop:FALSE];
+        _kgpp.delegate = self;
+    }
+    
+    return _kgpp;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -128,6 +140,7 @@
                     iInfo.imageURL = picurl;
                     iInfo.imageTitle = growdoc.date;
                     iInfo.imageDesc = growdoc.content;
+                    iInfo.placeHolder = [UIImage imageNamed:@"default_img"];
                     [self.pbImgInfos addObject:iInfo];
 
                     //count++;
@@ -260,10 +273,12 @@
                                      NSLog(@"load image compelted");
                                      [activityIndicator removeFromSuperview];
                                      activityIndicator = nil;
+                                     
+                                     PBImageInfo *imageInfo = (PBImageInfo*)[self.pbImgInfos objectAtIndex:indexPath.row-1];
+                                     imageInfo.placeHolder = image;
                                  }];
            }
 
-    
     return cell;
 }
 
@@ -275,19 +290,13 @@
     if (indexPath.row < 1 || indexPath.row-1 >= [self.docs count]) {
         return;
     }
-    
-//    GrowDoc *curDoc = (GrowDoc *)[self.docs objectAtIndex:(indexPath.row-1)];
-    
-//    if(curDoc != nil)
-//    {
-        PBViewController *pbVC = [[PBViewController alloc] init];
-        pbVC.index = indexPath.row-1;
-        pbVC.handleVC = self;
-        pbVC.imageInfos = self.pbImgInfos;
-        [pbVC show];
-//    }
-}
 
+    PBViewController *pbVC = [[PBViewController alloc] init];
+    pbVC.index = indexPath.row-1;
+    pbVC.handleVC = self;
+    pbVC.imageInfos = self.pbImgInfos;
+    [pbVC show];
+}
 
 /*
 // Override to support conditional editing of the table view.
@@ -352,7 +361,44 @@
 
 #pragma mark
 - (void)onAddClick:(UITapGestureRecognizer*) sender{
-    NSLog(@"click");
+    UIActionSheet *choiceSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                             delegate:self
+                                                    cancelButtonTitle:@"取消"
+                                               destructiveButtonTitle:nil
+                                                    otherButtonTitles:@"拍照", @"从相册中选取", nil];
+    [choiceSheet showInView:self.view];
+}
+
+#pragma mark UIActionSheetDelegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0) {
+        // 拍照
+        [self.kgpp takePhoto];
+        
+    } else if (buttonIndex == 1) {
+        // 从相册中选取
+        [self.kgpp selectPhoto];
+    }
+}
+
+#pragma mark - KGPicPickerDelegate
+- (void)doPicPicked:(UIImage *)image
+{
+//    NSLog(@"get image");
+    [KGUtil uploadImage:@"/system/insertGrowthArchive"
+                  image:image
+                success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                    NSString *code = [responseObject objectForKey:@"code"];
+                    if ([code isEqualToString:@"000000"]) {
+                        NSLog(@"succ");
+                        //reload
+                        [self loadNewData:true];
+                    }
+                }
+                failure:^(AFHTTPRequestOperation *operation, NSError *error) {                            NSLog(@"Error: %@", error);
+                }
+                 inView:self.view
+                showHud:true];
 }
 
 @end

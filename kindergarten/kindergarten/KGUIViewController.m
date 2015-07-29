@@ -12,7 +12,7 @@
 #import "KGUtil.h"
 #import "KGPicPicker.h"
 
-@interface KGUIViewController ()<UIActionSheetDelegate, KGPicPickerDelegate>
+@interface KGUIViewController () <UIActionSheetDelegate, KGPicPickerDelegate>
 
 @property (nonatomic) NSInteger tapImageTag;
 @property (nonatomic) KGPicPicker *kgpp;
@@ -31,7 +31,7 @@
 {
     if(!_kgpp)
     {
-        _kgpp = [[KGPicPicker alloc] initWithUIVC:self];
+        _kgpp = [[KGPicPicker alloc] initWithUIVC:self needCrop:YES];
         _kgpp.delegate = self;
     }
 
@@ -139,7 +139,6 @@
         }
     }
 }
-
 
 #pragma mark - KGPicPickerDelegate
 - (void)doPicPicked:(UIImage *)image

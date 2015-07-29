@@ -36,6 +36,7 @@
     {
         //这里还是原来的代码
         [[UIApplication sharedApplication] registerForRemoteNotificationTypes:
+
          (UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert)];
     }
     

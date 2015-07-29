@@ -12,20 +12,21 @@
 @interface KGPicPicker()
 
 @property (nonatomic, weak)UIViewController* uiVC;
-//@property (nonatomic, weak)NSString* storeKey;
+
+@property (nonatomic)BOOL needCrop;
 
 @end
 
 @implementation KGPicPicker
 
-- (instancetype)initWithUIVC:(UIViewController *)uiVC{
+- (instancetype)initWithUIVC:(UIViewController *)uiVC needCrop:(BOOL)needCrop{
     self = [self init];
     if (!self) {
         return nil;
     }
     
     _uiVC = uiVC;
-//    _storeKey = storeKey;
+    _needCrop = needCrop;
     
     return self;
 }
@@ -87,12 +88,20 @@
     [picker dismissViewControllerAnimated:YES completion:^() {
         UIImage *portraitImg = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
         portraitImg = [self imageByScalingToMaxSize:portraitImg];
-        // present the cropper view controller
-        VPImageCropperViewController *imgCropperVC = [[VPImageCropperViewController alloc] initWithImage:portraitImg cropFrame:CGRectMake(0, 100.0f, self.uiVC.view.frame.size.width, self.uiVC.view.frame.size.width) limitScaleRatio:3.0];
-        imgCropperVC.delegate = self;
-        [self.uiVC presentViewController:imgCropperVC animated:YES completion:^{
-            // TO DO
-        }];
+        
+        if(self.needCrop)
+        {
+            // present the cropper view controller
+            VPImageCropperViewController *imgCropperVC = [[VPImageCropperViewController alloc] initWithImage:portraitImg cropFrame:CGRectMake(0, 100.0f, self.uiVC.view.frame.size.width, self.uiVC.view.frame.size.width) limitScaleRatio:3.0];
+            imgCropperVC.delegate = self;
+            [self.uiVC presentViewController:imgCropperVC animated:YES completion:^{
+                // TO DO
+            }];
+        }
+        else
+        {
+            [self.delegate doPicPicked:portraitImg];
+        }
     }];
 }
 
