@@ -18,8 +18,9 @@
 #import "KGChild.h"
 #import "KGConst.h"
 #import "KGPicPicker.h"
+#import "GrowupEditViewController.h"
 
-@interface GrowupTableViewController() <UIActionSheetDelegate, KGPicPickerDelegate>
+@interface GrowupTableViewController() <UIActionSheetDelegate, KGPicPickerDelegate, KGPostImageDelegate>
 
 @property (nonatomic, strong)UITapGestureRecognizer *singleImgTap;
 @property (nonatomic, strong) NSMutableArray *pbImgInfos;
@@ -90,9 +91,6 @@
 }
 
 - (void)loadNewData:(BOOL)isNew{
-    NSDateFormatter *df = [[NSDateFormatter alloc] init];
-    [df setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    
     KGChild *curchild = [KGUtil getCurChild];
     NSDictionary *profile = @{@"childId": curchild.cid,
                               @"pageIndex": [NSString stringWithFormat:@"%ld", (long)self.curPageIndex],
@@ -191,7 +189,7 @@
         cell.docid = @"";
         cell.descLabel.text = @"";
     
-        cell.imgView.image = [UIImage imageNamed:@"image_placeholder"];
+        cell.imgView.image = [UIImage imageNamed:@"camera.png"];
         
         [cell.imgView addGestureRecognizer:self.singleImgTap];
 
@@ -385,20 +383,78 @@
 - (void)doPicPicked:(UIImage *)image
 {
 //    NSLog(@"get image");
-    [KGUtil uploadImage:@"/system/insertGrowthArchive"
-                  image:image
-                success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                    NSString *code = [responseObject objectForKey:@"code"];
-                    if ([code isEqualToString:@"000000"]) {
-                        NSLog(@"succ");
-                        //reload
-                        [self loadNewData:true];
-                    }
-                }
-                failure:^(AFHTTPRequestOperation *operation, NSError *error) {                            NSLog(@"Error: %@", error);
-                }
-                 inView:self.view
-                showHud:true];
+    if(image == nil)
+        return;
+    
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Growup" bundle:nil];
+    GrowupEditViewController *vc = (GrowupEditViewController *)[storyBoard instantiateViewControllerWithIdentifier:@"GrowDocEdit"];
+    
+    vc.image = image;
+    vc.delegate = self;
+    [self presentViewController:vc animated:YES
+                          completion:^(void){
+                          }];
 }
 
+#pragma mark - delete cell
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    if(indexPath.row == 0)
+        return NO;
+    
+    return YES;
+}
+
+/*改变删除按钮的title*/
+-(NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return @"删除";
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        NSInteger index = indexPath.row-1;
+        if(index < 0 || index >= [self.docs count])
+            return;
+        
+        GrowDoc *doc = (self.docs)[index];
+        [self removeDoc:indexPath docId:doc.docid];
+    }
+    else if (editingStyle == UITableViewCellEditingStyleInsert) {
+    }
+}
+
+-(void)removeDoc:(NSIndexPath *)indexPath docId:(NSString *)docId
+{
+    NSDictionary *profile = @{@"growthArchiveId":docId
+                              };
+    
+    NSString *curl = @"/system/deleteGrowthArchive";
+    [KGUtil postKGRequest:curl
+                     body:profile
+                  success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                      NSString *code = [responseObject objectForKey:@"code"];
+                      if ([code isEqualToString:@"000000"]) {
+                          [self doAfterRemoveDoc:indexPath];
+                      }
+                  }
+                  failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                      NSLog(@"Error: %@", error);
+                  }
+                   inView:self.view
+                  showHud:true];
+}
+
+-(void)doAfterRemoveDoc:(NSIndexPath *)indexPath
+{
+    [self.docs removeObjectAtIndex:indexPath.row-1];
+    [self.pbImgInfos removeObjectAtIndex:indexPath.row-1];
+    [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+}
+
+
+#pragma mark - KGPostImageDelegate
+- (void)reloadData {
+    [self loadNewData:YES];
+}
 @end

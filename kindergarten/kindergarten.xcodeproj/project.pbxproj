@@ -21,6 +21,8 @@
 		1225667D1B57F7780007733E /* park_messagebox.png in Resources */ = {isa = PBXBuildFile; fileRef = 122566791B57F7780007733E /* park_messagebox.png */; };
 		1225667E1B57F7780007733E /* park_teachers.png in Resources */ = {isa = PBXBuildFile; fileRef = 1225667A1B57F7780007733E /* park_teachers.png */; };
 		125090F21B650CD80046F40E /* KGPicPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 125090F11B650CD80046F40E /* KGPicPicker.m */; };
+		125090F41B68E09B0046F40E /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 125090F31B68E09B0046F40E /* camera.png */; };
+		125090F71B68F2530046F40E /* GrowupEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 125090F61B68F2530046F40E /* GrowupEditViewController.m */; };
 		1266D5C21B495B8A00E7253F /* head.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1266D5BF1B495B8A00E7253F /* head.jpg */; };
 		1266D5C31B495B8A00E7253F /* home_top_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 1266D5C01B495B8A00E7253F /* home_top_bg.png */; };
 		1266D5C41B495B8A00E7253F /* repeat_img.png in Resources */ = {isa = PBXBuildFile; fileRef = 1266D5C11B495B8A00E7253F /* repeat_img.png */; };
@@ -214,6 +216,9 @@
 		1225667A1B57F7780007733E /* park_teachers.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = park_teachers.png; path = Resource/funcicons/park_teachers.png; sourceTree = "<group>"; };
 		125090F01B650CD80046F40E /* KGPicPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KGPicPicker.h; sourceTree = "<group>"; };
 		125090F11B650CD80046F40E /* KGPicPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KGPicPicker.m; sourceTree = "<group>"; };
+		125090F31B68E09B0046F40E /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = camera.png; path = Resource/camera.png; sourceTree = "<group>"; };
+		125090F51B68F2530046F40E /* GrowupEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GrowupEditViewController.h; sourceTree = "<group>"; };
+		125090F61B68F2530046F40E /* GrowupEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GrowupEditViewController.m; sourceTree = "<group>"; };
 		1266D5BF1B495B8A00E7253F /* head.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = head.jpg; path = Resource/head.jpg; sourceTree = "<group>"; };
 		1266D5C01B495B8A00E7253F /* home_top_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = home_top_bg.png; path = Resource/home_top_bg.png; sourceTree = "<group>"; };
 		1266D5C11B495B8A00E7253F /* repeat_img.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = repeat_img.png; path = Resource/repeat_img.png; sourceTree = "<group>"; };
@@ -808,6 +813,8 @@
 				12EAE0DA1B5B8E550084680C /* GrowDocCell.m */,
 				12EAE0D61B5B65A50084680C /* GrowupTableViewController.h */,
 				12EAE0D71B5B65A50084680C /* GrowupTableViewController.m */,
+				125090F51B68F2530046F40E /* GrowupEditViewController.h */,
+				125090F61B68F2530046F40E /* GrowupEditViewController.m */,
 				12EAE0DC1B5B8FE90084680C /* GrowDoc.h */,
 				12EAE0DD1B5B8FE90084680C /* GrowDoc.m */,
 			);
@@ -1152,6 +1159,7 @@
 			isa = PBXGroup;
 			children = (
 				12DEACFF1B4D682C00C437BE /* funcicons */,
+				125090F31B68E09B0046F40E /* camera.png */,
 				9911C1F81B5A06C80080FFA9 /* default_img.png */,
 				9911C1FA1B5A07CB0080FFA9 /* image_placeholder.png */,
 				99F17F481B4D5C3600866F8F /* bg_11.png */,
@@ -1318,6 +1326,7 @@
 				12F630191B4932C000BE67B6 /* Growup.storyboard in Resources */,
 				12DEACFE1B4D682500C437BE /* home_pickup.png in Resources */,
 				99B3DAA01B6911E1007BBAE9 /* gallery_more_icon.png in Resources */,
+				125090F41B68E09B0046F40E /* camera.png in Resources */,
 				122566741B57DE190007733E /* class_intro.png in Resources */,
 				12C794A11B44232300918497 /* Main.storyboard in Resources */,
 				12AC16011B4917D3007C247B /* park_icon_normal.png in Resources */,
@@ -1413,6 +1422,7 @@
 				12AC16101B4918C3007C247B /* RBStoryboardLink.m in Sources */,
 				9997BA251B4D580E00B908B6 /* MYIntroductionPanel.m in Sources */,
 				9997BA061B4D580E00B908B6 /* AFURLResponseSerialization.m in Sources */,
+				125090F71B68F2530046F40E /* GrowupEditViewController.m in Sources */,
 				9997BA041B4D580E00B908B6 /* AFURLConnectionOperation.m in Sources */,
 				12AC16131B4918C3007C247B /* RBStoryboardPushSegue.m in Sources */,
 				12EAE14D1B5D3A270084680C /* MJRefreshFooter.m in Sources */,
