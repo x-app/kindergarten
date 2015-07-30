@@ -7,8 +7,8 @@
 //
 
 #import "PBViewController.h"
-
-
+#import "AppDelegate.h"
+#import "KxMenu.h"
 @interface PBViewController ()<UIScrollViewDelegate>
 
 
@@ -80,10 +80,43 @@
 -(void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
     //NSLog(@"in delegate!");
     if (viewController == self) {
+        UIImage *rightImage = [UIImage imageNamed:@"gallery_more_icon.png"];
+        UIImageView *rightImageView = [[UIImageView alloc] initWithImage:rightImage];
+        rightImageView.contentMode = UIViewContentModeScaleAspectFill;
+        rightImageView.frame = CGRectMake(5, 0, 10, 20);
+        UIButton *rightButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+        [rightButton addTarget:self action:@selector(clickRightButton:) forControlEvents:UIControlEventTouchUpInside];
+        [rightButton addSubview:rightImageView];
+        UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
+        self.navigationItem.rightBarButtonItem = rightButtonItem;
         [self setNavigationBarStyle];
     } else {
         [self restoreNavigationBarStyle];
     }
+}
+
+- (void)clickRightButton:(UIButton *)sender {
+    NSLog(@"click");
+    NSArray *menuItems =
+    @[
+      [KxMenuItem menuItem:@"转存至成长档案"
+                     image:[UIImage imageNamed:@"baby_icon_normal.png"]
+                    target:self
+                    action:@selector(pushMenuItem:)],
+      
+      [KxMenuItem menuItem:@"删除图片"
+                     image:nil
+                    target:self
+                    action:@selector(pushMenuItem:)],
+      ];
+    CGRect screenBounds = [[UIScreen mainScreen] bounds];
+    CGRect rect = CGRectMake(screenBounds.size.width - 80, self.navigationController.navigationBar.frame.origin.y, 100, self.navigationController.navigationBar.frame.size.height);
+//    UIView *cView = [[UIView alloc] initWithFrame:rect];
+//    cView.backgroundColor = [UIColor redColor];
+//    [self.view addSubview:cView];
+    [KxMenu showMenuInView:self.view
+                  fromRect:rect//self.navigationController.navigationBar.frame// self..frame
+                 menuItems:menuItems];
 }
 
 - (void)setNavigationBarStyle {
