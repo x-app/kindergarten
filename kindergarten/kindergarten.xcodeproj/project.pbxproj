@@ -170,6 +170,8 @@
 		99ABD5A11B48030400B8DB8B /* help_2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99ABD59E1B48030400B8DB8B /* help_2.xib */; };
 		99ABD5A21B48030400B8DB8B /* help_3.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99ABD59F1B48030400B8DB8B /* help_3.xib */; };
 		99ABD5A31B48030400B8DB8B /* help_4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99ABD5A01B48030400B8DB8B /* help_4.xib */; };
+		99B3DAA01B6911E1007BBAE9 /* gallery_more_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 99B3DA9F1B6911E1007BBAE9 /* gallery_more_icon.png */; };
+		99C642891B6A5627008EF929 /* KxMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 99C642881B6A5627008EF929 /* KxMenu.m */; };
 		99D55A501B5FC8AF00C508A3 /* Introduction.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 99D55A4F1B5FC8AF00C508A3 /* Introduction.storyboard */; };
 		99D55A541B5FC92A00C508A3 /* IntroductionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99D55A531B5FC92A00C508A3 /* IntroductionViewController.m */; };
 		99D55A571B61222900C508A3 /* MeFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 99D55A561B61222900C508A3 /* MeFunction.m */; };
@@ -465,6 +467,9 @@
 		99ABD59E1B48030400B8DB8B /* help_2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = help_2.xib; path = Resource/help_2.xib; sourceTree = "<group>"; };
 		99ABD59F1B48030400B8DB8B /* help_3.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = help_3.xib; path = Resource/help_3.xib; sourceTree = "<group>"; };
 		99ABD5A01B48030400B8DB8B /* help_4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = help_4.xib; path = Resource/help_4.xib; sourceTree = "<group>"; };
+		99B3DA9F1B6911E1007BBAE9 /* gallery_more_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gallery_more_icon.png; path = Resource/gallery_more_icon.png; sourceTree = "<group>"; };
+		99C642871B6A5627008EF929 /* KxMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KxMenu.h; sourceTree = "<group>"; };
+		99C642881B6A5627008EF929 /* KxMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KxMenu.m; sourceTree = "<group>"; };
 		99D55A4F1B5FC8AF00C508A3 /* Introduction.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Introduction.storyboard; sourceTree = "<group>"; };
 		99D55A521B5FC92A00C508A3 /* IntroductionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroductionViewController.h; sourceTree = "<group>"; };
 		99D55A531B5FC92A00C508A3 /* IntroductionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroductionViewController.m; sourceTree = "<group>"; };
@@ -862,6 +867,8 @@
 		9911C2C71B5E825B0080FFA9 /* PhotoBrowser */ = {
 			isa = PBXGroup;
 			children = (
+				99C642871B6A5627008EF929 /* KxMenu.h */,
+				99C642881B6A5627008EF929 /* KxMenu.m */,
 				9990FB351B650EEE006A80F7 /* LFRoundProgressView.h */,
 				9990FB361B650EEE006A80F7 /* LFRoundProgressView.m */,
 				9990FB371B650EEE006A80F7 /* PBProgressView.h */,
@@ -1157,6 +1164,7 @@
 				9911C1FA1B5A07CB0080FFA9 /* image_placeholder.png */,
 				99F17F481B4D5C3600866F8F /* bg_11.png */,
 				1266D5BF1B495B8A00E7253F /* head.jpg */,
+				99B3DA9F1B6911E1007BBAE9 /* gallery_more_icon.png */,
 				1266D5C01B495B8A00E7253F /* home_top_bg.png */,
 				1266D5C11B495B8A00E7253F /* repeat_img.png */,
 				12AC15FA1B4917D3007C247B /* baby_icon_normal.png */,
@@ -1317,6 +1325,7 @@
 				9911C1FB1B5A07CB0080FFA9 /* image_placeholder.png in Resources */,
 				12F630191B4932C000BE67B6 /* Growup.storyboard in Resources */,
 				12DEACFE1B4D682500C437BE /* home_pickup.png in Resources */,
+				99B3DAA01B6911E1007BBAE9 /* gallery_more_icon.png in Resources */,
 				125090F41B68E09B0046F40E /* camera.png in Resources */,
 				122566741B57DE190007733E /* class_intro.png in Resources */,
 				12C794A11B44232300918497 /* Main.storyboard in Resources */,
@@ -1456,6 +1465,7 @@
 				9997BA081B4D580E00B908B6 /* ASTextField.m in Sources */,
 				9997BA051B4D580E00B908B6 /* AFURLRequestSerialization.m in Sources */,
 				9997BA141B4D580E00B908B6 /* CLLockInfoView.m in Sources */,
+				99C642891B6A5627008EF929 /* KxMenu.m in Sources */,
 				9997BA021B4D580E00B908B6 /* AFNetworkReachabilityManager.m in Sources */,
 				9997BA131B4D580E00B908B6 /* CLLockNavVC.m in Sources */,
 				99F17F581B4E94B700866F8F /* KGChild.m in Sources */,
