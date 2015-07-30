@@ -105,7 +105,7 @@
                     action:@selector(pushMenuItem:)],
       
       [KxMenuItem menuItem:@"删除图片"
-                     image:nil
+                     image:[UIImage imageNamed:@"class_icon_normal.png"]
                     target:self
                     action:@selector(pushMenuItem:)],
       ];

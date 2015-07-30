@@ -39,52 +39,50 @@
 #import "KxMenu.h"
 #import <QuartzCore/QuartzCore.h>
 
-const CGFloat kArrowSize = 12.f;
+const CGFloat kArrowSize = 0.f;
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
-
 @interface KxMenuView : UIView
 @end
 
-//@interface KxMenuOverlay : UIView
-//@end
-//
-//@implementation KxMenuOverlay
-//
-//// - (void) dealloc { NSLog(@"dealloc %@", self); }
-//
-//- (id)initWithFrame:(CGRect)frame
-//{
-//    self = [super initWithFrame:frame];
-//    if (self) {
-//        self.backgroundColor = [UIColor clearColor];
-//        self.opaque = NO;
-//        
-//        UITapGestureRecognizer *gestureRecognizer;
-//        gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
-//                                                                    action:@selector(singleTap:)];
-//        [self addGestureRecognizer:gestureRecognizer];
-//    }
-//    return self;
-//}
-//
-//// thank horaceho https://github.com/horaceho
-//// for his solution described in https://github.com/kolyvan/kxmenu/issues/9
-//
-//- (void)singleTap:(UITapGestureRecognizer *)recognizer
-//{
-//    for (UIView *v in self.subviews) {
-//        if ([v isKindOfClass:[KxMenuView class]] && [v respondsToSelector:@selector(dismissMenu:)]) {
-//            [v performSelector:@selector(dismissMenu:) withObject:@(YES)];
-//        }
-//    }
-//}
-//
-//@end
+@interface KxMenuOverlay : UIView
+@end
 
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
+@implementation KxMenuOverlay
+
+// - (void) dealloc { NSLog(@"dealloc %@", self); }
+
+- (id)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.backgroundColor = [UIColor clearColor];
+        self.opaque = NO;
+        
+        UITapGestureRecognizer *gestureRecognizer;
+        gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                    action:@selector(singleTap:)];
+        [self addGestureRecognizer:gestureRecognizer];
+    }
+    return self;
+}
+
+// thank horaceho https://github.com/horaceho
+// for his solution described in https://github.com/kolyvan/kxmenu/issues/9
+
+- (void)singleTap:(UITapGestureRecognizer *)recognizer
+{
+    for (UIView *v in self.subviews) {
+        if ([v isKindOfClass:[KxMenuView class]] && [v respondsToSelector:@selector(dismissMenu:)]) {
+            [v performSelector:@selector(dismissMenu:) withObject:@(YES)];
+        }
+    }
+}
+
+@end
+
+
 
 @implementation KxMenuItem
 
@@ -199,9 +197,9 @@ typedef enum {
     const CGFloat widthHalf = contentSize.width * 0.5f;
     const CGFloat heightHalf = contentSize.height * 0.5f;
     
-    const CGFloat kMargin = 5.f;
+    const CGFloat kMargin = 0.f;
     
-    if (heightPlusArrow < (outerHeight - rectY1)) {
+    //if (heightPlusArrow < (outerHeight - rectY1)) {
     
         _arrowDirection = KxMenuViewArrowDirectionUp;
         CGPoint point = (CGPoint){
@@ -226,7 +224,7 @@ typedef enum {
             contentSize.height + kArrowSize
         };
         
-    } else if (heightPlusArrow < rectY0) {
+    /*} else if (heightPlusArrow < rectY0) {
         
         _arrowDirection = KxMenuViewArrowDirectionDown;
         CGPoint point = (CGPoint){
@@ -308,7 +306,7 @@ typedef enum {
             (outerHeight - contentSize.height) * 0.5f,
             contentSize,
         };
-    }    
+    } */
 }
 
 - (void)showMenuInView:(UIView *)view
@@ -322,10 +320,10 @@ typedef enum {
     
     [self setupFrameInView:view fromRect:rect];
         
-//    KxMenuOverlay *overlay = [[KxMenuOverlay alloc] initWithFrame:view.bounds];
-//    [overlay addSubview:self];
-//    [view addSubview:overlay];
-    [view addSubview:self];
+    KxMenuOverlay *overlay = [[KxMenuOverlay alloc] initWithFrame:view.bounds];
+    [overlay addSubview:self];
+    [view addSubview:overlay];
+//    [view addSubview:self];
     
     _contentView.hidden = YES;
     const CGRect toFrame = self.frame;
@@ -360,15 +358,15 @@ typedef enum {
                                  
                              } completion:^(BOOL finished) {
                                  
-//                                 if ([self.superview isKindOfClass:[KxMenuOverlay class]])
-//                                     [self.superview removeFromSuperview];
+                                 if ([self.superview isKindOfClass:[KxMenuOverlay class]])
+                                     [self.superview removeFromSuperview];
                                  [self removeFromSuperview];
                              }];
             
         } else {
             
-//            if ([self.superview isKindOfClass:[KxMenuOverlay class]])
-//                [self.superview removeFromSuperview];
+            if ([self.superview isKindOfClass:[KxMenuOverlay class]])
+                [self.superview removeFromSuperview];
             [self removeFromSuperview];
         }
     }
@@ -389,16 +387,17 @@ typedef enum {
         [v removeFromSuperview];
     }
     
-    if (!_menuItems.count)
+    if (!_menuItems.count) {
         return nil;
+    }
  
-    const CGFloat kMinMenuItemHeight = 25.f;
-    const CGFloat kMinMenuItemWidth = 25.f;
-    const CGFloat kMarginX = 10.f;
-    const CGFloat kMarginY = 5.f;
+    const CGFloat kMinMenuItemHeight = 30.f;
+    const CGFloat kMinMenuItemWidth = 30.f;
+    const CGFloat kMarginX = 5.f;
+    const CGFloat kMarginY = 2.f;
     
     UIFont *titleFont = [KxMenu titleFont];
-    if (!titleFont) titleFont = [UIFont boldSystemFontOfSize:16];
+    if (!titleFont) titleFont = [UIFont boldSystemFontOfSize:14];
     
     CGFloat maxImageWidth = 0;    
     CGFloat maxItemHeight = 0;
@@ -444,7 +443,7 @@ typedef enum {
     contentView.backgroundColor = [UIColor clearColor];
     contentView.opaque = NO;
     
-    CGFloat itemY = kMarginY * 2;
+    CGFloat itemY = 2;//kMarginY * 2;
     NSUInteger itemNum = 0;
         
     for (KxMenuItem *menuItem in _menuItems) {
@@ -513,11 +512,12 @@ typedef enum {
         
         if (menuItem.image) {
             
-            const CGRect imageFrame = {kMarginX * 2, kMarginY, maxImageWidth, maxItemHeight - kMarginY * 2};
+            //const CGRect imageFrame = {kMarginX * 2, kMarginY, maxImageWidth, maxItemHeight - kMarginY * 2};
+            const CGRect imageFrame = {kMarginX * 2, kMarginY, 25, 25};
             UIImageView *imageView = [[UIImageView alloc] initWithFrame:imageFrame];
             imageView.image = menuItem.image;
             imageView.clipsToBounds = YES;
-            imageView.contentMode = UIViewContentModeCenter;
+            imageView.contentMode = UIViewContentModeScaleAspectFill;
             imageView.autoresizingMask = UIViewAutoresizingNone;
             [itemView addSubview:imageView];
         }
@@ -536,7 +536,7 @@ typedef enum {
         ++itemNum;
     }    
     
-    contentView.frame = (CGRect){0, 0, maxItemWidth, itemY + kMarginY * 2};
+    contentView.frame = (CGRect){0, 0, maxItemWidth, itemY + kMarginY};
     
     return contentView;
 }
