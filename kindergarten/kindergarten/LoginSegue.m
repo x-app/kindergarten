@@ -45,6 +45,9 @@
             delegate.user.parentID = [[obj objectForKey:@"parentid"] integerValue];
             delegate.user.uid = [obj objectForKey:@"iuId"];
             delegate.user.answer = [obj objectForKey:@"answer"];
+            
+            [self saveUser:delegate.user];
+            
             next.fromVC = current.fromVC;
             current.nextVC = next;
             if (delegate.user.regMode == 0) {
@@ -70,6 +73,12 @@
         NSLog(@"Error: %@", error);
     } inView:current.view
      showHud:true];
+}
+
+-(void)saveUser:(KGUser *)user
+{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:[user toDictionary]  forKey:@"User"];
 }
 
 @end

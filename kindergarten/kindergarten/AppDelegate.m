@@ -40,25 +40,49 @@
          (UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert)];
     }
     
+    // get push
+    if (launchOptions != nil)
+    {
+        NSDictionary *dictionary = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+        if (dictionary != nil)
+        {
+            NSLog(@"Launched from push notification: %@", dictionary);
+            //dictionary是payload
+//            [self addMessageFromRemoteNotification:dictionary updateUI:NO];
+        }
+    }
+    
+    self.resignActiveTime = nil;
+    
     // 修复Push到下一级右上角可恶的黑条
     self.window.backgroundColor = [UIColor whiteColor];
     
     self.user = [[KGUser alloc] init];
     self.user.verified = NO;
     self.user.registered = NO;
-    NSInteger visitTimes = 0;
+    self.user.deviceID = @"";
     
     self.varible = [[KGVarible alloc] init];
     self.varible.server_index_url = @"http://app.nugget-nj.com/kindergarten_index";
     //self.varible.server_app_url = @"http://app.nugget-nj.com/nugget_app";
+    
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    visitTimes = [userDefaults integerForKey:@"visitTimes"];
+    
+    NSDictionary *variDict = [userDefaults objectForKey:@"varible"];
+    if (variDict != nil) {
+        [self.varible fromDictionary:variDict];
+    }
+    NSDictionary *userDict = [userDefaults objectForKey:@"User"];
+    if (userDict != nil) {
+        [self.user fromDictionary:userDict];
+    }
+
+    
+    NSInteger visitTimes = [userDefaults integerForKey:@"visitTimes"];
     
 //    for the first time test
     //visitTimes = 0;
     //
-    self.resignActiveTime = nil;
-    
     if (visitTimes == 0) {
         //create UI
         CGRect windowFrame = [[UIScreen mainScreen] bounds];
@@ -89,11 +113,6 @@
         [[self window] addSubview:introductionView];
     } else {
         [self introduction:nil didFinishWithType:0];
-    }
-    
-    NSDictionary *variDict = [userDefaults objectForKey:@"varible"];
-    if (variDict != nil) {
-        [self.varible fromDictionary:variDict];
     }
     visitTimes++;
     
@@ -203,10 +222,18 @@
 - (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
 {
     NSLog(@"My token is: %@", deviceToken);
+    self.devicetoken = deviceToken;
 }
 
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
 {
     NSLog(@"Failed to get token, error: %@", error);
 }
+
+- (void)application:(UIApplication*)application didReceiveRemoteNotification:(NSDictionary*)payload
+{
+    NSLog(@"Received notification: %@", payload);
+//    [self addMessageFromRemoteNotification:userInfo updateUI:YES];
+}
+
 @end

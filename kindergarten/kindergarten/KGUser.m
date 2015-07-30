@@ -23,17 +23,18 @@
         NSDictionary *childDict = [self.childs[i] toDictionary];
         [dictArray addObject:childDict];
     }
-    NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
                           self.name, @"name",
                           self.idNo, @"idNo",
-                          self.parentID, @"parentID",
+                          self.uid, @"uid",
+                          [NSString stringWithFormat: @"%ld", (long)self.parentID], @"parentID",
                           self.question, @"question",
-                          self.questionID, @"questionID",
-                          self.deviceID, @"deviceID",
-                          self.category, @"category",
-                          self.answer, @"answer",
-                          self.registered, @"registered",
-                          self.childs, dictArray,
+//                          self.questionID, @"questionID",
+//                          self.deviceID, @"deviceID",
+                          [NSString stringWithFormat: @"%ld", (long)self.category], @"category",
+//                          self.answer, @"answer",
+                          //self.registered, @"registered",
+                          //self.childs, dictArray,
                           nil];
     
     return dict;
@@ -42,19 +43,20 @@
 - (void)fromDictionary:(NSDictionary *)dict {
     self.name = [dict objectForKey:@"name"];
     self.idNo = [dict objectForKey:@"idNo"];
+    self.uid = [dict objectForKey:@"uid"];
     self.parentID = [[dict objectForKey:@"parentID"] integerValue];
     self.question = [dict objectForKey:@"question"];
-    self.questionID = [[dict objectForKey:@"questionID"] integerValue];
-    self.deviceID = [dict objectForKey:@"deviceID"];
+//    self.questionID = [[dict objectForKey:@"questionID"] integerValue];
+//    self.deviceID = [dict objectForKey:@"deviceID"];
     self.category = [[dict objectForKey:@"category"] integerValue];
-    self.answer = [dict objectForKey:@"answer"];
-    self.registered = [[dict objectForKey: @"registered"] boolValue];
+//    self.answer = [dict objectForKey:@"answer"];
+    //self.registered = [[dict objectForKey: @"registered"] boolValue];
+    /*
     NSArray *childArray = [[dict objectForKey:@"childs"] array];
     for (int i = 0; i < [childArray count]; i++) {
         KGChild *child = [[KGChild alloc] init];
         [child fromDictionary:childArray[i]];
         [self.childs addObject:child];
-    }
+    }*/
 }
-
 @end

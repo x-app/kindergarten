@@ -62,6 +62,7 @@
     
     switch (tag){
         case 1:{
+            KGUser *user = [KGUtil getUser];
             UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Baby" bundle:nil];
             vc = [storyBoard instantiateViewControllerWithIdentifier:@"PickupView"];
             

@@ -270,6 +270,11 @@ static NSArray *month_cn;
     return delegate.varible;
 }
 
++ (KGUser *)getUser{
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    return delegate.user;
+}
+
 + (KGChild *)getCurChild {
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     if ([delegate.user.childs count] >= 1) {
@@ -283,14 +288,20 @@ static NSArray *month_cn;
     for(int i=0; i<curchilds.count; i++)
     {
         NSDictionary *childInfo = (NSDictionary *)[curchilds objectAtIndex:i];
-        KGChild *curchild = [[KGChild alloc] initWithName:[childInfo objectForKey:@"name"]
+        
+        KGChild *child = [[KGChild alloc] initWithName:[childInfo objectForKey:@"name"]
                                                        id:[childInfo objectForKey:@"id"]
                                                       sex:[[childInfo objectForKey:@"sex"] integerValue]
                                                   classID:[childInfo objectForKey:@"classId"]
                                                 className:[childInfo objectForKey:@"className"]
                                                  birthday:[childInfo objectForKey:@"birthday"]];
-        [delegate.user.childs addObject:curchild];
+         
+        //KGChild *child = [KGChild alloc];
+        //[child fromDictionary:childInfo];
+        [delegate.user.childs addObject:child];
     }
+    
+    // TODO 选择child
     if(delegate.user.childs.count > 0)
         return delegate.user.childs[0];
     
