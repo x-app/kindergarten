@@ -104,10 +104,10 @@
                     target:self
                     action:@selector(pushMenuItem:)],
       
-      [KxMenuItem menuItem:@"删除图片"
-                     image:[UIImage imageNamed:@"class_icon_normal.png"]
+      [KxMenuItem menuItem:@"保存至本地相册"
+                     image:[UIImage imageNamed:@"save.png"]
                     target:self
-                    action:@selector(pushMenuItem:)],
+                    action:@selector(saveImageToLocalAlbum:)],
       ];
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
     CGRect rect = CGRectMake(screenBounds.size.width - 80, self.navigationController.navigationBar.frame.origin.y, 100, self.navigationController.navigationBar.frame.size.height);
@@ -117,6 +117,30 @@
     [KxMenu showMenuInView:self.view
                   fromRect:rect//self.navigationController.navigationBar.frame// self..frame
                  menuItems:menuItems];
+}
+
+- (void)saveImageToLocalAlbum: (id)sender {
+    UIImage *curImage = self.currentItemView.photoImageView.image;
+    if (curImage == nil) {
+        return;
+    }
+    UIImageWriteToSavedPhotosAlbum(curImage, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
+}
+
+- (void)image: (UIImage *)image didFinishSavingWithError: (NSError *) error contextInfo: (void *) contextInfo
+{
+    NSString *msg = nil ;
+    if(error != NULL){
+        msg = @"保存图片失败" ;
+    }else{
+        msg = @"保存图片成功" ;
+    }
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"保存图片结果提示"
+                                                    message:msg
+                                                   delegate:self
+                                          cancelButtonTitle:@"确定"
+                                          otherButtonTitles:nil];
+    [alert show];
 }
 
 - (void)setNavigationBarStyle {
