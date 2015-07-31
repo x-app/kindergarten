@@ -8,7 +8,6 @@
 
 #import "PBViewController.h"
 #import "AppDelegate.h"
-#import "KxMenu.h"
 @interface PBViewController ()<UIScrollViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray *menuItems;
@@ -137,6 +136,11 @@
 //    UIView *cView = [[UIView alloc] initWithFrame:rect];
 //    cView.backgroundColor = [UIColor redColor];
 //    [self.view addSubview:cView];
+    for (int i = 0; i < _menuItems.count; i++) {
+        KxMenuItem *item = (KxMenuItem *)[_menuItems objectAtIndex:i];
+        item.indexInPB = self.page;
+        item.rowInPBHandlerVC = self.rowInHandleVC;
+    }
     [KxMenu showMenuInView:self.view
                   fromRect:rect//self.navigationController.navigationBar.frame// self..frame
                  menuItems:self.menuItems];
