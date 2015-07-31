@@ -451,6 +451,9 @@
     [self.docs removeObjectAtIndex:indexPath.row-1];
     [self.pbImgInfos removeObjectAtIndex:indexPath.row-1];
     [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+
+    // 指定更新被删除记录的下一记录。防止日期头被删除。
+    [self.tableView reloadRowsAtIndexPaths:[[NSArray alloc] initWithObjects:indexPath, nil] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 

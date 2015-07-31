@@ -273,7 +273,7 @@ static NSString * const reuseIdentifier = @"AlbumCell";
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
-    } inView:self.collectionView showHud:YES];
+    } inView:self.collectionView showHud:YES showError:true];
 }
 
 @end
