@@ -63,4 +63,10 @@
 
 -(void)show;
 
+- (void)addAMenuItem:(NSString *)title
+                icon:(UIImage *)image
+              target:(id)trgt
+              action:(SEL)selector;
+
+
 @end

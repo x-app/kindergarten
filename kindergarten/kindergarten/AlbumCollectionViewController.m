@@ -202,6 +202,7 @@ static NSString * const reuseIdentifier = @"AlbumCell";
     pbVC.index = 0;
     pbVC.handleVC = self;
     pbVC.imageInfos = imageInfos;
+    [pbVC addAMenuItem:@"转存至成长档案" icon:[UIImage imageNamed:@"baby_icon_normal.png"] target:self action:@selector(saveToGrowupDoc)];
     [pbVC show];
 }
 
@@ -253,6 +254,26 @@ static NSString * const reuseIdentifier = @"AlbumCell";
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
     return UIEdgeInsetsMake(5, 2.5, 5, 2.5);
+}
+
+
+- (void)saveToGrowupDoc {
+    NSLog(@"save to grow up doc");
+    NSDictionary *data = @{@"classId": [[KGUtil getCurChild] cid],
+                           @"activitiesAlbumInfoId": @2};
+    NSDictionary *body = [KGUtil getRequestBody:data];
+    NSDictionary *params = @{@"uid": REQUEST_UID, @"sign": [KGUtil getRequestSign:body], @"body":body};
+    NSString *urlSuffix = @"/system/savePicToGrowthArchive";
+    NSString *url = [[KGUtil getServerAppURL] stringByAppendingString:urlSuffix];
+    [KGUtil postRequest:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"JSON: %@", responseObject);
+        NSString *code = [responseObject objectForKey:@"code"];
+        if ([code isEqualToString:@"000000"]) {
+            
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+    } inView:self.collectionView showHud:YES];
 }
 
 @end
