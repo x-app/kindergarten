@@ -201,8 +201,9 @@ static NSString * const reuseIdentifier = @"AlbumCell";
     PBViewController *pbVC = [[PBViewController alloc] init];
     pbVC.index = 0;
     pbVC.handleVC = self;
+    pbVC.rowInHandleVC = indexPath.row;
     pbVC.imageInfos = imageInfos;
-    [pbVC addAMenuItem:@"转存至成长档案" icon:[UIImage imageNamed:@"baby_icon_normal.png"] target:self action:@selector(saveToGrowupDoc)];
+    [pbVC addAMenuItem:@"转存至成长档案" icon:[UIImage imageNamed:@"baby_icon_normal.png"] target:self action:@selector(saveToGrowupDoc:)];
     [pbVC show];
 }
 
@@ -256,14 +257,39 @@ static NSString * const reuseIdentifier = @"AlbumCell";
     return UIEdgeInsetsMake(5, 2.5, 5, 2.5);
 }
 
+- (KGActivityAlbumInfo *)getAlbumInfo: (NSInteger)albumIndex infoIndex:(NSInteger)infoIndex {
+    if (albumIndex < 0 || albumIndex >= self.activityAlbums.count) {
+        return nil;
+    }
+    KGActivityAlbum *curAlbum = (KGActivityAlbum *)[self.activityAlbums objectAtIndex:albumIndex];
+    if (curAlbum == nil) {
+        return nil;
+    }
+    if (infoIndex < 0 || infoIndex >= curAlbum.albumInfos.count) {
+        return nil;
+    }
+    return [curAlbum.albumInfos objectAtIndex:infoIndex];
+}
 
-- (void)saveToGrowupDoc {
+
+- (void)saveToGrowupDoc:(id)sender {
     NSLog(@"save to grow up doc");
-    NSDictionary *data = @{@"classId": [[KGUtil getCurChild] cid],
-                           @"activitiesAlbumInfoId": @2};
+    if (![sender isKindOfClass:[KxMenuItem class]]) {
+        return;
+    }
+    KxMenuItem *item = (KxMenuItem *)sender;
+    NSInteger indexInPB = item.indexInPB;
+    NSInteger rowInSelf = item.rowInPBHandlerVC;
+    KGActivityAlbumInfo *info = [self getAlbumInfo:rowInSelf infoIndex:indexInPB];
+    if (info == nil) {
+        return;
+    }
+    NSLog(@"row: %ld, index:%ld", rowInSelf, indexInPB);
+    NSDictionary *data = @{@"childId": @([[[KGUtil getCurChild] cid] integerValue]),
+                           @"activitiesAlbumInfoId": @(info.infoId)};
     NSDictionary *body = [KGUtil getRequestBody:data];
     NSDictionary *params = @{@"uid": REQUEST_UID, @"sign": [KGUtil getRequestSign:body], @"body":body};
-    NSString *urlSuffix = @"/system/savePicToGrowthArchive";
+    NSString *urlSuffix = @"/parent/savePicToGrowthArchive";
     NSString *url = [[KGUtil getServerAppURL] stringByAppendingString:urlSuffix];
     [KGUtil postRequest:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON: %@", responseObject);

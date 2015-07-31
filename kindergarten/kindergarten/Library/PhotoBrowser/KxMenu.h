@@ -18,6 +18,11 @@
 @property (readwrite, nonatomic, strong) NSString *title;
 @property (readwrite, nonatomic, weak) id target;
 @property (readwrite, nonatomic) SEL action;
+
+//当前弹出菜单时，PhotoBrowser上的索引
+@property (nonatomic) NSInteger indexInPB;
+@property (nonatomic) NSInteger rowInPBHandlerVC;
+
 //@property (readwrite, nonatomic, strong) UIColor *foreColor;
 @property (readwrite, nonatomic) NSTextAlignment alignment;
 

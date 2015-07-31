@@ -10,7 +10,7 @@
 #import "PBImageInfo.h"
 #import "PBScrollView.h"
 #import "PBItemView.h"
-
+#import "KxMenu.h"
 
 @interface PBViewController : UIViewController<UINavigationControllerDelegate>
 
@@ -26,6 +26,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *scrollViewRightMarginC;
 
 
+@property (nonatomic) NSInteger rowInHandleVC;
 
 
 /** 相册数组 */
