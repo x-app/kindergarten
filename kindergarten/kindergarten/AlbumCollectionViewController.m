@@ -120,7 +120,7 @@ static NSString * const reuseIdentifier = @"AlbumCell";
         NSLog(@"Error: %@", error);
         [self.collectionView.header endRefreshing];
         [self.collectionView.footer endRefreshing];
-    } inView:self.collectionView showHud:NO];
+    } inView:self.collectionView showHud:NO showError:true];
 }
 
 /*

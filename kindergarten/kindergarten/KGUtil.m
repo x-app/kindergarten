@@ -136,7 +136,8 @@ static NSArray *month_cn;
             success:(void (^)(AFHTTPRequestOperation *, id))success
             failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
              inView:(UIView *)view
-           showHud:(BOOL)showHud{
+           showHud:(BOOL)showHud
+          showError:(BOOL)showError{
     NSLog(@"Post request to [%@] using [%@]", url, parameters);
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -165,18 +166,22 @@ static NSArray *month_cn;
         if(showHud)
             [hud hide:YES];
         
-        MBProgressHUD *messageHUD = [MBProgressHUD showHUDAddedTo:view animated:YES];
-        messageHUD.mode = MBProgressHUDModeText;
-        NSString *content = @"";
-        if (error.code == -1001) {
-            content = @"请求已超时, 请检查网络设置, 稍后重试";
-        } else {
-            content = @"请求失败, 请稍后重试";
+        if(showError)
+        {
+            MBProgressHUD *messageHUD = [MBProgressHUD showHUDAddedTo:view animated:YES];
+            messageHUD.mode = MBProgressHUDModeText;
+            NSString *content = @"";
+            if (error.code == -1001) {
+                content = @"请求已超时, 请检查网络设置, 稍后重试";
+            } else {
+                content = @"请求失败, 请稍后重试";
+            }
+            messageHUD.labelText = content;
+            messageHUD.margin = 10.f;
+            messageHUD.removeFromSuperViewOnHide = YES;
+            [messageHUD hide:YES afterDelay:2];
         }
-        messageHUD.labelText = content;
-        messageHUD.margin = 10.f;
-        messageHUD.removeFromSuperViewOnHide = YES;
-        [messageHUD hide:YES afterDelay:2];
+        
         if (failure != nil) {
             failure(operation, error);
         }
@@ -195,7 +200,7 @@ static NSArray *month_cn;
     NSDictionary *bodyhasdate = [KGUtil getRequestBody:body];
     NSDictionary *params = @{@"uid": REQUEST_UID, @"sign": [KGUtil getRequestSign:bodyhasdate], @"body":bodyhasdate};
     
-    [KGUtil postRequest:url parameters:params success:success failure:failure inView:view showHud:showHud];
+    [KGUtil postRequest:url parameters:params success:success failure:failure inView:view showHud:showHud showError:true];
 }
 
 + (void)uploadImage:(NSString *)curl
@@ -331,6 +336,11 @@ static NSArray *month_cn;
 + (NSString *)getServerHtmlURL {
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     return delegate.varible.server_html_url;
+}
+
++ (NSString *)getServerPushURL {
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    return delegate.varible.server_push_url;
 }
 
 + (void)lockTopMostVC {

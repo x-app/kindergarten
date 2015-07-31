@@ -108,7 +108,8 @@
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);
         } inView:self.view
-         showHud:true];
+         showHud:true
+         showError:true];
     }
 }
 
@@ -152,10 +153,12 @@
         } else {
             //失败
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    }
+    failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         //查询幼儿失败
     } inView:self.view
-     showHud:true];
+     showHud:true
+   showError:true];
 }
 
 - (void)setGesturePswd {
@@ -211,7 +214,8 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
     } inView:self.view
-     showHud:true];
+     showHud:true
+     showError:true];
 }
 
 - (void)showParkList {
@@ -331,7 +335,8 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
     } inView:self.view
-     showHud:true];
+     showHud:true
+     showError:true];
 }
 
 #pragma mark -- Test Actions --

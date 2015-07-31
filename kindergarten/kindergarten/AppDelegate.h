@@ -22,7 +22,9 @@
 
 @property (strong, nonatomic) KGVarible *varible;
 
-@property (strong, nonatomic) NSData* devicetoken;
+@property (strong, nonatomic) NSString* devicetoken;
+
+-(void)postToken;
 
 @end
 

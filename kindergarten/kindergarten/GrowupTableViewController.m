@@ -192,6 +192,7 @@
         cell.imgView.image = [UIImage imageNamed:@"camera.png"];
         
         [cell.imgView addGestureRecognizer:self.singleImgTap];
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
 
         return cell;
     }
