@@ -77,6 +77,7 @@
 
 + (void)lockTopMostVC;
 
++ (BOOL)isEmptyString:(NSString *)str;
 
 /******************************************************************************
  函数名称 : + (NSString *)base64StringFromText:(NSString *)text

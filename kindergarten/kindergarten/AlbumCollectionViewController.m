@@ -258,6 +258,13 @@ static NSString * const reuseIdentifier = @"AlbumCell";
     return UIEdgeInsetsMake(5, 2.5, 5, 2.5);
 }
 
+- (KGActivityAlbum *)getAlbum: (NSInteger)albumIndex {
+    if (albumIndex < 0 || albumIndex >= self.activityAlbums.count) {
+        return nil;
+    }
+    return self.activityAlbums[albumIndex];
+}
+
 - (KGActivityAlbumInfo *)getAlbumInfo: (NSInteger)albumIndex infoIndex:(NSInteger)infoIndex {
     if (albumIndex < 0 || albumIndex >= self.activityAlbums.count) {
         return nil;
@@ -284,8 +291,14 @@ static NSString * const reuseIdentifier = @"AlbumCell";
     if (info == nil) {
         return;
     }
+    KGActivityAlbum *album = [self getAlbum:rowInSelf];
+    if (album == nil) {
+        return;
+    }
+    NSString *desc = [KGUtil isEmptyString:info.desc] ? [NSString stringWithFormat:@"%@[%ld/%ld]", album.dirName, (long)(indexInPB + 1), (long)album.albumInfos.count]: info.desc;
     NSDictionary *data = @{@"childId": @([[[KGUtil getCurChild] cid] integerValue]),
-                           @"activitiesAlbumInfoId": @(info.infoId)};
+                           @"activitiesAlbumInfoId": @(info.infoId),
+                           @"description": desc};
     NSDictionary *body = [KGUtil getRequestBody:data];
     NSDictionary *params = @{@"uid": REQUEST_UID, @"sign": [KGUtil getRequestSign:body], @"body":body};
     NSString *urlSuffix = @"/parent/savePicToGrowthArchive";

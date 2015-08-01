@@ -65,6 +65,7 @@ static NSArray *month_cn;
     NSError *parseError = nil;
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:body options:0 error:&parseError];
     NSString *bodyStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    bodyStr = [bodyStr stringByReplacingOccurrencesOfString:@"\\/" withString:@"/"];
 //    [bodyStr appendString:@"{"];
 //    for (id key in [body allKeys]) {
 //        NSString *value = [body valueForKey:key];
@@ -395,6 +396,10 @@ static NSArray *month_cn;
 
 + (UIViewController *)getTopMostViewController {
     return [[UIApplication sharedApplication] topMostViewController];
+}
+
++ (BOOL)isEmptyString:(NSString *)str {
+    return (str == nil) || [str isKindOfClass:[NSNull class]] || [str isEqualToString:@""];
 }
 
 ///base64相关函数
