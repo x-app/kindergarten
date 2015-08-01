@@ -16,6 +16,7 @@
 #import "UIImageView+WebCache.h"
 #import "PBImageInfo.h"
 #import "PBViewController.h"
+
 @interface AlbumCollectionViewController ()
 
 @property (nonatomic) NSInteger pageIndex;
@@ -273,7 +274,6 @@ static NSString * const reuseIdentifier = @"AlbumCell";
 
 
 - (void)saveToGrowupDoc:(id)sender {
-    NSLog(@"save to grow up doc");
     if (![sender isKindOfClass:[KxMenuItem class]]) {
         return;
     }
@@ -284,7 +284,6 @@ static NSString * const reuseIdentifier = @"AlbumCell";
     if (info == nil) {
         return;
     }
-    NSLog(@"row: %ld, index:%ld", rowInSelf, indexInPB);
     NSDictionary *data = @{@"childId": @([[[KGUtil getCurChild] cid] integerValue]),
                            @"activitiesAlbumInfoId": @(info.infoId)};
     NSDictionary *body = [KGUtil getRequestBody:data];
@@ -295,11 +294,16 @@ static NSString * const reuseIdentifier = @"AlbumCell";
         NSLog(@"JSON: %@", responseObject);
         NSString *code = [responseObject objectForKey:@"code"];
         if ([code isEqualToString:@"000000"]) {
-            
+            [KGUtil showCheckMark:@"转存成功" checked:YES inView:[KGUtil getTopMostViewController].view];
+        } else {
+            NSString *msg = [responseObject objectForKey:@"msg"];
+            NSString *hint = [NSString stringWithFormat:@"转存失败: %@", msg];
+            [KGUtil showCheckMark:hint checked:NO inView:[KGUtil getTopMostViewController].view];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
-    } inView:self.collectionView showHud:YES];
+        [KGUtil showCheckMark:@"保存至成长档案失败" checked:YES inView:self.collectionView];
+    } inView:[KGUtil getTopMostViewController].view showHud:YES];
 }
 
 @end

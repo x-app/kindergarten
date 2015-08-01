@@ -131,6 +131,25 @@ static NSArray *month_cn;
     //[HUD showWhileExecuting:@selector(myTask) onTarget:self withObject:nil animated:YES];
 }
 
++ (void)showCheckMark:(NSString *)infoText checked:(BOOL)checked inView:(id)view {
+    if (![view isKindOfClass:[UIView class]]) {
+        return;
+    }
+    MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:view];
+    [view addSubview:hud];
+    NSString *iconName = checked ? @"checkmark" : @"checkmark_false";
+    hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:iconName]];
+    
+    // Set custom view mode
+    hud.mode = MBProgressHUDModeCustomView;
+    
+    //hud.delegate = self;
+    hud.labelText = infoText;
+    
+    [hud show:YES];
+    [hud hide:YES afterDelay:2];
+}
+
 + (void)postRequest:(NSString *)url
          parameters:(id)parameters
             success:(void (^)(AFHTTPRequestOperation *, id))success
@@ -353,6 +372,11 @@ static NSArray *month_cn;
             [lockVC dismiss:1.0f];
         }];
     }
+}
+
++ (UIViewController *)getTopMostViewController {
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    return [[UIApplication sharedApplication] topMostViewController];
 }
 
 

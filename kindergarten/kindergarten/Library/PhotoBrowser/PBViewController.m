@@ -8,6 +8,7 @@
 
 #import "PBViewController.h"
 #import "AppDelegate.h"
+#import "KGUtil.h"
 @interface PBViewController ()<UIScrollViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray *menuItems;
@@ -156,18 +157,22 @@
 
 - (void)image: (UIImage *)image didFinishSavingWithError: (NSError *) error contextInfo: (void *) contextInfo
 {
-    NSString *msg = nil ;
+    NSString *msg = nil;
+    BOOL successFlag = NO;
     if(error != NULL){
         msg = @"保存图片失败" ;
-    }else{
+        successFlag = NO;
+    } else{
         msg = @"保存图片成功" ;
+        successFlag = YES;
     }
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"保存图片结果提示"
+    [KGUtil showCheckMark:msg checked:successFlag inView:self.view];
+    /*UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"保存图片结果提示"
                                                     message:msg
                                                    delegate:self
                                           cancelButtonTitle:@"确定"
                                           otherButtonTitles:nil];
-    [alert show];
+    [alert show];*/
 }
 
 - (void)setNavigationBarStyle {

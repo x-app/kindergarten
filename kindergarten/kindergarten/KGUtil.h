@@ -25,9 +25,13 @@
 
 + (NSString *)getDateStr: (NSDate *)date;
 
-+ (void)showAlert: (NSString *)content inView:(id)view;
++ (void)showAlert:(NSString *)content inView:(id)view;
 
-+ (void)showLoading: (id)view;
++ (void)showLoading:(id)view;
+
++ (void)showCheckMark:(NSString *)infoText checked:(BOOL)checked inView:(id)view;
+
++ (UIViewController *)getTopMostViewController;
 
 + (void)postRequest: (NSString *)url
          parameters:(id)parameters

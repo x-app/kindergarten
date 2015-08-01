@@ -198,7 +198,7 @@
         return nil;
     }
  
-    const CGFloat kMinMenuItemHeight = 36.f;
+    //const CGFloat kMinMenuItemHeight = 36.f;
     const CGFloat kMinMenuItemWidth = 100.f;
     const CGFloat kMarginX = 5.f;
     const CGFloat kMarginY = 2.f;
