@@ -51,7 +51,7 @@
     
     self.tableView.separatorStyle = NO;
     
-    self.curPageIndex = 0;
+    self.curPageIndex = 1;
     
     self.singleImgTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onAddClick:)];
 
@@ -150,9 +150,9 @@
             self.tableView.footer.hidden = NO;
             [self.tableView.header endRefreshing];
             [self.tableView.footer endRefreshing];
-            if(self.curPageIndex + objlist.count < pageTotalCount)
+            if(self.curPageIndex + KG_PAGE_SIZE-1 < pageTotalCount)
             {
-                self.curPageIndex += objlist.count;
+                self.curPageIndex += KG_PAGE_SIZE;
             }
             else{
                 [self.tableView.footer noticeNoMoreData];

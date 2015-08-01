@@ -18,11 +18,11 @@
 }
 
 - (NSDictionary *)toDictionary {
-    NSMutableArray *dictArray = [[NSMutableArray alloc] initWithCapacity:[self.childs count]];
-    for (int i = 0; i < [self.childs count]; i++) {
-        NSDictionary *childDict = [self.childs[i] toDictionary];
-        [dictArray addObject:childDict];
-    }
+//    NSMutableArray *dictArray = [[NSMutableArray alloc] initWithCapacity:[self.childs count]];
+//    for (int i = 0; i < [self.childs count]; i++) {
+//        NSDictionary *childDict = [self.childs[i] toDictionary];
+//        [dictArray addObject:childDict];
+//    }
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
                           self.name, @"name",
                           self.idNo, @"idNo",
