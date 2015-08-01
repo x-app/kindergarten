@@ -609,25 +609,25 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CII-X6-0Rp">
-                                <rect key="frame" x="175" y="146" width="250" height="250"/>
+                                <rect key="frame" x="175" y="144" width="250" height="250"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="250" id="3tZ-Zd-C1Z"/>
                                     <constraint firstAttribute="width" constant="250" id="S2e-o3-ezj"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请让幼儿园的工作人员扫描下面的二维码，通过检验后再入园接送您的宝贝" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bb6-cW-dHd">
-                                <rect key="frame" x="30" y="94" width="540" height="42"/>
+                                <rect key="frame" x="30" y="94" width="540" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="42" id="MS3-WK-Cqf"/>
+                                    <constraint firstAttribute="height" constant="40" id="MS3-WK-Cqf"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="有效日期" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3kR-R8-020">
-                                <rect key="frame" x="175" y="406" width="250" height="30"/>
+                                <rect key="frame" x="175" y="404" width="250" height="20"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="PvB-fs-XE0"/>
+                                    <constraint firstAttribute="height" constant="20" id="PvB-fs-XE0"/>
                                     <constraint firstAttribute="width" constant="250" id="iOx-My-vDS"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>

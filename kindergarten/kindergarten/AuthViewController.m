@@ -67,7 +67,7 @@
     }
     childsStr = [childsStr stringByAppendingString:@"]"];
     NSInteger parentId = curUser.parentID;
-    NSString *contentStr = [NSString stringWithFormat:@"{\"type\":\"1\",\"time\":\"%@\",\"parent\":\"%ld\",\"childlist\":\"%@\"}", dateStr, (long)parentId, childsStr];
+    NSString *contentStr = [NSString stringWithFormat:@"{\"type\":\"1\",\"time\":\"%@\",\"parent\":\"%ld\",\"childlist\":%@}", dateStr, (long)parentId, childsStr];
     NSLog(@"content string: %@", contentStr);
     NSString *finalContentStr = [NSString stringWithFormat:@"AA%@ZZ", [KGUtil base64StringFromText:contentStr]];
     NSLog(@"final content string:%@", finalContentStr);
