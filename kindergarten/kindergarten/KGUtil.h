@@ -38,7 +38,8 @@
             success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
             failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
              inView:(UIView *)view
-            showHud:(BOOL)showHud;
+            showHud:(BOOL)showHud
+          showError:(BOOL)showError;
 
 + (void)postKGRequest:(NSString *)curl
                  body:(NSDictionary *)body
@@ -66,6 +67,8 @@
 + (NSString *)getServerAppURL;
 
 + (NSString *)getServerHtmlURL;
+
++ (NSString *)getServerPushURL;
 
 + (void)lockTopMostVC;
 

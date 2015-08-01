@@ -10,7 +10,6 @@
 
 @interface GrowupTableViewController : UITableViewController
 
-- (void)reload;
 
 @property (nonatomic, strong) NSMutableArray *docs;
 

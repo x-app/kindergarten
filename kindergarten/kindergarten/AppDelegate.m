@@ -63,6 +63,7 @@
     self.varible = [[KGVarible alloc] init];
     self.varible.server_index_url = @"http://app.nugget-nj.com/kindergarten_index";
     //self.varible.server_app_url = @"http://app.nugget-nj.com/nugget_app";
+    self.varible.server_push_url = @"http://slice.eu.org:8080/pushservice/api";
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     
@@ -187,6 +188,27 @@
     [self window].rootViewController = [mainStoryboard instantiateInitialViewController];
 }*/
 
+-(void)postToken
+{
+    if(self.user != nil && self.user.uid != nil && self.devicetoken != nil)
+    {
+        NSDictionary *data = @{@"user_id": self.user.uid,
+                               @"token": self.devicetoken,
+                               @"name": self.user.name};
+        NSDictionary *body = [KGUtil getRequestBody:data];
+        NSDictionary *params = @{@"type": @"JOIN", @"sign": [KGUtil getRequestSign:body], @"body": body};
+        
+        [KGUtil postRequest:[KGUtil getServerPushURL] parameters:params
+                    success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                        NSLog(@"submit token succ!");
+                    }
+                    failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                        NSLog(@"Error: %@", error);
+                    }
+                    inView:nil showHud:false showError:false];
+    }
+}
+
 #pragma mark - MYIntroduction Delegate
 
 -(void)introduction:(MYBlurIntroductionView *)introductionView didChangeToPanel:(MYIntroductionPanel *)panel withIndex:(NSInteger)panelIndex{
@@ -220,7 +242,13 @@
 - (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
 {
     NSLog(@"My token is: %@", deviceToken);
-    self.devicetoken = deviceToken;
+    
+    NSString *newToken = [deviceToken description];
+    newToken = [newToken stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
+    newToken = [newToken stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    self.devicetoken = newToken;
+    [self postToken];
 }
 
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error

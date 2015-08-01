@@ -13,6 +13,7 @@
 @property (nonatomic, strong) NSString *server_index_url;
 @property (nonatomic, strong) NSString *server_app_url;
 @property (nonatomic, strong) NSString *server_html_url;
+@property (nonatomic, strong) NSString *server_push_url;
 
 @property (nonatomic, strong) NSString *parkName;
 

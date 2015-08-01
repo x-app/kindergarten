@@ -121,7 +121,7 @@ static NSString * const reuseIdentifier = @"AlbumCell";
         NSLog(@"Error: %@", error);
         [self.collectionView.header endRefreshing];
         [self.collectionView.footer endRefreshing];
-    } inView:self.collectionView showHud:NO];
+    } inView:self.collectionView showHud:NO showError:true];
 }
 
 /*
@@ -303,7 +303,7 @@ static NSString * const reuseIdentifier = @"AlbumCell";
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
         [KGUtil showCheckMark:@"保存至成长档案失败" checked:YES inView:self.collectionView];
-    } inView:[KGUtil getTopMostViewController].view showHud:YES];
+    } inView:[KGUtil getTopMostViewController].view showHud:YES showError:true];
 }
 
 @end

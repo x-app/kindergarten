@@ -132,7 +132,7 @@
         NSLog(@"Error: %@", error);
         [self.tableView.header endRefreshing];
         [self.tableView.footer endRefreshing];
-    } inView:self.tableView showHud:NO];
+    } inView:self.tableView showHud:NO showError:true];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

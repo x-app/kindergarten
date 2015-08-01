@@ -48,6 +48,8 @@
             
             [self saveUser:delegate.user];
             
+            [delegate postToken];
+            
             next.fromVC = current.fromVC;
             current.nextVC = next;
             if (delegate.user.regMode == 0) {
@@ -72,7 +74,7 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
     } inView:current.view
-     showHud:true];
+     showHud:true showError:true];
 }
 
 -(void)saveUser:(KGUser *)user
