@@ -599,7 +599,7 @@
         <!--接送授权-->
         <scene sceneID="2PL-db-0ye">
             <objects>
-                <viewController storyboardIdentifier="PickupView" title="接送授权" hidesBottomBarWhenPushed="YES" id="ldc-JC-M6i" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PickupView" title="接送授权" hidesBottomBarWhenPushed="YES" id="ldc-JC-M6i" customClass="AuthViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uwg-Wv-Gv7"/>
                         <viewControllerLayoutGuide type="bottom" id="5yo-yp-0Dk"/>
@@ -607,8 +607,50 @@
                     <view key="view" contentMode="scaleToFill" id="50p-qs-bY5">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CII-X6-0Rp">
+                                <rect key="frame" x="175" y="144" width="250" height="250"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="250" id="3tZ-Zd-C1Z"/>
+                                    <constraint firstAttribute="width" constant="250" id="S2e-o3-ezj"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请让幼儿园的工作人员扫描下面的二维码，通过检验后再入园接送您的宝贝" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bb6-cW-dHd">
+                                <rect key="frame" x="30" y="94" width="540" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="MS3-WK-Cqf"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="有效日期" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3kR-R8-020">
+                                <rect key="frame" x="175" y="404" width="250" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="PvB-fs-XE0"/>
+                                    <constraint firstAttribute="width" constant="250" id="iOx-My-vDS"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="3kR-R8-020" secondAttribute="centerX" id="51T-7P-K90"/>
+                            <constraint firstItem="Bb6-cW-dHd" firstAttribute="top" secondItem="uwg-Wv-Gv7" secondAttribute="bottom" constant="30" id="GUq-hZ-bap"/>
+                            <constraint firstItem="Bb6-cW-dHd" firstAttribute="leading" secondItem="50p-qs-bY5" secondAttribute="leading" constant="30" id="JfT-5w-jcv"/>
+                            <constraint firstAttribute="trailing" secondItem="Bb6-cW-dHd" secondAttribute="trailing" constant="30" id="TYM-hy-7PV"/>
+                            <constraint firstItem="CII-X6-0Rp" firstAttribute="top" secondItem="Bb6-cW-dHd" secondAttribute="bottom" constant="10" id="Z4C-DH-VYy"/>
+                            <constraint firstItem="3kR-R8-020" firstAttribute="top" secondItem="CII-X6-0Rp" secondAttribute="bottom" constant="10" id="eSh-Pw-Yco"/>
+                            <constraint firstAttribute="centerX" secondItem="CII-X6-0Rp" secondAttribute="centerX" id="wlj-5m-Ue5"/>
+                        </constraints>
                     </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="qrCodeImageView" destination="CII-X6-0Rp" id="5Mr-ZD-C3v"/>
+                        <outlet property="validDateLabel" destination="3kR-R8-020" id="m3g-Kp-jKv"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tai-d9-iN9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
