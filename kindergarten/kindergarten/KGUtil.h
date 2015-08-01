@@ -25,6 +25,8 @@
 
 + (NSString *)getDateStr: (NSDate *)date;
 
++ (NSString *)getChnDateStr: (NSDate *)date;
+
 + (void)showAlert:(NSString *)content inView:(id)view;
 
 + (void)showLoading:(id)view;

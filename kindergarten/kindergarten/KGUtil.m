@@ -101,6 +101,13 @@ static NSArray *month_cn;
     return dateStr;
 }
 
++ (NSString *)getChnDateStr: (NSDate *)date {
+    NSDateFormatter *df = [[NSDateFormatter alloc] init];
+    [df setDateFormat:@"yyyy年MM月dd日"];
+    NSString *dateStr = [df stringFromDate:date];
+    return dateStr;
+}
+
 + (void)showAlert:(NSString *)content inView:(id)view {
     if (![view isKindOfClass:[UIView class]]) {
         return;

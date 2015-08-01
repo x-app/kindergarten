@@ -173,6 +173,15 @@
 		99B3DAA01B6911E1007BBAE9 /* gallery_more_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 99B3DA9F1B6911E1007BBAE9 /* gallery_more_icon.png */; };
 		99C642891B6A5627008EF929 /* KxMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 99C642881B6A5627008EF929 /* KxMenu.m */; };
 		99C6428B1B6B46A2008EF929 /* save.png in Resources */ = {isa = PBXBuildFile; fileRef = 99C6428A1B6B46A2008EF929 /* save.png */; };
+		99C642A41B6CB378008EF929 /* bitstream.c in Sources */ = {isa = PBXBuildFile; fileRef = 99C642931B6CB378008EF929 /* bitstream.c */; };
+		99C642A51B6CB378008EF929 /* mask.c in Sources */ = {isa = PBXBuildFile; fileRef = 99C642951B6CB378008EF929 /* mask.c */; };
+		99C642A61B6CB378008EF929 /* qrencode.c in Sources */ = {isa = PBXBuildFile; fileRef = 99C642971B6CB378008EF929 /* qrencode.c */; };
+		99C642A71B6CB378008EF929 /* qrinput.c in Sources */ = {isa = PBXBuildFile; fileRef = 99C642991B6CB378008EF929 /* qrinput.c */; };
+		99C642A81B6CB378008EF929 /* qrspec.c in Sources */ = {isa = PBXBuildFile; fileRef = 99C6429B1B6CB378008EF929 /* qrspec.c */; };
+		99C642A91B6CB378008EF929 /* rscode.c in Sources */ = {isa = PBXBuildFile; fileRef = 99C6429D1B6CB378008EF929 /* rscode.c */; };
+		99C642AA1B6CB378008EF929 /* split.c in Sources */ = {isa = PBXBuildFile; fileRef = 99C6429F1B6CB378008EF929 /* split.c */; };
+		99C642AB1B6CB378008EF929 /* QRCodeGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 99C642A31B6CB378008EF929 /* QRCodeGenerator.m */; };
+		99C642AE1B6CB8C1008EF929 /* AuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99C642AD1B6CB8C1008EF929 /* AuthViewController.m */; };
 		99D55A501B5FC8AF00C508A3 /* Introduction.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 99D55A4F1B5FC8AF00C508A3 /* Introduction.storyboard */; };
 		99D55A541B5FC92A00C508A3 /* IntroductionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99D55A531B5FC92A00C508A3 /* IntroductionViewController.m */; };
 		99D55A571B61222900C508A3 /* MeFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 99D55A561B61222900C508A3 /* MeFunction.m */; };
@@ -472,6 +481,24 @@
 		99C642871B6A5627008EF929 /* KxMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KxMenu.h; sourceTree = "<group>"; };
 		99C642881B6A5627008EF929 /* KxMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KxMenu.m; sourceTree = "<group>"; };
 		99C6428A1B6B46A2008EF929 /* save.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = save.png; path = Resource/save.png; sourceTree = "<group>"; };
+		99C642931B6CB378008EF929 /* bitstream.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = bitstream.c; sourceTree = "<group>"; };
+		99C642941B6CB378008EF929 /* bitstream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bitstream.h; sourceTree = "<group>"; };
+		99C642951B6CB378008EF929 /* mask.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mask.c; sourceTree = "<group>"; };
+		99C642961B6CB378008EF929 /* mask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mask.h; sourceTree = "<group>"; };
+		99C642971B6CB378008EF929 /* qrencode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = qrencode.c; sourceTree = "<group>"; };
+		99C642981B6CB378008EF929 /* qrencode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = qrencode.h; sourceTree = "<group>"; };
+		99C642991B6CB378008EF929 /* qrinput.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = qrinput.c; sourceTree = "<group>"; };
+		99C6429A1B6CB378008EF929 /* qrinput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = qrinput.h; sourceTree = "<group>"; };
+		99C6429B1B6CB378008EF929 /* qrspec.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = qrspec.c; sourceTree = "<group>"; };
+		99C6429C1B6CB378008EF929 /* qrspec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = qrspec.h; sourceTree = "<group>"; };
+		99C6429D1B6CB378008EF929 /* rscode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rscode.c; sourceTree = "<group>"; };
+		99C6429E1B6CB378008EF929 /* rscode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rscode.h; sourceTree = "<group>"; };
+		99C6429F1B6CB378008EF929 /* split.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = split.c; sourceTree = "<group>"; };
+		99C642A01B6CB378008EF929 /* split.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = split.h; sourceTree = "<group>"; };
+		99C642A21B6CB378008EF929 /* QRCodeGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeGenerator.h; sourceTree = "<group>"; };
+		99C642A31B6CB378008EF929 /* QRCodeGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeGenerator.m; sourceTree = "<group>"; };
+		99C642AC1B6CB8C1008EF929 /* AuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthViewController.h; sourceTree = "<group>"; };
+		99C642AD1B6CB8C1008EF929 /* AuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthViewController.m; sourceTree = "<group>"; };
 		99D55A4F1B5FC8AF00C508A3 /* Introduction.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Introduction.storyboard; sourceTree = "<group>"; };
 		99D55A521B5FC92A00C508A3 /* IntroductionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroductionViewController.h; sourceTree = "<group>"; };
 		99D55A531B5FC92A00C508A3 /* IntroductionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroductionViewController.m; sourceTree = "<group>"; };
@@ -654,6 +681,8 @@
 				12DEAD001B4D693300C437BE /* Baby.storyboard */,
 				12C794991B44232300918497 /* BabyViewController.h */,
 				12C7949A1B44232300918497 /* BabyViewController.m */,
+				99C642AC1B6CB8C1008EF929 /* AuthViewController.h */,
+				99C642AD1B6CB8C1008EF929 /* AuthViewController.m */,
 			);
 			name = "Baby Storyboard";
 			sourceTree = "<group>";
@@ -933,6 +962,8 @@
 		9997B9AB1B4D580100B908B6 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				99C642921B6CB378008EF929 /* libqrencode */,
+				99C642A11B6CB378008EF929 /* QRCodeGenerator */,
 				99688A361B62854A00AA7A41 /* VPImageCropper */,
 				9911C2E71B5F36990080FFA9 /* Category */,
 				9911C2C71B5E825B0080FFA9 /* PhotoBrowser */,
@@ -1190,6 +1221,38 @@
 			name = Resource;
 			sourceTree = "<group>";
 		};
+		99C642921B6CB378008EF929 /* libqrencode */ = {
+			isa = PBXGroup;
+			children = (
+				99C642931B6CB378008EF929 /* bitstream.c */,
+				99C642941B6CB378008EF929 /* bitstream.h */,
+				99C642951B6CB378008EF929 /* mask.c */,
+				99C642961B6CB378008EF929 /* mask.h */,
+				99C642971B6CB378008EF929 /* qrencode.c */,
+				99C642981B6CB378008EF929 /* qrencode.h */,
+				99C642991B6CB378008EF929 /* qrinput.c */,
+				99C6429A1B6CB378008EF929 /* qrinput.h */,
+				99C6429B1B6CB378008EF929 /* qrspec.c */,
+				99C6429C1B6CB378008EF929 /* qrspec.h */,
+				99C6429D1B6CB378008EF929 /* rscode.c */,
+				99C6429E1B6CB378008EF929 /* rscode.h */,
+				99C6429F1B6CB378008EF929 /* split.c */,
+				99C642A01B6CB378008EF929 /* split.h */,
+			);
+			name = libqrencode;
+			path = Library/libqrencode;
+			sourceTree = "<group>";
+		};
+		99C642A11B6CB378008EF929 /* QRCodeGenerator */ = {
+			isa = PBXGroup;
+			children = (
+				99C642A21B6CB378008EF929 /* QRCodeGenerator.h */,
+				99C642A31B6CB378008EF929 /* QRCodeGenerator.m */,
+			);
+			name = QRCodeGenerator;
+			path = Library/QRCodeGenerator;
+			sourceTree = "<group>";
+		};
 		99D55A511B5FC8CC00C508A3 /* Introduction Storyboard */ = {
 			isa = PBXGroup;
 			children = (
@@ -1420,6 +1483,7 @@
 				12EAE15A1B5D3A270084680C /* UIScrollView+MJExtension.m in Sources */,
 				99709B6E1B59E50A00150176 /* KGHomework.m in Sources */,
 				9911C2331B5A84C10080FFA9 /* UIImageView+UIActivityIndicatorForSDWebImage.m in Sources */,
+				99C642A61B6CB378008EF929 /* qrencode.c in Sources */,
 				99F17F681B50C3E800866F8F /* LoginViewContoller.m in Sources */,
 				9990FB491B67BF1E006A80F7 /* AlbumCollectionViewCell.m in Sources */,
 				9911C2D61B5E825C0080FFA9 /* PBImageView.m in Sources */,
@@ -1443,11 +1507,13 @@
 				12EAE14F1B5D3A270084680C /* MJRefreshAutoGifFooter.m in Sources */,
 				9911C2281B5A6BA50080FFA9 /* SDWebImageManager.m in Sources */,
 				9997BA181B4D580E00B908B6 /* CLLockView.m in Sources */,
+				99C642AA1B6CB378008EF929 /* split.c in Sources */,
 				12EAE15C1B5D3A270084680C /* UIView+MJExtension.m in Sources */,
 				9911C22B1B5A6BA50080FFA9 /* UIImage+GIF.m in Sources */,
 				99709B6B1B59E45000150176 /* ChildTableViewController.m in Sources */,
 				12C7949E1B44232300918497 /* ClassViewController.m in Sources */,
 				12EAE1561B5D3A270084680C /* MJRefreshNormalHeader.m in Sources */,
+				99C642A41B6CB378008EF929 /* bitstream.c in Sources */,
 				12EAE0D81B5B65A50084680C /* GrowupTableViewController.m in Sources */,
 				9911C22A1B5A6BA50080FFA9 /* UIButton+WebCache.m in Sources */,
 				9911C2271B5A6BA50080FFA9 /* SDWebImageDownloaderOperation.m in Sources */,
@@ -1457,6 +1523,7 @@
 				9997BA001B4D580E00B908B6 /* AFHTTPRequestOperationManager.m in Sources */,
 				12EAE0DE1B5B8FE90084680C /* GrowDoc.m in Sources */,
 				12AC15F71B490D80007C247B /* MeViewController.m in Sources */,
+				99C642A81B6CB378008EF929 /* qrspec.c in Sources */,
 				9997BA031B4D580E00B908B6 /* AFSecurityPolicy.m in Sources */,
 				9911C2301B5A6BA50080FFA9 /* UIView+WebCacheOperation.m in Sources */,
 				12C794981B44232300918497 /* AppDelegate.m in Sources */,
@@ -1471,6 +1538,7 @@
 				9997BA141B4D580E00B908B6 /* CLLockInfoView.m in Sources */,
 				99C642891B6A5627008EF929 /* KxMenu.m in Sources */,
 				9997BA021B4D580E00B908B6 /* AFNetworkReachabilityManager.m in Sources */,
+				99C642A91B6CB378008EF929 /* rscode.c in Sources */,
 				9997BA131B4D580E00B908B6 /* CLLockNavVC.m in Sources */,
 				99F17F581B4E94B700866F8F /* KGChild.m in Sources */,
 				9997BA161B4D580E00B908B6 /* CLLockLabel.m in Sources */,
@@ -1487,6 +1555,7 @@
 				99F17F5E1B4ED3D800866F8F /* KGConst.m in Sources */,
 				9911C2EA1B5F36990080FFA9 /* UIViewController+TopMostViewController.m in Sources */,
 				9997BA1A1B4D580E00B908B6 /* CoreArchive.m in Sources */,
+				99C642A51B6CB378008EF929 /* mask.c in Sources */,
 				12EAE1521B5D3A270084680C /* MJRefreshBackGifFooter.m in Sources */,
 				9990FB461B67B182006A80F7 /* KGActivityAlbumInfo.m in Sources */,
 				99F17F5B1B4ECCCD00866F8F /* KGUtil.m in Sources */,
@@ -1495,11 +1564,13 @@
 				9911C22C1B5A6BA50080FFA9 /* UIImage+MultiFormat.m in Sources */,
 				9911C22E1B5A6BA50080FFA9 /* UIImageView+HighlightedWebCache.m in Sources */,
 				12AC16141B4918C3007C247B /* RBStoryboardSegue.m in Sources */,
+				99C642A71B6CB378008EF929 /* qrinput.c in Sources */,
 				99F17F551B4E91B800866F8F /* KGUser.m in Sources */,
 				9911C1FE1B5A62D40080FFA9 /* KGImageDetailViewController.m in Sources */,
 				9997BA011B4D580E00B908B6 /* AFHTTPSessionManager.m in Sources */,
 				12EAE14E1B5D3A270084680C /* MJRefreshHeader.m in Sources */,
 				9911C2D51B5E825C0080FFA9 /* PBImageInfo.m in Sources */,
+				99C642AE1B6CB8C1008EF929 /* AuthViewController.m in Sources */,
 				12C794951B44232300918497 /* main.m in Sources */,
 				9911C2DB1B5E825C0080FFA9 /* PBViewController.m in Sources */,
 				9997BA111B4D580E00B908B6 /* CALayer+Anim.m in Sources */,
@@ -1507,6 +1578,7 @@
 				9911C2241B5A6BA50080FFA9 /* SDWebImageCompat.m in Sources */,
 				12EAE1541B5D3A270084680C /* MJRefreshBackStateFooter.m in Sources */,
 				99D55A571B61222900C508A3 /* MeFunction.m in Sources */,
+				99C642AB1B6CB378008EF929 /* QRCodeGenerator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
