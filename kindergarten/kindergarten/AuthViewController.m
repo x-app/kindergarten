@@ -27,7 +27,7 @@
 
 
 - (NSString *)authorityString {
-    return @"hello world";
+    
     /**
      SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
      LoginManager loginManager = new LoginManager(this);
@@ -55,7 +55,23 @@
      return res.substring(0, res.length() - 1) + "]}";
 
      */
-    
+    NSString *dateStr = [KGUtil getDateStr:[[NSDate alloc] init]];
+    NSString *childsStr = @"[";
+    KGUser *curUser = [KGUtil getUser];
+    for (int i = 0; i < curUser.childs.count; i++) {
+        KGChild *curChild = [curUser.childs objectAtIndex:i];
+        childsStr = [childsStr stringByAppendingFormat:@"{\"child\":\"%@\"}", curChild.cid];
+        if (i != curUser.childs.count - 1) {
+            childsStr = [childsStr stringByAppendingString:@","];
+        }
+    }
+    childsStr = [childsStr stringByAppendingString:@"]"];
+    NSInteger parentId = curUser.parentID;
+    NSString *contentStr = [NSString stringWithFormat:@"{\"type\":\"1\",\"time\":\"%@\",\"parent\":\"%ld\",\"childlist\":\"%@\"}", dateStr, (long)parentId, childsStr];
+    NSLog(@"content string: %@", contentStr);
+    NSString *finalContentStr = [NSString stringWithFormat:@"AA%@ZZ", [KGUtil base64StringFromText:contentStr]];
+    NSLog(@"final content string:%@", finalContentStr);
+    return finalContentStr;
 }
 
 - (void)generateQRCode {
