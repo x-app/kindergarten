@@ -372,7 +372,7 @@ static NSArray *month_cn;
         KGChild *child = [[KGChild alloc] initWithName:[childInfo objectForKey:@"name"]
                                                        id:[childInfo objectForKey:@"id"]
                                                       sex:[[childInfo objectForKey:@"sex"] integerValue]
-                                                  classID:[childInfo objectForKey:@"classId"]
+                                                  classID:(long)[childInfo objectForKey:@"classId"]
                                                 className:[childInfo objectForKey:@"className"]
                                                  birthday:[childInfo objectForKey:@"birthday"]];
          
