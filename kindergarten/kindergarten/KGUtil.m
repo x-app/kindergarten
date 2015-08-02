@@ -253,8 +253,17 @@ static NSArray *month_cn;
     NSData* descdata = [desc_encoded dataUsingEncoding:NSUTF8StringEncoding];
     
     NSString *url = [[KGUtil getServerAppURL] stringByAppendingString:curl];
-    NSData* data = UIImagePNGRepresentation(image);
-    NSLog(@"update image size is %lu", (unsigned long)[data length]);
+//    NSData* data = UIImagePNGRepresentation(image);
+    NSData *data = UIImageJPEGRepresentation(image, 1.0);
+    NSLog(@"uplaod image size of fatctor 1.0 is %lu", (unsigned long)[data length]);
+    
+    float factor = 0.9;
+    while([data length] >= 1000000 && factor > 0)
+    {
+        data = UIImageJPEGRepresentation(image, factor);
+        NSLog(@"upload image size of factor %f is %lu", factor, (unsigned long)[data length]);
+        factor -= 0.1;
+    }
     
     MBProgressHUD *hud = nil;
     if(showHud)

@@ -24,6 +24,9 @@
     
     if(self.image != nil)
         [self.imgView setImage:self.image];
+    
+    if(self.textView != nil)
+        self.textView.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -73,4 +76,12 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+#pragma mark - textview delegate
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView
+{
+    textView.text = @"";
+    textView.textColor = [UIColor blackColor];
+
+    return YES;
+}
 @end

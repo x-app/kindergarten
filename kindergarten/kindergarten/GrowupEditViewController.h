@@ -14,7 +14,7 @@
 
 @end
 
-@interface GrowupEditViewController : UIViewController
+@interface GrowupEditViewController : UIViewController <UITextViewDelegate>
 
 @property (nonatomic, weak) UIImage *image;
 
