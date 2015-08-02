@@ -19,6 +19,13 @@
     NSLog(@"verify user profile");
     LoginViewContoller *current = self.sourceViewController;
     LoginViewContoller *next = self.destinationViewController;
+    if ([current.parkTextField.text isEqualToString:@""]) {
+        [KGUtil showAlert:@"请选择所在幼儿园" inView:current.view];
+        return;
+    }
+    if ([KGUtil isEmptyString:[KGUtil getServerAppURL]] || [KGUtil isEmptyString:[KGUtil getServerIndexURL]] || [KGUtil isEmptyString:[KGUtil getServerHtmlURL]]) {
+        [KGUtil showAlert:@"幼儿园信息异常" inView:current.view];
+    }
     if ([current.idNoTextField.text isEqualToString:@""]) {
         [KGUtil showAlert:@"身份证号不能为空" inView:current.view];
         return;
@@ -31,7 +38,8 @@
     NSDictionary *body = [KGUtil getRequestBody:profile];
     NSDictionary *params = @{@"uid": REQUEST_UID, @"sign": [KGUtil getRequestSign:body], @"body":body};
     //NSString *url = @"http://app.nugget-nj.com/nugget_app/parent/regValid";
-    NSString *url = [[KGUtil getServerAppURL] stringByAppendingString:@"/parent/regValid"];
+    NSString *urlSuffix = [KGUtil isTeacherVersion] ? @"/teacher/regValid" : @"/parent/regValid";
+    NSString *url = [[KGUtil getServerAppURL] stringByAppendingString:urlSuffix];
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     [KGUtil postRequest:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON: %@", responseObject);
@@ -42,7 +50,11 @@
             delegate.user.name = [obj objectForKey:@"name"];
             delegate.user.idNo = [obj objectForKey:@"idNo"];
             delegate.user.question = [obj objectForKey:@"question"];
-            delegate.user.parentID = [[obj objectForKey:@"parentid"] integerValue];
+            if ([KGUtil isTeacherVersion]) {
+                delegate.user.teacherID = [[obj objectForKey:@"teacherid"] integerValue];
+            } else {
+                delegate.user.parentID = [[obj objectForKey:@"parentid"] integerValue];
+            }
             delegate.user.uid = [obj objectForKey:@"iuId"];
             delegate.user.answer = [obj objectForKey:@"answer"];
             
@@ -58,13 +70,21 @@
                     //current.nextVC = next;
                     [hint show];
                 } else {
-                    [current queryChildInfo: delegate.user.uid];
+                    if ([KGUtil isTeacherVersion]) {
+                        [current queryClassInfo: delegate.user.uid];
+                    } else {
+                        [current queryChildInfo: delegate.user.uid];
+                    }
                     //[current.navigationController pushViewController:next animated:YES];
                 }
                 //[hint release];
                 //[KGUtil showAlert:@"刚用户已经注册,你是否是要找回密码?" inView:current.view];
             } else if (delegate.user.regMode == 1) {
-                [current queryChildInfo: delegate.user.uid];
+                if ([KGUtil isTeacherVersion]) {
+                    [current queryClassInfo: delegate.user.uid];
+                } else {
+                    [current queryChildInfo: delegate.user.uid];
+                }
                 //next.qstnTextField.text = question;
                 //[current.navigationController pushViewController:next animated:YES];
             }

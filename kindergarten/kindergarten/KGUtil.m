@@ -322,6 +322,31 @@ static NSArray *month_cn;
     return delegate.user;
 }
 
++ (KGClass *)getCurClass {
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    if ([delegate.user.classes count] >= 1) {
+        KGClass *curClass = [delegate.user.childs objectAtIndex:0];
+        return curClass;
+    }
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSArray *curclasses = [userDefaults objectForKey:@"curclasses"];
+    
+    for(int i=0; i<curclasses.count; i++)
+    {
+        NSDictionary *classInfo = (NSDictionary *)[curclasses objectAtIndex:i];
+        
+        KGClass *aClass = [[KGClass alloc] initWithName:[classInfo objectForKey:@"className"]
+                                                classId:[[classInfo objectForKey:@"classId"] integerValue]];
+        [delegate.user.classes addObject:aClass];
+    }
+    
+    // TODO 选择class
+    if(delegate.user.classes.count > 0)
+        return delegate.user.classes[0];
+    return nil;
+}
+
 + (KGChild *)getCurChild {
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     if ([delegate.user.childs count] >= 1) {

@@ -10,6 +10,7 @@
 #import "AFHTTPRequestOperationManager.h"
 #import "KGChild.h"
 #import "KGVarible.h"
+#import "KGClass.h"
 
 #define __BASE64( text )        [KGUtil base64StringFromText:text]
 #define __TEXT( base64 )        [KGUtil textFromBase64String:base64]
@@ -65,6 +66,7 @@
 
 + (KGVarible *)getVarible;
 + (KGChild *)getCurChild;
++ (KGClass *)getCurClass;
 + (KGUser *)getUser;
 
 + (NSString *)getMonthZn:(NSInteger)index;

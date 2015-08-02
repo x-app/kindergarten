@@ -15,6 +15,7 @@
 #import "KGUtil.h"
 #import "KGConst.h"
 #import "KGChild.h"
+#import "KGClass.h"
 @interface LoginViewContoller ()
 
 
@@ -83,15 +84,19 @@
         NSDictionary *body = [KGUtil getRequestBody:profile];
         NSDictionary *params = @{@"uid": REQUEST_UID, @"sign": [KGUtil getRequestSign:body], @"body":body};
         //NSDictionary *params = @{@"uid": REQUEST_UID, @"sign": [KGUtil getRequestSign:body], @"body":body};
-        //NSString *url = @"http://app.nugget-nj.com/nugget_app/parent/register";
-        NSString *url = [[KGUtil getServerAppURL] stringByAppendingString:@"/parent/register"];
+        NSString *urlSuffix = [KGUtil isTeacherVersion] ? @"/teacher/register" : @"/parent/register";
+        NSString *url = [[KGUtil getServerAppURL] stringByAppendingString:urlSuffix];
         [KGUtil postRequest:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"JSON: %@", responseObject);
             NSString *code = [responseObject objectForKey:@"code"];
             if ([code isEqualToString:@"000000"]) {
                 NSDictionary *obj = [responseObject objectForKey:@"obj"];
                 delegate.user.uid = [obj objectForKey:@"iuid"];
-                delegate.user.parentID = [(NSString *)[obj objectForKey:@"parentid"] integerValue];
+                if ([KGUtil isTeacherVersion]) {
+                    delegate.user.teacherID = [(NSString *)[obj objectForKey:@"teacherid"] integerValue];
+                } else {
+                    delegate.user.parentID = [(NSString *)[obj objectForKey:@"parentid"] integerValue];
+                }
                 [self setGesturePswd];
                 //下面开始查询幼儿信息
 //                NSString *childUrl = [[KGUtil getServerAppURL] stringByAppendingString:@"parent/queryChildInfo"];
@@ -112,7 +117,11 @@
          showError:true];
     }
 }
-
+/**
+ *  在注册阶段家长查询幼儿信息
+ *
+ *  @param uid 用户uid
+ */
 - (void)queryChildInfo: (NSString *)uid {
     //下面开始查询幼儿信息
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -159,6 +168,57 @@
     } inView:self.view
      showHud:true
    showError:true];
+}
+
+/**
+ *  注册阶段教师查询班级信息
+ *
+ *  @param uid 用户uid
+ */
+- (void)queryClassInfo: (NSString *)uid {
+    //下面开始查询幼儿信息
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    NSString *url = [[KGUtil getServerAppURL] stringByAppendingString:@"/teacher/queryClassInfo"];
+    NSDictionary *data = @{@"iuId": uid};
+    NSDictionary *body = [KGUtil getRequestBody:data];
+    NSDictionary *childParams = @{@"uid": REQUEST_UID, @"sign": [KGUtil getRequestSign:body], @"body": body};
+    [KGUtil postRequest:url
+             parameters:childParams
+                success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                    NSLog(@"JSON: %@", responseObject);
+                    NSString *code = [responseObject objectForKey:@"code"];
+                    if ([code isEqualToString:@"000000"]) {
+                        NSArray *classes = [responseObject objectForKey:@"objlist"];
+                        if ([classes count] == 0) {
+                            //没有班级信息
+                            [KGUtil showAlert:@"未查询到班级信息" inView:self.view];
+                        } else {
+                            [delegate.user.classes removeAllObjects];
+                            
+                            for (int i = 0; i < [classes count]; i++) {
+                                //..
+                                NSDictionary *classInfo = (NSDictionary *)[classes objectAtIndex:i];
+                                KGClass *curClass = [[KGClass alloc] initWithName:[classInfo objectForKey:@"className"]
+                                                                          classId:[[classInfo objectForKey:@"classId"] integerValue]];
+                                [delegate.user.classes addObject:curClass];
+                            }
+                            //delegate.user.curChild = [delegate.user.childs objectAtIndex:0];
+                            if (classes.count > 0){
+                                NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+                                [userDefaults setObject:classes forKey:@"curclasses"];
+                            }
+                            [self.navigationController pushViewController:self.nextVC animated:YES];
+                        }
+                    } else {
+                        //失败
+                    }
+                }
+                failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                    //查询班级失败
+                }
+                 inView:self.view
+                showHud:true
+              showError:true];
 }
 
 - (void)setGesturePswd {
@@ -353,10 +413,13 @@
     self.parkTextField.text = @"江苏南京市南戈特幼儿园";
 }
 - (IBAction)jumpToMain:(UIButton *)sender {
-    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    /*AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     delegate.user.verified = YES;
     //delegate.user.registering = NO;
-    [self.navigationController dismissViewControllerAnimated:NO completion:nil];
+    [self.navigationController dismissViewControllerAnimated:NO completion:nil];*/
+    self.nameTextField.text = @"许阿密";
+    self.idNoTextField.text = @"350582199303073606";
+    self.parkTextField.text = @"江苏南京市南戈特幼儿园";
 }
 
 
@@ -366,11 +429,17 @@
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     if (buttonIndex == 0) { //确定-直接进入忘记密码的模式
         delegate.user.regMode = 1;
-        [self queryChildInfo:delegate.user.uid];
+        if ([KGUtil isTeacherVersion]) {
+            [self queryClassInfo: delegate.user.uid];
+        } else {
+            [self queryChildInfo:delegate.user.uid];
+        }
         //[self.navigationController pushViewController:self.nextVC animated:YES];
     } else { //取消-返回main.storyboard
         delegate.user.registering = NO;
-        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+        [self.navigationController dismissViewControllerAnimated:YES completion:^{
+            [KGUtil lockTopMostVC];
+        }];
     }
 }
 #pragma mark -- UITextFieldDelegate --

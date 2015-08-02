@@ -191,6 +191,7 @@
 		99D55A5D1B61248E00C508A3 /* feedback_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 99D55A591B61248E00C508A3 /* feedback_icon.png */; };
 		99D55A5E1B61248E00C508A3 /* password_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 99D55A5A1B61248E00C508A3 /* password_icon.png */; };
 		99D55A5F1B61248E00C508A3 /* setting_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 99D55A5B1B61248E00C508A3 /* setting_icon.png */; };
+		99E675A61B6E41BD00BCBE7E /* KGClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 99E675A51B6E41BD00BCBE7E /* KGClass.m */; };
 		99F17F491B4D5C3600866F8F /* bg_11.png in Resources */ = {isa = PBXBuildFile; fileRef = 99F17F481B4D5C3600866F8F /* bg_11.png */; };
 		99F17F551B4E91B800866F8F /* KGUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F17F541B4E91B800866F8F /* KGUser.m */; };
 		99F17F581B4E94B700866F8F /* KGChild.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F17F571B4E94B700866F8F /* KGChild.m */; };
@@ -512,6 +513,8 @@
 		99D55A591B61248E00C508A3 /* feedback_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = feedback_icon.png; path = Resource/feedback_icon.png; sourceTree = "<group>"; };
 		99D55A5A1B61248E00C508A3 /* password_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = password_icon.png; path = Resource/password_icon.png; sourceTree = "<group>"; };
 		99D55A5B1B61248E00C508A3 /* setting_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = setting_icon.png; path = Resource/setting_icon.png; sourceTree = "<group>"; };
+		99E675A41B6E41BD00BCBE7E /* KGClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KGClass.h; sourceTree = "<group>"; };
+		99E675A51B6E41BD00BCBE7E /* KGClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KGClass.m; sourceTree = "<group>"; };
 		99F17F481B4D5C3600866F8F /* bg_11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bg_11.png; path = Resource/bg_11.png; sourceTree = "<group>"; };
 		99F17F531B4E91B800866F8F /* KGUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KGUser.h; sourceTree = "<group>"; };
 		99F17F541B4E91B800866F8F /* KGUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KGUser.m; sourceTree = "<group>"; };
@@ -1284,6 +1287,8 @@
 				996D322D1B55525200CB648B /* KGVarible.m */,
 				99709B6C1B59E50A00150176 /* KGHomework.h */,
 				99709B6D1B59E50A00150176 /* KGHomework.m */,
+				99E675A41B6E41BD00BCBE7E /* KGClass.h */,
+				99E675A51B6E41BD00BCBE7E /* KGClass.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1512,6 +1517,7 @@
 				12EAE1551B5D3A270084680C /* MJRefreshGifHeader.m in Sources */,
 				12EAE0DB1B5B8E550084680C /* GrowDocCell.m in Sources */,
 				9911C2DA1B5E825C0080FFA9 /* PBScrollView.m in Sources */,
+				99E675A61B6E41BD00BCBE7E /* KGClass.m in Sources */,
 				12EAE14F1B5D3A270084680C /* MJRefreshAutoGifFooter.m in Sources */,
 				9911C2281B5A6BA50080FFA9 /* SDWebImageManager.m in Sources */,
 				9997BA181B4D580E00B908B6 /* CLLockView.m in Sources */,
