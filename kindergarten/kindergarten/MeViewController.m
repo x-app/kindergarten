@@ -165,6 +165,10 @@
     if (indexPath.row >= [self.functions count] || indexPath.row < 0) {
         return;
     }
+    
+    NSString *uid = [KGUtil getUser].uid;
+    NSString *cid = [KGUtil getCurChild].cid;
+    
     MeFunction *curFunc = [self.functions objectAtIndex:indexPath.row];
     switch (curFunc.type) {
         case CHANGE_PSWD: {
@@ -193,7 +197,8 @@
             [self webVC].title = @"意见反馈";
             [self.navigationController pushViewController:[self webVC] animated:YES];
             
-            NSString *body = [NSString stringWithFormat:@"c=%@&dt=%@&u=%@", @"2013110", [KGUtil getCompactDateStr], @"20141021172851000015"];
+            // teacher换用g，内容是classid
+            NSString *body = [NSString stringWithFormat:@"c=%@&dt=%@&u=%@", cid, [KGUtil getCompactDateStr], uid];
             NSString *url = [KGUtil getRequestHtmlUrl:@"/FeedBack/prefer" bodyStr:body];
             
             NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:url]];

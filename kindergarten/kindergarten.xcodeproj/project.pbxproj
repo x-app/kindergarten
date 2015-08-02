@@ -81,6 +81,8 @@
 		12EAE15B1B5D3A270084680C /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 12EAE1471B5D3A270084680C /* UIScrollView+MJRefresh.m */; };
 		12EAE15C1B5D3A270084680C /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 12EAE1491B5D3A270084680C /* UIView+MJExtension.m */; };
 		12F630191B4932C000BE67B6 /* Growup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12F630181B4932C000BE67B6 /* Growup.storyboard */; };
+		12F9F8711B6E388400CFDB1B /* home_health.png in Resources */ = {isa = PBXBuildFile; fileRef = 12F9F86F1B6E388400CFDB1B /* home_health.png */; };
+		12F9F8721B6E388400CFDB1B /* home_roll.png in Resources */ = {isa = PBXBuildFile; fileRef = 12F9F8701B6E388400CFDB1B /* home_roll.png */; };
 		9911C1F91B5A06C80080FFA9 /* default_img.png in Resources */ = {isa = PBXBuildFile; fileRef = 9911C1F81B5A06C80080FFA9 /* default_img.png */; };
 		9911C1FB1B5A07CB0080FFA9 /* image_placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 9911C1FA1B5A07CB0080FFA9 /* image_placeholder.png */; };
 		9911C1FE1B5A62D40080FFA9 /* KGImageDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9911C1FD1B5A62D40080FFA9 /* KGImageDetailViewController.m */; };
@@ -325,6 +327,8 @@
 		12EAE1481B5D3A270084680C /* UIView+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MJExtension.h"; sourceTree = "<group>"; };
 		12EAE1491B5D3A270084680C /* UIView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJExtension.m"; sourceTree = "<group>"; };
 		12F630181B4932C000BE67B6 /* Growup.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Growup.storyboard; sourceTree = "<group>"; };
+		12F9F86F1B6E388400CFDB1B /* home_health.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = home_health.png; path = Resource/funcicons/home_health.png; sourceTree = "<group>"; };
+		12F9F8701B6E388400CFDB1B /* home_roll.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = home_roll.png; path = Resource/funcicons/home_roll.png; sourceTree = "<group>"; };
 		9911C1F81B5A06C80080FFA9 /* default_img.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = default_img.png; path = Resource/default_img.png; sourceTree = "<group>"; };
 		9911C1FA1B5A07CB0080FFA9 /* image_placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = image_placeholder.png; path = Resource/image_placeholder.png; sourceTree = "<group>"; };
 		9911C1FC1B5A62D40080FFA9 /* KGImageDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KGImageDetailViewController.h; sourceTree = "<group>"; };
@@ -709,6 +713,8 @@
 				12DEACF51B4D682500C437BE /* home_leave.png */,
 				12DEACF61B4D682500C437BE /* home_messagebox.png */,
 				12DEACF71B4D682500C437BE /* home_pickup.png */,
+				12F9F86F1B6E388400CFDB1B /* home_health.png */,
+				12F9F8701B6E388400CFDB1B /* home_roll.png */,
 			);
 			name = funcicons;
 			sourceTree = "<group>";
@@ -1404,6 +1410,7 @@
 				9997BA1E1B4D580E00B908B6 /* MLTableAlertButton@2x.png in Resources */,
 				12AC15FF1B4917D3007C247B /* class_icon_normal.png in Resources */,
 				99C6428B1B6B46A2008EF929 /* save.png in Resources */,
+				12F9F8711B6E388400CFDB1B /* home_health.png in Resources */,
 				12DEAC841B4D36E600C437BE /* Me.storyboard in Resources */,
 				122566761B57DE190007733E /* class_statics.png in Resources */,
 				9997BA1D1B4D580E00B908B6 /* MLTableAlertButton.png in Resources */,
@@ -1441,6 +1448,7 @@
 				1225667C1B57F7780007733E /* park_menu.png in Resources */,
 				122566731B57DE190007733E /* class_grow.png in Resources */,
 				122566751B57DE190007733E /* class_photo.png in Resources */,
+				12F9F8721B6E388400CFDB1B /* home_roll.png in Resources */,
 				122566651B56AA410007733E /* Child.storyboard in Resources */,
 				12DEAD011B4D693300C437BE /* Baby.storyboard in Resources */,
 				9997BA0D1B4D580E00B908B6 /* user_name_icon.png in Resources */,

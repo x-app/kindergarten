@@ -14,6 +14,9 @@
 
 @property (nonatomic) NSInteger viewAppearCount;
 @property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *func;
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *funcbtns;
+
+
 @property (weak, nonatomic) IBOutlet UIImageView *repeatImage;
 
 @end
@@ -35,6 +38,9 @@
         UITapGestureRecognizer *singleTap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onImageClick:)];
         [v addGestureRecognizer:singleTap1];
     }
+    
+    if([KGUtil isTeacherVersion])
+        [self setTeacherVersionFunc];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -59,21 +65,48 @@
     
     UIViewController *vc = nil;
 //    CGRect windowFrame = [[UIScreen mainScreen] bounds];
-    
+    NSString *uid = [KGUtil getUser].uid;
+    NSString *cid = [KGUtil getCurChild].cid;
+    NSString *gid = @"";
+    NSString *url = nil;
     switch (tag){
         case 1:{
-            UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Baby" bundle:nil];
-            vc = [storyBoard instantiateViewControllerWithIdentifier:@"PickupView"];
+            if(![KGUtil isTeacherVersion])
+            {
+                UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Baby" bundle:nil];
+                vc = [storyBoard instantiateViewControllerWithIdentifier:@"PickupView"];
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+            else
+            {
+                [self webVC].title = @"健康";
+                [self.navigationController pushViewController:[self webVC] animated:YES];
+                
+                NSString *body = [NSString stringWithFormat:@"g=%@&dt=%@&u=%@", gid, [KGUtil getCompactDateStr], uid];
+                url = [KGUtil getRequestHtmlUrl:@"/health/bringmedic" bodyStr:body];
+                NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+                [[self webVC].webView loadRequest:request];
+            }
             
-            [self.navigationController pushViewController:vc animated:YES];
             break;
         }
         case 2:{
-            [self webVC].title = @"晨检";
-            [self.navigationController pushViewController:[self webVC] animated:YES];
-            
-            NSString *body = [NSString stringWithFormat:@"c=%@&dt=%@&u=%@", @"2013110", [KGUtil getCompactDateStr], @"20141021172851000015"];
-            NSString *url = [KGUtil getRequestHtmlUrl:@"/health/givemedic" bodyStr:body];
+            if(![KGUtil isTeacherVersion])
+            {
+                [self webVC].title = @"晨检";
+                [self.navigationController pushViewController:[self webVC] animated:YES];
+                
+                NSString *body = [NSString stringWithFormat:@"c=%@&dt=%@&u=%@", cid, [KGUtil getCompactDateStr], uid];
+                url = [KGUtil getRequestHtmlUrl:@"/health/givemedic" bodyStr:body];
+            }
+            else
+            {
+                [self webVC].title = @"点名";
+                [self.navigationController pushViewController:[self webVC] animated:YES];
+                
+                NSString *body = [NSString stringWithFormat:@"g=%@&dt=%@&u=%@", gid, [KGUtil getCompactDateStr], uid];
+                url = [KGUtil getRequestHtmlUrl:@"/morningCheck/rollcall" bodyStr:body];
+            }
             
             NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:url]];
             [[self webVC].webView loadRequest:request];
@@ -83,19 +116,38 @@
             [self webVC].title = @"信箱";
             [self.navigationController pushViewController:[self webVC] animated:YES];
             
-            NSString *body = [NSString stringWithFormat:@"c=%@&dt=%@&u=%@", @"2013110", [KGUtil getCompactDateStr], @"20141021172851000015"];
-            NSString *url = [KGUtil getRequestHtmlUrl:@"/message/parentsmess" bodyStr:body];
+            if(![KGUtil isTeacherVersion])
+            {
+                NSString *body = [NSString stringWithFormat:@"c=%@&dt=%@&u=%@", cid, [KGUtil getCompactDateStr], uid];
+                 url = [KGUtil getRequestHtmlUrl:@"/message/parentsmess" bodyStr:body];
+            }
+            else
+            {
+                NSString *body = [NSString stringWithFormat:@"g=%@&dt=%@&u=%@", gid, [KGUtil getCompactDateStr], uid];
+                url = [KGUtil getRequestHtmlUrl:@"/message/teachermess" bodyStr:body];
+            }
             
             NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:url]];
             [[self webVC].webView loadRequest:request];
             break;
         }
         case 4:{
-            [self webVC].title = @"进园";
-            [self.navigationController pushViewController:[self webVC] animated:YES];
-            
-            NSString *body = [NSString stringWithFormat:@"c=%@&dt=%@&u=%@", @"2013110", [KGUtil getCompactDateStr], @"20141021172851000015"];
-            NSString *url = [KGUtil getRequestHtmlUrl:@"/morningCheck/intopark" bodyStr:body];
+            if(![KGUtil isTeacherVersion])
+            {
+                [self webVC].title = @"进园";
+                [self.navigationController pushViewController:[self webVC] animated:YES];
+                
+                NSString *body = [NSString stringWithFormat:@"c=%@&dt=%@&u=%@", cid, [KGUtil getCompactDateStr], uid];
+                url = [KGUtil getRequestHtmlUrl:@"/morningCheck/intopark" bodyStr:body];
+            }
+            else
+            {
+                [self webVC].title = @"请假处理";
+                [self.navigationController pushViewController:[self webVC] animated:YES];
+                
+                NSString *body = [NSString stringWithFormat:@"g=%@&dt=%@&u=%@", gid, [KGUtil getCompactDateStr], uid];
+                url = [KGUtil getRequestHtmlUrl:@"/holiday/list" bodyStr:body];
+            }
             
             NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:url]];
             [[self webVC].webView loadRequest:request];
@@ -105,7 +157,7 @@
             [self webVC].title = @"离园";
             [self.navigationController pushViewController:[self webVC] animated:YES];
             
-            NSString *body = [NSString stringWithFormat:@"c=%@&dt=%@&u=%@", @"2013110", [KGUtil getCompactDateStr], @"20141021172851000015"];
+            NSString *body = [NSString stringWithFormat:@"c=%@&dt=%@&u=%@", cid, [KGUtil getCompactDateStr], uid];
             NSString *url = [KGUtil getRequestHtmlUrl:@"/morningCheck/outpark" bodyStr:body];
             
             NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:url]];
@@ -116,7 +168,7 @@
             [self webVC].title = @"请假";
             [self.navigationController pushViewController:[self webVC] animated:YES];
             
-            NSString *body = [NSString stringWithFormat:@"c=%@&dt=%@&u=%@", @"2013110", [KGUtil getCompactDateStr], @"20141021172851000015"];
+            NSString *body = [NSString stringWithFormat:@"c=%@&dt=%@&u=%@", cid, [KGUtil getCompactDateStr], uid];
             NSString *url = [KGUtil getRequestHtmlUrl:@"/holiday/askto" bodyStr:body];
             
             NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:url]];
@@ -134,6 +186,38 @@
             break;
     }
 
+}
+
+-(void) setTeacherVersionFunc{
+    for(int i=0; i<self.func.count; i++)
+    {
+        UIImageView* iv = self.func[i];
+        
+        if(iv.tag == 1)
+            [iv setImage:[UIImage imageNamed:@"home_health.png"]];
+        else if(iv.tag ==2)
+            [iv setImage:[UIImage imageNamed:@"home_roll.png"]];
+        else if(iv.tag == 4)
+            [iv setImage:[UIImage imageNamed:@"home_leave.png"]];
+        if(iv.tag >= 5)
+            [iv setHidden:true];
+    }
+    
+    for(int i=0; i<self.funcbtns.count; i++)
+    {
+        UIButton* btn = self.funcbtns[i];
+        if([btn.titleLabel.text  isEqual: @"接送授权"])
+           [btn setTitle:@"健康" forState:UIControlStateNormal];
+        else if([btn.titleLabel.text  isEqual: @"晨检"])
+            [btn setTitle:@"点名" forState:UIControlStateNormal];
+        else if([btn.titleLabel.text  isEqual: @"信箱"]){
+            
+        }
+        else if([btn.titleLabel.text  isEqual: @"进园"])
+            [btn setTitle:@"请假处理" forState:UIControlStateNormal];
+        else
+            [btn setHidden:true];
+    }
 }
 
 @end

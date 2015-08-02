@@ -63,13 +63,15 @@
     
     UIViewController *vc = nil;
     //    CGRect windowFrame = [[UIScreen mainScreen] bounds];
-    
+    NSString *uid = [KGUtil getUser].uid;
+    NSString *cid = [KGUtil getCurChild].cid;
+
     switch (tag){
         case 1:{
             [self webVC].title = @"公告";
             [self.navigationController pushViewController:[self webVC] animated:YES];
             
-            NSString *body = [NSString stringWithFormat:@"c=%@&dt=%@&u=%@", @"2013110", [KGUtil getCompactDateStr], @"20141021172851000015"];
+            NSString *body = [NSString stringWithFormat:@"c=%@&dt=%@&u=%@", cid, [KGUtil getCompactDateStr], uid];
             NSString *url = [KGUtil getRequestHtmlUrl:@"/message/bulletin" bodyStr:body];
             
             NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:url]];
@@ -81,7 +83,7 @@
             [self webVC].title = @"课程表";
             [self.navigationController pushViewController:[self webVC] animated:YES];
             
-            NSString *body = [NSString stringWithFormat:@"c=%@&dt=%@&u=%@", @"2013110", [KGUtil getCompactDateStr], @"20141021172851000015"];
+            NSString *body = [NSString stringWithFormat:@"c=%@&dt=%@&u=%@", cid, [KGUtil getCompactDateStr], uid];
             NSString *url = [KGUtil getRequestHtmlUrl:@"/book/lesson" bodyStr:body];
             
             NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:url]];
@@ -102,7 +104,7 @@
             [self webVC].title = @"生日提醒";
             [self.navigationController pushViewController:[self webVC] animated:YES];
             
-            NSString *body = [NSString stringWithFormat:@"c=%@&dt=%@&u=%@", @"2013110", [KGUtil getCompactDateStr], @"20141021172851000015"];
+            NSString *body = [NSString stringWithFormat:@"c=%@&dt=%@&u=%@", cid, [KGUtil getCompactDateStr], uid];
             NSString *url = [KGUtil getRequestHtmlUrl:@"/book/birthday" bodyStr:body];
             
             NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:url]];

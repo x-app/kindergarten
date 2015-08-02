@@ -172,9 +172,6 @@
                                         <include reference="pQY-Fl-uAg"/>
                                     </mask>
                                 </variation>
-                                <connections>
-                                    <segue destination="ldc-JC-M6i" kind="show" id="EEo-7e-WHi"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sor-4t-ayE">
                                 <rect key="frame" x="57" y="467" width="73" height="30"/>
@@ -590,6 +587,13 @@
                         <outletCollection property="func" destination="Vij-Jg-DDT" id="sGs-HL-k5C"/>
                         <outletCollection property="func" destination="GiF-a3-w93" id="hya-1W-xLy"/>
                         <outletCollection property="func" destination="08R-93-MB6" id="XBG-Ac-Pcm"/>
+                        <outletCollection property="funcbtns" destination="WVx-hD-5GG" id="kZi-is-JRN"/>
+                        <outletCollection property="funcbtns" destination="7Wj-aj-lMR" id="6cb-fF-85m"/>
+                        <outletCollection property="funcbtns" destination="FrN-PG-L1n" id="HgL-RJ-7Hg"/>
+                        <outletCollection property="funcbtns" destination="AhR-Ng-MlJ" id="8G2-Aw-Al5"/>
+                        <outletCollection property="funcbtns" destination="sor-4t-ayE" id="b4b-o5-R0W"/>
+                        <outletCollection property="funcbtns" destination="qak-Xi-BAK" id="ajH-1k-z7u"/>
+                        <outletCollection property="funcbtns" destination="5dQ-Ae-Mra" id="ujg-Sl-FwC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DKz-O2-YjN" sceneMemberID="firstResponder"/>
