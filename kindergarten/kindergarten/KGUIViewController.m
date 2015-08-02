@@ -114,13 +114,21 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    KGChild *curChild = KGUtil.getCurChild;
-    if(curChild)
-    {
-        self.babyNameLabel.text = curChild.name;
-        self.classNameLabel.text = [NSString stringWithFormat:@"%@%@", KGUtil.getVarible.parkName, curChild.className];
+    if ([KGUtil isTeacherVersion]) {
+        KGClass *curClass = [KGUtil getCurClass];
+        if (curClass) {
+            self.babyNameLabel.text = [KGUtil getUser].name;
+            self.classNameLabel.text = [NSString stringWithFormat:@"%@%@", KGUtil.getVarible.parkName, curClass.className];
+        }
+    } else {
+        KGChild *curChild = KGUtil.getCurChild;
+        if(curChild)
+        {
+            self.babyNameLabel.text = curChild.name;
+            self.classNameLabel.text = [NSString stringWithFormat:@"%@%@", KGUtil.getVarible.parkName, curChild.className];
+        }
     }
-    
+
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     //[userDefaults setObject:editedImage forKey:@"babyPortraitImage"];
     NSData *pImageData = (NSData *)[userDefaults objectForKey:@"babyPortraitImage"];

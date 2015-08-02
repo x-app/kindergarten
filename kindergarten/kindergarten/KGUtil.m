@@ -322,10 +322,18 @@ static NSArray *month_cn;
     return delegate.user;
 }
 
++ (NSInteger)getCurClassId {
+    if ([KGUtil isTeacherVersion]) {
+        return [KGUtil getCurClass].classId;
+    } else {
+        return [KGUtil getCurChild].classId;
+    }
+}
+
 + (KGClass *)getCurClass {
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     if ([delegate.user.classes count] >= 1) {
-        KGClass *curClass = [delegate.user.childs objectAtIndex:0];
+        KGClass *curClass = [delegate.user.classes objectAtIndex:0];
         return curClass;
     }
     
