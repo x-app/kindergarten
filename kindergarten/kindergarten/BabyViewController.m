@@ -60,14 +60,19 @@
 }
 
 - (void)onImageClick:(UITapGestureRecognizer*) sender{
-    //NSLog(@"%ld", (long)sender.view.tag);
     NSInteger tag = sender.view.tag;
     
     UIViewController *vc = nil;
-//    CGRect windowFrame = [[UIScreen mainScreen] bounds];
+
     NSString *uid = [KGUtil getUser].uid;
-    NSString *cid = [KGUtil getCurChild].cid;
+    NSString *cid = @"";
     NSString *gid = @"";
+    KGChild *child = [KGUtil getCurChild];
+    if(child != nil)
+        cid = child.cid;
+    KGClass *class = [KGUtil getCurClass];
+    if(class != nil)
+        gid =[ NSString stringWithFormat:@"%ld", (long)class.classId];
     NSString *url = nil;
     switch (tag){
         case 1:{
@@ -82,7 +87,7 @@
                 [self webVC].title = @"健康";
                 [self.navigationController pushViewController:[self webVC] animated:YES];
                 
-                NSString *body = [NSString stringWithFormat:@"g=%@&dt=%@&u=%@", gid, [KGUtil getCompactDateStr], uid];
+                NSString *body = [NSString stringWithFormat:@"dt=%@&g=%@&u=%@", [KGUtil getCompactDateStr], gid, uid];
                 url = [KGUtil getRequestHtmlUrl:@"/health/bringmedic" bodyStr:body];
                 NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:url]];
                 [[self webVC].webView loadRequest:request];
@@ -104,7 +109,7 @@
                 [self webVC].title = @"点名";
                 [self.navigationController pushViewController:[self webVC] animated:YES];
                 
-                NSString *body = [NSString stringWithFormat:@"g=%@&dt=%@&u=%@", gid, [KGUtil getCompactDateStr], uid];
+                NSString *body = [NSString stringWithFormat:@"dt=%@&g=%@&u=%@", [KGUtil getCompactDateStr], gid, uid];
                 url = [KGUtil getRequestHtmlUrl:@"/morningCheck/rollcall" bodyStr:body];
             }
             
@@ -123,7 +128,7 @@
             }
             else
             {
-                NSString *body = [NSString stringWithFormat:@"g=%@&dt=%@&u=%@", gid, [KGUtil getCompactDateStr], uid];
+                NSString *body = [NSString stringWithFormat:@"dt=%@&g=%@&u=%@", [KGUtil getCompactDateStr], gid, uid];
                 url = [KGUtil getRequestHtmlUrl:@"/message/teachermess" bodyStr:body];
             }
             
@@ -145,7 +150,7 @@
                 [self webVC].title = @"请假处理";
                 [self.navigationController pushViewController:[self webVC] animated:YES];
                 
-                NSString *body = [NSString stringWithFormat:@"g=%@&dt=%@&u=%@", gid, [KGUtil getCompactDateStr], uid];
+                NSString *body = [NSString stringWithFormat:@"dt=%@&g=%@&u=%@", [KGUtil getCompactDateStr], gid, uid];
                 url = [KGUtil getRequestHtmlUrl:@"/holiday/list" bodyStr:body];
             }
             

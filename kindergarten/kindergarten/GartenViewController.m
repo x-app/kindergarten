@@ -106,6 +106,17 @@
             }
             break;
         }
+        case 5:{
+            [self webVC].title = @"园长信箱";
+            [self.navigationController pushViewController:[self webVC] animated:YES];
+            
+            NSString *body = [NSString stringWithFormat:@"c=%@&dt=%@&u=%@", cid, [KGUtil getCompactDateStr], uid];
+            NSString *url = [KGUtil getRequestHtmlUrl:@"/statistics/students" bodyStr:body];
+            
+            NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+            [[self webVC].webView loadRequest:request];
+            break;
+        }
         default:
             break;
     }
