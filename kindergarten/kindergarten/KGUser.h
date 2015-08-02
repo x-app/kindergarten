@@ -14,7 +14,8 @@
 
 @property (strong, nonatomic) NSString *uid;        //用户编号
 @property (strong, nonatomic) NSString *name;       //姓名
-@property (nonatomic) NSInteger parentID;           //家长ID
+@property (nonatomic) NSInteger parentID;           //家长ID(如果是教师则有)
+@property (nonatomic) NSInteger teacherID;          //教师ID(如果是教师则有)
 @property (strong, nonatomic) NSString *idNo;       //身份证号码
 @property (strong, nonatomic) NSString *deviceID;   //设备ID
 @property (nonatomic) NSInteger category;           //用户类别300-家长 301-教师 302-园长
@@ -27,9 +28,10 @@
 @property (strong, nonatomic) NSString *question;   //密保问题
 @property (strong, nonatomic) NSString *answer;     //密保问题答案
 
-@property (strong, nonatomic) NSMutableArray *childs;  //该用户的孩子
+@property (strong, nonatomic) NSMutableArray *childs;  //该用户的孩子(适用于家长)
 @property (strong, nonatomic) KGChild *curChild;
 
+@property (strong, nonatomic) NSMutableArray *classes; //该用户的班级(适用于教师)
 
 - (NSDictionary *)toDictionary;
 

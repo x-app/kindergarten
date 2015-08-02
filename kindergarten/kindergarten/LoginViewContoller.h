@@ -21,5 +21,5 @@
 
 
 - (void)queryChildInfo: (NSString *)uid;
-
+- (void)queryClassInfo: (NSString *)uid;
 @end
