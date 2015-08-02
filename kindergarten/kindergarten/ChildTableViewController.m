@@ -70,7 +70,7 @@
 }
 
 - (void)loadTableData: (BOOL)loadAll {
-    NSDictionary *data = @{@"classID": [[KGUtil getCurChild] classID],
+    NSDictionary *data = @{@"classID": @([KGUtil getCurClassId]),
                            @"pageIndex": @(self.pageIndex),
                            @"pageSize": @(10)};
     NSDictionary *body = [KGUtil getRequestBody:data];

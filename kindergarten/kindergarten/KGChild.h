@@ -14,7 +14,7 @@
 @property (strong, nonatomic) NSString *cid;        //小朋友编号
 @property (strong, nonatomic) NSString *name;       //姓名
 @property (nonatomic) NSInteger sex;                //性别 0女 1男
-@property (strong, nonatomic) NSString *classID;    //班级ID
+@property (nonatomic) NSInteger classId;             //班级ID
 @property (strong, nonatomic) NSString *className;  //班级名
 @property (strong, nonatomic) NSString *birthday;   //生日
 @property (weak, nonatomic) KGUser* parent;         //家长
@@ -22,7 +22,7 @@
 - (instancetype)initWithName: (NSString *)name
                           id: (NSString *)id
                          sex: (NSInteger)sex
-                     classID: (NSString *)classID
+                     classID: (NSInteger)classId
                    className: (NSString *)className
                     birthday: (NSString *)birthday;
 

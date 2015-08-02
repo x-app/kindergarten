@@ -67,6 +67,7 @@
 + (KGVarible *)getVarible;
 + (KGChild *)getCurChild;
 + (KGClass *)getCurClass;
++ (NSInteger)getCurClassId;
 + (KGUser *)getUser;
 
 + (NSString *)getMonthZn:(NSInteger)index;

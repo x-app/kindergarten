@@ -68,7 +68,7 @@ static NSString * const reuseIdentifier = @"AlbumCell";
 }
 
 - (void)loadAlbumData:(BOOL)loadAll {
-    NSDictionary *data = @{@"classId": [[KGUtil getCurChild] classID],
+    NSDictionary *data = @{@"classId": @([KGUtil getCurClassId]),
                            @"pageIndex": @(self.pageIndex),
                            @"pageSize": @(10)};
     NSDictionary *body = [KGUtil getRequestBody:data];
