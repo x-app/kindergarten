@@ -25,6 +25,10 @@ static NSArray *month_cn;
 
 @implementation KGUtil
 
++ (BOOL)isTeacherVersion
+{
+    return true;
+}
 
 + (NSString *)getMD5Str:(NSString *)sourceStr {
     //NSData *source = [sourceStr dataUsingEncoding:NSUTF8StringEncoding];

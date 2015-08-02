@@ -16,6 +16,8 @@
 
 @interface KGUtil : NSObject
 
++ (BOOL)isTeacherVersion;
+
 + (NSString *)getMD5Str: (NSString *)sourceStr;
 
 + (NSDictionary *)getRequestBody: (NSDictionary *)data;
