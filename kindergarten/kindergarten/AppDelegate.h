@@ -24,6 +24,8 @@
 
 @property (strong, nonatomic) NSString* devicetoken;
 
+@property (nonatomic) NSInteger appVersion;
+
 -(void)postToken;
 
 @end

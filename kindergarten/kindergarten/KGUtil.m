@@ -239,6 +239,8 @@ static NSArray *month_cn;
 + (void)uploadImage:(NSString *)curl
               image:(UIImage *)image
         description:(NSString *)description
+         customAttr:(NSString *)customAttr
+        customValue:(NSData *)customValue
             success:(void (^)(AFHTTPRequestOperation *, id))success
             failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
              inView:(UIView *)view
@@ -249,9 +251,9 @@ static NSArray *month_cn;
     manager.requestSerializer.timeoutInterval = 30.0f;
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
     
-    KGChild *curchild = [KGUtil getCurChild];
-    NSString *childid = [NSString stringWithFormat:@"%@", curchild.cid];
-    NSData *curchilddata = [childid dataUsingEncoding:NSUTF8StringEncoding];
+    //KGChild *curchild = [KGUtil getCurChild];
+    //NSString *childid = [NSString stringWithFormat:@"%@", curchild.cid];
+    //NSData *curchilddata = [childid dataUsingEncoding:NSUTF8StringEncoding];
 
     NSString *desc_encoded = [description stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSData* descdata = [desc_encoded dataUsingEncoding:NSUTF8StringEncoding];
@@ -280,7 +282,8 @@ static NSArray *month_cn;
     }
     
     [manager POST:url parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-        [formData appendPartWithFormData:curchilddata name:@"childId"];
+        //[formData appendPartWithFormData:curchilddata name:@"childId"];
+        [formData appendPartWithFormData:customValue name:customAttr];
         [formData appendPartWithFormData:descdata name:@"description"];
         [formData appendPartWithFileData:data name:@"picUrl" fileName:@"upload.jpg" mimeType:@"image/jpeg"];
     } success:^(AFHTTPRequestOperation *operation,id responseObject) {

@@ -19,9 +19,9 @@
 @property (readwrite, nonatomic, weak) id target;
 @property (readwrite, nonatomic) SEL action;
 
-//当前弹出菜单时，PhotoBrowser上的索引
-@property (nonatomic) NSInteger indexInPB;
-@property (nonatomic) NSInteger rowInPBHandlerVC;
+@property (nonatomic) NSInteger imageIndex;   //当前弹出菜单时, 当前image在PhotoBrowser中的索引
+@property (nonatomic) NSInteger rowIndex;     //当前弹出菜单时, 当前image在之前VC中的row(UITableView UICollectionView等)
+@property (nonatomic) NSInteger sectionIndex; //当前弹出菜单时, 当前image在之前VC中的section(UITableView UICollectionView等)
 
 //@property (readwrite, nonatomic, strong) UIColor *foreColor;
 @property (readwrite, nonatomic) NSTextAlignment alignment;

@@ -23,7 +23,7 @@
 @interface ChildTableViewController ()<UIActionSheetDelegate, KGPicPickerDelegate, KGPostImageDelegate>
 
 @property (nonatomic, strong) KGPicPicker *picPicker;
-
+@property (nonatomic, strong) NSMutableArray *imageInfos;
 @end
 
 @implementation ChildTableViewController
@@ -57,6 +57,8 @@
     if ([KGUtil isTeacherVersion]) {
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewHomework)];
     }
+    UIView *v = [[UIView alloc] initWithFrame:CGRectZero];
+    [self.tableView setTableFooterView:v];
 }
 
 - (KGPicPicker *)picPicker {
@@ -65,49 +67,6 @@
         _picPicker.delegate = self;
     }
     return _picPicker;
-}
-
-- (void)addNewHomework {
-    UIActionSheet *choiceSheet = [[UIActionSheet alloc] initWithTitle:nil
-                                                             delegate:self
-                                                    cancelButtonTitle:@"取消"
-                                               destructiveButtonTitle:nil
-                                                    otherButtonTitles:@"拍照", @"从相册中选取", nil];
-    [choiceSheet showInView:self.view];
-}
-
-#pragma mark UIActionSheetDelegate
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == 0) {
-        // 拍照
-        [self.picPicker takePhoto];
-        
-    } else if (buttonIndex == 1) {
-        // 从相册中选取
-        [self.picPicker selectPhoto];
-    }
-}
-
-#pragma mark - KGPicPickerDelegate
-- (void)doPicPicked:(UIImage *)image
-{
-    //    NSLog(@"get image");
-    if(image == nil)
-        return;
-    
-    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Growup" bundle:nil];
-    GrowupEditViewController *vc = (GrowupEditViewController *)[storyBoard instantiateViewControllerWithIdentifier:@"GrowDocEdit"];
-    
-    vc.image = image;
-    vc.delegate = self;
-    [self presentViewController:vc animated:YES
-                     completion:^(void){
-                     }];
-}
-
-#pragma mark - KGPostImageDelegate
-- (void)reloadData {
-    [self loadTableData:YES];
 }
 
 - (void)loadTableData: (BOOL)loadAll {
@@ -159,15 +118,15 @@
             } else {
                 [self.tableView.footer noticeNoMoreData];
             }
-//            self.pageIndex += 1;
-//            if (homeworkArray.count == 0) {
-//                [self.tableView.footer noticeNoMoreData];
-//            }
-//            if (self.pageIndex + homeworkArray.count < pageTotalCount) {
-//                self.pageIndex += homeworkArray.count;
-//            } else {
-//                [self.tableView.footer noticeNoMoreData];
-//            }
+            //            self.pageIndex += 1;
+            //            if (homeworkArray.count == 0) {
+            //                [self.tableView.footer noticeNoMoreData];
+            //            }
+            //            if (self.pageIndex + homeworkArray.count < pageTotalCount) {
+            //                self.pageIndex += homeworkArray.count;
+            //            } else {
+            //                [self.tableView.footer noticeNoMoreData];
+            //            }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
@@ -177,32 +136,32 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-//    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-//    NSDictionary *data = @{@"classID": [[KGUtil getCurChild] classID],
-//                           @"pageIndex": @1,
-//                           @"pageSize":@10};
-//    NSDictionary *body = [KGUtil getRequestBody:data];
-//    NSDictionary *params = @{@"uid": REQUEST_UID, @"sign": [KGUtil getRequestSign:body], @"body":body};
-//    NSString *url = [[KGUtil getServerAppURL] stringByAppendingString:@"/system/pageQueryHomework"];
-//    [KGUtil postRequest:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        NSLog(@"JSON: %@", responseObject);
-//        NSString *code = [responseObject objectForKey:@"code"];
-//        if ([code isEqualToString:@"000000"]) {
-//            NSArray *homeworkArray = (NSArray *)[responseObject objectForKey:@"objlist"];
-//            for (int i = 0; i < [homeworkArray count]; i++) {
-//                NSDictionary *hwDict = [homeworkArray objectAtIndex:i];
-//                KGHomework *homework = [[KGHomework alloc] initWithDesc:[hwDict objectForKey:@"description"]
-//                                                                classId:[[hwDict objectForKey:@"classId"] integerValue]
-//                                                             homeworkId:[[hwDict objectForKey:@"homeworkId"] integerValue]
-//                                                                 picUrl:[hwDict objectForKey:@"picUrl"]
-//                                                            smallPicUrl:[hwDict objectForKey:@"smallPicUrl"]
-//                                                               createAt:[hwDict objectForKey:@"createTime"]];
-//                [self.homeworks addObject:homework];
-//            }
-//        }
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        NSLog(@"Error: %@", error);
-//    } inView:self.tableView];
+    //    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    //    NSDictionary *data = @{@"classID": [[KGUtil getCurChild] classID],
+    //                           @"pageIndex": @1,
+    //                           @"pageSize":@10};
+    //    NSDictionary *body = [KGUtil getRequestBody:data];
+    //    NSDictionary *params = @{@"uid": REQUEST_UID, @"sign": [KGUtil getRequestSign:body], @"body":body};
+    //    NSString *url = [[KGUtil getServerAppURL] stringByAppendingString:@"/system/pageQueryHomework"];
+    //    [KGUtil postRequest:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    //        NSLog(@"JSON: %@", responseObject);
+    //        NSString *code = [responseObject objectForKey:@"code"];
+    //        if ([code isEqualToString:@"000000"]) {
+    //            NSArray *homeworkArray = (NSArray *)[responseObject objectForKey:@"objlist"];
+    //            for (int i = 0; i < [homeworkArray count]; i++) {
+    //                NSDictionary *hwDict = [homeworkArray objectAtIndex:i];
+    //                KGHomework *homework = [[KGHomework alloc] initWithDesc:[hwDict objectForKey:@"description"]
+    //                                                                classId:[[hwDict objectForKey:@"classId"] integerValue]
+    //                                                             homeworkId:[[hwDict objectForKey:@"homeworkId"] integerValue]
+    //                                                                 picUrl:[hwDict objectForKey:@"picUrl"]
+    //                                                            smallPicUrl:[hwDict objectForKey:@"smallPicUrl"]
+    //                                                               createAt:[hwDict objectForKey:@"createTime"]];
+    //                [self.homeworks addObject:homework];
+    //            }
+    //        }
+    //    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    //        NSLog(@"Error: %@", error);
+    //    } inView:self.tableView];
 }
 
 
@@ -211,7 +170,42 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Table view data source
+#pragma mark UIActionSheetDelegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0) {
+        // 拍照
+        [self.picPicker takePhoto];
+        
+    } else if (buttonIndex == 1) {
+        // 从相册中选取
+        [self.picPicker selectPhoto];
+    }
+}
+
+#pragma mark - KGPicPickerDelegate
+- (void)doPicPicked:(UIImage *)image
+{
+    //    NSLog(@"get image");
+    if(image == nil)
+        return;
+    
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Growup" bundle:nil];
+    GrowupEditViewController *vc = (GrowupEditViewController *)[storyBoard instantiateViewControllerWithIdentifier:@"GrowDocEdit"];
+    
+    vc.image = image;
+    vc.delegate = self;
+    [self presentViewController:vc animated:YES
+                     completion:^(void){
+                     }];
+}
+
+#pragma mark - KGPostImageDelegate
+- (void)reloadData {
+    [self loadTableData:YES];
+}
+
+
+#pragma mark - tableview datasource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
@@ -223,8 +217,7 @@
     return [self.homeworks count];
 }
 
-#pragma mark - 代理方法
-#pragma mark 设置每行高度（每行高度可以不一样）
+#pragma mark - tableview delegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 80;
 }
@@ -256,6 +249,64 @@
     }
 }
 
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    HomeworkTableViewCell *cell = (HomeworkTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"homeworkCell" forIndexPath:indexPath];
+    KGHomework *homework = (KGHomework *)[self.homeworks objectAtIndex:indexPath.row];
+    if (homework) {
+        //cell.picImageView.image = [UIImage imageNamed:@"image_placeholder"];
+        cell.descLabel.text = homework.desc;
+        cell.timeLabel.text = homework.createTime;//[KGUtil getDateStr:homework.createTime];
+        cell.smallPicUrl = homework.smallPicUrl;
+        cell.picUrl = homework.picUrl;
+        NSString *smallPicUrl = [NSString stringWithFormat:@"%@%@", [KGUtil getServerAppURL], homework.smallPicUrl];
+        cell.picImageView.contentMode = UIViewContentModeScaleAspectFill;
+        cell.picImageView.clipsToBounds = YES;
+        homework.coverImage = [UIImage imageNamed:@"image_placeholder"];
+        [cell.picImageView sd_setImageWithURL:[NSURL URLWithString:smallPicUrl]
+                             placeholderImage:[UIImage imageNamed:@"image_placeholder"]
+                                      options:SDWebImageProgressiveDownload
+                                    completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                        homework.coverImage = image;
+                                    }];
+    }
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+    if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {
+        [cell setPreservesSuperviewLayoutMargins:NO];
+    }
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row >= [self.homeworks count] || indexPath.row < 0) {
+        return;
+    }
+    NSMutableArray *imageInfos = [[NSMutableArray alloc] initWithCapacity:[self.homeworks count]];
+    for (int i = 0; i < [self.homeworks count]; i++) {
+        KGHomework *hw = (KGHomework *)[self.homeworks objectAtIndex:i];
+        PBImageInfo *iInfo = [[PBImageInfo alloc] init];
+        iInfo.imageURL = [NSString stringWithFormat:@"%@%@", [KGUtil getServerAppURL], hw.picUrl];
+        iInfo.imageTitle = hw.createTime;
+        iInfo.imageDesc = hw.desc;
+        iInfo.placeHolder = hw.coverImage;
+        [imageInfos addObject:iInfo];
+    }
+    PBViewController *pbVC = [[PBViewController alloc] init];
+    pbVC.index = indexPath.row;
+    pbVC.handleVC = self;
+    pbVC.imageInfos = imageInfos;
+    [pbVC addAMenuItem:@"删除亲子成长" icon:[UIImage imageNamed:@"baby_icon_normal.png"] target:self action:@selector(deleteHomeworkFromPB:)];
+    [pbVC show];
+}
+
+#pragma mark - delete homework
 - (void)deleteHomework:(NSInteger)homeworkId section:(NSInteger)sec row:(NSInteger)row {
     if (![KGUtil isTeacherVersion]) {
         return;
@@ -293,105 +344,31 @@
 }
 
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    HomeworkTableViewCell *cell = (HomeworkTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"homeworkCell" forIndexPath:indexPath];
-    KGHomework *homework = (KGHomework *)[self.homeworks objectAtIndex:indexPath.row];
-    if (homework) {
-        //cell.picImageView.image = [UIImage imageNamed:@"image_placeholder"];
-        cell.descLabel.text = homework.desc;
-        cell.timeLabel.text = homework.createTime;//[KGUtil getDateStr:homework.createTime];
-        cell.smallPicUrl = homework.smallPicUrl;
-        cell.picUrl = homework.picUrl;
-        NSString *smallPicUrl = [NSString stringWithFormat:@"%@%@", [KGUtil getServerAppURL], homework.smallPicUrl];
-        cell.picImageView.contentMode = UIViewContentModeScaleAspectFill;
-        cell.picImageView.clipsToBounds = YES;
-        homework.coverImage = [UIImage imageNamed:@"image_placeholder"];
-        [cell.picImageView sd_setImageWithURL:[NSURL URLWithString:smallPicUrl]
-                             placeholderImage:[UIImage imageNamed:@"image_placeholder"]
-                                      options:SDWebImageProgressiveDownload
-                                    completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                                        homework.coverImage = image;
-                                    }];
-    }
-    return cell;
-}
-
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
-        [cell setSeparatorInset:UIEdgeInsetsZero];
-    }
-    if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {
-        [cell setPreservesSuperviewLayoutMargins:NO];
-    }
-    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
-        [cell setLayoutMargins:UIEdgeInsetsZero];
-    }
-}
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row >= [self.homeworks count] || indexPath.row < 0) {
-        return;
-    }
-    NSMutableArray *imageInfos = [[NSMutableArray alloc] initWithCapacity:[self.homeworks count]];
-    for (int i = 0; i < [self.homeworks count]; i++) {
-        KGHomework *hw = (KGHomework *)[self.homeworks objectAtIndex:i];
-        PBImageInfo *iInfo = [[PBImageInfo alloc] init];
-        iInfo.imageURL = [NSString stringWithFormat:@"%@%@", [KGUtil getServerAppURL], hw.picUrl];
-        iInfo.imageTitle = hw.createTime;
-        iInfo.imageDesc = hw.desc;
-        iInfo.placeHolder = hw.coverImage;
-        [imageInfos addObject:iInfo];
-    }
-    PBViewController *pbVC = [[PBViewController alloc] init];
-    pbVC.index = indexPath.row;
-    pbVC.handleVC = self;
-    pbVC.imageInfos = imageInfos;
-    [pbVC addAMenuItem:@"删除亲子成长" icon:[UIImage imageNamed:@"baby_icon_normal.png"] target:self action:@selector(deleteHomeworkFromPB:)];
-    [pbVC show];
-}
-
 - (void)deleteHomeworkFromPB:(id)sender {
     if (![sender isKindOfClass:[KxMenuItem class]]) {
         return;
     }
     KxMenuItem *item = (KxMenuItem *)sender;
-    NSInteger indexInPB = item.indexInPB;
-    NSInteger rowInSelf = item.rowInPBHandlerVC;
-    KGHomework *hw = [self.homeworks objectAtIndex:indexInPB];
+    NSInteger imageIndex = item.imageIndex;
+    KGHomework *hw = [self.homeworks objectAtIndex:imageIndex];
     if (hw == nil) {
         return;
     }
+    [self deleteHomework:hw.homeworkId section:item.sectionIndex row:item.rowIndex];
 }
 
-#pragma mark - Navigation
+#pragma mark add homework
+- (void)addNewHomework {
+    UIActionSheet *choiceSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                             delegate:self
+                                                    cancelButtonTitle:@"取消"
+                                               destructiveButtonTitle:nil
+                                                    otherButtonTitles:@"拍照", @"从相册中选取", nil];
+    [choiceSheet showInView:self.view];
+}
 
+
+#pragma mark - Navigation
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].

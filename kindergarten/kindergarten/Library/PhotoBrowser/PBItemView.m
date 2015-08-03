@@ -290,7 +290,7 @@
 /*
  *  处理bottomView
  */
--(void)handleBotoomView{
+-(void)handleBottomView{
     
     CGFloat h = _bottomView.frame.size.height;
     
