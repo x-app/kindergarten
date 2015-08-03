@@ -17,8 +17,12 @@
 #import "PBViewController.h"
 #import "MJRefresh.h"
 #import "KGHomework.h"
+#import "KGPicPicker.h"
+#import "GrowupEditViewController.h"
 
-@interface ChildTableViewController ()
+@interface ChildTableViewController ()<UIActionSheetDelegate, KGPicPickerDelegate, KGPostImageDelegate>
+
+@property (nonatomic, strong) KGPicPicker *picPicker;
 
 @end
 
@@ -50,23 +54,60 @@
     }];
     // 首次不显示
     self.tableView.footer.hidden = YES;
-//    UIEdgeInsets edgeInset = self.tableView.separatorInset;
-//    self.tableView.separatorInset = UIEdgeInsetsMake(edgeInset.top, 0, edgeInset.bottom, edgeInset.right);
-    //[self.tableView setSeparatorInset:UIEdgeInsetsZero];
-    //self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    if ([KGUtil isTeacherVersion]) {
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewHomework)];
+    }
+}
+
+- (KGPicPicker *)picPicker {
+    if(_picPicker == nil) {
+        _picPicker = [[KGPicPicker alloc] initWithUIVC:self needCrop:FALSE];
+        _picPicker.delegate = self;
+    }
+    return _picPicker;
+}
+
+- (void)addNewHomework {
+    UIActionSheet *choiceSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                             delegate:self
+                                                    cancelButtonTitle:@"取消"
+                                               destructiveButtonTitle:nil
+                                                    otherButtonTitles:@"拍照", @"从相册中选取", nil];
+    [choiceSheet showInView:self.view];
+}
+
+#pragma mark UIActionSheetDelegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0) {
+        // 拍照
+        [self.picPicker takePhoto];
+        
+    } else if (buttonIndex == 1) {
+        // 从相册中选取
+        [self.picPicker selectPhoto];
+    }
+}
+
+#pragma mark - KGPicPickerDelegate
+- (void)doPicPicked:(UIImage *)image
+{
+    //    NSLog(@"get image");
+    if(image == nil)
+        return;
     
-    //self.homeworks = [[NSMutableArray alloc] init];
-    /*for (int i = 0; i < 20; i++) {
-        NSString *hwDesc = [NSString stringWithFormat:@"homework%d", i];
-        KGHomework *hw = [[KGHomework alloc] initWithDesc: hwDesc classId:10001 homeworkId:i picUrl:@"test" smallPicUrl:@"test" createAt: [[NSDate alloc] init]];
-        [self.homeworks addObject:hw];
-    }*/
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Growup" bundle:nil];
+    GrowupEditViewController *vc = (GrowupEditViewController *)[storyBoard instantiateViewControllerWithIdentifier:@"GrowDocEdit"];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    vc.image = image;
+    vc.delegate = self;
+    [self presentViewController:vc animated:YES
+                     completion:^(void){
+                     }];
+}
+
+#pragma mark - KGPostImageDelegate
+- (void)reloadData {
+    [self loadTableData:YES];
 }
 
 - (void)loadTableData: (BOOL)loadAll {
@@ -187,47 +228,72 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 80;
 }
-/*
-- (UIImage*)imageNamed:(NSString*)imageNamed cache:(BOOL)cache
-{
-    UIImage* retImage = [staticImageDictionary objectForKey:imageNamed];
-    if (retImage == nil)
-    {
-        retImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imageNamed]]];
-        if (cache)
-        {
-            if (staticImageDictionary == nil)
-                staticImageDictionary = [NSMutableDictionary new];
-            [staticImageDictionary setObject:retImage forKey:imageNamed];
-        }
-    }
-    return retImage;
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return [KGUtil isTeacherVersion];
 }
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    ...
-    // Add a view for the image (this is in section if cell = nil)
-    NSString *tmp = [NSString stringWithFormat:@"%@", [[photoArray objectAtIndex:row] objectForKey:@"url"]];
-    holder = [[[UIImageView alloc] initWithFrame:CGRectMake( 13, 2, 48, 50)] autorelease];
-    holder.tag = 4;
-    holder.contentMode = UIViewContentModeScaleToFill;
-    // Here we either load from the web or we cache it...
-    UIImage *ret = [self imageNamed:tmp cache:YES];
-    holder.image = ret;
-    ...
-    [cell.contentView addSubview:holder];
-*/
+
+-(NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return @"删除";
+}
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([KGUtil isTeacherVersion]) {
+        return UITableViewCellEditingStyleDelete;
+    } else {
+        return UITableViewCellEditingStyleNone;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        NSInteger index = indexPath.row ;
+        if(index < 0 || index >= [self.homeworks count]) {
+            return;
+        }
+        KGHomework *hw = [self.homeworks objectAtIndex:index];
+        [self deleteHomework:hw.homeworkId section:indexPath.section row:indexPath.row];
+    }
+}
+
+- (void)deleteHomework:(NSInteger)homeworkId section:(NSInteger)sec row:(NSInteger)row {
+    if (![KGUtil isTeacherVersion]) {
+        return;
+    }
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:sec];
+    NSDictionary *data = @{@"homeworkId": @(homeworkId)};
+    NSDictionary *body = [KGUtil getRequestBody:data];
+    NSDictionary *params = @{@"uid": REQUEST_UID, @"sign": [KGUtil getRequestSign:body], @"body":body};
+    NSString *urlSuffix = @"/system/deleteHomework";
+    NSString *url = [[KGUtil getServerAppURL] stringByAppendingString:urlSuffix];
+    [KGUtil postRequest:url
+             parameters:params
+                success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                    NSLog(@"JSON: %@", responseObject);
+                    NSString *code = [responseObject objectForKey:@"code"];
+                    if ([code isEqualToString:@"000000"]) {
+                        [self doDeleteHomework:indexPath];
+                    } else {
+                        [KGUtil showCheckMark:@"删除失败" checked:NO inView:self.tableView];
+                    }
+                }
+                failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                    NSLog(@"Error: %@", error);
+                    [KGUtil showCheckMark:@"请求删除失败" checked:NO inView:self.tableView];
+                }
+                 inView:self.tableView
+                showHud:NO
+              showError:true];
+}
+
+- (void)doDeleteHomework:(NSIndexPath *)indexPath {
+    [self.homeworks removeObjectAtIndex:indexPath.row];
+    [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    //[KGUtil showCheckMark:@"删除成功" checked:YES inView:self.tableView];
+}
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    /*UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"homeworkCell" forIndexPath:indexPath];
-    
-    KGHomework *homework = (KGHomework *)[self.homeworks objectAtIndex:indexPath.row];
-    if (homework) {
-        cell.textLabel.text = homework.desc;
-        cell.detailTextLabel.text = [KGUtil getDateStr:homework.createTime];
-        cell.imageView.image = [UIImage imageNamed:@"image_placeholder"];
-    }*/
-    // Configure the cell...
-    
     HomeworkTableViewCell *cell = (HomeworkTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"homeworkCell" forIndexPath:indexPath];
     KGHomework *homework = (KGHomework *)[self.homeworks objectAtIndex:indexPath.row];
     if (homework) {
@@ -251,15 +317,6 @@
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-//    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
-//        NSLog(@"aaaa");
-//        [self.tableView setSeparatorInset:UIEdgeInsetsZero];
-//    }
-//    
-//    if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
-//        NSLog(@"bbbb");
-//        [self.tableView setLayoutMargins:UIEdgeInsetsZero];
-//    }
     if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
         [cell setSeparatorInset:UIEdgeInsetsZero];
     }
@@ -270,14 +327,6 @@
         [cell setLayoutMargins:UIEdgeInsetsZero];
     }
 }
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
 
 /*
 // Override to support editing the table view.
@@ -324,10 +373,22 @@
     pbVC.index = indexPath.row;
     pbVC.handleVC = self;
     pbVC.imageInfos = imageInfos;
-    //pbVC.placeHolder = cell.imageView.image;
+    [pbVC addAMenuItem:@"删除亲子成长" icon:[UIImage imageNamed:@"baby_icon_normal.png"] target:self action:@selector(deleteHomeworkFromPB:)];
     [pbVC show];
 }
 
+- (void)deleteHomeworkFromPB:(id)sender {
+    if (![sender isKindOfClass:[KxMenuItem class]]) {
+        return;
+    }
+    KxMenuItem *item = (KxMenuItem *)sender;
+    NSInteger indexInPB = item.indexInPB;
+    NSInteger rowInSelf = item.rowInPBHandlerVC;
+    KGHomework *hw = [self.homeworks objectAtIndex:indexInPB];
+    if (hw == nil) {
+        return;
+    }
+}
 
 #pragma mark - Navigation
 
