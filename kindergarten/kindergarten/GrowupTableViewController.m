@@ -391,6 +391,7 @@
     GrowupEditViewController *vc = (GrowupEditViewController *)[storyBoard instantiateViewControllerWithIdentifier:@"GrowDocEdit"];
     
     vc.image = image;
+    vc.postType = ADD_GROWUP_DOC;
     vc.delegate = self;
     [self presentViewController:vc animated:YES
                           completion:^(void){

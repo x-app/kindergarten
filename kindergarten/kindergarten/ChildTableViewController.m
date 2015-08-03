@@ -194,6 +194,7 @@
     
     vc.image = image;
     vc.delegate = self;
+    vc.postType = ADD_HOMEWORK;
     [self presentViewController:vc animated:YES
                      completion:^(void){
                      }];
