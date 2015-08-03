@@ -305,7 +305,7 @@ static NSString * const reuseIdentifier = @"AlbumCell";
         return;
     }
     NSString *desc = [KGUtil isEmptyString:info.desc] ? [NSString stringWithFormat:@"%@[%ld/%ld]", album.dirName, (long)(indexInPB + 1), (long)album.albumInfos.count]: info.desc;
-    NSDictionary *data = @{@"childId": @([[[KGUtil getCurChild] cid] integerValue]),
+    NSDictionary *data = @{@"childId": @([[KGUtil getCurChild] cid]),
                            @"activitiesAlbumInfoId": @(info.infoId),
                            @"description": desc};
     NSDictionary *body = [KGUtil getRequestBody:data];

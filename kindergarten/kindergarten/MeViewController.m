@@ -167,7 +167,7 @@
     }
     
     NSString *uid = [KGUtil getUser].uid;
-    NSString *cid = [KGUtil getCurChild].cid;
+    NSInteger cid = [KGUtil getCurChild].cid;
     
     MeFunction *curFunc = [self.functions objectAtIndex:indexPath.row];
     switch (curFunc.type) {
@@ -198,7 +198,7 @@
             [self.navigationController pushViewController:[self webVC] animated:YES];
             
             // teacher换用g，内容是classid
-            NSString *body = [NSString stringWithFormat:@"c=%@&dt=%@&u=%@", cid, [KGUtil getCompactDateStr], uid];
+            NSString *body = [NSString stringWithFormat:@"c=%ld&dt=%@&u=%@", (long)cid, [KGUtil getCompactDateStr], uid];
             NSString *url = [KGUtil getRequestHtmlUrl:@"/FeedBack/prefer" bodyStr:body];
             
             NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:url]];

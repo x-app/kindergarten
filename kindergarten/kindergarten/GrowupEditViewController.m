@@ -47,7 +47,7 @@
 - (IBAction)onSend:(id)sender {
     [self.textView resignFirstResponder];
     KGChild *curchild = [KGUtil getCurChild];
-    NSString *childid = [NSString stringWithFormat:@"%@", curchild.cid];
+    NSString *childid = [NSString stringWithFormat:@"%ld", (long)curchild.cid];
     NSData *curchilddata = [childid dataUsingEncoding:NSUTF8StringEncoding];
      [KGUtil uploadImage:@"/system/insertGrowthArchive"
                    image:self.image
@@ -61,7 +61,7 @@
                          //reload
                          //     [self loadNewData:true];
                         [self dismissViewControllerAnimated:YES completion:nil];
-                         if(self.delegate)// && [self.delegate respondsToSelector:@selector(reloadData)])
+                        if(self.delegate)// && [self.delegate respondsToSelector:@selector(reloadData)])
                              [self.delegate reloadData];
                      }
                      else

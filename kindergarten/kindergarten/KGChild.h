@@ -11,7 +11,7 @@
 
 @interface KGChild : NSObject
 
-@property (strong, nonatomic) NSString *cid;        //小朋友编号
+@property (nonatomic) NSInteger cid;        //小朋友编号
 @property (strong, nonatomic) NSString *name;       //姓名
 @property (nonatomic) NSInteger sex;                //性别 0女 1男
 @property (nonatomic) NSInteger classId;             //班级ID
@@ -20,14 +20,14 @@
 @property (weak, nonatomic) KGUser* parent;         //家长
 
 - (instancetype)initWithName: (NSString *)name
-                          id: (NSString *)id
+                          id: (NSInteger)cid
                          sex: (NSInteger)sex
                      classID: (NSInteger)classId
                    className: (NSString *)className
                     birthday: (NSString *)birthday;
 
-- (NSDictionary *)toDictionary;
+//- (NSDictionary *)toDictionary;
 
-- (void)fromDictionary: (NSDictionary *)dict;
+//- (void)fromDictionary: (NSDictionary *)dict;
 
 @end

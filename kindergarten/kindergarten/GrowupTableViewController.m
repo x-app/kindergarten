@@ -92,7 +92,7 @@
 
 - (void)loadNewData:(BOOL)isNew{
     KGChild *curchild = [KGUtil getCurChild];
-    NSDictionary *profile = @{@"childId": curchild.cid,
+    NSDictionary *profile = @{@"childId": [NSString stringWithFormat:@"%ld", (long)curchild.cid],
                               @"pageIndex": [NSString stringWithFormat:@"%ld", (long)self.curPageIndex],
                               @"pageSize": [NSString stringWithFormat:@"%d", KG_PAGE_SIZE]
                               };
