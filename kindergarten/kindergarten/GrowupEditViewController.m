@@ -82,7 +82,7 @@
                          //reload
                          //     [self loadNewData:true];
                         [self dismissViewControllerAnimated:YES completion:nil];
-                         if(self.delegate)// && [self.delegate respondsToSelector:@selector(reloadData)])
+                        if(self.delegate)// && [self.delegate respondsToSelector:@selector(reloadData)])
                              [self.delegate reloadData];
                      }
                      else

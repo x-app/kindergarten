@@ -60,7 +60,7 @@
     KGUser *curUser = [KGUtil getUser];
     for (int i = 0; i < curUser.childs.count; i++) {
         KGChild *curChild = [curUser.childs objectAtIndex:i];
-        childsStr = [childsStr stringByAppendingFormat:@"{\"child\":\"%@\"}", curChild.cid];
+        childsStr = [childsStr stringByAppendingFormat:@"{\"child\":\"%ld\"}", (long)curChild.cid];
         if (i != curUser.childs.count - 1) {
             childsStr = [childsStr stringByAppendingString:@","];
         }

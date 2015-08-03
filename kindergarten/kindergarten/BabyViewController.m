@@ -65,7 +65,7 @@
     UIViewController *vc = nil;
 
     NSString *uid = [KGUtil getUser].uid;
-    NSString *cid = @"";
+    NSInteger cid = 0;
     KGChild *child = [KGUtil getCurChild];
     if(child != nil)
         cid = child.cid;
@@ -99,7 +99,7 @@
                 [self webVC].title = @"晨检";
                 [self.navigationController pushViewController:[self webVC] animated:YES];
                 
-                NSString *body = [NSString stringWithFormat:@"c=%@&dt=%@&u=%@", cid, [KGUtil getCompactDateStr], uid];
+                NSString *body = [NSString stringWithFormat:@"c=%ld&dt=%@&u=%@", (long)cid, [KGUtil getCompactDateStr], uid];
                 url = [KGUtil getRequestHtmlUrl:@"/health/givemedic" bodyStr:body];
             }
             else
@@ -121,7 +121,7 @@
             
             if(![KGUtil isTeacherVersion])
             {
-                NSString *body = [NSString stringWithFormat:@"c=%@&dt=%@&u=%@", cid, [KGUtil getCompactDateStr], uid];
+                NSString *body = [NSString stringWithFormat:@"c=%ld&dt=%@&u=%@", (long)cid, [KGUtil getCompactDateStr], uid];
                  url = [KGUtil getRequestHtmlUrl:@"/message/parentsmess" bodyStr:body];
             }
             else
@@ -140,7 +140,7 @@
                 [self webVC].title = @"进园";
                 [self.navigationController pushViewController:[self webVC] animated:YES];
                 
-                NSString *body = [NSString stringWithFormat:@"c=%@&dt=%@&u=%@", cid, [KGUtil getCompactDateStr], uid];
+                NSString *body = [NSString stringWithFormat:@"c=%ld&dt=%@&u=%@", (long)cid, [KGUtil getCompactDateStr], uid];
                 url = [KGUtil getRequestHtmlUrl:@"/morningCheck/intopark" bodyStr:body];
             }
             else
@@ -160,7 +160,7 @@
             [self webVC].title = @"离园";
             [self.navigationController pushViewController:[self webVC] animated:YES];
             
-            NSString *body = [NSString stringWithFormat:@"c=%@&dt=%@&u=%@", cid, [KGUtil getCompactDateStr], uid];
+            NSString *body = [NSString stringWithFormat:@"c=%ld&dt=%@&u=%@", (long)cid, [KGUtil getCompactDateStr], uid];
             NSString *url = [KGUtil getRequestHtmlUrl:@"/morningCheck/outpark" bodyStr:body];
             
             NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:url]];
@@ -171,7 +171,7 @@
             [self webVC].title = @"请假";
             [self.navigationController pushViewController:[self webVC] animated:YES];
             
-            NSString *body = [NSString stringWithFormat:@"c=%@&dt=%@&u=%@", cid, [KGUtil getCompactDateStr], uid];
+            NSString *body = [NSString stringWithFormat:@"c=%ld&dt=%@&u=%@", (long)cid, [KGUtil getCompactDateStr], uid];
             NSString *url = [KGUtil getRequestHtmlUrl:@"/holiday/askto" bodyStr:body];
             
             NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:url]];

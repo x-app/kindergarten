@@ -167,7 +167,13 @@
     }
     
     NSString *uid = [KGUtil getUser].uid;
-    NSString *cid = [KGUtil getCurChild].cid;
+    NSInteger cid = 0;
+    KGChild *child = [KGUtil getCurChild];
+    if(child != nil)
+        cid = child.cid;
+    NSInteger gid = [KGUtil getCurClassId];
+    
+    NSString *url = nil;
     
     MeFunction *curFunc = [self.functions objectAtIndex:indexPath.row];
     switch (curFunc.type) {
@@ -197,9 +203,16 @@
             [self webVC].title = @"意见反馈";
             [self.navigationController pushViewController:[self webVC] animated:YES];
             
-            // teacher换用g，内容是classid
-            NSString *body = [NSString stringWithFormat:@"c=%@&dt=%@&u=%@", cid, [KGUtil getCompactDateStr], uid];
-            NSString *url = [KGUtil getRequestHtmlUrl:@"/FeedBack/prefer" bodyStr:body];
+            if(![KGUtil isTeacherVersion])
+            {
+                NSString *body = [NSString stringWithFormat:@"c=%ld&dt=%@&u=%@", (long)cid, [KGUtil getCompactDateStr], uid];
+                url = [KGUtil getRequestHtmlUrl:@"/FeedBack/prefer" bodyStr:body];
+            }
+            else
+            {
+                NSString *body = [NSString stringWithFormat:@"dt=%@&g=%ld&u=%@", [KGUtil getCompactDateStr], (long)gid, uid];
+                url = [KGUtil getRequestHtmlUrl:@"/FeedBack/prefer" bodyStr:body];
+            }
             
             NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:url]];
             [[self webVC].webView loadRequest:request];

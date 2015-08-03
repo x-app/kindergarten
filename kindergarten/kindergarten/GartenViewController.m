@@ -57,11 +57,14 @@
     //NSLog(@"%ld", (long)sender.view.tag);
     NSInteger tag = sender.view.tag;
     
-    //UIViewController *vc = nil;
-    //    CGRect windowFrame = [[UIScreen mainScreen] bounds];
-    
     NSString *uid = [KGUtil getUser].uid;
-    NSString *cid = [KGUtil getCurChild].cid;
+    NSInteger cid = 0;
+    KGChild *child = [KGUtil getCurChild];
+    if(child != nil)
+        cid = child.cid;
+    NSInteger gid = [KGUtil getCurClassId];
+    
+    NSString *url = nil;
 
     switch (tag){
         case 1:{
@@ -78,8 +81,16 @@
             [self webVC].title = @"菜谱";
             [self.navigationController pushViewController:[self webVC] animated:YES];
             
-            NSString *body = [NSString stringWithFormat:@"c=%@&dt=%@&u=%@", cid, [KGUtil getCompactDateStr], uid];
-            NSString *url = [KGUtil getRequestHtmlUrl:@"/book/cookbook" bodyStr:body];
+            if(![KGUtil isTeacherVersion])
+            {
+                NSString *body = [NSString stringWithFormat:@"c=%ld&dt=%@&u=%@", (long)cid, [KGUtil getCompactDateStr], uid];
+                url = [KGUtil getRequestHtmlUrl:@"/book/cookbook" bodyStr:body];
+            }
+            else
+            {
+                NSString *body = [NSString stringWithFormat:@"dt=%@&g=%ld&u=%@", [KGUtil getCompactDateStr], (long)gid, uid];
+                url = [KGUtil getRequestHtmlUrl:@"/book/cookbook" bodyStr:body];
+            }
             
             NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:url]];
             [[self webVC].webView loadRequest:request];
@@ -89,8 +100,16 @@
             [self webVC].title = @"园长信箱";
             [self.navigationController pushViewController:[self webVC] animated:YES];
             
-            NSString *body = [NSString stringWithFormat:@"c=%@&dt=%@&u=%@", cid, [KGUtil getCompactDateStr], uid];
-            NSString *url = [KGUtil getRequestHtmlUrl:@"/message/masterMess" bodyStr:body];
+            if(![KGUtil isTeacherVersion])
+            {
+                NSString *body = [NSString stringWithFormat:@"c=%ld&dt=%@&u=%@", (long)cid, [KGUtil getCompactDateStr], uid];
+                url = [KGUtil getRequestHtmlUrl:@"/message/masterMess" bodyStr:body];
+            }
+            else
+            {
+                NSString *body = [NSString stringWithFormat:@"dt=%@&g=%ld&u=%@", [KGUtil getCompactDateStr], (long)gid, uid];
+                url = [KGUtil getRequestHtmlUrl:@"/message/masterMess" bodyStr:body];
+            }
             
             NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:url]];
             [[self webVC].webView loadRequest:request];
@@ -110,7 +129,7 @@
             [self webVC].title = @"园长信箱";
             [self.navigationController pushViewController:[self webVC] animated:YES];
             
-            NSString *body = [NSString stringWithFormat:@"c=%@&dt=%@&u=%@", cid, [KGUtil getCompactDateStr], uid];
+            NSString *body = [NSString stringWithFormat:@"c=%ld&dt=%@&u=%@", (long)cid, [KGUtil getCompactDateStr], uid];
             NSString *url = [KGUtil getRequestHtmlUrl:@"/statistics/students" bodyStr:body];
             
             NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:url]];
