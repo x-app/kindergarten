@@ -49,10 +49,18 @@ static NSString * const reuseIdentifier = @"AlbumCell";
     // 首次不显示
     self.collectionView.footer.hidden = YES;
     
+    if ([KGUtil isTeacherVersion]) {
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewAlbum)];
+    }
     // Register cell classes
     //[self.collectionView registerClass:[AlbumCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
     
     // Do any additional setup after loading the view.
+}
+
+
+- (void)addNewAlbum {
+    NSLog(@"add new album");
 }
 
 - (void)didReceiveMemoryWarning {
@@ -202,7 +210,8 @@ static NSString * const reuseIdentifier = @"AlbumCell";
     PBViewController *pbVC = [[PBViewController alloc] init];
     pbVC.index = 0;
     pbVC.handleVC = self;
-    pbVC.rowInHandleVC = indexPath.row;
+    pbVC.rowIndex = indexPath.row;
+    pbVC.sectionIndex = indexPath.section;
     pbVC.imageInfos = imageInfos;
     [pbVC addAMenuItem:@"转存至成长档案" icon:[UIImage imageNamed:@"baby_icon_normal.png"] target:self action:@selector(saveToGrowupDoc:)];
     [pbVC show];
@@ -285,8 +294,8 @@ static NSString * const reuseIdentifier = @"AlbumCell";
         return;
     }
     KxMenuItem *item = (KxMenuItem *)sender;
-    NSInteger indexInPB = item.indexInPB;
-    NSInteger rowInSelf = item.rowInPBHandlerVC;
+    NSInteger indexInPB = item.imageIndex;
+    NSInteger rowInSelf = item.rowIndex;
     KGActivityAlbumInfo *info = [self getAlbumInfo:rowInSelf infoIndex:indexInPB];
     if (info == nil) {
         return;

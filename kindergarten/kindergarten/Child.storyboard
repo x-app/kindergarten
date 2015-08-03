@@ -68,6 +68,7 @@
                             <outlet property="delegate" destination="e7o-qH-B5h" id="4yh-54-Hy3"/>
                         </connections>
                     </tableView>
+                    <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qzp-Kp-j8R" userLabel="First Responder" sceneMemberID="firstResponder"/>

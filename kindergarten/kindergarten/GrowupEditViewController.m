@@ -46,9 +46,14 @@
 
 - (IBAction)onSend:(id)sender {
     [self.textView resignFirstResponder];
+    KGChild *curchild = [KGUtil getCurChild];
+    NSString *childid = [NSString stringWithFormat:@"%@", curchild.cid];
+    NSData *curchilddata = [childid dataUsingEncoding:NSUTF8StringEncoding];
      [KGUtil uploadImage:@"/system/insertGrowthArchive"
                    image:self.image
              description:self.textView.text
+              customAttr:@"childId"
+             customValue:curchilddata
                  success:^(AFHTTPRequestOperation *operation, id responseObject) {
                      NSString *code = [responseObject objectForKey:@"code"];
                      if ([code isEqualToString:@"000000"]) {

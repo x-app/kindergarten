@@ -38,7 +38,7 @@
 /*
  *  处理bottomView
  */
--(void)handleBotoomView;
+-(void)handleBottomView;
 
 
 

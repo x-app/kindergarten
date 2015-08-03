@@ -2,7 +2,7 @@
 //  PhotoBrowserViewController.h
 //  photobrowser
 //
-//  Created by 庄小仙 on 15/7/20.
+//  Created by wangbin on 15/7/20.
 //  Copyright (c) 2015年 netmad. All rights reserved.
 //
 
@@ -26,11 +26,11 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *scrollViewRightMarginC;
 
 
-@property (nonatomic) NSInteger rowInHandleVC;
-
+@property (nonatomic) NSInteger rowIndex;
+@property (nonatomic) NSInteger sectionIndex;
 
 /** 相册数组 */
-@property (nonatomic,strong) NSArray *imageInfos;
+@property (nonatomic,strong) NSMutableArray *imageInfos;
 
 /** 总页数 */
 @property (nonatomic,assign) NSUInteger pageCount;

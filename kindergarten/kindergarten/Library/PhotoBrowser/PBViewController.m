@@ -2,7 +2,7 @@
 //  PhotoBrowserViewController.m
 //  photobrowser
 //
-//  Created by 庄小仙 on 15/7/20.
+//  Created by wangbin on 15/7/20.
 //  Copyright (c) 2015年 netmad. All rights reserved.
 //
 
@@ -14,6 +14,8 @@
 @property (nonatomic, strong) NSMutableArray *menuItems;
 
 @end
+
+const CGFloat segWidth = 20.f;
 
 @implementation PBViewController
 
@@ -119,7 +121,9 @@
 }
 
 - (void)clickRightButton:(UIButton *)sender {
-    NSLog(@"click");
+    //[self removePage:self.page];
+    //return;
+    //NSLog(@"click");
     /*NSArray *menuItems =
     @[
       [KxMenuItem menuItem:@"转存至成长档案"
@@ -139,8 +143,9 @@
 //    [self.view addSubview:cView];
     for (int i = 0; i < _menuItems.count; i++) {
         KxMenuItem *item = (KxMenuItem *)[_menuItems objectAtIndex:i];
-        item.indexInPB = self.page;
-        item.rowInPBHandlerVC = self.rowInHandleVC;
+        item.imageIndex = self.page;
+        item.rowIndex = self.rowIndex;
+        item.sectionIndex = self.sectionIndex;
     }
     [KxMenu showMenuInView:self.view
                   fromRect:rect//self.navigationController.navigationBar.frame// self..frame
@@ -202,7 +207,7 @@
     [self pagesPrepare];
     
     //间距
-    _scrollViewRightMarginC.constant = - 20.f;
+    _scrollViewRightMarginC.constant = -segWidth;
 }
 
 
@@ -212,7 +217,7 @@
     
     __block CGRect frame = [UIScreen mainScreen].bounds;
     
-    CGFloat widthEachPage = frame.size.width + 20.0f;
+    CGFloat widthEachPage = frame.size.width + segWidth;
     
     //展示页码对应的页面
     [self showWithPage:self.index];
@@ -223,7 +228,29 @@
     self.scrollView.index = _index;
 }
 
-
+- (void)removePage: (NSInteger)page {
+    if (page < 0 || page >= self.imageInfos.count) {
+        return;
+    }
+    NSInteger nextPage = (page == self.imageInfos.count - 1) ? self.imageInfos.count - 2 : page + 1;
+    //[self showWithPage:nextPage];
+    //[self setPage:nextPage];
+    
+    //CGRect targetFrame = CGRectMake(-320, 0, 320, 568);
+    //self.scrollView.pagingEnabled = YES;
+    CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
+    CGPoint targetPoint = CGPointMake((screenWidth + segWidth) * nextPage, 0);
+    //[self.scrollView setContentOffset:targetPoint animated:YES];
+    //[self.imageInfos removeObjectAtIndex:page];
+    
+    //[self pagesPrepare];
+    //[_currentItemView removeFromSuperview];
+    [self.scrollView setContentOffset:targetPoint animated:YES];
+    self.page = nextPage;
+    //[self.scrollView scrollRectToVisible:targetFrame animated:YES];
+    //[self.scrollView scrollRectToVisible:CGRectMake(320 * nextPage, 0, 320, 568) animated:YES];
+    //[self.imageInfos removeObjectAtIndex:page];
+}
 
 /*
  *  展示页码对应的页面
@@ -304,7 +331,7 @@
             
             PBItemView *itemView = (PBItemView *)subView;
             
-            [itemView handleBotoomView];
+            [itemView handleBottomView];
         }
     }];
 }
@@ -394,7 +421,7 @@
 }
 
 
--(void)setImageInfos:(NSArray *)imageInfos {
+-(void)setImageInfos:(NSMutableArray *)imageInfos {
     NSLog(@"[PhotoBrowserViewController]setImageInfos");
     _imageInfos = imageInfos;
     

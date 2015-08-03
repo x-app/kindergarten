@@ -59,6 +59,8 @@
 + (void)uploadImage:(NSString *)curl
               image:(UIImage *)image
         description:(NSString *)description
+         customAttr:(NSString *)customAttr
+        customValue:(NSData *)customValue
             success:(void (^)(AFHTTPRequestOperation *, id))success
             failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
              inView:(UIView *)view
