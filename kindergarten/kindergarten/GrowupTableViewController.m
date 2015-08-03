@@ -418,16 +418,16 @@
         if(index < 0 || index >= [self.docs count])
             return;
         
-        GrowDoc *doc = (self.docs)[index];
-        [self removeDoc:indexPath docId:doc.docid];
+        [self removeDoc:index];
     }
     else if (editingStyle == UITableViewCellEditingStyleInsert) {
     }
 }
 
--(void)removeDoc:(NSIndexPath *)indexPath docId:(NSString *)docId
+-(void)removeDoc:(NSInteger)index
 {
-    NSDictionary *profile = @{@"growthArchiveId":docId
+    GrowDoc *doc = (self.docs)[index];
+    NSDictionary *profile = @{@"growthArchiveId":doc.docid
                               };
     
     NSString *curl = @"/system/deleteGrowthArchive";
@@ -436,7 +436,7 @@
                   success:^(AFHTTPRequestOperation *operation, id responseObject) {
                       NSString *code = [responseObject objectForKey:@"code"];
                       if ([code isEqualToString:@"000000"]) {
-                          [self doAfterRemoveDoc:indexPath];
+                          [self doAfterRemoveDoc:index];
                       }
                   }
                   failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -446,19 +446,23 @@
                   showHud:true];
 }
 
--(void)doAfterRemoveDoc:(NSIndexPath *)indexPath
+-(void)doAfterRemoveDoc:(NSInteger)index
 {
-    [self.docs removeObjectAtIndex:indexPath.row-1];
-    [self.pbImgInfos removeObjectAtIndex:indexPath.row-1];
+    if(index < 0 || index >= self.docs.count)
+        return;
+    
+    [self.docs removeObjectAtIndex:index];
+    [self.pbImgInfos removeObjectAtIndex:index];
+    
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index+1 inSection:0];
     [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
 
     // 指定更新被删除记录的下一记录。防止日期头被删除。
-    if(indexPath.row <= self.docs.count)
+    if(index < self.docs.count)
     {
         [self.tableView reloadRowsAtIndexPaths:[[NSArray alloc] initWithObjects:indexPath, nil] withRowAnimation:UITableViewRowAnimationNone];
     }
 }
-
 
 #pragma mark - KGPostImageDelegate
 - (void)reloadData {
