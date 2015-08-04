@@ -294,6 +294,9 @@
     pbVC.index = indexPath.row-1;
     pbVC.handleVC = self;
     pbVC.imageInfos = self.pbImgInfos;
+    
+    //TODO delete icon
+    [pbVC addAMenuItem:@"删除" icon:[UIImage imageNamed:@"baby_icon_normal.png"] target:self action:@selector(removeDoc:)];
     [pbVC show];
 }
 
@@ -427,6 +430,9 @@
 
 -(void)removeDoc:(NSInteger)index
 {
+    if(index <0 || index >= self.docs.count)
+        return;
+    
     GrowDoc *doc = (self.docs)[index];
     NSDictionary *profile = @{@"growthArchiveId":doc.docid
                               };

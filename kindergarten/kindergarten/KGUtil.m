@@ -27,7 +27,7 @@ static NSArray *month_cn;
 
 + (BOOL)isTeacherVersion
 {
-    return true;
+    return false;
 }
 
 + (NSString *)getMD5Str:(NSString *)sourceStr {
@@ -375,9 +375,9 @@ static NSArray *month_cn;
         NSDictionary *childInfo = (NSDictionary *)[curchilds objectAtIndex:i];
         
         KGChild *child = [[KGChild alloc] initWithName:[childInfo objectForKey:@"name"]
-                                                       id:(NSInteger)[childInfo objectForKey:@"id"]
+                                                       id:[[childInfo objectForKey:@"id"] integerValue]
                                                       sex:[[childInfo objectForKey:@"sex"] integerValue]
-                                                  classID:(long)[childInfo objectForKey:@"classId"]
+                                                  classID:[[childInfo objectForKey:@"classId"] integerValue]
                                                 className:[childInfo objectForKey:@"className"]
                                                  birthday:[childInfo objectForKey:@"birthday"]];
          

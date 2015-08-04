@@ -147,7 +147,7 @@
                     KGChild *child = [[KGChild alloc] initWithName:[childInfo objectForKey:@"name"]
                                                                 id:[[childInfo objectForKey:@"id"] integerValue]
                                                                sex:[[childInfo objectForKey:@"sex"] integerValue]
-                                                           classID:(NSInteger)[childInfo objectForKey:@"classId"]
+                                                           classID:[[childInfo objectForKey:@"classId"] integerValue]
                                                          className:[childInfo objectForKey:@"className"]
                                                           birthday:[childInfo objectForKey:@"birthday"]];
                     [delegate.user.childs addObject:child];
