@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HomeworkTableViewCell : UITableViewCell
+@interface KGImageTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *picImageView;
 @property (weak, nonatomic) IBOutlet UILabel *descLabel;

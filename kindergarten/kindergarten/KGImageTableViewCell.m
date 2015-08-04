@@ -6,9 +6,9 @@
 //  Copyright (c) 2015年 xapp. All rights reserved.
 //
 
-#import "HomeworkTableViewCell.h"
+#import "KGImageTableViewCell.h"
 
-@implementation HomeworkTableViewCell
+@implementation KGImageTableViewCell
 
 - (void)awakeFromNib {
     // Initialization code

@@ -49,9 +49,9 @@ static NSString * const reuseIdentifier = @"AlbumCell";
     // 首次不显示
     self.collectionView.footer.hidden = YES;
     
-    if ([KGUtil isTeacherVersion]) {
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewAlbum)];
-    }
+//    if ([KGUtil isTeacherVersion]) {
+//        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewAlbum)];
+//    }
     // Register cell classes
     //[self.collectionView registerClass:[AlbumCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
     

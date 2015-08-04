@@ -10,16 +10,15 @@
 
 @implementation KGHomework
 
-
 - (instancetype)initWithDesc:(NSString *)desc classId:(NSInteger)classId homeworkId:(NSInteger)homeworkId picUrl:(NSString *)picUrl smallPicUrl:(NSString *)smallPicUrl createAt:(NSString *)createTime {
-    self = [super init];
+    self = [super initWithDesc:desc picUrl:picUrl smallPicUrl:smallPicUrl createAt:createTime];
     if (self) {
-        self.desc = desc;
+        //self.desc = desc;
         self.classId = classId;
         self.homeworkId = homeworkId;
-        self.picUrl = picUrl;
-        self.smallPicUrl = smallPicUrl;
-        self.createTime = createTime;
+        //self.picUrl = picUrl;
+        //self.smallPicUrl = smallPicUrl;
+        //self.createTime = createTime;
     }
     return self;
 }

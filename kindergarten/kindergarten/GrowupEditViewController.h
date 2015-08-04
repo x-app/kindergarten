@@ -11,6 +11,7 @@
 typedef enum {
     ADD_GROWUP_DOC,
     ADD_HOMEWORK,
+    ADD_TEACHERDESC,
     ADD_ALBUM_PHOTO
 } KG_POST_TYPE;
 

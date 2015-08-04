@@ -283,7 +283,9 @@ static NSArray *month_cn;
     
     [manager POST:url parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         //[formData appendPartWithFormData:curchilddata name:@"childId"];
-        [formData appendPartWithFormData:customValue name:customAttr];
+        if (customAttr && customValue) {
+            [formData appendPartWithFormData:customValue name:customAttr];
+        }
         [formData appendPartWithFormData:descdata name:@"description"];
         [formData appendPartWithFileData:data name:@"picUrl" fileName:@"upload.jpg" mimeType:@"image/jpeg"];
     } success:^(AFHTTPRequestOperation *operation,id responseObject) {
