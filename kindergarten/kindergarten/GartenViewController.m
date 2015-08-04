@@ -16,8 +16,6 @@
 
 
 @property (weak, nonatomic) IBOutlet UIImageView *repeatImage;
-//@property (weak, nonatomic) IBOutlet UILabel *babyNameLabel;
-//@property (weak, nonatomic) IBOutlet UILabel *classNameLabel;
 
 @end
 
@@ -135,15 +133,10 @@
             [self webVC].title = @"班级统计";
             [self.navigationController pushViewController:[self webVC] animated:YES];
             
-            if(![KGUtil isTeacherVersion])
-            {
-                NSString *body = [NSString stringWithFormat:@"c=%ld&dt=%@&u=%@", (long)cid, [KGUtil getCompactDateStr], uid];
-                url = [KGUtil getRequestHtmlUrl:@"/message/masterMess" bodyStr:body];
-            }
-            else
+            if([KGUtil isTeacherVersion])
             {
                 NSString *body = [NSString stringWithFormat:@"dt=%@&g=%ld&u=%@", [KGUtil getCompactDateStr], (long)gid, uid];
-                url = [KGUtil getRequestHtmlUrl:@"/message/masterMess" bodyStr:body];
+                url = [KGUtil getRequestHtmlUrl:@"/statistics/students" bodyStr:body];
             }
             
             NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:url]];
@@ -153,7 +146,6 @@
         default:
             break;
     }
-    
 }
 
 -(void) setTeacherVersionFunc{
