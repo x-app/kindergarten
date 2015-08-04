@@ -12,6 +12,9 @@
 #import "IntroductionViewController.h"
 @interface GartenViewController ()
 @property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *func;
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *funcbtns;
+
+
 @property (weak, nonatomic) IBOutlet UIImageView *repeatImage;
 //@property (weak, nonatomic) IBOutlet UILabel *babyNameLabel;
 //@property (weak, nonatomic) IBOutlet UILabel *classNameLabel;
@@ -35,6 +38,9 @@
         UITapGestureRecognizer *singleTap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onImageClick:)];
         [v addGestureRecognizer:singleTap1];
     }
+    
+    if([KGUtil isTeacherVersion])
+        [self setTeacherVersionFunc];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -126,11 +132,19 @@
             break;
         }
         case 5:{
-            [self webVC].title = @"园长信箱";
+            [self webVC].title = @"班级统计";
             [self.navigationController pushViewController:[self webVC] animated:YES];
             
-            NSString *body = [NSString stringWithFormat:@"c=%ld&dt=%@&u=%@", (long)cid, [KGUtil getCompactDateStr], uid];
-            NSString *url = [KGUtil getRequestHtmlUrl:@"/statistics/students" bodyStr:body];
+            if(![KGUtil isTeacherVersion])
+            {
+                NSString *body = [NSString stringWithFormat:@"c=%ld&dt=%@&u=%@", (long)cid, [KGUtil getCompactDateStr], uid];
+                url = [KGUtil getRequestHtmlUrl:@"/message/masterMess" bodyStr:body];
+            }
+            else
+            {
+                NSString *body = [NSString stringWithFormat:@"dt=%@&g=%ld&u=%@", [KGUtil getCompactDateStr], (long)gid, uid];
+                url = [KGUtil getRequestHtmlUrl:@"/message/masterMess" bodyStr:body];
+            }
             
             NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:url]];
             [[self webVC].webView loadRequest:request];
@@ -142,6 +156,23 @@
     
 }
 
+-(void) setTeacherVersionFunc{
+    for(int i=0; i<self.func.count; i++)
+    {
+        UIImageView* iv = self.func[i];
+        
+        if(iv.tag == 5)
+            [iv setHidden:false];
+    }
+    
+    for(int i=0; i<self.funcbtns.count; i++)
+    {
+        UIButton* btn = self.funcbtns[i];
+        
+        if([btn.titleLabel.text  isEqual: @"班级统计"])
+            [btn setHidden:false];
+    }
+}
 /*
 #pragma mark - Navigation
 
