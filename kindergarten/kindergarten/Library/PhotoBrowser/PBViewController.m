@@ -122,7 +122,7 @@ const CGFloat segWidth = 20.f;
 
 - (void)clickRightButton:(UIButton *)sender {
     //[self removePage:self.page];
-    [self addAPage];
+    //[self addAPage];
     //return;
     //NSLog(@"click");
     /*NSArray *menuItems =
@@ -137,7 +137,7 @@ const CGFloat segWidth = 20.f;
                     target:self
                     action:@selector(saveImageToLocalAlbum:)],
       ];*/
-    /*CGRect screenBounds = [[UIScreen mainScreen] bounds];
+    CGRect screenBounds = [[UIScreen mainScreen] bounds];
     CGRect rect = CGRectMake(screenBounds.size.width - 80, self.navigationController.navigationBar.frame.origin.y, 100, self.navigationController.navigationBar.frame.size.height);
 //    UIView *cView = [[UIView alloc] initWithFrame:rect];
 //    cView.backgroundColor = [UIColor redColor];
@@ -150,7 +150,7 @@ const CGFloat segWidth = 20.f;
     }
     [KxMenu showMenuInView:self.view
                   fromRect:rect//self.navigationController.navigationBar.frame// self..frame
-                 menuItems:self.menuItems];*/
+                 menuItems:self.menuItems];
 }
 
 - (void)saveImageToLocalAlbum: (id)sender {
