@@ -34,7 +34,7 @@
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="30" id="2Aj-mr-ONq"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>

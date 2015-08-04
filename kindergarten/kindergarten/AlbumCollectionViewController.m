@@ -106,9 +106,9 @@ static NSString * const reuseIdentifier = @"AlbumCell";
     AlbumCollectionViewCell *cell = (AlbumCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"AlbumCell" forIndexPath:indexPath];
     //cell.backgroundColor = [UIColor blackColor];
     KGActivityAlbum *curAlbum = (KGActivityAlbum *)[self.activityAlbums objectAtIndex:indexPath.row];
-    NSLog(@"%@", indexPath);
-    NSLog(@"%ld %ld", (long)indexPath.section, (long)indexPath.row);
-    cell.albumNameLabel.text = curAlbum.dirName;
+    cell.albumNameLabel.text = [NSString stringWithFormat:@"%@(%ld)", curAlbum.dirName, (long)curAlbum.albumInfos.count] ;
+    cell.albumImageView.contentMode = UIViewContentModeScaleAspectFill;
+    cell.albumImageView.clipsToBounds = YES;
     NSString *coverUrl = [curAlbum getCoverUrl];
     if ([coverUrl isEqualToString:@""]) {
         cell.albumImageView.image = [UIImage imageNamed:@"image_placeholder"];
@@ -127,8 +127,6 @@ static NSString * const reuseIdentifier = @"AlbumCell";
         longPressGR.delegate = self;
         longPressGR.view.tag = indexPath.row;
     }
-    // Configure the cell
-    
     return cell;
 }
 
@@ -150,7 +148,7 @@ static NSString * const reuseIdentifier = @"AlbumCell";
         KGActivityAlbumInfo *aInfo = (KGActivityAlbumInfo *)[curAlbum.albumInfos objectAtIndex:i];
         PBImageInfo *iInfo = [[PBImageInfo alloc] init];
         iInfo.imageURL = [NSString stringWithFormat:@"%@%@", [KGUtil getServerAppURL], aInfo.picUrl];
-        iInfo.imageTitle = [NSString stringWithFormat:@"%ld/%ld", (long)(i + 1), (long)curAlbum.albumInfos.count];
+        //iInfo.imageTitle = [NSString stringWithFormat:@"%ld/%ld", (long)(i + 1), (long)curAlbum.albumInfos.count];
         iInfo.imageDesc = aInfo.desc;
         [imageInfos addObject:iInfo];
     }
@@ -161,6 +159,8 @@ static NSString * const reuseIdentifier = @"AlbumCell";
     pbVC.sectionIndex = indexPath.section;
     pbVC.imageInfos = imageInfos;
     [pbVC addAMenuItem:@"转存至成长档案" icon:[UIImage imageNamed:@"baby_icon_normal.png"] target:self action:@selector(saveToGrowupDoc:)];
+    [pbVC addAMenuItem:@"增加照片" icon:[UIImage imageNamed:@"baby_icon_normal.png"] target:self action:@selector(deleteHomeworkFromPB:)];
+    [pbVC addAMenuItem:@"删除照片" icon:[UIImage imageNamed:@"baby_icon_normal.png"] target:self action:@selector(deleteHomeworkFromPB:)];
     [pbVC show];
 }
 

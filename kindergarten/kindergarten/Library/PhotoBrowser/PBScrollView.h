@@ -12,7 +12,7 @@
 
 @property (nonatomic,assign) NSUInteger index;
 
-@property (nonatomic,strong) NSArray *imageInfos;
+//@property (nonatomic,strong) NSArray *imageInfos;
 
 
 @end
