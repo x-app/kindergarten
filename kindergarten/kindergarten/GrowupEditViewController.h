@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum {
+    ADD_GROWUP_DOC,
+    ADD_HOMEWORK,
+    ADD_ALBUM_PHOTO
+} KG_POST_TYPE;
+
 @protocol KGPostImageDelegate
 
 -(void)reloadData;
@@ -19,5 +25,7 @@
 @property (nonatomic, weak) UIImage *image;
 
 @property (nonatomic, assign) id<KGPostImageDelegate> delegate;
+
+@property (nonatomic) KG_POST_TYPE postType;
 
 @end

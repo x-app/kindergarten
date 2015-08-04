@@ -46,14 +46,35 @@
 
 - (IBAction)onSend:(id)sender {
     [self.textView resignFirstResponder];
-    KGChild *curchild = [KGUtil getCurChild];
-    NSString *childid = [NSString stringWithFormat:@"%ld", (long)curchild.cid];
-    NSData *curchilddata = [childid dataUsingEncoding:NSUTF8StringEncoding];
-     [KGUtil uploadImage:@"/system/insertGrowthArchive"
+    NSString *attrName = @"";
+    NSData* attrValue = nil;
+    NSString *url = @"";
+    if ([KGUtil isTeacherVersion]) {
+        if (self.postType == ADD_HOMEWORK) {
+            url = @"/system/insertHomework";
+            attrName = @"classId";
+            attrValue = [[NSString stringWithFormat:@"%ld", (long)[KGUtil getCurClassId]] dataUsingEncoding:NSUTF8StringEncoding];
+        } else if (self.postType == ADD_ALBUM_PHOTO) {
+            //todo
+        } else {
+            return;
+        }
+    } else {
+        if (self.postType == ADD_GROWUP_DOC) {
+            url = @"/system/insertGrowthArchive";
+            attrName = @"childId";
+            KGChild *curchild = [KGUtil getCurChild];
+            NSString *childid = [NSString stringWithFormat:@"%@", curchild.cid];
+            attrValue = [childid dataUsingEncoding:NSUTF8StringEncoding];
+        } else {
+            return;
+        }
+    }
+     [KGUtil uploadImage:url
                    image:self.image
              description:self.textView.text
-              customAttr:@"childId"
-             customValue:curchilddata
+              customAttr:attrName
+             customValue:attrValue
                  success:^(AFHTTPRequestOperation *operation, id responseObject) {
                      NSString *code = [responseObject objectForKey:@"code"];
                      if ([code isEqualToString:@"000000"]) {
@@ -71,7 +92,8 @@
                             NSLog(@"Error: %@", msg);
                      }
                  }
-                 failure:^(AFHTTPRequestOperation *operation, NSError *error) {                             NSLog(@"Error: %@", error);
+                 failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                     NSLog(@"Error: %@", error);
                  }
                   inView:self.view
                  showHud:true];
