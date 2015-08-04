@@ -59,7 +59,9 @@
             attrValue = nil;
             attrName = nil;
         } else if (self.postType == ADD_ALBUM_PHOTO) {
-            //todo
+            url = @"/teacher/insertActivitiesAlbumInfo";
+            attrName = @"directoryId";
+            attrValue = [[NSString stringWithFormat:@"%ld", (long)self.albumDirId] dataUsingEncoding:NSUTF8StringEncoding];
         } else {
             return;
         }

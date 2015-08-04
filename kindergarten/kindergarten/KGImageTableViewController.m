@@ -57,9 +57,11 @@
     }];
     // 首次不显示
     self.tableView.footer.hidden = YES;
-//    if ([KGUtil isTeacherVersion]) {
-//        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewHomework)];
-//    }
+
+    if (![KGUtil isTeacherVersion]) {
+        self.navigationItem.rightBarButtonItem = nil;
+    }
+
     UIView *v = [[UIView alloc] initWithFrame:CGRectZero];
     [self.tableView setTableFooterView:v];
 }
