@@ -8,7 +8,7 @@
 
 #import "GrowupTableViewController.h"
 #import "UIImageView+UIActivityIndicatorForSDWebImage.h"
-#import "KGImageDetailViewController.h"
+//#import "KGImageDetailViewController.h"
 #import "PBImageInfo.h"
 #import "PBViewController.h"
 #import "MJRefresh.h"
@@ -331,7 +331,7 @@
 }
 */
 
-
+/*
 #pragma mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -356,7 +356,7 @@
         detailViewController.imageURL = picurl;
         detailViewController.imageDesc = curDoc.content;
     }
-}
+}*/
 
 #pragma mark
 - (void)onAddClick:(UITapGestureRecognizer*) sender{

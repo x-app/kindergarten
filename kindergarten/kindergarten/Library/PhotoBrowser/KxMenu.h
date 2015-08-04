@@ -31,6 +31,8 @@
                    target:(id)target
                    action:(SEL) action;
 
+@property (nonatomic, copy) void (^actionBlock)();
+
 @end
 
 @interface KxMenu : NSObject

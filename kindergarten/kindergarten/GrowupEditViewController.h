@@ -11,6 +11,7 @@
 typedef enum {
     ADD_GROWUP_DOC,
     ADD_HOMEWORK,
+    ADD_TEACHERDESC,
     ADD_ALBUM_PHOTO
 } KG_POST_TYPE;
 
@@ -27,5 +28,7 @@ typedef enum {
 @property (nonatomic, assign) id<KGPostImageDelegate> delegate;
 
 @property (nonatomic) KG_POST_TYPE postType;
+
+@property (nonatomic) NSInteger albumDirId; //用于传递活动相册目录id
 
 @end

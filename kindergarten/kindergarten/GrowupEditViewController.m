@@ -54,8 +54,14 @@
             url = @"/system/insertHomework";
             attrName = @"classId";
             attrValue = [[NSString stringWithFormat:@"%ld", (long)[KGUtil getCurClassId]] dataUsingEncoding:NSUTF8StringEncoding];
+        } else if (self.postType == ADD_TEACHERDESC) {
+            url = @"/system/insertTeacherDesc";
+            attrValue = nil;
+            attrName = nil;
         } else if (self.postType == ADD_ALBUM_PHOTO) {
-            //todo
+            url = @"/teacher/insertActivitiesAlbumInfo";
+            attrName = @"directoryId";
+            attrValue = [[NSString stringWithFormat:@"%ld", (long)self.albumDirId] dataUsingEncoding:NSUTF8StringEncoding];
         } else {
             return;
         }
@@ -64,7 +70,7 @@
             url = @"/system/insertGrowthArchive";
             attrName = @"childId";
             KGChild *curchild = [KGUtil getCurChild];
-            NSString *childid = [NSString stringWithFormat:@"%@", curchild.cid];
+            NSString *childid = [NSString stringWithFormat:@"%ld", (long)curchild.cid];
             attrValue = [childid dataUsingEncoding:NSUTF8StringEncoding];
         } else {
             return;

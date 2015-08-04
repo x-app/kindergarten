@@ -7,9 +7,20 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
-@interface KGHomework : NSObject
+#import "KGImageTableRowInfo.h"
+//#import <UIKit/UIKit.h>
+@interface KGHomework : KGImageTableRowInfo
 
+@property (nonatomic) NSInteger classId;
+@property (nonatomic) NSInteger homeworkId;
+
+- (instancetype)initWithDesc: (NSString *)desc
+                     classId: (NSInteger)classId
+                  homeworkId: (NSInteger)homeworkId
+                      picUrl: (NSString *)picUrl
+                 smallPicUrl: (NSString *)smallPicUrl
+                    createAt: (NSString *)createTime;
+/*
 @property (strong, nonatomic) NSString *picUrl;
 @property (strong, nonatomic) NSString *smallPicUrl;
 @property (strong, nonatomic) NSString *desc;
@@ -25,5 +36,5 @@
                       picUrl: (NSString *)picUrl
                  smallPicUrl: (NSString *)smallPicUrl
                     createAt: (NSString *)createTime;
-
+*/
 @end

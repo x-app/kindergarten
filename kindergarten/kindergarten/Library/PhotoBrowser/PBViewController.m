@@ -122,6 +122,7 @@ const CGFloat segWidth = 20.f;
 
 - (void)clickRightButton:(UIButton *)sender {
     //[self removePage:self.page];
+    [self addAPage];
     //return;
     //NSLog(@"click");
     /*NSArray *menuItems =
@@ -136,7 +137,7 @@ const CGFloat segWidth = 20.f;
                     target:self
                     action:@selector(saveImageToLocalAlbum:)],
       ];*/
-    CGRect screenBounds = [[UIScreen mainScreen] bounds];
+    /*CGRect screenBounds = [[UIScreen mainScreen] bounds];
     CGRect rect = CGRectMake(screenBounds.size.width - 80, self.navigationController.navigationBar.frame.origin.y, 100, self.navigationController.navigationBar.frame.size.height);
 //    UIView *cView = [[UIView alloc] initWithFrame:rect];
 //    cView.backgroundColor = [UIColor redColor];
@@ -149,7 +150,7 @@ const CGFloat segWidth = 20.f;
     }
     [KxMenu showMenuInView:self.view
                   fromRect:rect//self.navigationController.navigationBar.frame// self..frame
-                 menuItems:self.menuItems];
+                 menuItems:self.menuItems];*/
 }
 
 - (void)saveImageToLocalAlbum: (id)sender {
@@ -228,25 +229,67 @@ const CGFloat segWidth = 20.f;
     self.scrollView.index = _index;
 }
 
+- (void)addAPage {
+    PBImageInfo *ex = [[PBImageInfo alloc] init];
+    ex.imageDesc = @"new photo";
+    ex.imageURL = @"https://www.baidu.com/img/bd_logo1.png";
+    ex.imageTitle = @"";
+    [self.imageInfos addObject:ex];
+    self.pageCount = self.imageInfos.count;
+    [self.reusablePhotoItemViewSetM removeAllObjects];
+    [self.visiblePhotoItemViewDictM removeAllObjects];
+    self.index = self.imageInfos.count - 1;
+    self.page = self.imageInfos.count - 1;
+    [self pagesPrepare];
+}
+
 - (void)removePage: (NSInteger)page {
     if (page < 0 || page >= self.imageInfos.count) {
         return;
     }
-    NSInteger nextPage = (page == self.imageInfos.count - 1) ? self.imageInfos.count - 2 : page + 1;
+    NSInteger nextPage = -1;
+    if (page == 0 && self.imageInfos.count == 1) {
+        //nextPage = 0;
+        [self dismiss];
+        return;
+    } else {
+        nextPage = (page == self.imageInfos.count - 1) ? self.imageInfos.count - 2 : page;
+    }
     //[self showWithPage:nextPage];
     //[self setPage:nextPage];
     
     //CGRect targetFrame = CGRectMake(-320, 0, 320, 568);
     //self.scrollView.pagingEnabled = YES;
-    CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
-    CGPoint targetPoint = CGPointMake((screenWidth + segWidth) * nextPage, 0);
+    //CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
+    //CGPoint targetPoint = CGPointMake((screenWidth + segWidth) * nextPage, 0);
     //[self.scrollView setContentOffset:targetPoint animated:YES];
     //[self.imageInfos removeObjectAtIndex:page];
-    
+    [self.imageInfos removeObjectAtIndex:page];
+    self.pageCount = self.imageInfos.count;
+//    for (int i = 0; i < self.scrollView.subviews.count; i++) {
+//        UIView *view = [self.scrollView.subviews objectAtIndex:i];
+//        [view removeFromSuperview];
+//    }
+    [self.currentItemView removeFromSuperview];
+    //[self.visiblePhotoItemViewDictM removeObjectForKey:@(page)];
+    if (self.currentItemView) {
+        [self.reusablePhotoItemViewSetM removeObject:self.currentItemView];
+    }
+    if ([[self.visiblePhotoItemViewDictM allKeys] containsObject:@(page)]) {
+        [self.visiblePhotoItemViewDictM removeObjectForKey:@(page)];
+    }
+    //[self.reusablePhotoItemViewSetM removeAllObjects];
+    //[self.visiblePhotoItemViewDictM removeAllObjects];
+    self.index = nextPage;
+    self.page = nextPage;
+    [self pagesPrepare];
+    //[self showWithPage:nextPage];
+
+
     //[self pagesPrepare];
     //[_currentItemView removeFromSuperview];
-    [self.scrollView setContentOffset:targetPoint animated:YES];
-    self.page = nextPage;
+    //[self.scrollView setContentOffset:targetPoint animated:YES];
+    //self.page = nextPage;
     //[self.scrollView scrollRectToVisible:targetFrame animated:YES];
     //[self.scrollView scrollRectToVisible:CGRectMake(320 * nextPage, 0, 320, 568) animated:YES];
     //[self.imageInfos removeObjectAtIndex:page];
@@ -436,7 +479,15 @@ const CGFloat segWidth = 20.f;
 
 
 -(void)setPage:(NSUInteger)page{
-    
+    PBImageInfo *curImgInfo = (PBImageInfo *)[self.imageInfos objectAtIndex:page];
+    NSString *text = curImgInfo.imageTitle;
+    if ([KGUtil isEmptyString:text]) {
+        text = [NSString stringWithFormat:@"%@ / %@", @(page + 1) , @(self.imageInfos.count)];
+    }
+    UILabel *titleLabel = (UILabel *)self.navigationItem.titleView;
+    if (titleLabel != nil) {
+        titleLabel.text = text;
+    }
     if(_page !=0 && _page == page) return;
     
     _lastPage = page;
@@ -445,13 +496,15 @@ const CGFloat segWidth = 20.f;
     
     //设置标题
     //NSString *text = [NSString stringWithFormat:@"%@ / %@", @(page + 1) , @(self.pageCount)];
-    PBImageInfo *curImgInfo = (PBImageInfo *)[self.imageInfos objectAtIndex:self.page];
+    /*PBImageInfo *curImgInfo = (PBImageInfo *)[self.imageInfos objectAtIndex:self.page];
     NSString *text = curImgInfo.imageTitle;
-    
+    if ([KGUtil isEmptyString:text]) {
+        text = [NSString stringWithFormat:@"%@ / %@", @(page + 1) , @(self.imageInfos.count)];
+    }
     UILabel *titleLabel = (UILabel *)self.navigationItem.titleView;
     if (titleLabel != nil) {
         titleLabel.text = text;
-    }
+    }*/
     
 //    dispatch_async(dispatch_get_main_queue(), ^{
 //        

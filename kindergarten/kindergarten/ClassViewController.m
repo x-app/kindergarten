@@ -8,7 +8,7 @@
 
 #import "ClassViewController.h"
 #import "KGUtil.h"
-#import "ChildTableViewController.h"
+#import "KGImageTableViewController.h"
 #import "IntroductionViewController.h"
 @interface ClassViewController ()
 
@@ -150,7 +150,7 @@
         case 6:{
             UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Child" bundle:nil];
             vc = [storyBoard instantiateViewControllerWithIdentifier:@"ChildView"];
-            ChildTableViewController *cvc = (ChildTableViewController *)vc;
+            KGImageTableViewController *cvc = (KGImageTableViewController *)vc;
             if (cvc != nil) {
                 cvc.type = HOMEWORK;
                 [self.navigationController pushViewController:cvc animated:YES];
