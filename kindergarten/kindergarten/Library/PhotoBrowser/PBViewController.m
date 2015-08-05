@@ -58,6 +58,22 @@ const CGFloat segWidth = 20.f;
                                             action:selector]];
 }
 
+- (void)addAMenuItem:(NSString *)title icon:(UIImage *)image opType:(PhotoBrowserOperationType)optype opBlock:(void(^)(NSInteger section, NSInteger row, NSInteger imageIndex))opblock {
+    if (optype == OP_ADD_PHOTO) {
+        
+    } else if (optype == OP_DELETE_PHOTO) {
+        self.deletePhotoBlock = opblock;
+        [self.menuItems addObject:[KxMenuItem menuItem:title
+                                                 image:image
+                                                target:self
+                                                action:@selector(deletePhotoAction:)]];
+    }
+}
+
+- (void)deletePhotoAction:(id)sender {
+    [self removePage:self.page];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -93,12 +109,18 @@ const CGFloat segWidth = 20.f;
 
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [self setNavigationBarStyle];
+    //[self showWithPage:self.index];
+    //[self vcPrepare];
+    //[self setNavigationBarStyle];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self setNavigationBarStyle];
+    [self pagesPrepare];
+    
+    //self.scrollView.index = self.index;
+    //self.page = self.index;
+    //[self setNavigationBarStyle];
     //[self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
@@ -225,7 +247,7 @@ const CGFloat segWidth = 20.f;
     
     //设置contentSize
     self.scrollView.contentSize = CGSizeMake(widthEachPage * self.imageInfos.count, 0);
-    
+    self.scrollView.isScrollToIndex = NO;
     self.scrollView.index = _index;
 }
 

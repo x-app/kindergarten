@@ -12,6 +12,8 @@
 
 @property (nonatomic,assign) NSUInteger index;
 
+@property (nonatomic,assign) BOOL isScrollToIndex;
+
 //@property (nonatomic,strong) NSArray *imageInfos;
 
 

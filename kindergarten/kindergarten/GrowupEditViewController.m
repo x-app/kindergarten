@@ -8,6 +8,7 @@
 
 #import "GrowupEditViewController.h"
 #import "KGUtil.h"
+#import "AlbumCollectionViewController.h"
 
 @interface GrowupEditViewController ()
 
@@ -90,6 +91,13 @@
                         [self dismissViewControllerAnimated:YES completion:nil];
                         if(self.delegate)// && [self.delegate respondsToSelector:@selector(reloadData)])
                              [self.delegate reloadData];
+                         //在活动相册中，往一个相册新增完毕后返回
+                         if (self.postType == ADD_ALBUM_PHOTO) {
+                             AlbumCollectionViewController *albumVC = (AlbumCollectionViewController *)self.delegate;
+                             if (albumVC) {
+                                 [albumVC dismissPhotoBrowser];
+                             }
+                         }
                      }
                      else
                      {

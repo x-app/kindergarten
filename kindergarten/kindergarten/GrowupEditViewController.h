@@ -30,5 +30,4 @@ typedef enum {
 @property (nonatomic) KG_POST_TYPE postType;
 
 @property (nonatomic) NSInteger albumDirId; //用于传递活动相册目录id
-
 @end

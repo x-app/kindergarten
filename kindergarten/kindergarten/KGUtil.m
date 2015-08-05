@@ -27,7 +27,7 @@ static NSArray *month_cn;
 
 + (BOOL)isTeacherVersion
 {
-    return false;
+    return true;
 }
 
 + (NSString *)getMD5Str:(NSString *)sourceStr {

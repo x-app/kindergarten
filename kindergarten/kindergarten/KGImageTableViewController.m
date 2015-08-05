@@ -27,6 +27,8 @@
 
 @property (nonatomic, strong) NSMutableArray *imageInfos;  //为PhotoBrowser提供的图像信息数组
 
+@property (nonatomic, strong) PBViewController *pbVC;
+
 @end
 
 @implementation KGImageTableViewController
@@ -47,6 +49,7 @@
 
     // 设置下拉刷新
     self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        self.pageIndex = 1;
         [self loadTableData:YES];
     }];
     [self.tableView.header beginRefreshing];
@@ -71,6 +74,40 @@
         _imageTableRowInfos = [[NSMutableArray alloc] init];
     }
     return _imageTableRowInfos;
+}
+
+- (NSMutableArray *)imageInfos {
+    if (_imageInfos == nil) {
+        _imageInfos = [[NSMutableArray alloc] init];
+    }
+    return _imageInfos;
+}
+
+- (void)createImageInfos {
+    [self.imageInfos removeAllObjects];
+    for (int i = 0; i < [self.imageTableRowInfos count]; i++) {
+        KGImageTableRowInfo *rowInfo = (KGImageTableRowInfo *)[self.imageTableRowInfos objectAtIndex:i];
+        PBImageInfo *iInfo = [[PBImageInfo alloc] init];
+        iInfo.imageURL = [NSString stringWithFormat:@"%@%@", [KGUtil getServerAppURL], rowInfo.picUrl];
+        iInfo.imageTitle = rowInfo.createTime;
+        iInfo.imageDesc = rowInfo.desc;
+        iInfo.placeHolder = rowInfo.coverImage;
+        [self.imageInfos addObject:iInfo];
+    }
+}
+
+- (PBViewController *)pbVC {
+    if (_pbVC == nil) {
+        _pbVC = [[PBViewController alloc] init];
+        _pbVC.imageInfos = self.imageInfos;
+        _pbVC.handleVC = self;
+        if (self.type == HOMEWORK) {
+            [_pbVC addAMenuItem:@"删除亲子成长" icon:[UIImage imageNamed:@"baby_icon_normal.png"] target:self action:@selector(deleteImageTableRowInPB:)];
+        } else if (self.type == TEACHER) {
+            [_pbVC addAMenuItem:@"删除教师风采" icon:[UIImage imageNamed:@"baby_icon_normal.png"] target:self action:@selector(deleteImageTableRowInPB:)];
+        }
+    }
+    return _pbVC;
 }
 
 - (KGPicPicker *)picPicker {
@@ -252,7 +289,7 @@
         } else {
             return;
         }
-        [self deleteImageTableRow:infoId section:indexPath.section row:indexPath.row];
+        [self deleteImageTableRow:infoId section:indexPath.section row:indexPath.row isInPB:NO];
     }
 }
 
@@ -294,7 +331,7 @@
     if (indexPath.row >= [self.imageTableRowInfos count] || indexPath.row < 0) {
         return;
     }
-    NSMutableArray *imageInfos = [[NSMutableArray alloc] initWithCapacity:[self.imageTableRowInfos count]];
+    /*NSMutableArray *imageInfos = [[NSMutableArray alloc] initWithCapacity:[self.imageTableRowInfos count]];
     for (int i = 0; i < [self.imageTableRowInfos count]; i++) {
         KGImageTableRowInfo *rowInfo = (KGImageTableRowInfo *)[self.imageTableRowInfos objectAtIndex:i];
         PBImageInfo *iInfo = [[PBImageInfo alloc] init];
@@ -308,8 +345,18 @@
     pbVC.index = indexPath.row;
     pbVC.handleVC = self;
     pbVC.imageInfos = imageInfos;
-    [pbVC addAMenuItem:@"删除亲子成长" icon:[UIImage imageNamed:@"baby_icon_normal.png"] target:self action:@selector(deleteHomeworkFromPB:)];
-    [pbVC show];
+    if (self.type == HOMEWORK) {
+        [pbVC addAMenuItem:@"删除亲子成长" icon:[UIImage imageNamed:@"baby_icon_normal.png"] target:self action:@selector(deleteImageTableRowInPB:)];
+    } else if (self.type == TEACHER) {
+        [pbVC addAMenuItem:@"删除教师风采" icon:[UIImage imageNamed:@"baby_icon_normal.png"] target:self action:@selector(deleteImageTableRowInPB:)];
+    }
+    [pbVC show];*/
+    [self createImageInfos];
+    self.pbVC.index = indexPath.row;
+    self.pbVC.rowIndex = indexPath.row;
+    self.pbVC.sectionIndex = indexPath.section;
+    //self.pbVC.imageInfos = self.imageInfos;
+    [self.pbVC show];
 }
 
 #pragma mark - add button action
@@ -318,7 +365,7 @@
 }
 
 #pragma mark - delete row
-- (void)deleteImageTableRow:(NSInteger)infoId section:(NSInteger)sec row:(NSInteger)row {
+- (void)deleteImageTableRow:(NSInteger)infoId section:(NSInteger)sec row:(NSInteger)row isInPB:(BOOL)isInPB{
     if (![KGUtil isTeacherVersion]) {
         return;
     }
@@ -337,6 +384,7 @@
     NSDictionary *body = [KGUtil getRequestBody:data];
     NSDictionary *params = @{@"uid": REQUEST_UID, @"sign": [KGUtil getRequestSign:body], @"body":body};
     NSString *url = [[KGUtil getServerAppURL] stringByAppendingString:urlSuffix];
+    UIView *view = isInPB ? self.pbVC.view : self.tableView;
     [KGUtil postRequest:url
              parameters:params
                 success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -344,16 +392,19 @@
                     NSString *code = [responseObject objectForKey:@"code"];
                     if ([code isEqualToString:@"000000"]) {
                         [self doDeleteImageTableRow:indexPath];
+                        if (isInPB) {
+                            [self.pbVC removePage:row];
+                        }
                     } else {
-                        [KGUtil showCheckMark:@"删除失败" checked:NO inView:self.tableView];
+                        [KGUtil showCheckMark:@"删除失败" checked:NO inView:view];
                     }
                 }
                 failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                     NSLog(@"Error: %@", error);
-                    [KGUtil showCheckMark:@"请求删除失败" checked:NO inView:self.tableView];
+                    [KGUtil showCheckMark:@"请求删除失败" checked:NO inView:view];
                 }
-                 inView:self.tableView
-                showHud:NO
+                 inView:self.view
+                showHud:YES
               showError:true];
 }
 
@@ -364,17 +415,30 @@
 }
 
 
-- (void)deleteHomeworkFromPB:(id)sender {
-//    if (![sender isKindOfClass:[KxMenuItem class]]) {
-//        return;
-//    }
-//    KxMenuItem *item = (KxMenuItem *)sender;
-//    NSInteger imageIndex = item.imageIndex;
-//    KGHomework *hw = [self.imageTableRowInfos objectAtIndex:imageIndex];
-//    if (hw == nil) {
-//        return;
-//    }
-//    [self deleteImageTableRow:hw.homeworkId section:item.sectionIndex row:item.rowIndex];
+- (void)deleteImageTableRowInPB:(id)sender {
+    if (![sender isKindOfClass:[KxMenuItem class]]) {
+        return;
+    }
+    KxMenuItem *item = (KxMenuItem *)sender;
+    NSInteger imageIndex = item.imageIndex;
+    if (imageIndex < 0 || imageIndex >= self.imageTableRowInfos.count) {
+        return;
+    }
+    NSInteger infoId;
+    if (self.type == HOMEWORK) {
+        KGHomework *hw = [self.imageTableRowInfos objectAtIndex:imageIndex];
+        if (hw == nil) {
+            return;
+        }
+        infoId = hw.homeworkId;
+    } else if (self.type == TEACHER) {
+        KGTeacherDesc *td = [self.imageTableRowInfos objectAtIndex:imageIndex];
+        if (td == nil) {
+            return;
+        }
+        infoId = td.teacherDescId;
+    }
+    [self deleteImageTableRow:infoId section:item.sectionIndex row:imageIndex isInPB:YES];
 }
 
 #pragma mark add row

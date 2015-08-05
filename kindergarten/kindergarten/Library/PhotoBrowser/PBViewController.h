@@ -12,6 +12,14 @@
 #import "PBItemView.h"
 #import "KxMenu.h"
 
+
+typedef enum {
+    OP_ADD_PHOTO,
+    OP_DELETE_PHOTO,
+    OP_SAVE_TO_LOCAL,
+    OP_OTHERS
+} PhotoBrowserOperationType;
+
 @interface PBViewController : UIViewController<UINavigationControllerDelegate>
 
 
@@ -62,12 +70,20 @@
 /** 当前显示中的itemView */
 @property (nonatomic,weak) PBItemView *currentItemView;
 
--(void)show;
+
+@property (nonatomic,copy) void (^deletePhotoBlock)(NSInteger section, NSInteger row, NSInteger imageIndex);
+
+@property (nonatomic,copy) void (^addPhotoBlock)(NSInteger section, NSInteger row, NSInteger imageIndex);
+
+- (void)removePage: (NSInteger)page;
+
+- (void)show;
 
 - (void)addAMenuItem:(NSString *)title
                 icon:(UIImage *)image
               target:(id)trgt
               action:(SEL)selector;
 
+- (void)dismiss;
 
 @end
