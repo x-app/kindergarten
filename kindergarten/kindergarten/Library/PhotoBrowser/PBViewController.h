@@ -50,10 +50,8 @@ typedef enum {
 /** 上一个页码 */
 @property (nonatomic,assign) NSUInteger lastPage;
 
-
 /** 初始显示的index */
 @property (nonatomic,assign) NSUInteger index;
-
 
 /** 可重用集合 */
 @property (nonatomic,strong) NSMutableSet *reusablePhotoItemViewSetM;
@@ -76,6 +74,8 @@ typedef enum {
 @property (nonatomic,copy) void (^addPhotoBlock)(NSInteger section, NSInteger row, NSInteger imageIndex);
 
 - (void)removePage: (NSInteger)page;
+
+- (void)resetToIndex: (NSInteger)index;
 
 - (void)show;
 

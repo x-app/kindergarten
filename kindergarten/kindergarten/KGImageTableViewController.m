@@ -14,7 +14,6 @@
 #import "KGImageTableViewCell.h"
 //#import "KGImageDetailViewController.h"
 #import "UIImageView+WebCache.h"
-#import "PBViewController.h"
 #import "MJRefresh.h"
 #import "KGHomework.h"
 #import "KGTeacherDesc.h"
@@ -26,8 +25,6 @@
 @property (nonatomic, strong) KGPicPicker *picPicker;      //拍照or从相册选择控件
 
 @property (nonatomic, strong) NSMutableArray *imageInfos;  //为PhotoBrowser提供的图像信息数组
-
-@property (nonatomic, strong) PBViewController *pbVC;
 
 @end
 
@@ -99,11 +96,13 @@
 - (PBViewController *)pbVC {
     if (_pbVC == nil) {
         _pbVC = [[PBViewController alloc] init];
-        _pbVC.imageInfos = self.imageInfos;
+        //_pbVC.imageInfos = self.imageInfos;
         _pbVC.handleVC = self;
         if (self.type == HOMEWORK) {
+            [_pbVC addAMenuItem:@"增加亲子成长" icon:[UIImage imageNamed:@"baby_icon_normal.png"] target:self action:@selector(addImageTableRowInPB:)];
             [_pbVC addAMenuItem:@"删除亲子成长" icon:[UIImage imageNamed:@"baby_icon_normal.png"] target:self action:@selector(deleteImageTableRowInPB:)];
         } else if (self.type == TEACHER) {
+            [_pbVC addAMenuItem:@"增加教师风采" icon:[UIImage imageNamed:@"baby_icon_normal.png"] target:self action:@selector(addImageTableRowInPB:)];
             [_pbVC addAMenuItem:@"删除教师风采" icon:[UIImage imageNamed:@"baby_icon_normal.png"] target:self action:@selector(deleteImageTableRowInPB:)];
         }
     }
@@ -176,6 +175,9 @@
             } else {
                 [self.tableView.footer noticeNoMoreData];
             }
+            [self createImageInfos];
+            self.pbVC.imageInfos = self.imageInfos;
+            [self.pbVC resetToIndex:0];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
@@ -233,6 +235,9 @@
 - (void)reloadData {
     self.pageIndex = 1;
     [self loadTableData:YES];
+//    if (self.pbVC.pbVisible) {
+//        [self.pbVC addAPage];
+//    }
 }
 
 
@@ -351,16 +356,20 @@
         [pbVC addAMenuItem:@"删除教师风采" icon:[UIImage imageNamed:@"baby_icon_normal.png"] target:self action:@selector(deleteImageTableRowInPB:)];
     }
     [pbVC show];*/
-    [self createImageInfos];
+    //[self createImageInfos];
     self.pbVC.index = indexPath.row;
     self.pbVC.rowIndex = indexPath.row;
     self.pbVC.sectionIndex = indexPath.section;
-    //self.pbVC.imageInfos = self.imageInfos;
+    self.pbVC.imageInfos = self.imageInfos;
     [self.pbVC show];
 }
 
 #pragma mark - add button action
 - (IBAction)addButtonAction:(id)sender {
+    [self addImageTableRow];
+}
+
+- (void)addImageTableRowInPB:(id)sender {
     [self addImageTableRow];
 }
 

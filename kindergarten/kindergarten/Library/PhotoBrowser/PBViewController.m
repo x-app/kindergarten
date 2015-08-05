@@ -249,19 +249,20 @@ const CGFloat segWidth = 20.f;
     self.scrollView.contentSize = CGSizeMake(widthEachPage * self.imageInfos.count, 0);
     self.scrollView.isScrollToIndex = NO;
     self.scrollView.index = _index;
+    [self.reusablePhotoItemViewSetM removeAllObjects];
+    [self.visiblePhotoItemViewDictM removeAllObjects];
 }
 
-- (void)addAPage {
-    PBImageInfo *ex = [[PBImageInfo alloc] init];
+- (void)resetToIndex: (NSInteger)index{
+    /*PBImageInfo *ex = [[PBImageInfo alloc] init];
     ex.imageDesc = @"new photo";
     ex.imageURL = @"https://www.baidu.com/img/bd_logo1.png";
     ex.imageTitle = @"";
-    [self.imageInfos addObject:ex];
-    self.pageCount = self.imageInfos.count;
+    [self.imageInfos addObject:ex];*/
+    //self.pageCount = self.imageInfos.count;
     [self.reusablePhotoItemViewSetM removeAllObjects];
     [self.visiblePhotoItemViewDictM removeAllObjects];
-    self.index = self.imageInfos.count - 1;
-    self.page = self.imageInfos.count - 1;
+    self.index = index;
     [self pagesPrepare];
 }
 

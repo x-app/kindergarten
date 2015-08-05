@@ -86,7 +86,7 @@ static NSString * const reuseIdentifier = @"AlbumCell";
     if (_pbVC == nil) {
         _pbVC = [[PBViewController alloc] init];
         _pbVC.handleVC = self;
-        _pbVC.imageInfos = self.imageInfos;
+        //_pbVC.imageInfos = self.imageInfos;
         if ([KGUtil isTeacherVersion]) {
             [_pbVC addAMenuItem:@"增加照片" icon:[UIImage imageNamed:@"baby_icon_normal.png"] target:self action:@selector(addPhotoToAlbumInPB:)];
             [_pbVC addAMenuItem:@"删除照片" icon:[UIImage imageNamed:@"baby_icon_normal.png"] target:self action:@selector(deletePhotoFromAlbumInPB:)];
@@ -211,6 +211,7 @@ static NSString * const reuseIdentifier = @"AlbumCell";
     [pbVC show];*/
     [self createImageInfos:indexPath.row];
     self.pbVC.index = 0;
+    self.pbVC.imageInfos = self.imageInfos;
     self.pbVC.rowIndex = indexPath.row;
     self.pbVC.sectionIndex = indexPath.section;
     [self.pbVC show];
@@ -588,6 +589,7 @@ static NSString * const reuseIdentifier = @"AlbumCell";
 - (void)reloadData {
     self.pageIndex = 1;
     [self loadAlbumData:YES];
+    [self dismissPhotoBrowser];
 }
 
 @end
