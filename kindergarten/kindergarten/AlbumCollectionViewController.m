@@ -32,6 +32,7 @@
 
 @property (nonatomic, strong) PBViewController *pbVC;
 
+@property (nonatomic) NSInteger curAlbumIndex;
 @property (nonatomic, strong) NSMutableArray *imageInfos;
 
 @end
@@ -48,11 +49,13 @@ static NSString * const reuseIdentifier = @"AlbumCell";
     self.pageIndex = 1;
     self.longPressedIndex = -1;
     self.dirIdRecord = -1;
+    self.curAlbumIndex = -1;
 
     //[self.collectionView registerClass:[AlbumCollectionViewCell class] forCellWithReuseIdentifier:@"AlbumCell"];
     
     // 设置下拉刷新
     self.collectionView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        self.pageIndex = 1;
         [self loadAlbumData:YES];
     }];
     [self.collectionView.header beginRefreshing];
@@ -88,10 +91,10 @@ static NSString * const reuseIdentifier = @"AlbumCell";
         _pbVC.handleVC = self;
         //_pbVC.imageInfos = self.imageInfos;
         if ([KGUtil isTeacherVersion]) {
-            [_pbVC addAMenuItem:@"增加照片" icon:[UIImage imageNamed:@"baby_icon_normal.png"] target:self action:@selector(addPhotoToAlbumInPB:)];
-            [_pbVC addAMenuItem:@"删除照片" icon:[UIImage imageNamed:@"baby_icon_normal.png"] target:self action:@selector(deletePhotoFromAlbumInPB:)];
+            [_pbVC addAMenuItem:@"增加照片" icon:[UIImage imageNamed:@"icon_add.png"] target:self action:@selector(addPhotoToAlbumInPB:)];
+            [_pbVC addAMenuItem:@"删除照片" icon:[UIImage imageNamed:@"icon_delete.png"] target:self action:@selector(deletePhotoFromAlbumInPB:)];
         } else {
-            [_pbVC addAMenuItem:@"转存至成长档案" icon:[UIImage imageNamed:@"baby_icon_normal.png"] target:self action:@selector(saveToGrowupDoc:)];
+            [_pbVC addAMenuItem:@"转存至成长档案" icon:[UIImage imageNamed:@"icon_add.png"] target:self action:@selector(saveToGrowupDoc:)];
         }
     }
     return _pbVC;
@@ -104,7 +107,7 @@ static NSString * const reuseIdentifier = @"AlbumCell";
     return _imageInfos;
 }
 
-- (void)createImageInfos:(NSInteger)index {
+- (void)resetImageInfos:(NSInteger)index {
     if (index < 0 || index >= self.activityAlbums.count) {
         return;
     }
@@ -120,6 +123,7 @@ static NSString * const reuseIdentifier = @"AlbumCell";
         iInfo.imageDesc = aInfo.desc;
         [self.imageInfos addObject:iInfo];
     }
+    self.pbVC.imageInfos = self.imageInfos;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -153,9 +157,18 @@ static NSString * const reuseIdentifier = @"AlbumCell";
     cell.albumNameLabel.text = [NSString stringWithFormat:@"%@(%ld)", curAlbum.dirName, (long)curAlbum.albumInfos.count] ;
     cell.albumImageView.contentMode = UIViewContentModeScaleAspectFill;
     cell.albumImageView.clipsToBounds = YES;
+    cell.album2ndImageView.contentMode = UIViewContentModeScaleAspectFill;
+    cell.album2ndImageView.clipsToBounds = YES;
+    cell.album3rdImageView.contentMode = UIViewContentModeScaleAspectFill;
+    cell.album3rdImageView.clipsToBounds = YES;
     NSString *coverUrl = [curAlbum getCoverUrl];
+    //cell.album2ndImageView.image = [UIImage imageNamed:@"image_placeholder"];
+    //cell.album3rdImageView.image = [UIImage imageNamed:@"image_placeholder"];
+
     if ([coverUrl isEqualToString:@""]) {
-        cell.albumImageView.image = [UIImage imageNamed:@"image_placeholder"];
+        cell.albumImageView.image = [UIImage imageNamed:@"camera.png"];
+        cell.album2ndImageView.hidden = YES;
+        cell.album3rdImageView.hidden = YES;
     } else {
         NSString *url = [NSString stringWithFormat:@"%@%@", [KGUtil getServerAppURL], coverUrl];
         [cell.albumImageView sd_setImageWithURL:[NSURL URLWithString:url]
@@ -163,6 +176,29 @@ static NSString * const reuseIdentifier = @"AlbumCell";
                                         options:SDWebImageProgressiveDownload
                                       completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                                       }];
+        if ([KGUtil isEmptyString:[curAlbum get2ndCoverUrl]]) {
+            cell.album2ndImageView.hidden = YES;
+            cell.album3rdImageView.hidden = YES;
+        } else {
+            cell.album2ndImageView.hidden = NO;
+            NSString *url2nd = [NSString stringWithFormat:@"%@%@", [KGUtil getServerAppURL], [curAlbum get2ndCoverUrl]];
+            [cell.album2ndImageView sd_setImageWithURL:[NSURL URLWithString:url2nd]
+                                      placeholderImage:[UIImage imageNamed:@"image_placeholder"]
+                                               options:SDWebImageProgressiveDownload
+                                             completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                             }];
+            if ([KGUtil isEmptyString:[curAlbum get3rdCoverUrl]]) {
+                cell.album3rdImageView.hidden = YES;
+            } else {
+                cell.album3rdImageView.hidden = NO;
+                NSString *url3rd = [NSString stringWithFormat:@"%@%@", [KGUtil getServerAppURL], [curAlbum get3rdCoverUrl]];
+                [cell.album3rdImageView sd_setImageWithURL:[NSURL URLWithString:url3rd]
+                                          placeholderImage:[UIImage imageNamed:@"image_placeholder"]
+                                                   options:SDWebImageProgressiveDownload
+                                                 completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                                 }];
+            }
+        }
     }
     if ([KGUtil isTeacherVersion]) {
         UILongPressGestureRecognizer *longPressGR = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressCellAction:)];
@@ -209,9 +245,10 @@ static NSString * const reuseIdentifier = @"AlbumCell";
         [pbVC addAMenuItem:@"转存至成长档案" icon:[UIImage imageNamed:@"baby_icon_normal.png"] target:self action:@selector(saveToGrowupDoc:)];
     }
     [pbVC show];*/
-    [self createImageInfos:indexPath.row];
+    [self resetImageInfos:indexPath.row];
+    self.curAlbumIndex = indexPath.row;
     self.pbVC.index = 0;
-    self.pbVC.imageInfos = self.imageInfos;
+    //self.pbVC.imageInfos = self.imageInfos;
     self.pbVC.rowIndex = indexPath.row;
     self.pbVC.sectionIndex = indexPath.section;
     [self.pbVC show];
@@ -250,8 +287,7 @@ static NSString * const reuseIdentifier = @"AlbumCell";
 
 #pragma mark UICollectionViewDelegateFlowLayout
 //定义每个UICollectionView 的大小
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-{
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     CGFloat unitWidth = 150;
     CGFloat unitMargin = 5;
     CGFloat screenWidth = [[UIScreen mainScreen] bounds].size.width;
@@ -261,8 +297,7 @@ static NSString * const reuseIdentifier = @"AlbumCell";
 }
 
 //定义每个UICollectionView 的 margin
--(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
-{
+-(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
     return UIEdgeInsetsMake(5, 2.5, 5, 2.5);
 }
 
@@ -377,6 +412,7 @@ static NSString * const reuseIdentifier = @"AlbumCell";
     NSDictionary *params = @{@"uid": REQUEST_UID, @"sign": [KGUtil getRequestSign:body], @"body":body};
     NSString *urlSuffix = @"/teacher/deleteDirectory";
     NSString *url = [[KGUtil getServerAppURL] stringByAppendingString:urlSuffix];
+    UIView *tmView = [KGUtil getTopMostViewController].view;
     [KGUtil postRequest:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON: %@", responseObject);
         NSString *code = [responseObject objectForKey:@"code"];
@@ -384,12 +420,12 @@ static NSString * const reuseIdentifier = @"AlbumCell";
             self.pageIndex = 1;
             [self loadAlbumData:YES];
         } else {
-            [KGUtil showCheckMark:@"删除失败" checked:NO inView:self.collectionView];
+            [KGUtil showCheckMark:@"删除失败" checked:NO inView:tmView];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
-        [KGUtil showCheckMark:@"请求删除失败" checked:NO inView:self.collectionView];
-    } inView:self.collectionView showHud:NO showError:true];
+        [KGUtil showCheckMark:@"请求删除失败" checked:NO inView:tmView];
+    } inView:tmView showHud:YES showError:true];
 }
 
 - (void)deletePhotoFromAlbumInPB:(id)sender {
@@ -414,15 +450,17 @@ static NSString * const reuseIdentifier = @"AlbumCell";
     NSDictionary *params = @{@"uid": REQUEST_UID, @"sign": [KGUtil getRequestSign:body], @"body":body};
     NSString *urlSuffix = @"/teacher/deleteActivitiesAlbumInfo";
     NSString *url = [[KGUtil getServerAppURL] stringByAppendingString:urlSuffix];
-    UIView *view = isInPB ? self.pbVC.view : self.collectionView;
+    UIView *view = [KGUtil getTopMostViewController].view; //isInPB ? self.pbVC.view : self.collectionView;
     [KGUtil postRequest:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON: %@", responseObject);
         NSString *code = [responseObject objectForKey:@"code"];
         if ([code isEqualToString:@"000000"]) {
             [self reloadData];
-            if (isInPB) {
-                [self.pbVC removePage:index];
-            }
+//            if (isInPB) {
+//                [self.pbVC removePage:index];
+//            }
+            [self resetImageInfos:self.curAlbumIndex];
+            [self.pbVC resetAsPageRemoved];
         } else {
             [KGUtil showCheckMark:@"删除失败" checked:NO inView:view];
         }
@@ -488,6 +526,10 @@ static NSString * const reuseIdentifier = @"AlbumCell";
                 self.pageIndex += 1;
             } else {
                 [self.collectionView.footer noticeNoMoreData];
+            }
+            if (self.curAlbumIndex >= 0 && self.curAlbumIndex < self.activityAlbums.count) {
+                [self resetImageInfos:self.curAlbumIndex];
+                [self.pbVC resetToIndex:0];
             }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -589,7 +631,7 @@ static NSString * const reuseIdentifier = @"AlbumCell";
 - (void)reloadData {
     self.pageIndex = 1;
     [self loadAlbumData:YES];
-    [self dismissPhotoBrowser];
+    //[self dismissPhotoBrowser];
 }
 
 @end

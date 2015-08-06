@@ -41,7 +41,7 @@ typedef enum {
 @property (nonatomic,strong) NSMutableArray *imageInfos;
 
 /** 总页数 */
-@property (nonatomic,assign) NSUInteger pageCount;
+//@property (nonatomic,assign) NSUInteger pageCount;
 
 /** page */
 @property (nonatomic,assign) NSUInteger page;
@@ -68,12 +68,13 @@ typedef enum {
 /** 当前显示中的itemView */
 @property (nonatomic,weak) PBItemView *currentItemView;
 
-
 @property (nonatomic,copy) void (^deletePhotoBlock)(NSInteger section, NSInteger row, NSInteger imageIndex);
 
 @property (nonatomic,copy) void (^addPhotoBlock)(NSInteger section, NSInteger row, NSInteger imageIndex);
 
 - (void)removePage: (NSInteger)page;
+
+- (void)resetAsPageRemoved;
 
 - (void)resetToIndex: (NSInteger)index;
 

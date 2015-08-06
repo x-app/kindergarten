@@ -109,19 +109,12 @@ const CGFloat segWidth = 20.f;
 
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    //[self showWithPage:self.index];
-    //[self vcPrepare];
-    //[self setNavigationBarStyle];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self pagesPrepare];
-    
-    //self.scrollView.index = self.index;
-    //self.page = self.index;
-    //[self setNavigationBarStyle];
-    //[self.navigationController setNavigationBarHidden:YES animated:YES];
+    [self setNavigationBarStyle];
 }
 
 -(void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
@@ -237,29 +230,41 @@ const CGFloat segWidth = 20.f;
 
 /** 每页准备 */
 -(void)pagesPrepare{
-    
+    if (self.imageInfos == nil || self.imageInfos.count == 0) {
+        return;
+    }
     __block CGRect frame = [UIScreen mainScreen].bounds;
     
     CGFloat widthEachPage = frame.size.width + segWidth;
     
+    [self.reusablePhotoItemViewSetM removeAllObjects];
+    [self.visiblePhotoItemViewDictM removeAllObjects];
+    
     //展示页码对应的页面
     [self showWithPage:self.index];
-    
+    //self.page = self.index;
     //设置contentSize
     self.scrollView.contentSize = CGSizeMake(widthEachPage * self.imageInfos.count, 0);
     self.scrollView.isScrollToIndex = NO;
     self.scrollView.index = _index;
-    [self.reusablePhotoItemViewSetM removeAllObjects];
-    [self.visiblePhotoItemViewDictM removeAllObjects];
+}
+
+- (void)resetAsPageRemoved {
+    NSInteger nextPage = self.page;
+    if (nextPage < 0 || nextPage >= self.imageInfos.count) {
+        nextPage = self.imageInfos.count - 1;
+    }
+    [self resetToIndex:nextPage];
 }
 
 - (void)resetToIndex: (NSInteger)index{
-    /*PBImageInfo *ex = [[PBImageInfo alloc] init];
-    ex.imageDesc = @"new photo";
-    ex.imageURL = @"https://www.baidu.com/img/bd_logo1.png";
-    ex.imageTitle = @"";
-    [self.imageInfos addObject:ex];*/
-    //self.pageCount = self.imageInfos.count;
+    if (self.imageInfos == nil || self.imageInfos.count == 0) {
+        [self dismiss];
+    }
+    for (int i = 0; i < self.scrollView.subviews.count; i++) {
+        UIView *view = [self.scrollView.subviews objectAtIndex:i];
+        [view removeFromSuperview];
+    }
     [self.reusablePhotoItemViewSetM removeAllObjects];
     [self.visiblePhotoItemViewDictM removeAllObjects];
     self.index = index;
@@ -288,7 +293,7 @@ const CGFloat segWidth = 20.f;
     //[self.scrollView setContentOffset:targetPoint animated:YES];
     //[self.imageInfos removeObjectAtIndex:page];
     [self.imageInfos removeObjectAtIndex:page];
-    self.pageCount = self.imageInfos.count;
+    //self.pageCount = self.imageInfos.count;
 //    for (int i = 0; i < self.scrollView.subviews.count; i++) {
 //        UIView *view = [self.scrollView.subviews objectAtIndex:i];
 //        [view removeFromSuperview];
@@ -322,7 +327,18 @@ const CGFloat segWidth = 20.f;
  *  展示页码对应的页面
  */
 -(void)showWithPage:(NSUInteger)page{
-    
+    if (self.imageInfos == nil || self.imageInfos.count == 0) {
+        return;
+    }
+//    PBImageInfo *curImgInfo = (PBImageInfo *)[self.imageInfos objectAtIndex:page];
+//    NSString *text = curImgInfo.imageTitle;
+//    if ([KGUtil isEmptyString:text]) {
+//        text = [NSString stringWithFormat:@"%@ / %@", @(page + 1) , @(self.imageInfos.count)];
+//    }
+//    UILabel *titleLabel = (UILabel *)self.navigationItem.titleView;
+//    if (titleLabel != nil) {
+//        titleLabel.text = text;
+//    }
     //如果对应页码对应的视图正在显示中，就不用再显示了
     if([self.visiblePhotoItemViewDictM objectForKey:@(page)] != nil) return;
     
@@ -424,7 +440,7 @@ const CGFloat segWidth = 20.f;
     
     if(offsetX > pageOffsetX){//正在向左滑动，展示右边的页面
         
-        if(page >= self.pageCount - 1) return;
+        if(page >= self.imageInfos.count - 1) return;
         
         self.nextPage = page + 1;
         
@@ -491,7 +507,10 @@ const CGFloat segWidth = 20.f;
     NSLog(@"[PhotoBrowserViewController]setImageInfos");
     _imageInfos = imageInfos;
     
-    self.pageCount = imageInfos.count;
+    //self.pageCount = imageInfos.count;
+    if (_imageInfos == nil || self.imageInfos.count == 0) {
+        return;
+    }
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.3f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         //初始化页码信息
@@ -502,6 +521,9 @@ const CGFloat segWidth = 20.f;
 
 
 -(void)setPage:(NSUInteger)page{
+    if (page >= self.imageInfos.count) {
+        return;
+    }
     PBImageInfo *curImgInfo = (PBImageInfo *)[self.imageInfos objectAtIndex:page];
     NSString *text = curImgInfo.imageTitle;
     if ([KGUtil isEmptyString:text]) {
@@ -536,14 +558,14 @@ const CGFloat segWidth = 20.f;
 //        [self.topBarLabel layoutIfNeeded];
 //    });
     
-    dispatch_async(dispatch_get_main_queue(), ^{
+    //dispatch_async(dispatch_get_main_queue(), ^{
         
         //显示对应的页面
         [self showWithPage:page];
         
         //获取当前显示中的photoItemView
         self.currentItemView = [self.visiblePhotoItemViewDictM objectForKey:@(self.page)];
-    });
+    //});
 }
 
 
@@ -617,6 +639,8 @@ const CGFloat segWidth = 20.f;
 //
 -(void)dismiss{
     [self.navigationController popViewControllerAnimated:YES];
+    [self.reusablePhotoItemViewSetM removeAllObjects];
+    [self.visiblePhotoItemViewDictM removeAllObjects];
 }
 
 

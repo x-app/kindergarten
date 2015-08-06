@@ -11,7 +11,7 @@
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="Sih-Lx-FgT">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.99808633209999997" green="0.99808633209999997" blue="0.99808633209999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="eTv-Qa-Dwt">
                             <size key="itemSize" width="217" height="217"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -26,8 +26,14 @@
                                     <rect key="frame" x="0.0" y="0.0" width="217" height="217"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vCQ-oN-SAg">
-                                            <rect key="frame" x="2" y="2" width="215" height="181"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gt7-uX-XSu" userLabel="3rd Image View">
+                                            <rect key="frame" x="10" y="2" width="197" height="175"/>
+                                        </imageView>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="U8i-ax-NvA" userLabel="2nd Image View">
+                                            <rect key="frame" x="6" y="5" width="205" height="175"/>
+                                        </imageView>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vCQ-oN-SAg" userLabel="Cover Image View">
+                                            <rect key="frame" x="2" y="8" width="213" height="175"/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UwP-jA-eFZ">
                                             <rect key="frame" x="2" y="185" width="213" height="30"/>
@@ -41,16 +47,26 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <constraints>
+                                    <constraint firstItem="gt7-uX-XSu" firstAttribute="leading" secondItem="1Zq-5L-CXT" secondAttribute="leading" constant="10" id="4Bj-Bg-UxJ"/>
                                     <constraint firstItem="UwP-jA-eFZ" firstAttribute="top" secondItem="vCQ-oN-SAg" secondAttribute="bottom" constant="2" id="9YG-re-CxU"/>
-                                    <constraint firstAttribute="trailing" secondItem="vCQ-oN-SAg" secondAttribute="trailing" id="BFT-Yk-M9F"/>
+                                    <constraint firstItem="U8i-ax-NvA" firstAttribute="height" secondItem="gt7-uX-XSu" secondAttribute="height" id="AoV-YM-VTn"/>
+                                    <constraint firstAttribute="trailing" secondItem="vCQ-oN-SAg" secondAttribute="trailing" constant="2" id="BFT-Yk-M9F"/>
                                     <constraint firstItem="UwP-jA-eFZ" firstAttribute="leading" secondItem="1Zq-5L-CXT" secondAttribute="leading" constant="2" id="BQ2-A8-4uE"/>
+                                    <constraint firstItem="U8i-ax-NvA" firstAttribute="height" secondItem="vCQ-oN-SAg" secondAttribute="height" id="GfZ-1Z-D0Z"/>
                                     <constraint firstAttribute="bottom" secondItem="UwP-jA-eFZ" secondAttribute="bottom" constant="2" id="Ope-qK-L95"/>
+                                    <constraint firstAttribute="trailing" secondItem="gt7-uX-XSu" secondAttribute="trailing" constant="10" id="cFn-3b-5Sc"/>
+                                    <constraint firstAttribute="trailing" secondItem="U8i-ax-NvA" secondAttribute="trailing" constant="6" id="dGa-kn-Q78"/>
                                     <constraint firstAttribute="trailing" secondItem="UwP-jA-eFZ" secondAttribute="trailing" constant="2" id="dLL-ZI-00N"/>
-                                    <constraint firstItem="vCQ-oN-SAg" firstAttribute="top" secondItem="1Zq-5L-CXT" secondAttribute="top" constant="2" id="vYQ-nL-f3g"/>
+                                    <constraint firstItem="gt7-uX-XSu" firstAttribute="top" secondItem="1Zq-5L-CXT" secondAttribute="top" constant="2" id="lGH-aS-xDc"/>
+                                    <constraint firstItem="U8i-ax-NvA" firstAttribute="top" secondItem="1Zq-5L-CXT" secondAttribute="top" constant="5" id="rtK-1H-Xvb"/>
+                                    <constraint firstItem="U8i-ax-NvA" firstAttribute="leading" secondItem="1Zq-5L-CXT" secondAttribute="leading" constant="6" id="v0O-wM-qEy"/>
+                                    <constraint firstItem="vCQ-oN-SAg" firstAttribute="top" secondItem="1Zq-5L-CXT" secondAttribute="top" constant="8" id="vYQ-nL-f3g"/>
                                     <constraint firstItem="vCQ-oN-SAg" firstAttribute="leading" secondItem="1Zq-5L-CXT" secondAttribute="leading" constant="2" id="y3L-lH-yxb"/>
                                 </constraints>
                                 <size key="customSize" width="217" height="217"/>
                                 <connections>
+                                    <outlet property="album2ndImageView" destination="U8i-ax-NvA" id="uQ7-51-Gjl"/>
+                                    <outlet property="album3rdImageView" destination="gt7-uX-XSu" id="2gR-89-iDP"/>
                                     <outlet property="albumImageView" destination="vCQ-oN-SAg" id="PFn-Th-bqS"/>
                                     <outlet property="albumNameLabel" destination="UwP-jA-eFZ" id="371-O5-MPu"/>
                                 </connections>

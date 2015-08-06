@@ -17,5 +17,6 @@
 @property (nonatomic) NSInteger picCount;
 
 - (NSString *)getCoverUrl;
-
+- (NSString *)get2ndCoverUrl;
+- (NSString *)get3rdCoverUrl;
 @end
