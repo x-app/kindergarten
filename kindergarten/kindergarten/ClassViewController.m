@@ -43,13 +43,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
-//    KGChild *curChild = KGUtil.getCurChild;
-//    if(curChild)
-//    {
-//        self.babyNameLabel.text = curChild.name;
-//        self.classNameLabel.text = [NSString stringWithFormat:@"%@%@", KGUtil.getVarible.parkName, curChild.className];
-//    }
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -63,52 +57,13 @@
     
     UIViewController *vc = nil;
 
-    NSString *uid = [KGUtil getUser].uid;
-    NSInteger cid = 0;
-    KGChild *child = [KGUtil getCurChild];
-    if(child != nil)
-        cid = child.cid;
-    NSInteger gid = [KGUtil getCurClassId];
-
-    NSString *url = nil;
     switch (tag){
         case 1:{
-            [self webVC].title = @"公告";
-            [self.navigationController pushViewController:[self webVC] animated:YES];
-            
-            if(![KGUtil isTeacherVersion])
-            {
-                NSString *body = [NSString stringWithFormat:@"c=%ld&dt=%@&u=%@", (long)cid, [KGUtil getCompactDateStr], uid];
-                url = [KGUtil getRequestHtmlUrl:@"/message/bulletin" bodyStr:body];
-            }
-            else
-            {
-                NSString *body = [NSString stringWithFormat:@"dt=%@&g=%ld&u=%@", [KGUtil getCompactDateStr], (long)gid, uid];
-                url = [KGUtil getRequestHtmlUrl:@"/message/bulletin" bodyStr:body];
-            }
-            
-            NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:url]];
-            [[self webVC].webView loadRequest:request];
-
+            [self pushWebView:@"bulletin"];
             break;
         }
         case 2:{
-            [self webVC].title = @"课程表";
-            [self.navigationController pushViewController:[self webVC] animated:YES];
-            
-            if(![KGUtil isTeacherVersion])
-            {
-                NSString *body = [NSString stringWithFormat:@"c=%ld&dt=%@&u=%@", (long)cid, [KGUtil getCompactDateStr], uid];
-                url = [KGUtil getRequestHtmlUrl:@"/book/lesson" bodyStr:body];
-            }
-            else
-            {
-                NSString *body = [NSString stringWithFormat:@"dt=%@&g=%ld&u=%@", [KGUtil getCompactDateStr], (long)gid, uid];
-                url = [KGUtil getRequestHtmlUrl:@"/book/lesson" bodyStr:body];
-            }
-            
-            NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:url]];
-            [[self webVC].webView loadRequest:request];
+            [self pushWebView:@"lesson"];
             break;
         }
         case 3:{
@@ -122,23 +77,7 @@
             break;
         }
         case 4:{
-            [self webVC].title = @"生日提醒";
-            [self.navigationController pushViewController:[self webVC] animated:YES];
-            
-            if(![KGUtil isTeacherVersion])
-            {
-                NSString *body = [NSString stringWithFormat:@"c=%ld&dt=%@&u=%@", (long)cid, [KGUtil getCompactDateStr], uid];
-                url = [KGUtil getRequestHtmlUrl:@"/book/birthday" bodyStr:body];
-            }
-            else
-            {
-                NSString *body = [NSString stringWithFormat:@"dt=%@&g=%ld&u=%@", [KGUtil getCompactDateStr], (long)gid, uid];
-                url = [KGUtil getRequestHtmlUrl:@"/book/birthday" bodyStr:body];
-
-            }
-            
-            NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:url]];
-            [[self webVC].webView loadRequest:request];
+            [self pushWebView:@"birthday"];
             break;
         }
         case 5:{

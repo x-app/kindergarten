@@ -41,14 +41,18 @@
     }
     
     // get push
+    self.isLaunchedByNotification = false;
+    self.myPushType = @"";
+    self.myPushBadge = -1;
     if (launchOptions != nil)
     {
+        self.isLaunchedByNotification = true;
         NSDictionary *dictionary = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
         if (dictionary != nil)
         {
-            NSLog(@"Launched from push notification: %@", dictionary);
+            //NSLog(@"Launched from push notification: %@", dictionary);
             //dictionary是payload
-//            [self addMessageFromRemoteNotification:dictionary updateUI:NO];
+            [self doWithNotification:dictionary];
         }
     }
     
@@ -259,7 +263,24 @@
 - (void)application:(UIApplication*)application didReceiveRemoteNotification:(NSDictionary*)payload
 {
     NSLog(@"Received notification: %@", payload);
-//    [self addMessageFromRemoteNotification:userInfo updateUI:YES];
+    self.isLaunchedByNotification = false;
+    
+    [self doWithNotification:payload];
+}
+
+- (void)doWithNotification:(NSDictionary*)payload
+{
+//    NSString *alertValue = [[payload valueForKey:@"aps"] valueForKey:@"alert"];
+
+    // 自定义消息
+    NSString *type = [payload valueForKey:@"type"];
+    
+    NSInteger badge = -1;
+    if([[payload allKeys] containsObject:@"badge"])
+        badge = [[payload valueForKey:@"badge"] integerValue];
+        
+    self.myPushType = type;
+    self.myPushBadge = badge;
 }
 
 @end

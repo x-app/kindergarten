@@ -26,6 +26,11 @@
 
 @property (nonatomic) NSInteger appVersion;
 
+@property (nonatomic) BOOL isLaunchedByNotification;
+
+@property (strong, nonatomic)NSString *myPushType;
+@property (nonatomic)NSInteger myPushBadge;
+
 -(void)postToken;
 
 @end
