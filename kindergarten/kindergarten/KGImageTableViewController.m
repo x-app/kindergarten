@@ -14,7 +14,6 @@
 #import "KGImageTableViewCell.h"
 //#import "KGImageDetailViewController.h"
 #import "UIImageView+WebCache.h"
-#import "PBViewController.h"
 #import "MJRefresh.h"
 #import "KGHomework.h"
 #import "KGTeacherDesc.h"
@@ -47,6 +46,7 @@
 
     // 设置下拉刷新
     self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        self.pageIndex = 1;
         [self loadTableData:YES];
     }];
     [self.tableView.header beginRefreshing];
@@ -71,6 +71,43 @@
         _imageTableRowInfos = [[NSMutableArray alloc] init];
     }
     return _imageTableRowInfos;
+}
+
+- (NSMutableArray *)imageInfos {
+    if (_imageInfos == nil) {
+        _imageInfos = [[NSMutableArray alloc] init];
+    }
+    return _imageInfos;
+}
+
+- (void)resetImageInfos {
+    [self.imageInfos removeAllObjects];
+    for (int i = 0; i < [self.imageTableRowInfos count]; i++) {
+        KGImageTableRowInfo *rowInfo = (KGImageTableRowInfo *)[self.imageTableRowInfos objectAtIndex:i];
+        PBImageInfo *iInfo = [[PBImageInfo alloc] init];
+        iInfo.imageURL = [NSString stringWithFormat:@"%@%@", [KGUtil getServerAppURL], rowInfo.picUrl];
+        iInfo.imageTitle = rowInfo.createTime;
+        iInfo.imageDesc = rowInfo.desc;
+        iInfo.placeHolder = rowInfo.coverImage;
+        [self.imageInfos addObject:iInfo];
+    }
+    self.pbVC.imageInfos = self.imageInfos;
+}
+
+- (PBViewController *)pbVC {
+    if (_pbVC == nil) {
+        _pbVC = [[PBViewController alloc] init];
+        _pbVC.imageInfos = self.imageInfos;
+        _pbVC.handleVC = self;
+        if (self.type == HOMEWORK) {
+            [_pbVC addAMenuItem:@"增加亲子成长" icon:[UIImage imageNamed:@"icon_add.png"] target:self action:@selector(addImageTableRowInPB:)];
+            [_pbVC addAMenuItem:@"删除亲子成长" icon:[UIImage imageNamed:@"icon_delete.png"] target:self action:@selector(deleteImageTableRowInPB:)];
+        } else if (self.type == TEACHER) {
+            [_pbVC addAMenuItem:@"增加教师风采" icon:[UIImage imageNamed:@"icon_add.png"] target:self action:@selector(addImageTableRowInPB:)];
+            [_pbVC addAMenuItem:@"删除教师风采" icon:[UIImage imageNamed:@"icon_delete.png"] target:self action:@selector(deleteImageTableRowInPB:)];
+        }
+    }
+    return _pbVC;
 }
 
 - (KGPicPicker *)picPicker {
@@ -139,6 +176,8 @@
             } else {
                 [self.tableView.footer noticeNoMoreData];
             }
+            [self resetImageInfos];
+            [self.pbVC resetToIndex:0];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
@@ -294,7 +333,7 @@
     if (indexPath.row >= [self.imageTableRowInfos count] || indexPath.row < 0) {
         return;
     }
-    NSMutableArray *imageInfos = [[NSMutableArray alloc] initWithCapacity:[self.imageTableRowInfos count]];
+    /*NSMutableArray *imageInfos = [[NSMutableArray alloc] initWithCapacity:[self.imageTableRowInfos count]];
     for (int i = 0; i < [self.imageTableRowInfos count]; i++) {
         KGImageTableRowInfo *rowInfo = (KGImageTableRowInfo *)[self.imageTableRowInfos objectAtIndex:i];
         PBImageInfo *iInfo = [[PBImageInfo alloc] init];
@@ -308,12 +347,29 @@
     pbVC.index = indexPath.row;
     pbVC.handleVC = self;
     pbVC.imageInfos = imageInfos;
-    [pbVC addAMenuItem:@"删除亲子成长" icon:[UIImage imageNamed:@"baby_icon_normal.png"] target:self action:@selector(deleteHomeworkFromPB:)];
-    [pbVC show];
+    if (self.type == HOMEWORK) {
+        [pbVC addAMenuItem:@"删除亲子成长" icon:[UIImage imageNamed:@"baby_icon_normal.png"] target:self action:@selector(deleteImageTableRowInPB:)];
+    } else if (self.type == TEACHER) {
+        [pbVC addAMenuItem:@"删除教师风采" icon:[UIImage imageNamed:@"baby_icon_normal.png"] target:self action:@selector(deleteImageTableRowInPB:)];
+    }
+    [pbVC show];*/
+    //[self createImageInfos];
+//    if (self.imageInfos == nil || self.imageInfos.count == 0) {
+//        return;
+//    }
+    self.pbVC.index = indexPath.row;
+    self.pbVC.rowIndex = indexPath.row;
+    self.pbVC.sectionIndex = indexPath.section;
+    //self.pbVC.imageInfos = self.imageInfos;
+    [self.pbVC show];
 }
 
 #pragma mark - add button action
 - (IBAction)addButtonAction:(id)sender {
+    [self addImageTableRow];
+}
+
+- (void)addImageTableRowInPB:(id)sender {
     [self addImageTableRow];
 }
 
@@ -337,6 +393,8 @@
     NSDictionary *body = [KGUtil getRequestBody:data];
     NSDictionary *params = @{@"uid": REQUEST_UID, @"sign": [KGUtil getRequestSign:body], @"body":body};
     NSString *url = [[KGUtil getServerAppURL] stringByAppendingString:urlSuffix];
+    UIView *view = [KGUtil getTopMostViewController].view;
+    BOOL showHud = (view != nil);
     [KGUtil postRequest:url
              parameters:params
                 success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -344,16 +402,18 @@
                     NSString *code = [responseObject objectForKey:@"code"];
                     if ([code isEqualToString:@"000000"]) {
                         [self doDeleteImageTableRow:indexPath];
+                        [self resetImageInfos];
+                        [self.pbVC resetAsPageRemoved];
                     } else {
-                        [KGUtil showCheckMark:@"删除失败" checked:NO inView:self.tableView];
+                        [KGUtil showCheckMark:@"删除失败" checked:NO inView:view];
                     }
                 }
                 failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                     NSLog(@"Error: %@", error);
-                    [KGUtil showCheckMark:@"请求删除失败" checked:NO inView:self.tableView];
+                    [KGUtil showCheckMark:@"请求删除失败" checked:NO inView:view];
                 }
-                 inView:self.tableView
-                showHud:NO
+                 inView:view
+                showHud:showHud
               showError:true];
 }
 
@@ -364,17 +424,30 @@
 }
 
 
-- (void)deleteHomeworkFromPB:(id)sender {
-//    if (![sender isKindOfClass:[KxMenuItem class]]) {
-//        return;
-//    }
-//    KxMenuItem *item = (KxMenuItem *)sender;
-//    NSInteger imageIndex = item.imageIndex;
-//    KGHomework *hw = [self.imageTableRowInfos objectAtIndex:imageIndex];
-//    if (hw == nil) {
-//        return;
-//    }
-//    [self deleteImageTableRow:hw.homeworkId section:item.sectionIndex row:item.rowIndex];
+- (void)deleteImageTableRowInPB:(id)sender {
+    if (![sender isKindOfClass:[KxMenuItem class]]) {
+        return;
+    }
+    KxMenuItem *item = (KxMenuItem *)sender;
+    NSInteger imageIndex = item.imageIndex;
+    if (imageIndex < 0 || imageIndex >= self.imageTableRowInfos.count) {
+        return;
+    }
+    NSInteger infoId;
+    if (self.type == HOMEWORK) {
+        KGHomework *hw = [self.imageTableRowInfos objectAtIndex:imageIndex];
+        if (hw == nil) {
+            return;
+        }
+        infoId = hw.homeworkId;
+    } else if (self.type == TEACHER) {
+        KGTeacherDesc *td = [self.imageTableRowInfos objectAtIndex:imageIndex];
+        if (td == nil) {
+            return;
+        }
+        infoId = td.teacherDescId;
+    }
+    [self deleteImageTableRow:infoId section:item.sectionIndex row:imageIndex];
 }
 
 #pragma mark add row
@@ -386,24 +459,5 @@
                                                     otherButtonTitles:@"拍照", @"从相册中选取", nil];
     [choiceSheet showInView:self.view];
 }
-
-
-//#pragma mark - Navigation
-//// In a storyboard-based application, you will often want to do a little preparation before navigation
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-//    // Get the new view controller using [segue destinationViewController].
-//    // Pass the selected object to the new view controller.
-//    if ([segue.identifier isEqualToString:@"showDetail"]) {
-//        if ([segue.destinationViewController isKindOfClass:[KGImageDetailViewController class]]
-//            && [sender isKindOfClass:[KGImageTableViewCell class]]) {
-//            KGImageTableViewCell *curCell = (KGImageTableViewCell *)sender;
-//            KGImageDetailViewController *detailVC = (KGImageDetailViewController *)segue.destinationViewController;
-//            NSString *picUrl = [NSString stringWithFormat:@"%@%@", [KGUtil getServerAppURL], curCell.picUrl];
-//            detailVC.imageURL = picUrl;
-//            detailVC.imageDesc = curCell.descLabel.text;
-//        }
-//    }
-//}
-
 
 @end

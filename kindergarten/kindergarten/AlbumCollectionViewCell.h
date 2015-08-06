@@ -12,5 +12,7 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *albumImageView;
 @property (weak, nonatomic) IBOutlet UILabel *albumNameLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *album2ndImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *album3rdImageView;
 
 @end

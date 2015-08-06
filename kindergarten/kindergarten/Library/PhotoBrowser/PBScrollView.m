@@ -11,7 +11,6 @@
 
 @interface PBScrollView()
 
-@property (nonatomic,assign) BOOL isScrollToIndex;
 
 @end
 

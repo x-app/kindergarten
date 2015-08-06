@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "PBViewController.h"
 typedef enum {
     HOMEWORK,  //亲子成长（作业）
     TEACHER    //教师风采
@@ -20,5 +20,7 @@ typedef enum {
 @property (nonatomic) NSInteger pageIndex;
 
 @property (nonatomic) ImageTableViewType type;
+
+@property (nonatomic, strong) PBViewController *pbVC;
 
 @end

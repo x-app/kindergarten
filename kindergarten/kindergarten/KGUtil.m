@@ -161,7 +161,7 @@ static NSArray *month_cn;
     hud.labelText = infoText;
     
     [hud show:YES];
-    [hud hide:YES afterDelay:2];
+    [hud hide:YES afterDelay:1];
 }
 
 + (void)postRequest:(NSString *)url
@@ -177,7 +177,9 @@ static NSArray *month_cn;
     manager.requestSerializer.timeoutInterval = 10.0f;
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
-    
+    if (view == nil) {
+        showHud = NO;
+    }
     MBProgressHUD *hud = nil;
     if(showHud)
     {

@@ -8,6 +8,8 @@
 
 #import "GrowupEditViewController.h"
 #import "KGUtil.h"
+#import "AlbumCollectionViewController.h"
+#import "KGImageTableViewController.h"
 
 @interface GrowupEditViewController ()
 

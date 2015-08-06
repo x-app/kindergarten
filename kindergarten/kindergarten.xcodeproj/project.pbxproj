@@ -201,6 +201,8 @@
 		99F17F681B50C3E800866F8F /* LoginViewContoller.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F17F671B50C3E800866F8F /* LoginViewContoller.m */; };
 		99F1ED9B1B70429D00175CFB /* KGImageTableRowInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F1ED9A1B70429D00175CFB /* KGImageTableRowInfo.m */; };
 		99F1ED9E1B70459000175CFB /* KGTeacherDesc.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F1ED9D1B70459000175CFB /* KGTeacherDesc.m */; };
+		99F1EDD61B734ED700175CFB /* icon_add.png in Resources */ = {isa = PBXBuildFile; fileRef = 99F1EDD41B734ED700175CFB /* icon_add.png */; };
+		99F1EDD71B734ED700175CFB /* icon_delete.png in Resources */ = {isa = PBXBuildFile; fileRef = 99F1EDD51B734ED700175CFB /* icon_delete.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -533,6 +535,8 @@
 		99F1ED9A1B70429D00175CFB /* KGImageTableRowInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KGImageTableRowInfo.m; sourceTree = "<group>"; };
 		99F1ED9C1B70459000175CFB /* KGTeacherDesc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KGTeacherDesc.h; sourceTree = "<group>"; };
 		99F1ED9D1B70459000175CFB /* KGTeacherDesc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KGTeacherDesc.m; sourceTree = "<group>"; };
+		99F1EDD41B734ED700175CFB /* icon_add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_add.png; path = Resource/icon_add.png; sourceTree = "<group>"; };
+		99F1EDD51B734ED700175CFB /* icon_delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_delete.png; path = Resource/icon_delete.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1208,6 +1212,8 @@
 		99ABD5951B47FC5800B8DB8B /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				99F1EDD41B734ED700175CFB /* icon_add.png */,
+				99F1EDD51B734ED700175CFB /* icon_delete.png */,
 				12DEACFF1B4D682C00C437BE /* funcicons */,
 				125090F31B68E09B0046F40E /* camera.png */,
 				9911C1F81B5A06C80080FFA9 /* default_img.png */,
@@ -1428,6 +1434,7 @@
 				12DEACFA1B4D682500C437BE /* home_goout.png in Resources */,
 				9997BA1F1B4D580E00B908B6 /* MLTableAlertButtonPressed.png in Resources */,
 				12AC16001B4917D3007C247B /* my_icon_normal.png in Resources */,
+				99F1EDD71B734ED700175CFB /* icon_delete.png in Resources */,
 				9911C2D81B5E825C0080FFA9 /* PBItemView.xib in Resources */,
 				99688A341B6261D300AA7A41 /* as_password_icon.png in Resources */,
 				99ABD5971B47FC9B00B8DB8B /* help_1.xib in Resources */,
@@ -1443,6 +1450,7 @@
 				1266D5C41B495B8A00E7253F /* repeat_img.png in Resources */,
 				122566701B57DE190007733E /* class_announce.png in Resources */,
 				122566721B57DE190007733E /* class_curriculum.png in Resources */,
+				99F1EDD61B734ED700175CFB /* icon_add.png in Resources */,
 				9997BA221B4D580E00B908B6 /* MLTableAlertShadowMask@2x.png in Resources */,
 				1225667E1B57F7780007733E /* park_teachers.png in Resources */,
 				12AC15DA1B48FB4D007C247B /* Login.storyboard in Resources */,

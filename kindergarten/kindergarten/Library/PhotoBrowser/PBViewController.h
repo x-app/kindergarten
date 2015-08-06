@@ -12,6 +12,14 @@
 #import "PBItemView.h"
 #import "KxMenu.h"
 
+
+typedef enum {
+    OP_ADD_PHOTO,
+    OP_DELETE_PHOTO,
+    OP_SAVE_TO_LOCAL,
+    OP_OTHERS
+} PhotoBrowserOperationType;
+
 @interface PBViewController : UIViewController<UINavigationControllerDelegate>
 
 
@@ -33,7 +41,7 @@
 @property (nonatomic,strong) NSMutableArray *imageInfos;
 
 /** 总页数 */
-@property (nonatomic,assign) NSUInteger pageCount;
+//@property (nonatomic,assign) NSUInteger pageCount;
 
 /** page */
 @property (nonatomic,assign) NSUInteger page;
@@ -42,10 +50,8 @@
 /** 上一个页码 */
 @property (nonatomic,assign) NSUInteger lastPage;
 
-
 /** 初始显示的index */
 @property (nonatomic,assign) NSUInteger index;
-
 
 /** 可重用集合 */
 @property (nonatomic,strong) NSMutableSet *reusablePhotoItemViewSetM;
@@ -62,12 +68,23 @@
 /** 当前显示中的itemView */
 @property (nonatomic,weak) PBItemView *currentItemView;
 
--(void)show;
+@property (nonatomic,copy) void (^deletePhotoBlock)(NSInteger section, NSInteger row, NSInteger imageIndex);
+
+@property (nonatomic,copy) void (^addPhotoBlock)(NSInteger section, NSInteger row, NSInteger imageIndex);
+
+- (void)removePage: (NSInteger)page;
+
+- (void)resetAsPageRemoved;
+
+- (void)resetToIndex: (NSInteger)index;
+
+- (void)show;
 
 - (void)addAMenuItem:(NSString *)title
                 icon:(UIImage *)image
               target:(id)trgt
               action:(SEL)selector;
 
+- (void)dismiss;
 
 @end

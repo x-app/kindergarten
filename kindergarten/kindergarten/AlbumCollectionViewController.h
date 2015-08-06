@@ -13,4 +13,6 @@
 
 @property (nonatomic, strong) NSMutableArray *activityAlbums;
 
+- (void)dismissPhotoBrowser;
+
 @end
