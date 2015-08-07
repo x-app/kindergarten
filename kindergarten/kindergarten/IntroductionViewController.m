@@ -81,7 +81,7 @@
     NSDictionary *data = nil;
     NSString *urlSuffix = @"";
     if (self.type == CLASS) {
-        data = @{@"classId": @([[KGUtil getCurChild] classId])};
+        data = @{@"classId": @([KGUtil getCurClassId])};
         urlSuffix = @"/system/queryClassDesc";
     } else if (self.type == GARTEN) {
         data = @{};

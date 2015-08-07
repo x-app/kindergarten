@@ -24,7 +24,7 @@
 
 @property (strong, nonatomic) NSString* devicetoken;
 
-@property (nonatomic) NSInteger appVersion;
+@property (nonatomic) NSInteger appVersion; //0表示家长版  1表示教师版
 
 -(void)postToken;
 

@@ -28,8 +28,8 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请确保您的资料已经在幼儿园注册" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UFa-Sl-bFl">
-                                <rect key="frame" x="32" y="84" width="255" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="39.5" y="84" width="240" height="19.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -68,18 +68,29 @@
                                     <action selector="test:" destination="zKI-oN-WBr" eventType="touchUpInside" id="2Np-Ch-E6h"/>
                                 </connections>
                             </button>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BKe-Qt-VXO">
-                                <rect key="frame" x="104" y="505" width="51" height="31"/>
-                            </switch>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VNc-Pm-9k1">
-                                <rect key="frame" x="26" y="510" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="用户角色" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VNc-Pm-9k1">
+                                <rect key="frame" x="20" y="525" width="60" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="VfP-8n-zNu">
+                                <rect key="frame" x="90" y="520" width="120" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="WbT-fR-uh5"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="家长"/>
+                                    <segment title="教师"/>
+                                </segments>
+                                <connections>
+                                    <action selector="changeUserTypeAction:" destination="zKI-oN-WBr" eventType="valueChanged" id="Taw-cG-AcZ"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="gjk-9r-PEU" firstAttribute="top" secondItem="VfP-8n-zNu" secondAttribute="bottom" constant="20" id="6EW-XI-kRX"/>
                             <constraint firstItem="Imf-Ra-ipj" firstAttribute="top" secondItem="sgC-oj-hYG" secondAttribute="bottom" constant="10" id="8eG-IW-rb0"/>
                             <constraint firstItem="sgC-oj-hYG" firstAttribute="top" secondItem="79d-Tu-JRB" secondAttribute="bottom" constant="10" id="9Mk-hD-xwS"/>
                             <constraint firstItem="79d-Tu-JRB" firstAttribute="top" secondItem="UFa-Sl-bFl" secondAttribute="bottom" constant="15" id="Eot-q9-U1K"/>
@@ -89,7 +100,10 @@
                             <constraint firstItem="Imf-Ra-ipj" firstAttribute="leading" secondItem="Jvp-vw-IBa" secondAttribute="leadingMargin" constant="10" id="dCj-1D-tDB"/>
                             <constraint firstAttribute="centerX" secondItem="UFa-Sl-bFl" secondAttribute="centerX" id="ft1-1S-953"/>
                             <constraint firstItem="79d-Tu-JRB" firstAttribute="leading" secondItem="Jvp-vw-IBa" secondAttribute="leadingMargin" constant="10" id="heD-5z-q8M"/>
+                            <constraint firstItem="gjk-9r-PEU" firstAttribute="top" secondItem="VNc-Pm-9k1" secondAttribute="bottom" constant="25" id="i2a-QN-3zh"/>
                             <constraint firstItem="sgC-oj-hYG" firstAttribute="leading" secondItem="Jvp-vw-IBa" secondAttribute="leadingMargin" constant="10" id="iXB-lx-3qO"/>
+                            <constraint firstItem="VfP-8n-zNu" firstAttribute="leading" secondItem="VNc-Pm-9k1" secondAttribute="trailing" constant="10" id="ltI-CK-GXg"/>
+                            <constraint firstItem="VNc-Pm-9k1" firstAttribute="leading" secondItem="Jvp-vw-IBa" secondAttribute="leading" constant="20" id="npN-5I-dMd"/>
                             <constraint firstAttribute="trailingMargin" secondItem="sgC-oj-hYG" secondAttribute="trailing" constant="10" id="wmv-fN-zbo"/>
                         </constraints>
                     </view>
@@ -111,6 +125,7 @@
                         <outlet property="idNoTextField" destination="sgC-oj-hYG" id="2O4-gZ-dhj"/>
                         <outlet property="nameTextField" destination="Imf-Ra-ipj" id="15C-9m-xi8"/>
                         <outlet property="parkTextField" destination="79d-Tu-JRB" id="Jbw-dD-tYC"/>
+                        <outlet property="userTypeControl" destination="VfP-8n-zNu" id="RyA-sX-wV9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3R8-0O-eGj" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -129,19 +144,19 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入密保问题答案" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AiH-bo-bCv" customClass="ASTextField">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入密保问题答案" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AiH-bo-bCv" customClass="ASTextField">
                                 <rect key="frame" x="26" y="147" width="268" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请设置密码保护问题" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Axr-Pc-Mzr">
-                                <rect key="frame" x="83" y="84" width="153" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="87.5" y="84" width="144" height="19.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请选择密保问题" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Akq-Bb-Bvo" customClass="ASTextField">
-                                <rect key="frame" x="26" y="119" width="268" height="17"/>
+                                <rect key="frame" x="26" y="118" width="268" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>

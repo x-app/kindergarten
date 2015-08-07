@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *parkTextField;
 @property (weak, nonatomic) IBOutlet UITextField *qstnTextField;
 @property (weak, nonatomic) IBOutlet UITextField *nswrTextField;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *userTypeControl;
 
 
 - (void)queryChildInfo: (NSString *)uid;

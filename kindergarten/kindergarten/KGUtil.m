@@ -27,7 +27,20 @@ static NSArray *month_cn;
 
 + (BOOL)isTeacherVersion
 {
-    return true;
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    return (delegate.appVersion == 1);
+    //return true;
+}
+
++ (void)setAppVersion:(NSInteger)version {
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    if (version != 0 || version != 1) {
+        version = 0; //若非0和1,默认取0家长版
+    }
+    delegate.appVersion = version;
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:@(delegate.appVersion) forKey:@"appVersion"];
+    [userDefaults synchronize];
 }
 
 + (NSString *)getMD5Str:(NSString *)sourceStr {
