@@ -28,7 +28,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSLog(@"BabyViewDidLoad");
-   
+       
     self.repeatImage.image = [self.repeatImage.image resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0) resizingMode:UIImageResizingModeTile];
     
     for(int i=0; i<[self.func count]; i++)

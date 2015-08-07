@@ -194,27 +194,6 @@
     [self window].rootViewController = [mainStoryboard instantiateInitialViewController];
 }*/
 
--(void)postToken
-{
-    if(self.user != nil && self.user.uid != nil && self.devicetoken != nil)
-    {
-        NSDictionary *data = @{@"user_id": self.user.uid,
-                               @"token": self.devicetoken,
-                               @"name": self.user.name};
-        NSDictionary *body = [KGUtil getRequestBody:data];
-        NSDictionary *params = @{@"type": @"JOIN", @"sign": [KGUtil getRequestSign:body], @"body": body};
-        
-        [KGUtil postRequest:[KGUtil getServerPushURL] parameters:params
-                    success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                        NSLog(@"submit token succ!");
-                    }
-                    failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                        NSLog(@"Error: %@", error);
-                    }
-                    inView:nil showHud:false showError:false];
-    }
-}
-
 #pragma mark - MYIntroduction Delegate
 
 -(void)introduction:(MYBlurIntroductionView *)introductionView didChangeToPanel:(MYIntroductionPanel *)panel withIndex:(NSInteger)panelIndex{
@@ -295,5 +274,47 @@
     self.myPushType = type;
     self.myPushBadge = badge;
 }
+
+-(void)postToken
+{
+    if(self.user != nil && self.user.uid != nil && self.devicetoken != nil)
+    {
+        NSDictionary *data = @{@"user_id": self.user.uid,
+                               @"token": self.devicetoken,
+                               @"name": self.user.name};
+        NSDictionary *body = [KGUtil getRequestBody:data];
+        NSDictionary *params = @{@"type": @"JOIN", @"sign": [KGUtil getRequestSign:body], @"body": body};
+        
+        [KGUtil postRequest:[KGUtil getServerPushURL] parameters:params
+                    success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                        NSLog(@"submit token succ!");
+                    }
+                    failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                        NSLog(@"Error: %@", error);
+                    }
+                     inView:nil showHud:false showError:false];
+    }
+}
+
+-(void)deleteToken
+{
+    if(self.user != nil && self.user.uid != nil && self.devicetoken != nil)
+    {
+        NSDictionary *data = @{@"user_id": self.user.uid,
+                               @"token": self.devicetoken};
+        NSDictionary *body = [KGUtil getRequestBody:data];
+        NSDictionary *params = @{@"type": @"LEAVE", @"sign": [KGUtil getRequestSign:body], @"body": body};
+        
+        [KGUtil postRequest:[KGUtil getServerPushURL] parameters:params
+                    success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                        NSLog(@"delete token succ!");
+                    }
+                    failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                        NSLog(@"Error: %@", error);
+                    }
+                     inView:nil showHud:false showError:false];
+    }
+}
+
 
 @end

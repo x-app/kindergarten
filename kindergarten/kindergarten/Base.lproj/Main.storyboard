@@ -28,8 +28,8 @@
         <!--宝宝-->
         <scene sceneID="iVB-Z4-4oz">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Xkm-EG-Mpe" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="宝宝" image="baby_icon_normal.png" id="acW-dT-cKf"/>
+                <navigationController storyboardIdentifier="BabyNC" automaticallyAdjustsScrollViewInsets="NO" id="Xkm-EG-Mpe" customClass="MainNavigationController" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" tag="1" title="宝宝" image="baby_icon_normal.png" id="acW-dT-cKf"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="DX2-UJ-uii">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -95,8 +95,8 @@
         <!--班级-->
         <scene sceneID="qMn-1j-bqc">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="WCa-r2-hy1" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="班级" image="class_icon_normal.png" id="cPa-gy-q4n"/>
+                <navigationController storyboardIdentifier="ClassNC" automaticallyAdjustsScrollViewInsets="NO" id="WCa-r2-hy1" customClass="MainNavigationController" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" tag="2" title="班级" image="class_icon_normal.png" id="cPa-gy-q4n"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="dgE-BU-ZCo">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -114,8 +114,8 @@
         <!--园区-->
         <scene sceneID="bjb-Mn-Okh">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="fuQ-aX-yWs" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="园区" image="park_icon_normal.png" id="49y-NY-SGT"/>
+                <navigationController storyboardIdentifier="ParkNC" automaticallyAdjustsScrollViewInsets="NO" id="fuQ-aX-yWs" customClass="MainNavigationController" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" tag="3" title="园区" image="park_icon_normal.png" id="49y-NY-SGT"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ylF-fq-EBT">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -133,8 +133,8 @@
         <!--我-->
         <scene sceneID="48s-3U-M0B">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="kaN-Ny-OA9" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="我" image="my_icon_normal.png" id="hMz-Ub-jHo"/>
+                <navigationController storyboardIdentifier="MyNC" automaticallyAdjustsScrollViewInsets="NO" id="kaN-Ny-OA9" customClass="MainNavigationController" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" tag="4" title="我" image="my_icon_normal.png" id="hMz-Ub-jHo"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="FBb-Xj-fHh">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -199,9 +199,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="baby_icon_normal.png" width="32" height="32"/>
-        <image name="class_icon_normal.png" width="32" height="32"/>
-        <image name="my_icon_normal.png" width="32" height="32"/>
-        <image name="park_icon_normal.png" width="32" height="32"/>
+        <image name="baby_icon_normal.png" width="29" height="29"/>
+        <image name="class_icon_normal.png" width="29" height="29"/>
+        <image name="my_icon_normal.png" width="29" height="29"/>
+        <image name="park_icon_normal.png" width="29" height="29"/>
     </resources>
 </document>

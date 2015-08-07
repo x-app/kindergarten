@@ -10,7 +10,6 @@
 
 @interface GrowupTableViewController : UITableViewController
 
-
 @property (nonatomic, strong) NSMutableArray *docs;
 
 @end

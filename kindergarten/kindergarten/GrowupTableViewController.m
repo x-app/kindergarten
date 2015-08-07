@@ -22,6 +22,8 @@
 
 @interface GrowupTableViewController() <UIActionSheetDelegate, KGPicPickerDelegate, KGPostImageDelegate>
 
+@property (nonatomic, strong) PBViewController *pbVC;
+
 @property (nonatomic, strong)UITapGestureRecognizer *singleImgTap;
 @property (nonatomic, strong) NSMutableArray *pbImgInfos;
 @property (nonatomic) NSInteger curPageIndex;
@@ -88,6 +90,16 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (PBViewController *)pbVC {
+    if (_pbVC == nil) {
+        _pbVC = [[PBViewController alloc] init];
+        _pbVC.imageInfos = self.pbImgInfos;
+        _pbVC.handleVC = self;
+        [_pbVC addAMenuItem:@"删除" icon:[UIImage imageNamed:@"icon_delete.png"] target:self action:@selector(removeDoc:)];
+    }
+    return _pbVC;
 }
 
 - (void)loadNewData:(BOOL)isNew{
@@ -290,14 +302,14 @@
         return;
     }
 
-    PBViewController *pbVC = [[PBViewController alloc] init];
-    pbVC.index = indexPath.row-1;
-    pbVC.handleVC = self;
-    pbVC.imageInfos = self.pbImgInfos;
-    
-    //TODO delete icon
-    [pbVC addAMenuItem:@"删除" icon:[UIImage imageNamed:@"baby_icon_normal.png"] target:self action:@selector(removeDoc:)];
-    [pbVC show];
+//    PBViewController *pbVC = [[PBViewController alloc] init];
+    self.pbVC.index = indexPath.row-1;
+    self.pbVC.rowIndex = indexPath.row-1;
+    self.pbVC.sectionIndex = 0;
+//    pbVC.handleVC = self;
+//    pbVC.imageInfos = self.pbImgInfos;
+
+    [self.pbVC show];
 }
 
 /*
@@ -422,14 +434,14 @@
         if(index < 0 || index >= [self.docs count])
             return;
         
-        [self removeDoc:index];
+        [self removeDocAtIndex:index];
     }
     else if (editingStyle == UITableViewCellEditingStyleInsert) {
     }
 }
 
--(void)removeDoc:(NSInteger)index
-{
+-(void)removeDocAtIndex:(NSInteger)index {
+    
     if(index <0 || index >= self.docs.count)
         return;
     
@@ -453,6 +465,15 @@
                   showHud:true];
 }
 
+-(void)removeDoc:(id)sender {
+    if (![sender isKindOfClass:[KxMenuItem class]]) {
+        return;
+    }
+    KxMenuItem *item = (KxMenuItem *)sender;
+    NSInteger index = item.imageIndex;
+    [self removeDocAtIndex:index];
+}
+
 -(void)doAfterRemoveDoc:(NSInteger)index
 {
     if(index < 0 || index >= self.docs.count)
@@ -460,7 +481,9 @@
     
     [self.docs removeObjectAtIndex:index];
     [self.pbImgInfos removeObjectAtIndex:index];
-    
+    self.pbVC.imageInfos = self.pbImgInfos;
+    [self.pbVC resetAsPageRemoved];
+
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index+1 inSection:0];
     [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
 
@@ -469,6 +492,7 @@
     {
         [self.tableView reloadRowsAtIndexPaths:[[NSArray alloc] initWithObjects:indexPath, nil] withRowAnimation:UITableViewRowAnimationNone];
     }
+    
 }
 
 #pragma mark - KGPostImageDelegate
