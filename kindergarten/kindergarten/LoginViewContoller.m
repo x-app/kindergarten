@@ -42,6 +42,10 @@
     imageView.contentMode = UIViewContentModeScaleToFill;
     [imageView setImage:[UIImage imageNamed:@"bg_11.png"]];
     [self.view insertSubview:imageView atIndex: 0];
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSInteger versionInUD  = [[userDefaults objectForKey:@"appVersion"] integerValue];
+    [self.userTypeControl setSelectedSegmentIndex:versionInUD];
     NSLog(@"LoginViewController did load");
 }
 
@@ -325,6 +329,16 @@
     [self.tableAlert show];
 }
 
+- (void)flipView {
+    CATransition *animation = [CATransition animation];
+    animation.delegate = self;
+    animation.duration = 0.7f;
+    animation.timingFunction = UIViewAnimationCurveEaseInOut;
+    animation.type = @"oglFlip";
+    animation.subtype = kCATransitionFromRight;
+    [[self.view layer] addAnimation:animation forKey:@"animation"];
+}
+
 
 - (void)showQstnList {
     if ([self.qstnList count] == 0) {
@@ -423,7 +437,7 @@
 }
 
 
-#pragma mark -- UIAlertViewDelegate --
+#pragma mark UIAlertViewDelegate
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     NSLog(@"click alert view");
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -442,11 +456,24 @@
         }];
     }
 }
-#pragma mark -- UITextFieldDelegate --
+#pragma mark UITextFieldDelegate
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
     //do somthing
     NSLog(@"block text field begin editing");
     return NO;
+}
+
+
+- (IBAction)changeUserTypeAction:(id)sender {
+    UISegmentedControl *sc = (UISegmentedControl *)sender;
+    if (sc == nil) {
+        return;
+    }
+    [self flipView];
+    self.parkTextField.text = @"";
+    self.idNoTextField.text = @"";
+    self.nameTextField.text = @"";
+    [KGUtil setAppVersion:sc.selectedSegmentIndex];
 }
 
 /*

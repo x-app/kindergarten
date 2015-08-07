@@ -19,6 +19,8 @@
 
 + (BOOL)isTeacherVersion;
 
++ (void)setAppVersion:(NSInteger)version;
+
 + (NSString *)getMD5Str: (NSString *)sourceStr;
 
 + (NSDictionary *)getRequestBody: (NSDictionary *)data;

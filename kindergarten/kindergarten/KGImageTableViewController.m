@@ -99,12 +99,14 @@
         _pbVC = [[PBViewController alloc] init];
         _pbVC.imageInfos = self.imageInfos;
         _pbVC.handleVC = self;
-        if (self.type == HOMEWORK) {
-            [_pbVC addAMenuItem:@"增加亲子成长" icon:[UIImage imageNamed:@"icon_add.png"] target:self action:@selector(addImageTableRowInPB:)];
-            [_pbVC addAMenuItem:@"删除亲子成长" icon:[UIImage imageNamed:@"icon_delete.png"] target:self action:@selector(deleteImageTableRowInPB:)];
-        } else if (self.type == TEACHER) {
-            [_pbVC addAMenuItem:@"增加教师风采" icon:[UIImage imageNamed:@"icon_add.png"] target:self action:@selector(addImageTableRowInPB:)];
-            [_pbVC addAMenuItem:@"删除教师风采" icon:[UIImage imageNamed:@"icon_delete.png"] target:self action:@selector(deleteImageTableRowInPB:)];
+        if ([KGUtil isTeacherVersion]) {
+            if (self.type == HOMEWORK) {
+                [_pbVC addAMenuItem:@"增加亲子成长" icon:[UIImage imageNamed:@"icon_add.png"] target:self action:@selector(addImageTableRowInPB:)];
+                [_pbVC addAMenuItem:@"删除亲子成长" icon:[UIImage imageNamed:@"icon_delete.png"] target:self action:@selector(deleteImageTableRowInPB:)];
+            } else if (self.type == TEACHER) {
+                [_pbVC addAMenuItem:@"增加教师风采" icon:[UIImage imageNamed:@"icon_add.png"] target:self action:@selector(addImageTableRowInPB:)];
+                [_pbVC addAMenuItem:@"删除教师风采" icon:[UIImage imageNamed:@"icon_delete.png"] target:self action:@selector(deleteImageTableRowInPB:)];
+            }
         }
     }
     return _pbVC;

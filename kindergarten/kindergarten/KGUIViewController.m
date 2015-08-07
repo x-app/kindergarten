@@ -14,7 +14,7 @@
 
 @interface KGUIViewController () <UIActionSheetDelegate, KGPicPickerDelegate>
 
-@property (nonatomic) NSInteger tapImageTag;
+@property (nonatomic) NSInteger tapImageTag; //0表示头像 1是背景图
 @property (nonatomic) KGPicPicker *kgpp;
 
 @end
@@ -64,8 +64,8 @@
                                                              delegate:self
                                                     cancelButtonTitle:@"取消"
                                                destructiveButtonTitle:nil
-                                                    otherButtonTitles:@"拍照", @"从相册中选取", nil];
-    choiceSheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
+                                                    otherButtonTitles:@"拍照", @"从相册中选取", @"恢复默认", nil];
+    choiceSheet.actionSheetStyle = UIActionSheetStyleAutomatic;//UIActionSheetStyleBlackTranslucent;
     [choiceSheet showInView:self.view];
 }
 
@@ -74,10 +74,19 @@
     if (buttonIndex == 0) {
         // 拍照
         [self.kgpp takePhoto];
-                
     } else if (buttonIndex == 1) {
         // 从相册中选取
         [self.kgpp selectPhoto];
+    } else if (buttonIndex == 2) {
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        if (self.tapImageTag == 1) {
+            self.headerBgImageView.image = [UIImage imageNamed:@"home_top_bg.png"];
+            [userDefaults removeObjectForKey:@"headerBgImage"];
+        } else if (self.tapImageTag == 0) {
+            self.babyPortraitImageView.image = [UIImage imageNamed:@"head.jpg"];
+            [userDefaults removeObjectForKey:@"babyPortraitImage"];
+        }
+        [userDefaults synchronize];
     }
 }
 
@@ -137,6 +146,8 @@
         if (pImage != nil) {
             self.babyPortraitImageView.image = pImage;
         }
+    } else {
+        self.babyPortraitImageView.image = [UIImage imageNamed:@"head.jpg"];
     }
     
     NSData *hImageData = (NSData *)[userDefaults objectForKey:@"headerBgImage"];
@@ -145,6 +156,8 @@
         if (hImage != nil) {
             self.headerBgImageView.image = hImage;
         }
+    } else {
+        self.headerBgImageView.image = [UIImage imageNamed:@"home_top_bg.png"];
     }
 }
 
