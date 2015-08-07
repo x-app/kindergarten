@@ -26,6 +26,11 @@
 
 @property (nonatomic) NSInteger appVersion; //0表示家长版  1表示教师版
 
+@property (nonatomic) BOOL isLaunchedByNotification;
+
+@property (strong, nonatomic)NSString *myPushType;
+@property (nonatomic)NSInteger myPushBadge;
+
 -(void)postToken;
 
 @end

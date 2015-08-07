@@ -41,17 +41,25 @@
     
     if([KGUtil isTeacherVersion])
         [self setTeacherVersionFunc];
-}
+    }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     
-//    KGChild *curChild = KGUtil.getCurChild;
-//    if(curChild)
-//    {
-//        self.babyNameLabel.text = curChild.name;
-//        self.classNameLabel.text = [NSString stringWithFormat:@"%@%@", KGUtil.getVarible.parkName, curChild.className];
-//    }
+    // 通过点击push message冷启动应用，切换push到的type页面。
+    // 仅在这里增加切换逻辑，因为这里是冷启动的唯一主页面
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    if(delegate.isLaunchedByNotification)
+    {
+        delegate.isLaunchedByNotification = false;//只切换一次
+        if(delegate.myPushType != nil && [delegate.myPushType length] == 0)
+            [self pushWebView:delegate.myPushType];
+    }
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -64,14 +72,6 @@
     
     UIViewController *vc = nil;
 
-    NSString *uid = [KGUtil getUser].uid;
-    NSInteger cid = 0;
-    KGChild *child = [KGUtil getCurChild];
-    if(child != nil)
-        cid = child.cid;
-    NSInteger gid = [KGUtil getCurClassId];
-    
-    NSString *url = nil;
     switch (tag){
         case 1:{
             if(![KGUtil isTeacherVersion])
@@ -82,100 +82,62 @@
             }
             else
             {
-                [self webVC].title = @"健康";
-                [self.navigationController pushViewController:[self webVC] animated:YES];
-                
-                NSString *body = [NSString stringWithFormat:@"dt=%@&g=%ld&u=%@", [KGUtil getCompactDateStr], (long)gid, uid];
-                url = [KGUtil getRequestHtmlUrl:@"/health/bringmedic" bodyStr:body];
-                NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:url]];
-                [[self webVC].webView loadRequest:request];
+                [self pushWebView:@"bringmedic"];
             }
             
             break;
         }
         case 2:{
-            if(![KGUtil isTeacherVersion])
-            {
-                [self webVC].title = @"晨检";
-                [self.navigationController pushViewController:[self webVC] animated:YES];
-                
-                NSString *body = [NSString stringWithFormat:@"c=%ld&dt=%@&u=%@", (long)cid, [KGUtil getCompactDateStr], uid];
-                url = [KGUtil getRequestHtmlUrl:@"/health/givemedic" bodyStr:body];
-            }
-            else
-            {
-                [self webVC].title = @"点名";
-                [self.navigationController pushViewController:[self webVC] animated:YES];
-                
-                NSString *body = [NSString stringWithFormat:@"dt=%@&g=%ld&u=%@", [KGUtil getCompactDateStr], (long)gid, uid];
-                url = [KGUtil getRequestHtmlUrl:@"/morningCheck/rollcall" bodyStr:body];
-            }
-            
-            NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:url]];
-            [[self webVC].webView loadRequest:request];
+            [self pushWebView:@"givemedic"];
+//            if(![KGUtil isTeacherVersion])
+//            {
+//                [self webVC].title = @"晨检";
+//                [self.navigationController pushViewController:[self webVC] animated:YES];
+//                
+//                NSString *body = [NSString stringWithFormat:@"c=%ld&dt=%@&u=%@", (long)cid, [KGUtil getCompactDateStr], uid];
+//                url = [KGUtil getRequestHtmlUrl:@"/health/givemedic" bodyStr:body];
+//            }
+//            else
+//            {
+//                [self webVC].title = @"点名";
+//                [self.navigationController pushViewController:[self webVC] animated:YES];
+//                
+//                NSString *body = [NSString stringWithFormat:@"dt=%@&g=%ld&u=%@", [KGUtil getCompactDateStr], (long)gid, uid];
+//                url = [KGUtil getRequestHtmlUrl:@"/morningCheck/rollcall" bodyStr:body];
+//            }
+//            
+//            NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+//            [[self webVC].webView loadRequest:request];
             break;
         }
         case 3:{
-            [self webVC].title = @"信箱";
-            [self.navigationController pushViewController:[self webVC] animated:YES];
-            
             if(![KGUtil isTeacherVersion])
             {
-                NSString *body = [NSString stringWithFormat:@"c=%ld&dt=%@&u=%@", (long)cid, [KGUtil getCompactDateStr], uid];
-                 url = [KGUtil getRequestHtmlUrl:@"/message/parentsmess" bodyStr:body];
+                [self pushWebView:@"parentsmess"];
             }
             else
             {
-                NSString *body = [NSString stringWithFormat:@"dt=%@&g=%ld&u=%@", [KGUtil getCompactDateStr], (long)gid, uid];
-                url = [KGUtil getRequestHtmlUrl:@"/message/teachermess" bodyStr:body];
+                [self pushWebView:@"teachermess"];
             }
-            
-            NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:url]];
-            [[self webVC].webView loadRequest:request];
             break;
         }
         case 4:{
             if(![KGUtil isTeacherVersion])
             {
-                [self webVC].title = @"进园";
-                [self.navigationController pushViewController:[self webVC] animated:YES];
-                
-                NSString *body = [NSString stringWithFormat:@"c=%ld&dt=%@&u=%@", (long)cid, [KGUtil getCompactDateStr], uid];
-                url = [KGUtil getRequestHtmlUrl:@"/morningCheck/intopark" bodyStr:body];
+                [self pushWebView:@"intopark"];
             }
             else
             {
-                [self webVC].title = @"请假处理";
-                [self.navigationController pushViewController:[self webVC] animated:YES];
-                
-                NSString *body = [NSString stringWithFormat:@"dt=%@&g=%ld&u=%@", [KGUtil getCompactDateStr], (long)gid, uid];
-                url = [KGUtil getRequestHtmlUrl:@"/holiday/list" bodyStr:body];
+                [self pushWebView:@"holidaylist"];
             }
-            
-            NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:url]];
-            [[self webVC].webView loadRequest:request];
             break;
         }
         case 5:{
-            [self webVC].title = @"离园";
-            [self.navigationController pushViewController:[self webVC] animated:YES];
-            
-            NSString *body = [NSString stringWithFormat:@"c=%ld&dt=%@&u=%@", (long)cid, [KGUtil getCompactDateStr], uid];
-            NSString *url = [KGUtil getRequestHtmlUrl:@"/morningCheck/outpark" bodyStr:body];
-            
-            NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:url]];
-            [[self webVC].webView loadRequest:request];
+            [self pushWebView:@"outpark"];
             break;
         }
         case 6:{
-            [self webVC].title = @"请假";
-            [self.navigationController pushViewController:[self webVC] animated:YES];
-            
-            NSString *body = [NSString stringWithFormat:@"c=%ld&dt=%@&u=%@", (long)cid, [KGUtil getCompactDateStr], uid];
-            NSString *url = [KGUtil getRequestHtmlUrl:@"/holiday/askto" bodyStr:body];
-            
-            NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:url]];
-            [[self webVC].webView loadRequest:request];
+            [self pushWebView:@"askholiday"];
             break;
         }
         case 7:{
@@ -188,7 +150,6 @@
         default:
             break;
     }
-
 }
 
 -(void) setTeacherVersionFunc{
