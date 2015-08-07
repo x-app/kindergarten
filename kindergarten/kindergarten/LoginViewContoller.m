@@ -42,6 +42,10 @@
     imageView.contentMode = UIViewContentModeScaleToFill;
     [imageView setImage:[UIImage imageNamed:@"bg_11.png"]];
     [self.view insertSubview:imageView atIndex: 0];
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSInteger versionInUD  = [[userDefaults objectForKey:@"appVersion"] integerValue];
+    [self.userTypeControl setSelectedSegmentIndex:versionInUD];
     NSLog(@"LoginViewController did load");
 }
 
@@ -466,12 +470,7 @@
         return;
     }
     [self flipView];
-    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    if (sc.selectedSegmentIndex == 0) { //家长
-        delegate.appVersion = 0;
-    } else if (sc.selectedSegmentIndex == 1) { //教师
-        delegate.appVersion = 1;
-    }
+    [KGUtil setAppVersion:sc.selectedSegmentIndex];
 }
 
 /*

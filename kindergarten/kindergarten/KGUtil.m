@@ -34,13 +34,18 @@ static NSArray *month_cn;
 
 + (void)setAppVersion:(NSInteger)version {
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    if (version != 0 || version != 1) {
+    if (version != 0 && version != 1) {
         version = 0; //若非0和1,默认取0家长版
     }
     delegate.appVersion = version;
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setObject:@(delegate.appVersion) forKey:@"appVersion"];
     [userDefaults synchronize];
+}
+
++ (NSInteger)getAppVersionFromUserDefaults {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    return [[userDefaults objectForKey:@"appVersion"] integerValue];
 }
 
 + (NSString *)getMD5Str:(NSString *)sourceStr {
