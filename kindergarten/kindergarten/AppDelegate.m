@@ -265,6 +265,17 @@
     NSLog(@"Received notification: %@", payload);
     self.isLaunchedByNotification = false;
     
+    if (application.applicationState == UIApplicationStateActive) {
+        NSLog(@"Received notification active");
+        //程序当前正处于前台
+    }
+    else if(application.applicationState == UIApplicationStateInactive)
+    {
+        NSLog(@"Received notification inactive");
+        //程序处于后台
+//        self.isLaunchedByNotification = true;//从后台激活同冷启动一样处理
+        //如何通知当前vc切换view
+    }
     [self doWithNotification:payload];
 }
 
