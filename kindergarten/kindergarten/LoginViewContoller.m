@@ -470,6 +470,9 @@
         return;
     }
     [self flipView];
+    self.parkTextField.text = @"";
+    self.idNoTextField.text = @"";
+    self.nameTextField.text = @"";
     [KGUtil setAppVersion:sc.selectedSegmentIndex];
 }
 

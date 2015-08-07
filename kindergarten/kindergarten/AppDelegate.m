@@ -52,6 +52,10 @@
         }
     }
     
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSInteger versionInUD  = [[userDefaults objectForKey:@"appVersion"] integerValue];
+    self.appVersion = versionInUD;
+    
     self.resignActiveTime = nil;
     // 修复Push到下一级右上角可恶的黑条
     self.window.backgroundColor = [UIColor whiteColor];
@@ -64,9 +68,7 @@
     self.varible.server_index_url = @"http://app.nugget-nj.com/kindergarten_index";
     //self.varible.server_app_url = @"http://app.nugget-nj.com/nugget_app";
     self.varible.server_push_url = @"http://slice.eu.org:8080/pushservice/api";
-    
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    
+        
     NSDictionary *variDict = [userDefaults objectForKey:@"varible"];
     if (variDict != nil) {
         [self.varible fromDictionary:variDict];
