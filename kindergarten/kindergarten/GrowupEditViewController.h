@@ -9,10 +9,12 @@
 #import <UIKit/UIKit.h>
 
 typedef enum {
-    ADD_GROWUP_DOC,
-    ADD_HOMEWORK,
-    ADD_TEACHERDESC,
-    ADD_ALBUM_PHOTO
+    ADD_GROWUP_DOC,    //增加成长档案
+    ADD_HOMEWORK,      //增加作业
+    ADD_TEACHERDESC,   //增加教师风采
+    ADD_CLASS_DESC,    //增加班级介绍
+    ADD_GARTEN_DESC,   //增加园区介绍
+    ADD_ALBUM_PHOTO    //活动相册新增照片
 } KG_POST_TYPE;
 
 @protocol KGPostImageDelegate

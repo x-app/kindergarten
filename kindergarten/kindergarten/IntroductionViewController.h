@@ -2,7 +2,7 @@
 //  IntroductionViewController.h
 //  kindergarten
 //
-//  Created by 庄小仙 on 15/7/22.
+//  Created by wangbin on 15/7/22.
 //  Copyright (c) 2015年 xapp. All rights reserved.
 //
 
@@ -24,5 +24,6 @@ typedef enum {
 @property (weak, nonatomic) IBOutlet UIImageView *introImageView;
 
 @property (weak, nonatomic) IBOutlet UITextView *introTextView;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *updateButton;
 
 @end

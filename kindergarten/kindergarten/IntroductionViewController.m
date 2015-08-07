@@ -2,7 +2,7 @@
 //  IntroductionViewController.m
 //  kindergarten
 //
-//  Created by 庄小仙 on 15/7/22.
+//  Created by wangbin on 15/7/22.
 //  Copyright (c) 2015年 xapp. All rights reserved.
 //
 
@@ -11,7 +11,11 @@
 #import "KGUtil.h"
 #import "UIImageView+WebCache.h"
 #import "PBViewController.h"
-@interface IntroductionViewController ()
+#import "KGPicPicker.h"
+#import "GrowupEditViewController.h"
+@interface IntroductionViewController ()<UIActionSheetDelegate, KGPicPickerDelegate, KGPostImageDelegate>
+
+@property (nonatomic, strong) KGPicPicker *picPicker;
 
 @end
 
@@ -28,8 +32,20 @@
     self.introImageView.clipsToBounds = YES;
 //    UITapGestureRecognizer *tapImage = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showDetail:)];
 //    [self.introImageView addGestureRecognizer:tapImage];
+    if (![KGUtil isTeacherVersion]) {
+        self.navigationItem.rightBarButtonItem = nil;
+    }
+    
     [self queryIntroductionData];
     // Do any additional setup after loading the view.
+}
+
+- (KGPicPicker *)picPicker {
+    if(_picPicker == nil) {
+        _picPicker = [[KGPicPicker alloc] initWithUIVC:self needCrop:FALSE];
+        _picPicker.delegate = self;
+    }
+    return _picPicker;
 }
 
 - (void)showDetail:(UITapGestureRecognizer*) sender {
@@ -42,7 +58,7 @@
     PBViewController *pbVC = [[PBViewController alloc] init];
     pbVC.index = 0;
     pbVC.handleVC = self;
-    pbVC.imageInfos = [NSArray arrayWithObject:iInfo];
+    pbVC.imageInfos = [NSMutableArray arrayWithObject:iInfo];
     [pbVC show];
 }
 
@@ -103,7 +119,6 @@
                            placeholderImage:[UIImage imageNamed:@"image_placeholder"]
                                     options:SDWebImageProgressiveDownload
                                    progress:^(NSInteger receivedSize, NSInteger expectedSize) {
-                                       NSLog(@">>>>");
                                        if (!activityIndicator) {
                                            activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
                                            [weakImageView addSubview:activityIndicator];
@@ -119,6 +134,105 @@
                                   }];
     self.introTextView.text = self.introContent;
 }
+
+- (void)addIntroduction {
+    if (![KGUtil isTeacherVersion]) {
+        return;
+    }
+    UIActionSheet *choiceSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                             delegate:self
+                                                    cancelButtonTitle:@"取消"
+                                               destructiveButtonTitle:nil
+                                                    otherButtonTitles:@"拍照", @"从相册中选取", nil];
+    [choiceSheet showInView:self.view];
+}
+
+- (void)deleteIntroduction:(NSInteger)descId {
+    if (![KGUtil isTeacherVersion]) {
+        return;
+    }
+    NSDictionary *data = nil;
+    NSString *urlSuffix = @"";
+    if (self.type == CLASS) {
+        data = @{};
+        urlSuffix = @"/system/deleteClassDesc";
+    } else if (self.type == GARTEN) {
+        data = @{};
+        urlSuffix = @"/system/deleteKindergartenDesc";
+    } else {
+        return;
+    }
+    NSDictionary *body = [KGUtil getRequestBody:data];
+    NSDictionary *params = @{@"uid": REQUEST_UID, @"sign": [KGUtil getRequestSign:body], @"body":body};
+    NSString *url = [[KGUtil getServerAppURL] stringByAppendingString:urlSuffix];
+    UIView *view = [KGUtil getTopMostViewController].view;
+    BOOL showHud = (view != nil);
+    [KGUtil postRequest:url
+             parameters:params
+                success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                    NSLog(@"JSON: %@", responseObject);
+                    NSString *code = [responseObject objectForKey:@"code"];
+                    if ([code isEqualToString:@"000000"]) {
+                        
+                    } else {
+                        [KGUtil showCheckMark:@"删除失败" checked:NO inView:view];
+                    }
+                }
+                failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                    NSLog(@"Error: %@", error);
+                    [KGUtil showCheckMark:@"请求删除失败" checked:NO inView:view];
+                }
+                 inView:view
+                showHud:showHud
+              showError:true];
+}
+
+
+#pragma mark UIActionSheetDelegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0) {
+        // 拍照
+        [self.picPicker takePhoto];
+        
+    } else if (buttonIndex == 1) {
+        // 从相册中选取
+        [self.picPicker selectPhoto];
+    }
+}
+
+#pragma mark - KGPicPickerDelegate
+- (void)doPicPicked:(UIImage *)image
+{
+    //    NSLog(@"get image");
+    if(image == nil)
+        return;
+    
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Growup" bundle:nil];
+    GrowupEditViewController *vc = (GrowupEditViewController *)[storyBoard instantiateViewControllerWithIdentifier:@"GrowDocEdit"];
+    
+    vc.image = image;
+    vc.delegate = self;
+    if (self.type == CLASS) {
+        vc.postType = ADD_CLASS_DESC;
+    } else if (self.type == GARTEN) {
+        vc.postType = ADD_GARTEN_DESC;
+    } else {
+        return;
+    }
+    [self presentViewController:vc animated:YES
+                     completion:^(void){
+                     }];
+}
+
+#pragma mark - KGPostImageDelegate
+- (void)reloadData {
+    [self queryIntroductionData];
+}
+
+- (IBAction)updateButtonAction:(id)sender {
+    [self addIntroduction];
+}
+
 
 /*
  {

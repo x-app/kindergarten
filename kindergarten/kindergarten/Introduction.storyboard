@@ -27,7 +27,6 @@
                                     </imageView>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" editable="NO" text="暂无介绍" translatesAutoresizingMaskIntoConstraints="NO" id="aJs-BR-bQ2">
                                         <rect key="frame" x="0.0" y="250" width="600" height="286"/>
-                                        <color key="backgroundColor" red="0.94730508207070707" green="0.94730508207070707" blue="0.94730508207070707" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" address="YES"/>
@@ -65,10 +64,18 @@
                             <constraint firstAttribute="trailing" secondItem="aHc-7G-KvO" secondAttribute="trailing" id="iRW-sz-URm"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="oZN-rx-0Wd">
+                        <barButtonItem key="rightBarButtonItem" title="更新" id="h4M-1y-Vmn">
+                            <connections>
+                                <action selector="updateButtonAction:" destination="ljg-I5-Dou" id="2IP-sg-jtI"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="introImageView" destination="U5U-ab-bn5" id="OG6-WF-CeL"/>
                         <outlet property="introTextView" destination="aJs-BR-bQ2" id="aMj-kf-TcH"/>
+                        <outlet property="updateButton" destination="h4M-1y-Vmn" id="63h-rc-RO7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rfa-el-VEB" userLabel="First Responder" sceneMemberID="firstResponder"/>

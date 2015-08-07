@@ -64,6 +64,14 @@
             url = @"/teacher/insertActivitiesAlbumInfo";
             attrName = @"directoryId";
             attrValue = [[NSString stringWithFormat:@"%ld", (long)self.albumDirId] dataUsingEncoding:NSUTF8StringEncoding];
+        } else if (self.postType == ADD_CLASS_DESC) {
+            url = @"/teacher/insertClassDesc";
+            attrName = @"classId";
+            attrValue = [[NSString stringWithFormat:@"%ld", (long)[KGUtil getCurClassId]] dataUsingEncoding:NSUTF8StringEncoding];
+        } else if (self.postType == ADD_GARTEN_DESC) {
+            url = @"/teacher/insertKindergartenDesc";
+            attrName = nil;
+            attrValue = nil;
         } else {
             return;
         }
