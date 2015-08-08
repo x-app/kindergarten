@@ -97,6 +97,10 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     //NSLog(@"KGUIViewController:viewDidAppear");
+    
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    delegate.curKGVC = self;
+
 //    [self showVerifyLock];
 //    
 //    [[NSNotificationCenter defaultCenter]

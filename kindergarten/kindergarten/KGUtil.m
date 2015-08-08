@@ -7,6 +7,7 @@
 //
 
 #import "KGUtil.h"
+#import "KGUIViewController.h"
 #import "KGConst.h"
 #import "MBProgressHUD.h"
 #import <CommonCrypto/CommonDigest.h>
@@ -448,154 +449,6 @@ static NSArray *month_cn;
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     return delegate.webVC;
 }
-
-#pragma mark - push webview
-+ (void)pushWebView:(NSString *)webViewType inViewController:(UIViewController*)vc
-{
-    if(webViewType == nil)
-        return;
-    
-    if(vc == nil)
-        return;
-    
-    NSString *title = @"";
-    
-    NSString *curl = @"";
-    if ([webViewType isEqual:@"bringmedic"]){
-        //健康
-        curl = @"/health/bringmedic";
-    }
-    else if([webViewType isEqual:@"givemedic"]){
-        //晨检
-        curl = @"/health/givemedic";
-    }
-    else if([webViewType isEqual:@"rollcall"]){
-        //点名
-        curl = @"/morningCheck/rollcall";
-    }
-    else if([webViewType isEqual:@"parentsmess"]){
-        //家长信箱
-        curl = @"/message/parentsmess";
-    }
-    else if([webViewType isEqual:@"teachermess"]){
-        //教师信箱
-        curl = @"/message/teachermess";
-    }
-    else if([webViewType isEqual:@"intopark"]){
-        //进园
-        curl = @"/morningCheck/intopark";
-    }
-    else if([webViewType isEqual:@"holidaylist"]){
-        //请假处理
-        curl = @"/holiday/list";
-    }
-    else if([webViewType isEqual:@"outpark"]){
-        //出园
-        curl = @"/morningCheck/outpark";
-    }
-    else if([webViewType isEqual:@"askholiday"]){
-        //请假
-        curl = @"/holiday/askto";
-    }
-    else if([webViewType isEqual:@"bulletin"]){
-        //公告
-        curl = @"/message/bulletin";
-    }
-    else if([webViewType isEqual:@"lesson"]){
-        //课程表
-        curl = @"/book/lesson";
-    }
-    else if([webViewType isEqual:@"birthday"]){
-        //生日提醒
-        curl = @"/book/birthday";
-    }
-    else if([webViewType isEqual:@"cookbook"]){
-        //菜谱
-        curl = @"/book/cookbook";
-    }
-    else if([webViewType isEqual:@"masterMess"]){
-        //园长信箱
-        curl = @"/message/masterMess";
-    }
-    else if([webViewType isEqual:@"students"]){
-        //班级统计
-        curl = @"/statistics/students";
-    }
-    else if([webViewType isEqual:@"feedback"]){
-        //反馈
-        curl = @"/FeedBack/prefer";
-    }
-    else {
-        return;
-    }
-    
-    KGUtil.getWebVC.title = title;
-//    [KGUtil.getWebVC clearWebView];
-    [vc.navigationController pushViewController:KGUtil.getWebVC animated:YES];
-
-    NSString *uid = [KGUtil getUser].uid;
-    NSInteger cid = 0;
-    KGChild *child = [KGUtil getCurChild];
-    if(child != nil)
-        cid = child.cid;
-    NSInteger gid = [KGUtil getCurClassId];
-    
-    NSString *body = nil;
-    if(![KGUtil isTeacherVersion])
-    {
-        body = [NSString stringWithFormat:@"c=%ld&dt=%@&u=%@", (long)cid, [KGUtil getCompactDateStr], uid];
-    }
-    else
-    {
-        body = [NSString stringWithFormat:@"dt=%@&g=%ld&u=%@", [KGUtil getCompactDateStr], (long)gid, uid];
-    }
-    NSString *url = [KGUtil getRequestHtmlUrl:curl bodyStr:body];
-    NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:url]];
-    [KGUtil.getWebVC .webView loadRequest:request];
-}
-
-+ (void)lockTopMostVC {
-    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    UIViewController *tmVC = [[UIApplication sharedApplication] topMostViewController];
-    if (tmVC == nil) {
-        NSLog(@"top most vc is nil");
-    }
-    if ([tmVC isKindOfClass:[CLLockVC class]]) {
-        NSLog(@"already locked");
-        return;
-    }
-    if (!delegate.user.verified && !delegate.user.registering) {
-        NSLog(@"用户尚未注册或者验证没过");
-        [CLLockVC showVerifyLockVCInVC:tmVC forgetPwdBlock:^{
-            
-        } successBlock:^(CLLockVC *lockVC, NSString *pwd) {
-            NSLog(@"验证通过");
-            delegate.user.verified = YES;
-            [lockVC dismiss:1.0f];
-        }];
-    }
-}
-
-+ (void)pushViewBecomeActive {
-    // 通过点击push message热启动应用，切换push到type页面。由Appdelegate调用
-    // 此函数在didReceiveRemoteNotification之后触发，保证能够获取到push数据
-    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    
-    if(delegate.isLaunchedByNotification)
-    {
-        UIViewController *tmVC = [[UIApplication sharedApplication] topMostViewController];
-        if (tmVC == nil) {
-            NSLog(@"pushViewBecomeActive:top most vc is nil when");
-        }
-
-        delegate.isLaunchedByNotification = false;//只切换一次
-        if(delegate.myPushType != nil && [delegate.myPushType length] > 0)
-        {
-            [KGUtil pushWebView:delegate.myPushType inViewController:tmVC];
-        }
-    }
-}
-
 + (UIViewController *)getTopMostViewController {
     return [[UIApplication sharedApplication] topMostViewController];
 }
@@ -832,5 +685,152 @@ static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq
 }
 
 
+#pragma mark - push webview
++ (void)pushWebView:(NSString *)webViewType inViewController:(UIViewController*)vc
+{
+    if(webViewType == nil)
+        return;
+    
+    if(vc == nil)
+        return;
+    
+    NSString *title = @"";
+    
+    NSString *curl = @"";
+    if ([webViewType isEqual:@"bringmedic"]){
+        //健康
+        curl = @"/health/bringmedic";
+    }
+    else if([webViewType isEqual:@"givemedic"]){
+        //晨检
+        curl = @"/health/givemedic";
+    }
+    else if([webViewType isEqual:@"rollcall"]){
+        //点名
+        curl = @"/morningCheck/rollcall";
+    }
+    else if([webViewType isEqual:@"parentsmess"]){
+        //家长信箱
+        curl = @"/message/parentsmess";
+    }
+    else if([webViewType isEqual:@"teachermess"]){
+        //教师信箱
+        curl = @"/message/teachermess";
+    }
+    else if([webViewType isEqual:@"intopark"]){
+        //进园
+        curl = @"/morningCheck/intopark";
+    }
+    else if([webViewType isEqual:@"holidaylist"]){
+        //请假处理
+        curl = @"/holiday/list";
+    }
+    else if([webViewType isEqual:@"outpark"]){
+        //出园
+        curl = @"/morningCheck/outpark";
+    }
+    else if([webViewType isEqual:@"askholiday"]){
+        //请假
+        curl = @"/holiday/askto";
+    }
+    else if([webViewType isEqual:@"bulletin"]){
+        //公告
+        curl = @"/message/bulletin";
+    }
+    else if([webViewType isEqual:@"lesson"]){
+        //课程表
+        curl = @"/book/lesson";
+    }
+    else if([webViewType isEqual:@"birthday"]){
+        //生日提醒
+        curl = @"/book/birthday";
+    }
+    else if([webViewType isEqual:@"cookbook"]){
+        //菜谱
+        curl = @"/book/cookbook";
+    }
+    else if([webViewType isEqual:@"masterMess"]){
+        //园长信箱
+        curl = @"/message/masterMess";
+    }
+    else if([webViewType isEqual:@"students"]){
+        //班级统计
+        curl = @"/statistics/students";
+    }
+    else if([webViewType isEqual:@"feedback"]){
+        //反馈
+        curl = @"/FeedBack/prefer";
+    }
+    else {
+        return;
+    }
+    
+    KGUtil.getWebVC.title = title;
+    //    [KGUtil.getWebVC clearWebView];
+    [vc.navigationController pushViewController:KGUtil.getWebVC animated:YES];
+    
+    NSString *uid = [KGUtil getUser].uid;
+    NSInteger cid = 0;
+    KGChild *child = [KGUtil getCurChild];
+    if(child != nil)
+        cid = child.cid;
+    NSInteger gid = [KGUtil getCurClassId];
+    
+    NSString *body = nil;
+    if(![KGUtil isTeacherVersion])
+    {
+        body = [NSString stringWithFormat:@"c=%ld&dt=%@&u=%@", (long)cid, [KGUtil getCompactDateStr], uid];
+    }
+    else
+    {
+        body = [NSString stringWithFormat:@"dt=%@&g=%ld&u=%@", [KGUtil getCompactDateStr], (long)gid, uid];
+    }
+    NSString *url = [KGUtil getRequestHtmlUrl:curl bodyStr:body];
+    NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+    [KGUtil.getWebVC .webView loadRequest:request];
+}
+
++ (void)lockTopMostVC {
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    UIViewController *tmVC = [[UIApplication sharedApplication] topMostViewController];
+    if (tmVC == nil) {
+        NSLog(@"top most vc is nil");
+    }
+    if ([tmVC isKindOfClass:[CLLockVC class]]) {
+        NSLog(@"already locked");
+        return;
+    }
+    if (!delegate.user.verified && !delegate.user.registering) {
+        NSLog(@"用户尚未注册或者验证没过");
+        [CLLockVC showVerifyLockVCInVC:tmVC forgetPwdBlock:^{
+            
+        } successBlock:^(CLLockVC *lockVC, NSString *pwd) {
+            NSLog(@"验证通过");
+            delegate.user.verified = YES;
+            [lockVC dismiss:1.0f];
+        }];
+    }
+}
+
++ (void)pushViewBecomeActive {
+    // 通过点击push message热启动应用，切换push到type页面。由Appdelegate调用
+    // 此函数在didReceiveRemoteNotification之后触发，保证能够获取到push数据
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    if(delegate.isLaunchedByNotification)
+    {
+//        UIViewController *tmVC = [[UIApplication sharedApplication] topMostViewController];
+//        if (tmVC == nil) {
+//            NSLog(@"pushViewBecomeActive:top most vc is nil when");
+//        }
+//        
+        delegate.isLaunchedByNotification = false;//只切换一次
+        if(delegate.myPushType != nil && [delegate.myPushType length] > 0
+           && delegate.curKGVC !=nil && [delegate.curKGVC isKindOfClass:[KGUIViewController class]])
+        {
+            [KGUtil pushWebView:delegate.myPushType inViewController:delegate.curKGVC];
+        }
+    }
+}
 
 @end

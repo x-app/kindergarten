@@ -31,6 +31,8 @@
 @property (strong, nonatomic)NSString *myPushType;
 @property (nonatomic)NSInteger myPushBadge;
 
+@property (weak, nonatomic)UIViewController *curKGVC;
+
 -(void)postToken;
 
 @end
