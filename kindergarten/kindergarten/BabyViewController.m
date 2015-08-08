@@ -57,7 +57,7 @@
     {
         delegate.isLaunchedByNotification = false;//只切换一次
         if(delegate.pushUrl != nil && [delegate.pushUrl length] > 0)
-            [self pushWebView:delegate.pushUrl];
+            [KGUtil pushWebViewWithUrl:delegate.pushUrl inViewController:self];
     }
 }
 
