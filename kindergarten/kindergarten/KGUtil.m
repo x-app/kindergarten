@@ -359,6 +359,9 @@ static NSArray *month_cn;
 + (KGClass *)getCurClass {
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     if ([delegate.user.classes count] >= 1) {
+        return [delegate.user getCurClass];
+    }
+    /*if ([delegate.user.classes count] >= 1) {
         KGClass *curClass = [delegate.user.classes objectAtIndex:0];
         return curClass;
     }
@@ -378,12 +381,16 @@ static NSArray *month_cn;
     // TODO 选择class
     if(delegate.user.classes.count > 0)
         return delegate.user.classes[0];
+     */
     return nil;
 }
 
 + (KGChild *)getCurChild {
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     if ([delegate.user.childs count] >= 1) {
+        return [delegate.user getCurChild];
+    }
+    /*if ([delegate.user.childs count] >= 1) {
         KGChild *curChild = [delegate.user.childs objectAtIndex:0];
         return curChild;
     }
@@ -396,11 +403,11 @@ static NSArray *month_cn;
         NSDictionary *childInfo = (NSDictionary *)[curchilds objectAtIndex:i];
         
         KGChild *child = [[KGChild alloc] initWithName:[childInfo objectForKey:@"name"]
-                                                       id:[[childInfo objectForKey:@"id"] integerValue]
-                                                      sex:[[childInfo objectForKey:@"sex"] integerValue]
-                                                  classID:[[childInfo objectForKey:@"classId"] integerValue]
-                                                className:[childInfo objectForKey:@"className"]
-                                                 birthday:[childInfo objectForKey:@"birthday"]];
+                                                   cid:[[childInfo objectForKey:@"id"] integerValue]
+                                                   sex:[[childInfo objectForKey:@"sex"] integerValue]
+                                               classID:[[childInfo objectForKey:@"classId"] integerValue]
+                                             className:[childInfo objectForKey:@"className"]
+                                              birthday:[childInfo objectForKey:@"birthday"]];
          
         //KGChild *child = [KGChild alloc];
         //[child fromDictionary:childInfo];
@@ -410,7 +417,7 @@ static NSArray *month_cn;
     // TODO 选择child
     if(delegate.user.childs.count > 0)
         return delegate.user.childs[0];
-    
+    */
     return nil;
 }
 

@@ -19,4 +19,17 @@
     return self;
 }
 
+- (NSDictionary *)toDictionary {
+    NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:
+                          self.className, @"className",
+                          @(self.classId), @"classID",
+                          nil];
+    return dict;
+}
+
+- (void)fromDictionary:(NSDictionary *)dict {
+    self.classId = [[dict objectForKey:@"classID"] integerValue];
+    self.className = [dict objectForKey:@"className"];
+}
+
 @end

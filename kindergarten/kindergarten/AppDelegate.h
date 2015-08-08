@@ -20,6 +20,8 @@
 
 @property (strong, nonatomic) KGUser *user;
 
+@property (strong, nonatomic) NSString *lastUID; //切换用户时，记录上一个用户的uid（用于deleteToken）
+
 @property (strong, nonatomic) KGVarible *varible;
 
 @property (strong, nonatomic) NSString* devicetoken;
@@ -34,6 +36,7 @@
 @property (weak, nonatomic)UIViewController *curKGVC;
 
 -(void)postToken;
+-(void)deleteToken;
 
 @end
 

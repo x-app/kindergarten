@@ -15,4 +15,8 @@
 
 - (instancetype)initWithName:(NSString *)className classId:(NSInteger)classId;
 
+- (NSDictionary *)toDictionary;
+
+- (void)fromDictionary: (NSDictionary *)dict;
+
 @end

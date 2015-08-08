@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @class KGChild;
+@class KGClass;
 
 @interface KGUser : NSObject
 
@@ -29,12 +30,17 @@
 @property (strong, nonatomic) NSString *answer;     //密保问题答案
 
 @property (strong, nonatomic) NSMutableArray *childs;  //该用户的孩子(适用于家长)
-@property (strong, nonatomic) KGChild *curChild;
-
+//@property (strong, nonatomic) KGChild *curChild;
+@property (nonatomic) NSInteger childIdx;           //当前小孩的索引
 @property (strong, nonatomic) NSMutableArray *classes; //该用户的班级(适用于教师)
+@property (nonatomic) NSInteger classIdx;           //当前班级的索引
 
 - (NSDictionary *)toDictionary;
 
 - (void)fromDictionary: (NSDictionary *)dict;
+
+- (KGChild *)getCurChild;
+
+- (KGClass *)getCurClass;
 
 @end

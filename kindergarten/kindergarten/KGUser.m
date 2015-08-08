@@ -8,30 +8,41 @@
 
 #import "KGUser.h"
 #import "KGChild.h"
-
+#import "KGClass.h"
 @implementation KGUser
 
 - (instancetype)init {
     self = [super init];
-    self.childs = [[NSMutableArray alloc] init];
+    if (self) {
+        
+    }
     return self;
 }
 
 - (NSDictionary *)toDictionary {
-//    NSMutableArray *dictArray = [[NSMutableArray alloc] initWithCapacity:[self.childs count]];
-//    for (int i = 0; i < [self.childs count]; i++) {
-//        NSDictionary *childDict = [self.childs[i] toDictionary];
-//        [dictArray addObject:childDict];
-//    }
+    NSMutableArray *childDictArray = [[NSMutableArray alloc] initWithCapacity:[self.childs count]];
+    for (int i = 0; i < [self.childs count]; i++) {
+        NSDictionary *childDict = [self.childs[i] toDictionary];
+        [childDictArray addObject:childDict];
+    }
+    NSMutableArray *classDictArray = [[NSMutableArray alloc] initWithCapacity:[self.classes count]];
+    for (int i = 0; i < [self.classes count]; i++) {
+        NSDictionary *classDict = [self.classes[i] toDictionary];
+        [classDictArray addObject:classDict];
+    }
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
                           self.name, @"name",
                           self.idNo, @"idNo",
                           self.uid, @"uid",
-                          [NSString stringWithFormat: @"%ld", (long)self.parentID], @"parentID",
+                          @(self.parentID), @"parentID",
                           self.question, @"question",
-//                          self.questionID, @"questionID",
-//                          self.deviceID, @"deviceID",
-                          [NSString stringWithFormat: @"%ld", (long)self.category], @"category",
+                          @(self.questionID), @"questionID",
+                          self.deviceID, @"deviceID",
+                          @(self.category), @"category",
+                          childDictArray, @"childs",
+                          classDictArray, @"classes",
+                          @(self.childIdx), @"childIdx",
+                          @(self.classIdx), @"classIdx",
 //                          self.answer, @"answer",
                           //self.registered, @"registered",
                           //self.childs, dictArray,
@@ -46,18 +57,54 @@
     self.uid = [dict objectForKey:@"uid"];
     self.parentID = [[dict objectForKey:@"parentID"] integerValue];
     self.question = [dict objectForKey:@"question"];
-//    self.questionID = [[dict objectForKey:@"questionID"] integerValue];
+    self.questionID = [[dict objectForKey:@"questionID"] integerValue];
 //    self.deviceID = [dict objectForKey:@"deviceID"];
     self.category = [[dict objectForKey:@"category"] integerValue];
+    self.childIdx = [[dict objectForKey:@"childIdx"] integerValue];
+    self.classIdx = [[dict objectForKey:@"classIdx"] integerValue];
 //    self.answer = [dict objectForKey:@"answer"];
     //self.registered = [[dict objectForKey: @"registered"] boolValue];
-    /*
-    NSArray *childArray = [[dict objectForKey:@"childs"] array];
-    for (int i = 0; i < [childArray count]; i++) {
-        KGChild *child = [[KGChild alloc] init];
-        [child fromDictionary:childArray[i]];
-        [self.childs addObject:child];
-    }*/
+    NSArray *childDictArray = [dict objectForKey:@"childs"];
+    if (childDictArray != nil && childDictArray.count > 0) {
+        [self.childs removeAllObjects];
+        for (int i = 0; i < [childDictArray count]; i++) {
+            KGChild *child = [[KGChild alloc] init];
+            [child fromDictionary:childDictArray[i]];
+            [self.childs addObject:child];
+        }
+    }
+    
+    NSArray *classDictArray = [dict objectForKey:@"classes"];
+    if (classDictArray != nil && classDictArray.count > 0) {
+        [self.classes removeAllObjects];
+        for (int i = 0; i < [classDictArray count]; i++) {
+            KGClass *aClass = [[KGClass alloc] init];
+            [aClass fromDictionary:classDictArray[i]];
+            [self.classes addObject:aClass];
+        }
+    }
+}
+
+- (KGChild *)getCurChild {
+    if (self.childIdx < 0 || self.childIdx >= self.childs.count) {
+        return nil;
+    }
+    return [self.childs objectAtIndex:self.childIdx];
+}
+
+
+- (KGClass *)getCurClass {
+    if (self.classIdx < 0 || self.classIdx >= self.classes.count) {
+        return nil;
+    }
+    return [self.classes objectAtIndex:self.classIdx];
+}
+
+- (NSMutableArray *)childs {
+    if (_childs == nil) {
+        _childs = [[NSMutableArray alloc] init];
+    }
+    return _childs;
 }
 
 - (NSMutableArray *)classes {
