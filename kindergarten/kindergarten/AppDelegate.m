@@ -42,8 +42,8 @@
     
     // get push
     self.isLaunchedByNotification = false;
-    self.myPushType = @"";
-    self.myPushBadge = -1;
+    self.pushUrl = @"";
+    self.pushFunc = @"";
     if (launchOptions != nil)
     {
         self.isLaunchedByNotification = true;
@@ -262,14 +262,15 @@
 //    NSString *alertValue = [[payload valueForKey:@"aps"] valueForKey:@"alert"];
 
     // 自定义消息
-    NSString *type = [payload valueForKey:@"type"];
+    NSString *url = [payload valueForKey:@"url"];
+    NSString *func = [payload valueForKey:@"func"];
     
-    NSInteger badge = -1;
-    if([[payload allKeys] containsObject:@"badge"])
-        badge = [[payload valueForKey:@"badge"] integerValue];
-        
-    self.myPushType = type;
-    self.myPushBadge = badge;
+//    NSInteger badge = -1;
+//    if([[payload allKeys] containsObject:@"badge"])
+//        badge = [[payload valueForKey:@"badge"] integerValue];
+    
+    self.pushUrl = url;
+    self.pushFunc = func;
 }
 
 -(void)postToken

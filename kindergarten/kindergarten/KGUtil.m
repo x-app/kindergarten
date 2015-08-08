@@ -774,8 +774,10 @@ static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq
     
     KGUtil.getWebVC.title = title;
     //    [KGUtil.getWebVC clearWebView];
+    
     [vc.navigationController pushViewController:KGUtil.getWebVC animated:YES];
     
+    //get url
     NSString *uid = [KGUtil getUser].uid;
     NSInteger cid = 0;
     KGChild *child = [KGUtil getCurChild];
@@ -793,6 +795,22 @@ static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq
         body = [NSString stringWithFormat:@"dt=%@&g=%ld&u=%@", [KGUtil getCompactDateStr], (long)gid, uid];
     }
     NSString *url = [KGUtil getRequestHtmlUrl:curl bodyStr:body];
+    //
+    
+    NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+    [KGUtil.getWebVC .webView loadRequest:request];
+}
+
++ (void)pushWebViewWithUrl:(NSString *)url inViewController:(UIViewController*)vc
+{
+    if(url == nil || [url length] == 0 )
+        return;
+    
+    if(vc == nil)
+        return;
+    
+    [vc.navigationController pushViewController:KGUtil.getWebVC animated:YES];
+    
     NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:url]];
     [KGUtil.getWebVC .webView loadRequest:request];
 }
@@ -832,10 +850,16 @@ static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq
 //        }
 //        
         delegate.isLaunchedByNotification = false;//只切换一次
-        if(delegate.myPushType != nil && [delegate.myPushType length] > 0
-           && delegate.curKGVC !=nil && [delegate.curKGVC isKindOfClass:[KGUIViewController class]])
+        if(delegate.curKGVC !=nil && [delegate.curKGVC isKindOfClass:[KGUIViewController class]])
         {
-            [KGUtil pushWebView:delegate.myPushType inViewController:delegate.curKGVC];
+            if(delegate.pushUrl != nil && [delegate.pushUrl length] > 4 && [[delegate.pushUrl substringToIndex:4] isEqual:@"http"])
+            {// url push
+                [KGUtil pushWebViewWithUrl:delegate.pushUrl inViewController:delegate.curKGVC];
+            }
+            else if(delegate.pushFunc != nil && [delegate.pushFunc length] > 0)
+            {// 暂不启用
+                [KGUtil pushWebView:delegate.pushFunc inViewController:delegate.curKGVC];
+            }
         }
     }
 }
