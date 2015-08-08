@@ -143,24 +143,24 @@
                 [KGUtil showAlert:@"未查询到宝宝信息" inView:self.view];
             } else {
                 [delegate.user.childs removeAllObjects];
-                
                 for (int i = 0; i < [childs count]; i++) {
                     //..
                     
                     NSDictionary *childInfo = (NSDictionary *)[childs objectAtIndex:i];
                     KGChild *child = [[KGChild alloc] initWithName:[childInfo objectForKey:@"name"]
-                                                                id:[[childInfo objectForKey:@"id"] integerValue]
+                                                               cid:[[childInfo objectForKey:@"id"] integerValue]
                                                                sex:[[childInfo objectForKey:@"sex"] integerValue]
                                                            classID:[[childInfo objectForKey:@"classId"] integerValue]
                                                          className:[childInfo objectForKey:@"className"]
                                                           birthday:[childInfo objectForKey:@"birthday"]];
                     [delegate.user.childs addObject:child];
                 }
-                delegate.user.curChild = [delegate.user.childs objectAtIndex:0];
-                if(childs.count > 0){
-                    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-                    [userDefaults setObject:childs forKey:@"curchilds"];
-                }
+                delegate.user.classIdx = 0;
+                //delegate.user.curChild = [delegate.user.childs objectAtIndex:0];
+                //if(childs.count > 0){
+                //    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+                //    [userDefaults setObject:childs forKey:@"curchilds"];
+                //}
                 [self.navigationController pushViewController:self.nextVC animated:YES];
             }
         } else {
@@ -206,11 +206,12 @@
                                                                           classId:[[classInfo objectForKey:@"classId"] integerValue]];
                                 [delegate.user.classes addObject:curClass];
                             }
+                            delegate.user.classIdx = 0;
                             //delegate.user.curChild = [delegate.user.childs objectAtIndex:0];
-                            if (classes.count > 0){
-                                NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-                                [userDefaults setObject:classes forKey:@"curclasses"];
-                            }
+                            //if (classes.count > 0){
+                            //    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+                            //    [userDefaults setObject:classes forKey:@"curclasses"];
+                            //}
                             [self.navigationController pushViewController:self.nextVC animated:YES];
                         }
                     } else {
@@ -234,19 +235,14 @@
         [CLLockVC showSettingLockVCInVC:self successBlock:^(CLLockVC *lockVC, NSString *pwd) {
             NSLog(@"密码设置成功");
             AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-            
-            //UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-            //            if (mainStoryboard == nil) {
-            //                NSLog(@"main.storyboard is nil");
-            //                [lockVC dismiss:0];
-            //                return;
-            //            }
-            //[self dismissViewControllerAnimated:YES completion:nil];
-            //[lockVC dismiss:0];
+
             [lockVC dismissViewControllerAnimated:NO completion:^(void) {
                 delegate.user.registered = YES;
                 delegate.user.verified = YES;
                 delegate.user.registering = NO;
+                [delegate deleteToken];
+                [delegate postToken];
+                [self saveCustomData];
                 [self.navigationController dismissViewControllerAnimated:YES completion:nil];
             }];
             
@@ -255,9 +251,6 @@
                 //[self dismissViewControllerAnimated:NO completion:nil];
                 //[self presentViewController:self.fromVC animated:YES completion:nil];
             }
-            //BabyViewController *bvc = [mainStoryboard instantiateInitialViewController];
-            //[self presentViewController:bvc animated:NO completion:nil];
-            
         }];
     }
 }
@@ -317,8 +310,8 @@
         delegate.varible.server_app_url = appUrl;
         delegate.varible.server_html_url = htmlUrl;
         delegate.varible.parkName = parkName;
-        [[NSUserDefaults standardUserDefaults] setObject:[delegate.varible toDictionary] forKey:@"varible"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
+        //[[NSUserDefaults standardUserDefaults] setObject:[delegate.varible toDictionary] forKey:@"varible"];
+        //[[NSUserDefaults standardUserDefaults] synchronize];
         self.parkTextField.text = parkName;
         [self.parkTextField resignFirstResponder];
     } andCompletionBlock:^{
@@ -449,11 +442,11 @@
             [self queryChildInfo:delegate.user.uid];
         }
         //[self.navigationController pushViewController:self.nextVC animated:YES];
-    } else { //取消-返回main.storyboard
-        delegate.user.registering = NO;
-        [self.navigationController dismissViewControllerAnimated:YES completion:^{
-            [KGUtil lockTopMostVC];
-        }];
+    } else { //取消-返回main.storyboard--20150807日修改，不再返回main，直接取消
+//        delegate.user.registering = NO;
+//        [self.navigationController dismissViewControllerAnimated:YES completion:^{
+//            [KGUtil lockTopMostVC];
+//        }];
     }
 }
 #pragma mark UITextFieldDelegate
@@ -474,6 +467,26 @@
     self.idNoTextField.text = @"";
     self.nameTextField.text = @"";
     [KGUtil setAppVersion:sc.selectedSegmentIndex];
+}
+
+/**
+ *  统一存储用户数据
+ */
+- (void)saveCustomData {
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    //存储url信息
+    [userDefaults setObject:[delegate.varible toDictionary] forKey:@"varible"];
+    
+    //存储用户user
+    [userDefaults setObject:[delegate.user toDictionary]  forKey:@"user"];
+    
+    //存储小孩child
+    
+    //存储班级class
+    
+    [userDefaults synchronize];
 }
 
 /*

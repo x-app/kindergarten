@@ -45,6 +45,7 @@
         NSLog(@"JSON: %@", responseObject);
         NSString *code = [responseObject objectForKey:@"code"];
         if ([code isEqualToString:@"000000"]) {
+            delegate.lastUID = delegate.user.uid;
             NSDictionary *obj = [responseObject objectForKey:@"obj"];
             delegate.user.category = [(NSString *)[obj objectForKey:@"category"] integerValue];
             delegate.user.name = [obj objectForKey:@"name"];
@@ -58,9 +59,10 @@
             delegate.user.uid = [obj objectForKey:@"iuId"];
             delegate.user.answer = [obj objectForKey:@"answer"];
             
-            [self saveUser:delegate.user];
+            //2015-08-07 转移到最后注册成功的最后一步
+            //[self saveUser:delegate.user];
             
-            [delegate postToken];
+            //[delegate postToken];
             
             next.fromVC = current.fromVC;
             current.nextVC = next;
@@ -97,10 +99,12 @@
      showHud:true showError:true];
 }
 
+/*
 -(void)saveUser:(KGUser *)user
 {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setObject:[user toDictionary]  forKey:@"User"];
 }
+*/
 
 @end

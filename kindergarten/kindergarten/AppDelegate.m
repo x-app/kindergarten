@@ -67,6 +67,10 @@
     self.user.verified = NO;
     self.user.registered = NO;
     self.user.deviceID = @"";
+    NSDictionary *userDict = [userDefaults objectForKey:@"user"];
+    if (userDict != nil) {
+        [self.user fromDictionary:userDict];
+    }
     
     self.varible = [[KGVarible alloc] init];
     self.varible.server_index_url = @"http://app.nugget-nj.com/kindergarten_index";
@@ -77,11 +81,6 @@
     if (variDict != nil) {
         [self.varible fromDictionary:variDict];
     }
-    NSDictionary *userDict = [userDefaults objectForKey:@"User"];
-    if (userDict != nil) {
-        [self.user fromDictionary:userDict];
-    }
-
     
     NSInteger visitTimes = [userDefaults integerForKey:@"visitTimes"];
     
@@ -158,7 +157,7 @@
     NSLog(@"did become active in AppDelegate");
     NSDate *curTime = [[NSDate alloc] init];
     //第一次进入系统或者非激活状态超过一分钟，返回时需要重新lock
-    if (self.resignActiveTime == nil || [curTime timeIntervalSinceDate:self.resignActiveTime] > 60) {
+    if (self.resignActiveTime == nil || [curTime timeIntervalSinceDate:self.resignActiveTime] > 5) {
         [KGUtil lockTopMostVC];
     }
     /*UIViewController *tmVC = [[UIApplication sharedApplication] topMostViewController];
@@ -298,9 +297,25 @@
 
 -(void)deleteToken
 {
-    if(self.user != nil && self.user.uid != nil && self.devicetoken != nil)
+    /*if(self.user != nil && self.user.uid != nil && self.devicetoken != nil)
     {
         NSDictionary *data = @{@"user_id": self.user.uid,
+                               @"token": self.devicetoken};
+        NSDictionary *body = [KGUtil getRequestBody:data];
+        NSDictionary *params = @{@"type": @"LEAVE", @"sign": [KGUtil getRequestSign:body], @"body": body};
+        
+        [KGUtil postRequest:[KGUtil getServerPushURL] parameters:params
+                    success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                        NSLog(@"delete token succ!");
+                    }
+                    failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                        NSLog(@"Error: %@", error);
+                    }
+                     inView:nil showHud:false showError:false];
+    }*/
+    if(![KGUtil isEmptyString:self.lastUID] && self.devicetoken != nil)
+    {
+        NSDictionary *data = @{@"user_id": self.lastUID,
                                @"token": self.devicetoken};
         NSDictionary *body = [KGUtil getRequestBody:data];
         NSDictionary *params = @{@"type": @"LEAVE", @"sign": [KGUtil getRequestSign:body], @"body": body};
