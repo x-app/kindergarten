@@ -11,6 +11,7 @@
 #import "KGChild.h"
 #import "KGVarible.h"
 #import "KGClass.h"
+#import "WebViewController.h"
 
 #define __BASE64( text )        [KGUtil base64StringFromText:text]
 #define __TEXT( base64 )        [KGUtil textFromBase64String:base64]
@@ -84,7 +85,13 @@
 
 + (NSString *)getServerPushURL;
 
++ (WebViewController *)getWebVC;
+
++ (void)pushWebView:(NSString *)webViewType inViewController:(UIViewController*)vc;
+
 + (void)lockTopMostVC;
+
++ (void)pushViewBecomeActive;
 
 + (BOOL)isEmptyString:(NSString *)str;
 

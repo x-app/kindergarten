@@ -12,4 +12,6 @@
 
 @property (strong, nonatomic) UIWebView *webView;
 
+- (void)clearWebView;
+
 @end

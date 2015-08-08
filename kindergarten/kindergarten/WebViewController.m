@@ -6,6 +6,8 @@
 //  Copyright (c) 2015年 xapp. All rights reserved.
 //
 
+#import "CLLockVC.h"
+#import "UIViewController+TopMostViewController.h"
 #import "WebViewController.h"
 
 @interface WebViewController ()
@@ -51,7 +53,37 @@
     [super viewDidLoad];
 }
 
+-(void)viewWillDisappear:(BOOL)animated
+{
+    NSLog(@"willdisappear");
+}
+
 - (void)viewDidDisappear:(BOOL)animated
+{
+    NSLog(@"diddisappear");
+    UIViewController *tmVC = [[UIApplication sharedApplication] topMostViewController];
+    if (tmVC == nil) {
+        return;
+    }
+    if ([tmVC isKindOfClass:[CLLockVC class]]) {
+        //important: 防止lock出现，清空webview。
+        return;
+    }
+    
+    [self clearWebView];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    NSLog(@"willappear");
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    NSLog(@"didappear");
+}
+
+- (void)clearWebView
 {
     [self.webView stopLoading];
     [self.webView loadHTMLString:@"" baseURL:nil];
@@ -66,11 +98,6 @@
     for (cookie in [storage cookies]) {
         [storage deleteCookie:cookie];
     }
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    
 }
 
 - (void)didReceiveMemoryWarning {

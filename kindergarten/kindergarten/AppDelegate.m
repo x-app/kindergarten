@@ -154,27 +154,18 @@
     //NSString *clsName =  NSStringFromClass([window.rootViewController class]);
     //NSLog(@"become active: %@",clsName);
     //NSLog(@"become active: %@",[[window.rootViewController class] description]);
-    self.user.verified = NO;
+    
     NSLog(@"did become active in AppDelegate");
+    
+    //热启动时，执行推送到指定页面
+    [KGUtil pushViewBecomeActive];
+    
+    self.user.verified = NO;
     NSDate *curTime = [[NSDate alloc] init];
     //第一次进入系统或者非激活状态超过一分钟，返回时需要重新lock
-    if (self.resignActiveTime == nil || [curTime timeIntervalSinceDate:self.resignActiveTime] > 60) {
+    if (self.resignActiveTime == nil || [curTime timeIntervalSinceDate:self.resignActiveTime] > 0) {
         [KGUtil lockTopMostVC];
     }
-    /*UIViewController *tmVC = [[UIApplication sharedApplication] topMostViewController];
-    if (tmVC == nil) {
-        NSLog(@"top most vc is nil");
-    }
-    if (!self.user.verified && !self.user.registering) {
-        NSLog(@"用户尚未注册或者验证没过");
-        [CLLockVC showVerifyLockVCInVC:tmVC forgetPwdBlock:^{
-            
-        } successBlock:^(CLLockVC *lockVC, NSString *pwd) {
-            NSLog(@"验证通过");
-            self.user.verified = YES;
-            [lockVC dismiss:1.0f];
-        }];
-    }*/
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
@@ -218,6 +209,12 @@
         _webVC = [[WebViewController alloc] init];
         
         _webVC.hidesBottomBarWhenPushed = YES;
+    
+        NSHTTPCookie *cookie;
+        NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+        for (cookie in [storage cookies]) {
+            [storage deleteCookie:cookie];
+        }
     }
     
     return _webVC;
@@ -246,15 +243,16 @@
     NSLog(@"Received notification: %@", payload);
     self.isLaunchedByNotification = false;
     
-    if (application.applicationState == UIApplicationStateActive) {
+    if (application.applicationState == UIApplicationStateActive)
+    {//程序当前正处于前台
         NSLog(@"Received notification active");
-        //程序当前正处于前台
+        
     }
     else if(application.applicationState == UIApplicationStateInactive)
-    {
+    {//点击通知启动，程序在后台。进入这里
         NSLog(@"Received notification inactive");
-        //程序处于后台
-//        self.isLaunchedByNotification = true;//从后台激活同冷启动一样处理
+
+        self.isLaunchedByNotification = true;//从后台激活同冷启动一样处理
         //如何通知当前vc切换view
     }
     [self doWithNotification:payload];

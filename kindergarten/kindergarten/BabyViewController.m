@@ -59,7 +59,6 @@
         if(delegate.myPushType != nil && [delegate.myPushType length] == 0)
             [self pushWebView:delegate.myPushType];
     }
-
 }
 
 - (void)didReceiveMemoryWarning {

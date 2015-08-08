@@ -158,7 +158,17 @@
 - (void)clearAppCache {
     [[[SDWebImageManager sharedManager] imageCache] clearDisk];
     [[[SDWebImageManager sharedManager] imageCache] clearMemory];
-    [[NSURLCache sharedURLCache] removeAllCachedResponses];
+    
+    NSURLCache * cache = [NSURLCache sharedURLCache];
+    [cache removeAllCachedResponses];
+    [cache setDiskCapacity:0];
+    [cache setMemoryCapacity:0];
+    
+    NSHTTPCookie *cookie;
+    NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    for (cookie in [storage cookies]) {
+        [storage deleteCookie:cookie];
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
