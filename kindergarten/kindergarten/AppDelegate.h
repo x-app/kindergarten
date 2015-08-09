@@ -30,8 +30,11 @@
 
 @property (nonatomic) BOOL isLaunchedByNotification;
 
-@property (strong, nonatomic)NSString *myPushType;
-@property (nonatomic)NSInteger myPushBadge;
+@property (strong, nonatomic)NSString *pushUrl;
+@property (strong, nonatomic)NSString *pushFunc;
+//@property (nonatomic)NSInteger myPushBadge;
+
+@property (weak, nonatomic)UIViewController *curKGVC;
 
 -(void)postToken;
 -(void)deleteToken;

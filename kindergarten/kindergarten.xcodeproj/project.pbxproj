@@ -673,7 +673,6 @@
 				99D55A511B5FC8CC00C508A3 /* Introduction Storyboard */,
 				12C794A41B44232300918497 /* LaunchScreen.xib */,
 				12C794A21B44232300918497 /* Images.xcassets */,
-				12AC16021B4918C3007C247B /* RBStoryboardLink */,
 				12C794921B44232300918497 /* Supporting Files */,
 				1212C5601B52613000C11BD2 /* WebViewController.h */,
 				1212C5611B52613000C11BD2 /* WebViewController.m */,
@@ -1058,6 +1057,7 @@
 		9997B9AB1B4D580100B908B6 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				12AC16021B4918C3007C247B /* RBStoryboardLink */,
 				99C642921B6CB378008EF929 /* libqrencode */,
 				99C642A11B6CB378008EF929 /* QRCodeGenerator */,
 				99688A361B62854A00AA7A41 /* VPImageCropper */,

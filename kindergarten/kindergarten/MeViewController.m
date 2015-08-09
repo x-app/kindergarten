@@ -24,6 +24,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.funcTableView.delegate = self;
@@ -68,14 +69,12 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-//    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-//    if (delegate != nil && delegate.user != nil && delegate.user.name != nil) {
-//        self.userLabel.text = [NSString stringWithFormat:@"尊敬的%@, 您好！", delegate.user.name];
-//    }
-    
+    [super viewDidAppear:animated];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
     [self.funcTableView deselectRowAtIndexPath:[self.funcTableView indexPathForSelectedRow] animated:NO];
 }
 
@@ -158,7 +157,17 @@
 - (void)clearAppCache {
     [[[SDWebImageManager sharedManager] imageCache] clearDisk];
     [[[SDWebImageManager sharedManager] imageCache] clearMemory];
-    [[NSURLCache sharedURLCache] removeAllCachedResponses];
+    
+    NSURLCache * cache = [NSURLCache sharedURLCache];
+    [cache removeAllCachedResponses];
+    [cache setDiskCapacity:0];
+    [cache setMemoryCapacity:0];
+    
+    NSHTTPCookie *cookie;
+    NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    for (cookie in [storage cookies]) {
+        [storage deleteCookie:cookie];
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

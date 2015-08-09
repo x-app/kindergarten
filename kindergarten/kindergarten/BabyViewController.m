@@ -56,10 +56,9 @@
     if(delegate.isLaunchedByNotification)
     {
         delegate.isLaunchedByNotification = false;//只切换一次
-        if(delegate.myPushType != nil && [delegate.myPushType length] == 0)
-            [self pushWebView:delegate.myPushType];
+        if(delegate.pushUrl != nil && [delegate.pushUrl length] > 0)
+            [KGUtil pushWebViewWithUrl:delegate.pushUrl inViewController:self];
     }
-
 }
 
 - (void)didReceiveMemoryWarning {
@@ -88,7 +87,13 @@
             break;
         }
         case 2:{
-            [self pushWebView:@"givemedic"];
+            if(![KGUtil isTeacherVersion])
+            {
+                [self pushWebView:@"givemedic"];
+            }
+            else{
+                [self pushWebView:@"rollcall"];
+            }
 //            if(![KGUtil isTeacherVersion])
 //            {
 //                [self webVC].title = @"晨检";
