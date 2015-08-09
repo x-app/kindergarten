@@ -258,7 +258,6 @@
                                 </variation>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.9450981021" green="0.97647064920000004" blue="0.98431378599999997" alpha="1" colorSpace="deviceRGB"/>
                         <constraints>
                             <constraint firstItem="YAA-tH-pdV" firstAttribute="leading" secondItem="dWY-Lr-RMm" secondAttribute="trailing" constant="18" id="0gY-F9-j3w">
                                 <variation key="heightClass=regular-widthClass=compact" constant="35"/>

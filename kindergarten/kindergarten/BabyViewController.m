@@ -10,6 +10,8 @@
 #import "KGUtil.h"
 #import "AppDelegate.h"
 #import "KGChild.h"
+#import "JSBadgeView.h"
+
 @interface BabyViewController ()
 
 @property (nonatomic) NSInteger viewAppearCount;
@@ -51,6 +53,8 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    
+    [self getMessageCount];
     
     // 通过点击push message冷启动应用，切换push到的type页面。
     // 仅在这里增加切换逻辑，因为这里是冷启动的唯一主页面
@@ -221,9 +225,56 @@
         else if([btn.titleLabel.text  isEqual: @"请假处理"])
             [btn setTitle:@"进园" forState:UIControlStateNormal];
         else
-            [btn setHidden:false]; 
+            [btn setHidden:false];
     }
+}
 
+-(void) getMessageCount
+{
+    NSString *uid = [KGUtil getUser].uid;
+    NSString* body = [NSString stringWithFormat:@"dt=%@&u=%@", [KGUtil getCompactDateStr], uid];
+    NSString *url = [KGUtil getRequestHtmlUrl:@"/message/queryMessCount" bodyStr:body];
+    
+    [KGUtil sendGetRequest:url success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        NSLog(@"JSON: %@", responseObject);
+        NSInteger sta = [[responseObject objectForKey:@"sta"] integerValue];
+        if(sta == 1)
+        {
+            NSInteger count = [[responseObject objectForKey:@"count"] integerValue];
+            [self setMessBadge:count];
+        }
+        else
+        {
+            NSString *msg = [responseObject objectForKey:@"msg"];
+            if(nil != msg)
+                NSLog(@"Error: %@", msg);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+    }];
+}
+
+-(void) setMessBadge:(NSInteger) count
+{
+//    count = 9;
+    if(count < 1)
+        return;
+    
+    for(int i=0; i<self.func.count; i++)
+    {
+        UIImageView* iv = self.func[i];
+        
+        if(iv.tag == 3)
+        {
+            JSBadgeView *badgeView = [[JSBadgeView alloc] initWithParentView:iv alignment:JSBadgeViewAlignmentTopRight];
+            badgeView.badgeText = [NSString stringWithFormat:@"%ld", (long)count];
+            CGRect rect = [iv frame];
+            NSInteger dx = rect.size.width/2 - rect.size.width/2/sqrt(2);
+            [badgeView setBadgePositionAdjustment:CGPointMake(-dx, dx)];
+
+            return;
+        }
+    }
 }
 
 @end

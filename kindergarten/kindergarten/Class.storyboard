@@ -293,7 +293,6 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.9450981021" green="0.97647064920000004" blue="0.98431378599999997" alpha="1" colorSpace="deviceRGB"/>
                         <constraints>
                             <constraint firstItem="SEh-2p-92L" firstAttribute="top" secondItem="fRN-bH-UEn" secondAttribute="bottom" id="08I-Vn-Rkw"/>
                             <constraint firstItem="MCB-75-CGM" firstAttribute="width" secondItem="MCB-75-CGM" secondAttribute="height" multiplier="1:1" id="13T-8h-hXA"/>
