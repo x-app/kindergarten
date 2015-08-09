@@ -8,18 +8,25 @@
 
 #import "KGPicPicker.h"
 #import <MobileCoreServices/MobileCoreServices.h>
-
+#import "ELCImagePickerController.h"
 @interface KGPicPicker()
 
 @property (nonatomic, weak)UIViewController* uiVC;
 
-@property (nonatomic)BOOL needCrop;
+@property (nonatomic) BOOL needCrop;
+
+@property (nonatomic) BOOL multipleSelection;
 
 @end
 
 @implementation KGPicPicker
 
-- (instancetype)initWithUIVC:(UIViewController *)uiVC needCrop:(BOOL)needCrop{
+- (instancetype)initWithUIVC:(UIViewController *)uiVC needCrop:(BOOL)needCrop {
+    self = [self init];
+    return [self initWithUIVC:uiVC needCrop:needCrop multiple:NO];
+}
+
+- (instancetype)initWithUIVC:(UIViewController *)uiVC needCrop:(BOOL)needCrop multiple:(BOOL)multiple {
     self = [self init];
     if (!self) {
         return nil;
@@ -27,6 +34,7 @@
     
     _uiVC = uiVC;
     _needCrop = needCrop;
+    _multipleSelection = multiple;
     
     return self;
 }
@@ -51,27 +59,73 @@
                              NSLog(@"Picker View Controller is presented");
                          }];
     }
-
 }
 
 -(void)selectPhoto
 {
-    if ([self isPhotoLibraryAvailable]) {
-        UIImagePickerController *controller = [[UIImagePickerController alloc] init];
-        controller.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        NSMutableArray *mediaTypes = [[NSMutableArray alloc] init];
-        [mediaTypes addObject:(__bridge NSString *)kUTTypeImage];
-        controller.mediaTypes = mediaTypes;
+    if (self.multipleSelection) {
+        ELCImagePickerController *elcPicker = [[ELCImagePickerController alloc] initImagePicker];
         
-        controller.delegate = self;
+        elcPicker.maximumImagesCount = 100; //Set the maximum number of images to select to 100
+        elcPicker.returnsOriginalImage = YES; //Only return the fullScreenImage, not the fullResolutionImage
+        elcPicker.returnsImage = YES; //Return UIimage if YES. If NO, only return asset location information
+        elcPicker.onOrder = NO; //For multiple image selection, display and return order of selected images
+        elcPicker.mediaTypes = @[(NSString *)kUTTypeImage]; //Supports image and movie types, //(NSString *)kUTTypeMovie
         
-        [self.uiVC presentViewController:controller
-                           animated:YES
-                         completion:^(void){
-                             NSLog(@"Picker View Controller is presented");
-                         }];
+        elcPicker.imagePickerDelegate = self;
+        
+        [self.uiVC presentViewController:elcPicker animated:YES completion:nil];
+    } else {
+        if ([self isPhotoLibraryAvailable]) {
+            UIImagePickerController *controller = [[UIImagePickerController alloc] init];
+            controller.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            NSMutableArray *mediaTypes = [[NSMutableArray alloc] init];
+            [mediaTypes addObject:(__bridge NSString *)kUTTypeImage];
+            controller.mediaTypes = mediaTypes;
+            
+            controller.delegate = self;
+            
+            [self.uiVC presentViewController:controller
+                                    animated:YES
+                                  completion:^(void){
+                                      NSLog(@"Picker View Controller is presented");
+                                  }];
+        }
     }
+}
 
+
+#pragma mark ELCImagePickerControllerDelegate Methods
+- (void)elcImagePickerController:(ELCImagePickerController *)picker didFinishPickingMediaWithInfo:(NSArray *)info {
+    [self.uiVC dismissViewControllerAnimated:YES completion:nil];
+    
+    NSMutableArray *images = [NSMutableArray arrayWithCapacity:[info count]];
+    for (NSDictionary *dict in info) {
+        if ([dict objectForKey:UIImagePickerControllerMediaType] == ALAssetTypePhoto){
+            if ([dict objectForKey:UIImagePickerControllerOriginalImage]){
+                UIImage* image=[dict objectForKey:UIImagePickerControllerOriginalImage];
+                [images addObject:image];
+            } else {
+                NSLog(@"UIImagePickerControllerReferenceURL = %@", dict);
+            }
+        } /*else if ([dict objectForKey:UIImagePickerControllerMediaType] == ALAssetTypeVideo){
+            if ([dict objectForKey:UIImagePickerControllerOriginalImage]){
+                UIImage* image=[dict objectForKey:UIImagePickerControllerOriginalImage];
+                
+                [images addObject:image];
+            } else {
+                NSLog(@"UIImagePickerControllerReferenceURL = %@", dict);
+            }
+        } else {
+            NSLog(@"Uknown asset type");
+        }*/
+    }
+    [self finishPicPicking:images];
+    //[self.delegate doPicPicked:images];
+}
+
+- (void)elcImagePickerControllerDidCancel:(ELCImagePickerController *)picker {
+    [self.uiVC dismissViewControllerAnimated:YES completion:nil];
 }
 
 /*
@@ -100,7 +154,9 @@
         }
         else
         {
-            [self.delegate doPicPicked:portraitImg];
+            NSArray *images = [NSArray arrayWithObject:portraitImg];
+            //[self.delegate doPicPicked:images];
+            [self finishPicPicking:images];
         }
     }];
 }
@@ -113,9 +169,11 @@
 #pragma mark VPImageCropperDelegate
 - (void)imageCropper:(VPImageCropperViewController *)cropperViewController didFinished:(UIImage *)editedImage
 {
-    if(self.delegate)
-       [self.delegate doPicPicked:editedImage];
-    
+    if (self.delegate) {
+        NSArray *images = [NSArray arrayWithObject:editedImage];
+        //[self.delegate doPicPicked:images];
+        [self finishPicPicking:images];
+    }
     [cropperViewController dismissViewControllerAnimated:YES completion:^{
     }];
 }
@@ -234,6 +292,20 @@
         }
     }];
     return result;
+}
+
+- (void)finishPicPicking:(NSArray *)images {
+    if (self.delegate == nil) {
+        return;
+    }
+    if (images == nil || images.count == 0) {
+        return;
+    }
+    if (self.multipleSelection) {
+        [self.delegate doPicPicked:images];
+    } else {
+        [self.delegate doPicPicked:[images objectAtIndex:0]];
+    }
 }
 
 

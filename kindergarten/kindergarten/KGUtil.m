@@ -143,6 +143,7 @@ static NSArray *month_cn;
     // Configure for text only and offset down
     hud.mode = MBProgressHUDModeText;
     hud.labelText = content;
+    hud.labelFont = [UIFont systemFontOfSize:14];
     hud.margin = 10.f;
     hud.removeFromSuperViewOnHide = YES;
     
@@ -178,6 +179,7 @@ static NSArray *month_cn;
     
     //hud.delegate = self;
     hud.labelText = infoText;
+    hud.labelFont = [UIFont systemFontOfSize:14];
     
     [hud show:YES];
     [hud hide:YES afterDelay:1];

@@ -396,11 +396,11 @@
 }
 
 #pragma mark - KGPicPickerDelegate
-- (void)doPicPicked:(UIImage *)image
+- (void)doPicPicked:(id)image
 {
-//    NSLog(@"get image");
-    if(image == nil)
+    if (image == nil || ![image isKindOfClass:[UIImage class]]) {
         return;
+    }
     
     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Growup" bundle:nil];
     GrowupEditViewController *vc = (GrowupEditViewController *)[storyBoard instantiateViewControllerWithIdentifier:@"GrowDocEdit"];

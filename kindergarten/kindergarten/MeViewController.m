@@ -129,7 +129,7 @@
     headerLabel.textColor = [UIColor blackColor];
     headerLabel.font = [UIFont systemFontOfSize:15];// = [UIFont boldSystemFontOfSize:16];
     headerLabel.frame = CGRectMake(10.0, 0.0, 300.0, 44.0);
-    headerLabel.text = @"尊敬的黄晓伟用户, 您好！";
+    headerLabel.text = [NSString stringWithFormat:@"尊敬的%@用户, 您好！", [KGUtil getUser].name];
     
     [customView addSubview:headerLabel];
     
@@ -190,11 +190,14 @@
         }
             
         case CLEAR_CACHE: {
-            MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
-            [self.navigationController.view addSubview:hud];
-            
-            hud.mode = MBProgressHUDModeDeterminate;
-            [hud showWhileExecuting:@selector(clearAppCache) onTarget:self withObject:nil animated:YES];
+            MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:self.funcTableView];
+            [self.funcTableView addSubview:hud];
+            hud.labelText = @"清除中";
+            [hud show:YES];
+            [self clearAppCache];
+            [hud hide:YES];
+            //[hud showWhileExecuting:@selector(clearAppCache) onTarget:self withObject:nil animated:YES];
+            [KGUtil showCheckMark:@"清除完毕" checked:YES inView:self.funcTableView];
             [self.funcTableView deselectRowAtIndexPath:[self.funcTableView indexPathForSelectedRow] animated:NO];
             break;
         }
