@@ -186,6 +186,15 @@
 {
     [KGUtil pushWebView:webViewType inViewController:self];
 }
+
+- (void)setTeacherVersionFunc {
+
+}
+
+- (void)setParentVersionFunc {
+    
+}
+
 /*
 - (void)showVerifyLock {
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];

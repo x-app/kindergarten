@@ -16,6 +16,8 @@
 #import "KGConst.h"
 #import "KGChild.h"
 #import "KGClass.h"
+#import "RBStoryboardLink.h"
+#import "KGUIViewController.h"
 @interface LoginViewContoller ()
 
 
@@ -226,6 +228,52 @@
               showError:true];
 }
 
+- (void)setFuncIcons {
+    if (![KGUtil isTeacherVersion]) {
+        return;
+    }
+    UIWindow *window = [[UIApplication sharedApplication] keyWindow];
+    if (window == nil) {
+        return;
+    }
+    UIViewController *rootVC = window.rootViewController;
+    if (rootVC == nil || ![rootVC isKindOfClass:[UITabBarController class]]) {
+        return;
+    }
+    UITabBarController *tbVC = (UITabBarController *)rootVC;
+    if (tbVC == nil) {
+        return;
+    }
+    NSArray *cVCArray = tbVC.customizableViewControllers;
+    for (int i = 0; i < cVCArray.count; i++) {
+        UINavigationController *navi = (UINavigationController *)[tbVC.customizableViewControllers objectAtIndex:i];
+        if (navi == nil) {
+            continue;
+        }
+        NSArray *childVCs = navi.childViewControllers;
+        for (int j = 0; j < childVCs.count; j++) {
+            UIViewController *curChildVC = [childVCs objectAtIndex:j];
+            if (curChildVC == nil || ![curChildVC isKindOfClass:[RBStoryboardLink class]]) {
+                continue;
+            }
+            RBStoryboardLink *sbLink = (RBStoryboardLink *)curChildVC;
+            UIViewController *curVC = sbLink.scene;
+            if (curVC != nil && [curVC isKindOfClass:[KGUIViewController class]]) {
+                KGUIViewController *kgVC = (KGUIViewController *)curVC;
+                [kgVC setTeacherVersionFunc];
+            }
+        }
+        /*if ([navi.visibleViewController isKindOfClass:[RBStoryboardLink class]]) {
+            RBStoryboardLink *sbLink = (RBStoryboardLink *)navi.visibleViewController;
+            UIViewController *curVC = sbLink.scene;
+            if (curVC != nil && [curVC isKindOfClass:[KGUIViewController class]]) {
+                KGUIViewController *kgVC = (KGUIViewController *)curVC;
+                [kgVC setTeacherVersionFunc];
+            }
+        }*/
+    }
+}
+
 - (void)setGesturePswd {
     BOOL hasPwd = [CLLockVC hasPwd];
     hasPwd = NO;
@@ -234,8 +282,8 @@
     } else {
         [CLLockVC showSettingLockVCInVC:self successBlock:^(CLLockVC *lockVC, NSString *pwd) {
             NSLog(@"密码设置成功");
+            [self setFuncIcons];
             AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-
             [lockVC dismissViewControllerAnimated:NO completion:^(void) {
                 delegate.user.registered = YES;
                 delegate.user.verified = YES;
@@ -243,7 +291,31 @@
                 [delegate deleteToken];
                 [delegate postToken];
                 [self saveCustomData];
-                [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+                [self.navigationController dismissViewControllerAnimated:YES completion:^{
+                    //UIWindow *window = [[UIApplication sharedApplication] keyWindow];
+                    //NSArray *views = window.subviews;
+                    /*UITabBarController *tbVC = (UITabBarController *)[KGUtil getTopMostViewController];
+                    if (tbVC == nil) {
+                        return;
+                    }
+                    NSArray *cVCArray = tbVC.customizableViewControllers;
+                    for (int i = 0; i < cVCArray.count; i++) {
+                        UINavigationController *navi = (UINavigationController *)[tbVC.customizableViewControllers objectAtIndex:i];
+                        if (navi == nil) {
+                            continue;
+                        }
+                        if ([navi.visibleViewController isKindOfClass:[RBStoryboardLink class]]) {
+                            RBStoryboardLink *sbLink = (RBStoryboardLink *)navi.visibleViewController;
+                            UIViewController *curVC = sbLink.scene;
+                            if (curVC != nil && [curVC isKindOfClass:[KGUIViewController class]]) {
+                                KGUIViewController *kgVC = (KGUIViewController *)curVC;
+                                [kgVC setTeacherVersionFunc];
+                            }
+                            //KGUIViewController *kgVC = (KGUIViewController *)navi.visibleViewController;
+                            //[kgVC setTeacherVersionFunc];
+                        }
+                    }*/
+                }];
             }];
             
             if (self.fromVC != nil) {
