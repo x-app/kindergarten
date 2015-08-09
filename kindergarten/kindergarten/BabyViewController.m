@@ -41,7 +41,9 @@
     
     if([KGUtil isTeacherVersion])
         [self setTeacherVersionFunc];
-    }
+    else
+        [self setParentVersionFunc];
+}
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -188,6 +190,40 @@
         else
             [btn setHidden:true];
     }
+}
+
+-(void) setParentVersionFunc
+{
+    for(int i=0; i<self.func.count; i++)
+    {
+        UIImageView* iv = self.func[i];
+        
+        if(iv.tag == 1)
+            [iv setImage:[UIImage imageNamed:@"home_pickup.png"]];
+        else if(iv.tag ==2)
+            [iv setImage:[UIImage imageNamed:@"home_check.png"]];
+        else if(iv.tag == 4)
+            [iv setImage:[UIImage imageNamed:@"home_goin.png"]];
+        if(iv.tag >= 5)
+            [iv setHidden:false];
+    }
+    
+    for(int i=0; i<self.funcbtns.count; i++)
+    {
+        UIButton* btn = self.funcbtns[i];
+        if([btn.titleLabel.text  isEqual: @"健康"])
+            [btn setTitle:@"接送授权" forState:UIControlStateNormal];
+        else if([btn.titleLabel.text  isEqual: @"点名"])
+            [btn setTitle:@"晨检" forState:UIControlStateNormal];
+        else if([btn.titleLabel.text  isEqual: @"信箱"]){
+            
+        }
+        else if([btn.titleLabel.text  isEqual: @"请假处理"])
+            [btn setTitle:@"进园" forState:UIControlStateNormal];
+        else
+            [btn setHidden:true];
+    }
+
 }
 
 @end

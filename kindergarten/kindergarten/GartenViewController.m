@@ -39,6 +39,8 @@
     
     if([KGUtil isTeacherVersion])
         [self setTeacherVersionFunc];
+    else
+        [self setParentVersionFunc];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -117,6 +119,27 @@
             [btn setHidden:false];
     }
 }
+
+-(void) setParentVersionFunc{
+    for(int i=0; i<self.func.count; i++)
+    {
+        UIImageView* iv = self.func[i];
+        
+        if(iv.tag == 5)
+            [iv setHidden:true];
+    }
+    
+    for(int i=0; i<self.funcbtns.count; i++)
+    {
+        UIButton* btn = self.funcbtns[i];
+        
+        if([btn.titleLabel.text  isEqual: @"班级统计"])
+            [btn setHidden:true];
+    }
+}
+
+
+
 /*
 #pragma mark - Navigation
 
