@@ -146,6 +146,8 @@
 		9967DFB01B770A1400C88FE8 /* ELCAssetTablePicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9967DFA41B770A1400C88FE8 /* ELCAssetTablePicker.xib */; };
 		9967DFB11B770A1400C88FE8 /* Overlay.png in Resources */ = {isa = PBXBuildFile; fileRef = 9967DFA51B770A1400C88FE8 /* Overlay.png */; };
 		9967DFB21B770A1400C88FE8 /* Overlay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9967DFA61B770A1400C88FE8 /* Overlay@2x.png */; };
+		9967DFB51B774B1500C88FE8 /* ImageEditCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9967DFB41B774B1500C88FE8 /* ImageEditCollectionViewCell.m */; };
+		9967DFB71B774CF800C88FE8 /* cell_delete.png in Resources */ = {isa = PBXBuildFile; fileRef = 9967DFB61B774CF800C88FE8 /* cell_delete.png */; };
 		99688A341B6261D300AA7A41 /* as_password_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 99688A321B6261D300AA7A41 /* as_password_icon.png */; };
 		99688A351B6261D300AA7A41 /* as_password_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 99688A331B6261D300AA7A41 /* as_password_icon@2x.png */; };
 		99688A391B62854A00AA7A41 /* VPImageCropperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99688A381B62854A00AA7A41 /* VPImageCropperViewController.m */; };
@@ -466,6 +468,9 @@
 		9967DFA41B770A1400C88FE8 /* ELCAssetTablePicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ELCAssetTablePicker.xib; sourceTree = "<group>"; };
 		9967DFA51B770A1400C88FE8 /* Overlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Overlay.png; sourceTree = "<group>"; };
 		9967DFA61B770A1400C88FE8 /* Overlay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Overlay@2x.png"; sourceTree = "<group>"; };
+		9967DFB31B774B1500C88FE8 /* ImageEditCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageEditCollectionViewCell.h; sourceTree = "<group>"; };
+		9967DFB41B774B1500C88FE8 /* ImageEditCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageEditCollectionViewCell.m; sourceTree = "<group>"; };
+		9967DFB61B774CF800C88FE8 /* cell_delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cell_delete.png; path = Resource/cell_delete.png; sourceTree = "<group>"; };
 		99688A321B6261D300AA7A41 /* as_password_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = as_password_icon.png; sourceTree = "<group>"; };
 		99688A331B6261D300AA7A41 /* as_password_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "as_password_icon@2x.png"; sourceTree = "<group>"; };
 		99688A371B62854A00AA7A41 /* VPImageCropperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPImageCropperViewController.h; sourceTree = "<group>"; };
@@ -947,6 +952,8 @@
 				125090F61B68F2530046F40E /* GrowupEditViewController.m */,
 				12EAE0DC1B5B8FE90084680C /* GrowDoc.h */,
 				12EAE0DD1B5B8FE90084680C /* GrowDoc.m */,
+				9967DFB31B774B1500C88FE8 /* ImageEditCollectionViewCell.h */,
+				9967DFB41B774B1500C88FE8 /* ImageEditCollectionViewCell.m */,
 			);
 			name = "Growup Storyboard";
 			sourceTree = "<group>";
@@ -1373,6 +1380,7 @@
 				99B3DA9F1B6911E1007BBAE9 /* gallery_more_icon.png */,
 				1266D5C01B495B8A00E7253F /* home_top_bg.png */,
 				1266D5C11B495B8A00E7253F /* repeat_img.png */,
+				9967DFB61B774CF800C88FE8 /* cell_delete.png */,
 				99ABD5961B47FC9B00B8DB8B /* help_1.xib */,
 				99ABD59E1B48030400B8DB8B /* help_2.xib */,
 				99ABD59F1B48030400B8DB8B /* help_3.xib */,
@@ -1641,6 +1649,7 @@
 				12DEAD011B4D693300C437BE /* Baby.storyboard in Resources */,
 				9997BA0D1B4D580E00B908B6 /* user_name_icon.png in Resources */,
 				12DEAC871B4D3E8300C437BE /* Class.storyboard in Resources */,
+				9967DFB71B774CF800C88FE8 /* cell_delete.png in Resources */,
 				9967DFB21B770A1400C88FE8 /* Overlay@2x.png in Resources */,
 				122566711B57DE190007733E /* class_birth.png in Resources */,
 				99ABD5931B47FC3500B8DB8B /* help_3.png in Resources */,
@@ -1765,6 +1774,7 @@
 				99C642A51B6CB378008EF929 /* mask.c in Sources */,
 				12EAE1521B5D3A270084680C /* MJRefreshBackGifFooter.m in Sources */,
 				9990FB461B67B182006A80F7 /* KGActivityAlbumInfo.m in Sources */,
+				9967DFB51B774B1500C88FE8 /* ImageEditCollectionViewCell.m in Sources */,
 				99F17F5B1B4ECCCD00866F8F /* KGUtil.m in Sources */,
 				9911C2221B5A6BA50080FFA9 /* NSData+ImageContentType.m in Sources */,
 				9911C2D71B5E825C0080FFA9 /* PBItemView.m in Sources */,

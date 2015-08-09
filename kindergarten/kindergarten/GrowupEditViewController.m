@@ -10,12 +10,14 @@
 #import "KGUtil.h"
 #import "AlbumCollectionViewController.h"
 #import "KGImageTableViewController.h"
-
-@interface GrowupEditViewController ()
+#import "ImageEditCollectionViewCell.h"
+@interface GrowupEditViewController ()<UIGestureRecognizerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 
 @property (weak, nonatomic) IBOutlet UIImageView *imgView;
+
+@property (weak, nonatomic) IBOutlet UICollectionView *imagesCollectionView;
 @end
 
 @implementation GrowupEditViewController
@@ -29,6 +31,9 @@
     
     if(self.textView != nil)
         self.textView.delegate = self;
+    
+    self.imagesCollectionView.delegate = self;
+    self.imagesCollectionView.dataSource = self;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -127,4 +132,72 @@
 
     return YES;
 }
+
+#pragma mark - UICollectionViewDatasource
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    return 1;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    if (self.postType == ADD_ALBUM_PHOTO) {
+        //活动相册支持多图, 仿照微信, 最后一个cell是类似于微信的增加按钮
+        return self.images.count + 1;
+    } else {
+        return self.images.count;
+    }
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    ImageEditCollectionViewCell *cell = (ImageEditCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"ImageEditCell" forIndexPath:indexPath];
+    cell.deleteItemView.hidden = YES;
+    if (indexPath.row == self.images.count) {
+        cell.imageItemView.image = [UIImage imageNamed:@"camera.png"];
+        cell.isAddButton = YES;
+    } else {
+        cell.isAddButton = NO;
+        cell.imageItemView.image = [self.images objectAtIndex:indexPath.row];
+    }
+    if (self.postType == ADD_ALBUM_PHOTO) {
+        UILongPressGestureRecognizer *longPressGR = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressCellAction:)];
+        [cell addGestureRecognizer:longPressGR];
+        longPressGR.minimumPressDuration = 0.7;
+        longPressGR.delegate = self;
+        longPressGR.view.tag = indexPath.row;
+    }
+    return cell;
+}
+
+#pragma mark - UICollectionViewDelegate
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+}
+
+#pragma mark UICollectionViewDelegateFlowLayout
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    CGFloat screenWidth = [[UIScreen mainScreen] bounds].size.width;
+    NSInteger colsNum = 4; //每行四个
+    CGFloat unitMargin = 5;
+    CGFloat unitWidth = (int)((screenWidth - (colsNum + 1) * unitMargin) / colsNum) ;
+    return CGSizeMake(unitWidth, unitWidth);
+}
+
+#pragma mark - Actions
+- (void)addButtonAction:(id)sender {
+
+}
+
+- (void)longPressCellAction:(id)sender {
+    NSArray *visibleCells = self.imagesCollectionView.visibleCells;
+    for (int i = 0; i < visibleCells.count; i++) {
+        ImageEditCollectionViewCell *curCell = (ImageEditCollectionViewCell *)[visibleCells objectAtIndex:i];
+        if (curCell == nil) {
+            continue;
+        }
+        if (!curCell.isAddButton) {
+            curCell.deleteItemView.hidden = NO;
+        }
+    }
+    [self.imagesCollectionView reloadData];
+}
+
 @end

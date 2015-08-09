@@ -23,7 +23,7 @@ typedef enum {
 
 @end
 
-@interface GrowupEditViewController : UIViewController <UITextViewDelegate>
+@interface GrowupEditViewController : UIViewController <UITextViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) UIImage *image;
 
@@ -32,4 +32,7 @@ typedef enum {
 @property (nonatomic) KG_POST_TYPE postType;
 
 @property (nonatomic) NSInteger albumDirId; //用于传递活动相册目录id
+
+@property (nonatomic, strong) NSMutableArray *images;
+
 @end

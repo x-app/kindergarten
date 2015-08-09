@@ -614,11 +614,11 @@ static NSString * const reuseIdentifier = @"AlbumCell";
     if (images == nil || ![images isKindOfClass:[NSArray class]]) {
         return;
     }
-    UIImage *image = [images objectAtIndex:0];
+    //UIImage *image = [images objectAtIndex:0];
     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Growup" bundle:nil];
     GrowupEditViewController *vc = (GrowupEditViewController *)[storyBoard instantiateViewControllerWithIdentifier:@"GrowDocEdit"];
     
-    vc.image = image;
+    vc.images = images;
     vc.delegate = self;
     vc.postType = ADD_ALBUM_PHOTO;
     vc.albumDirId = self.dirIdRecord;
