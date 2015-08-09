@@ -335,7 +335,6 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.9450981021" green="0.97647064920000004" blue="0.98431378599999997" alpha="1" colorSpace="deviceRGB"/>
                         <constraints>
                             <constraint firstItem="08R-93-MB6" firstAttribute="centerY" secondItem="GiF-a3-w93" secondAttribute="centerY" constant="-10" id="0Rv-3B-fs0">
                                 <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>

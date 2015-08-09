@@ -183,161 +183,6 @@ static NSArray *month_cn;
     [hud hide:YES afterDelay:1];
 }
 
-+ (void)postRequest:(NSString *)url
-         parameters:(id)parameters
-            success:(void (^)(AFHTTPRequestOperation *, id))success
-            failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
-             inView:(UIView *)view
-           showHud:(BOOL)showHud
-          showError:(BOOL)showError{
-    NSLog(@"Post request to [%@] using [%@]", url, parameters);
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    manager.requestSerializer.timeoutInterval = 10.0f;
-    manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
-    if (view == nil) {
-        showHud = NO;
-    }
-    MBProgressHUD *hud = nil;
-    if(showHud)
-    {
-        hud = [[MBProgressHUD alloc] initWithView:view];
-        [view addSubview:hud];
-        hud.labelText = @"加载中";
-        hud.removeFromSuperViewOnHide = YES;
-        [hud show:YES];
-    }
-    
-    [manager POST:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        if(showHud)
-            [hud hide:YES];
-        
-        if (success != nil) {
-            success(operation, responseObject);
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        if(showHud)
-            [hud hide:YES];
-        
-        if(showError)
-        {
-            MBProgressHUD *messageHUD = [MBProgressHUD showHUDAddedTo:view animated:YES];
-            messageHUD.mode = MBProgressHUDModeText;
-            NSString *content = @"";
-            if (error.code == -1001) {
-                content = @"请求已超时, 请检查网络设置, 稍后重试";
-            } else {
-                content = @"请求失败, 请稍后重试";
-            }
-            messageHUD.labelText = content;
-            messageHUD.margin = 10.f;
-            messageHUD.removeFromSuperViewOnHide = YES;
-            [messageHUD hide:YES afterDelay:2];
-        }
-        
-        if (failure != nil) {
-            failure(operation, error);
-        }
-    }];
-}
-
-// 发送KG的数据请求
-+ (void)postKGRequest:(NSString *)curl
-         body:(NSDictionary *)body
-            success:(void (^)(AFHTTPRequestOperation *, id))success
-            failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
-             inView:(UIView *)view
-            showHud:(BOOL)showHud{
-    NSString *url = [[KGUtil getServerAppURL] stringByAppendingString:curl];
-
-    NSDictionary *bodyhasdate = [KGUtil getRequestBody:body];
-    NSDictionary *params = @{@"uid": REQUEST_UID, @"sign": [KGUtil getRequestSign:bodyhasdate], @"body":bodyhasdate};
-    
-    [KGUtil postRequest:url parameters:params success:success failure:failure inView:view showHud:showHud showError:true];
-}
-
-+ (void)uploadImage:(NSString *)curl
-              image:(UIImage *)image
-        description:(NSString *)description
-         customAttr:(NSString *)customAttr
-        customValue:(NSData *)customValue
-            success:(void (^)(AFHTTPRequestOperation *, id))success
-            failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
-             inView:(UIView *)view
-            showHud:(BOOL)showHud
-{
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    
-    manager.requestSerializer.timeoutInterval = 30.0f;
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
-    
-    //KGChild *curchild = [KGUtil getCurChild];
-    //NSString *childid = [NSString stringWithFormat:@"%@", curchild.cid];
-    //NSData *curchilddata = [childid dataUsingEncoding:NSUTF8StringEncoding];
-
-    NSString *desc_encoded = [description stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSData* descdata = [desc_encoded dataUsingEncoding:NSUTF8StringEncoding];
-    
-    NSString *url = [[KGUtil getServerAppURL] stringByAppendingString:curl];
-//    NSData* data = UIImagePNGRepresentation(image);
-    NSData *data = UIImageJPEGRepresentation(image, 1.0);
-    NSLog(@"uplaod image size of fatctor 1.0 is %lu", (unsigned long)[data length]);
-    
-    float factor = 0.9;
-    while([data length] >= 1000000 && factor > 0)
-    {
-        data = UIImageJPEGRepresentation(image, factor);
-        NSLog(@"upload image size of factor %f is %lu", factor, (unsigned long)[data length]);
-        factor -= 0.1;
-    }
-    
-    MBProgressHUD *hud = nil;
-    if(showHud)
-    {
-        hud = [[MBProgressHUD alloc] initWithView:view];
-        [view addSubview:hud];
-        hud.labelText = @"正在上传...";
-        hud.removeFromSuperViewOnHide = YES;
-        [hud show:YES];
-    }
-    
-    [manager POST:url parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-        //[formData appendPartWithFormData:curchilddata name:@"childId"];
-        if (customAttr && customValue) {
-            [formData appendPartWithFormData:customValue name:customAttr];
-        }
-        [formData appendPartWithFormData:descdata name:@"description"];
-        [formData appendPartWithFileData:data name:@"picUrl" fileName:@"upload.jpg" mimeType:@"image/jpeg"];
-    } success:^(AFHTTPRequestOperation *operation,id responseObject) {
-        if(showHud)
-            [hud hide:YES];
-        
-        if (success != nil) {
-            success(operation, responseObject);
-        }
-    } failure:^(AFHTTPRequestOperation *operation,NSError *error) {
-        if(showHud)
-            [hud hide:YES];
-        
-        MBProgressHUD *messageHUD = [MBProgressHUD showHUDAddedTo:view animated:YES];
-        messageHUD.mode = MBProgressHUDModeText;
-        NSString *content = @"";
-        if (error.code == -1001) {
-            content = @"请求已超时, 请检查网络设置, 稍后重试";
-        } else {
-            content = @"请求失败, 请稍后重试";
-        }
-        messageHUD.labelText = content;
-        messageHUD.margin = 10.f;
-        messageHUD.removeFromSuperViewOnHide = YES;
-        [messageHUD hide:YES afterDelay:2];
-        if (failure != nil) {
-            failure(operation, error);
-        }
-    }];
-}
-
 + (KGVarible *)getVarible{
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     return delegate.varible;
@@ -714,6 +559,188 @@ static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq
     return [[NSString alloc] initWithBytesNoCopy:characters length:length encoding:NSASCIIStringEncoding freeWhenDone:YES];
 }
 
+#pragma mark - request
+
++(void)sendGetRequest:(NSString *)url
+              success:(void (^)(AFHTTPRequestOperation *, id))success
+              failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
+{
+    NSLog(@"send get request to [%@]", url);
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    //    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.requestSerializer.timeoutInterval = 10.0f;
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+    
+    [manager GET:url parameters:nil
+         success:^(AFHTTPRequestOperation *operation, id responseObject){
+             if (success != nil) {
+                 success(operation, responseObject);
+             }
+         }
+         failure:^(AFHTTPRequestOperation *operation, NSError *error){
+             if (failure != nil) {
+                 failure(operation, error);
+             }
+         }];
+    
+}
+
+
++ (void)postRequest:(NSString *)url
+         parameters:(id)parameters
+            success:(void (^)(AFHTTPRequestOperation *, id))success
+            failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
+             inView:(UIView *)view
+            showHud:(BOOL)showHud
+          showError:(BOOL)showError{
+    NSLog(@"Post request to [%@] using [%@]", url, parameters);
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.requestSerializer.timeoutInterval = 10.0f;
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
+    if (view == nil) {
+        showHud = NO;
+    }
+    MBProgressHUD *hud = nil;
+    if(showHud)
+    {
+        hud = [[MBProgressHUD alloc] initWithView:view];
+        [view addSubview:hud];
+        hud.labelText = @"加载中";
+        hud.removeFromSuperViewOnHide = YES;
+        [hud show:YES];
+    }
+    
+    [manager POST:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if(showHud)
+            [hud hide:YES];
+        
+        if (success != nil) {
+            success(operation, responseObject);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if(showHud)
+            [hud hide:YES];
+        
+        if(showError)
+        {
+            MBProgressHUD *messageHUD = [MBProgressHUD showHUDAddedTo:view animated:YES];
+            messageHUD.mode = MBProgressHUDModeText;
+            NSString *content = @"";
+            if (error.code == -1001) {
+                content = @"请求已超时, 请检查网络设置, 稍后重试";
+            } else {
+                content = @"请求失败, 请稍后重试";
+            }
+            messageHUD.labelText = content;
+            messageHUD.margin = 10.f;
+            messageHUD.removeFromSuperViewOnHide = YES;
+            [messageHUD hide:YES afterDelay:2];
+        }
+        
+        if (failure != nil) {
+            failure(operation, error);
+        }
+    }];
+}
+
+// 发送KG的数据请求
++ (void)postKGRequest:(NSString *)curl
+                 body:(NSDictionary *)body
+              success:(void (^)(AFHTTPRequestOperation *, id))success
+              failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
+               inView:(UIView *)view
+              showHud:(BOOL)showHud{
+    NSString *url = [[KGUtil getServerAppURL] stringByAppendingString:curl];
+    
+    NSDictionary *bodyhasdate = [KGUtil getRequestBody:body];
+    NSDictionary *params = @{@"uid": REQUEST_UID, @"sign": [KGUtil getRequestSign:bodyhasdate], @"body":bodyhasdate};
+    
+    [KGUtil postRequest:url parameters:params success:success failure:failure inView:view showHud:showHud showError:true];
+}
+
++ (void)uploadImage:(NSString *)curl
+              image:(UIImage *)image
+        description:(NSString *)description
+         customAttr:(NSString *)customAttr
+        customValue:(NSData *)customValue
+            success:(void (^)(AFHTTPRequestOperation *, id))success
+            failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
+             inView:(UIView *)view
+            showHud:(BOOL)showHud
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    manager.requestSerializer.timeoutInterval = 30.0f;
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
+    
+    //KGChild *curchild = [KGUtil getCurChild];
+    //NSString *childid = [NSString stringWithFormat:@"%@", curchild.cid];
+    //NSData *curchilddata = [childid dataUsingEncoding:NSUTF8StringEncoding];
+    
+    NSString *desc_encoded = [description stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSData* descdata = [desc_encoded dataUsingEncoding:NSUTF8StringEncoding];
+    
+    NSString *url = [[KGUtil getServerAppURL] stringByAppendingString:curl];
+    //    NSData* data = UIImagePNGRepresentation(image);
+    NSData *data = UIImageJPEGRepresentation(image, 1.0);
+    NSLog(@"uplaod image size of fatctor 1.0 is %lu", (unsigned long)[data length]);
+    
+    float factor = 0.9;
+    while([data length] >= 1000000 && factor > 0)
+    {
+        data = UIImageJPEGRepresentation(image, factor);
+        NSLog(@"upload image size of factor %f is %lu", factor, (unsigned long)[data length]);
+        factor -= 0.1;
+    }
+    
+    MBProgressHUD *hud = nil;
+    if(showHud)
+    {
+        hud = [[MBProgressHUD alloc] initWithView:view];
+        [view addSubview:hud];
+        hud.labelText = @"正在上传...";
+        hud.removeFromSuperViewOnHide = YES;
+        [hud show:YES];
+    }
+    
+    [manager POST:url parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        //[formData appendPartWithFormData:curchilddata name:@"childId"];
+        if (customAttr && customValue) {
+            [formData appendPartWithFormData:customValue name:customAttr];
+        }
+        [formData appendPartWithFormData:descdata name:@"description"];
+        [formData appendPartWithFileData:data name:@"picUrl" fileName:@"upload.jpg" mimeType:@"image/jpeg"];
+    } success:^(AFHTTPRequestOperation *operation,id responseObject) {
+        if(showHud)
+            [hud hide:YES];
+        
+        if (success != nil) {
+            success(operation, responseObject);
+        }
+    } failure:^(AFHTTPRequestOperation *operation,NSError *error) {
+        if(showHud)
+            [hud hide:YES];
+        
+        MBProgressHUD *messageHUD = [MBProgressHUD showHUDAddedTo:view animated:YES];
+        messageHUD.mode = MBProgressHUDModeText;
+        NSString *content = @"";
+        if (error.code == -1001) {
+            content = @"请求已超时, 请检查网络设置, 稍后重试";
+        } else {
+            content = @"请求失败, 请稍后重试";
+        }
+        messageHUD.labelText = content;
+        messageHUD.margin = 10.f;
+        messageHUD.removeFromSuperViewOnHide = YES;
+        [messageHUD hide:YES afterDelay:2];
+        if (failure != nil) {
+            failure(operation, error);
+        }
+    }];
+}
 
 #pragma mark - push webview
 + (void)pushWebView:(NSString *)webViewType inViewController:(UIViewController*)vc
@@ -821,7 +848,7 @@ static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq
     //
     
     NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:url]];
-    [KGUtil.getWebVC .webView loadRequest:request];
+    [KGUtil.getWebVC.webView loadRequest:request];
 }
 
 + (void)pushWebViewWithUrl:(NSString *)url inViewController:(UIViewController*)vc

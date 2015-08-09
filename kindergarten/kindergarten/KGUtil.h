@@ -44,6 +44,10 @@
 
 + (UIViewController *)getTopMostViewController;
 
++(void)sendGetRequest:(NSString *)url
+              success:(void (^)(AFHTTPRequestOperation *, id))success
+              failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure;
+
 + (void)postRequest: (NSString *)url
          parameters:(id)parameters
             success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success

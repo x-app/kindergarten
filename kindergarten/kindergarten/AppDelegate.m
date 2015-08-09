@@ -22,6 +22,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    //设置全局导航条风格和颜色
+//    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:246/255.0 green:246/255.0 blue:246/255.0 alpha:1]];
+//    [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
+    
     // IOS8 新系统需要使用新的代码咯
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
     {

@@ -30,12 +30,6 @@
 		12AC15F41B490BD1007C247B /* GartenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AC15F31B490BD1007C247B /* GartenViewController.m */; };
 		12AC15F71B490D80007C247B /* MeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AC15F61B490D80007C247B /* MeViewController.m */; };
 		12AC16001B4917D3007C247B /* my_icon_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 12AC15FC1B4917D3007C247B /* my_icon_normal.png */; };
-		12AC16101B4918C3007C247B /* RBStoryboardLink.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AC16041B4918C3007C247B /* RBStoryboardLink.m */; };
-		12AC16111B4918C3007C247B /* RBStoryboardModalSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AC16071B4918C3007C247B /* RBStoryboardModalSegue.m */; };
-		12AC16121B4918C3007C247B /* RBStoryboardPopoverSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AC16091B4918C3007C247B /* RBStoryboardPopoverSegue.m */; };
-		12AC16131B4918C3007C247B /* RBStoryboardPushSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AC160B1B4918C3007C247B /* RBStoryboardPushSegue.m */; };
-		12AC16141B4918C3007C247B /* RBStoryboardSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AC160D1B4918C3007C247B /* RBStoryboardSegue.m */; };
-		12AC16151B4918C3007C247B /* UIViewController+RBStoryboardLink.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AC160F1B4918C3007C247B /* UIViewController+RBStoryboardLink.m */; };
 		12C794951B44232300918497 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C794941B44232300918497 /* main.m */; };
 		12C794981B44232300918497 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C794971B44232300918497 /* AppDelegate.m */; };
 		12C7949B1B44232300918497 /* BabyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C7949A1B44232300918497 /* BabyViewController.m */; };
@@ -104,6 +98,13 @@
 		12F9F8AA1B74DA6000CFDB1B /* my_icon_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 12F9F8A71B74DA6000CFDB1B /* my_icon_selected.png */; };
 		12F9F8AB1B74DA6000CFDB1B /* my_icon_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 12F9F8A81B74DA6000CFDB1B /* my_icon_selected@2x.png */; };
 		12F9F8AC1B74DA6000CFDB1B /* my_icon_selected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 12F9F8A91B74DA6000CFDB1B /* my_icon_selected@3x.png */; };
+		12F9F8B31B77543000CFDB1B /* JSBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 12F9F8B21B77543000CFDB1B /* JSBadgeView.m */; };
+		12F9F8C11B77548500CFDB1B /* RBStoryboardLink.m in Sources */ = {isa = PBXBuildFile; fileRef = 12F9F8B51B77548500CFDB1B /* RBStoryboardLink.m */; };
+		12F9F8C21B77548500CFDB1B /* RBStoryboardModalSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 12F9F8B81B77548500CFDB1B /* RBStoryboardModalSegue.m */; };
+		12F9F8C31B77548500CFDB1B /* RBStoryboardPopoverSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 12F9F8BA1B77548500CFDB1B /* RBStoryboardPopoverSegue.m */; };
+		12F9F8C41B77548600CFDB1B /* RBStoryboardPushSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 12F9F8BC1B77548500CFDB1B /* RBStoryboardPushSegue.m */; };
+		12F9F8C51B77548600CFDB1B /* RBStoryboardSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 12F9F8BE1B77548500CFDB1B /* RBStoryboardSegue.m */; };
+		12F9F8C61B77548600CFDB1B /* UIViewController+RBStoryboardLink.m in Sources */ = {isa = PBXBuildFile; fileRef = 12F9F8C01B77548500CFDB1B /* UIViewController+RBStoryboardLink.m */; };
 		9911C1F91B5A06C80080FFA9 /* default_img.png in Resources */ = {isa = PBXBuildFile; fileRef = 9911C1F81B5A06C80080FFA9 /* default_img.png */; };
 		9911C1FB1B5A07CB0080FFA9 /* image_placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 9911C1FA1B5A07CB0080FFA9 /* image_placeholder.png */; };
 		9911C2211B5A6BA50080FFA9 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 9911C2011B5A6BA50080FFA9 /* MKAnnotationView+WebCache.m */; };
@@ -265,19 +266,6 @@
 		12AC15F51B490D80007C247B /* MeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeViewController.h; sourceTree = "<group>"; };
 		12AC15F61B490D80007C247B /* MeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeViewController.m; sourceTree = "<group>"; };
 		12AC15FC1B4917D3007C247B /* my_icon_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = my_icon_normal.png; path = Resource/my_icon_normal.png; sourceTree = "<group>"; };
-		12AC16031B4918C3007C247B /* RBStoryboardLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBStoryboardLink.h; sourceTree = "<group>"; };
-		12AC16041B4918C3007C247B /* RBStoryboardLink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBStoryboardLink.m; sourceTree = "<group>"; };
-		12AC16051B4918C3007C247B /* RBStoryboardLinkSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBStoryboardLinkSource.h; sourceTree = "<group>"; };
-		12AC16061B4918C3007C247B /* RBStoryboardModalSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBStoryboardModalSegue.h; sourceTree = "<group>"; };
-		12AC16071B4918C3007C247B /* RBStoryboardModalSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBStoryboardModalSegue.m; sourceTree = "<group>"; };
-		12AC16081B4918C3007C247B /* RBStoryboardPopoverSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBStoryboardPopoverSegue.h; sourceTree = "<group>"; };
-		12AC16091B4918C3007C247B /* RBStoryboardPopoverSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBStoryboardPopoverSegue.m; sourceTree = "<group>"; };
-		12AC160A1B4918C3007C247B /* RBStoryboardPushSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBStoryboardPushSegue.h; sourceTree = "<group>"; };
-		12AC160B1B4918C3007C247B /* RBStoryboardPushSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBStoryboardPushSegue.m; sourceTree = "<group>"; };
-		12AC160C1B4918C3007C247B /* RBStoryboardSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RBStoryboardSegue.h; sourceTree = "<group>"; };
-		12AC160D1B4918C3007C247B /* RBStoryboardSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RBStoryboardSegue.m; sourceTree = "<group>"; };
-		12AC160E1B4918C3007C247B /* UIViewController+RBStoryboardLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+RBStoryboardLink.h"; sourceTree = "<group>"; };
-		12AC160F1B4918C3007C247B /* UIViewController+RBStoryboardLink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+RBStoryboardLink.m"; sourceTree = "<group>"; };
 		12C7948F1B44232300918497 /* kindergarten.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = kindergarten.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		12C794931B44232300918497 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		12C794941B44232300918497 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -376,6 +364,21 @@
 		12F9F8A71B74DA6000CFDB1B /* my_icon_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = my_icon_selected.png; path = Resource/my_icon_selected.png; sourceTree = "<group>"; };
 		12F9F8A81B74DA6000CFDB1B /* my_icon_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "my_icon_selected@2x.png"; path = "Resource/my_icon_selected@2x.png"; sourceTree = "<group>"; };
 		12F9F8A91B74DA6000CFDB1B /* my_icon_selected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "my_icon_selected@3x.png"; path = "Resource/my_icon_selected@3x.png"; sourceTree = "<group>"; };
+		12F9F8B11B77543000CFDB1B /* JSBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSBadgeView.h; path = Library/JSBadgeView/JSBadgeView.h; sourceTree = "<group>"; };
+		12F9F8B21B77543000CFDB1B /* JSBadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSBadgeView.m; path = Library/JSBadgeView/JSBadgeView.m; sourceTree = "<group>"; };
+		12F9F8B41B77548500CFDB1B /* RBStoryboardLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RBStoryboardLink.h; path = kindergarten/Library/RBStoryboardLink/RBStoryboardLink.h; sourceTree = SOURCE_ROOT; };
+		12F9F8B51B77548500CFDB1B /* RBStoryboardLink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RBStoryboardLink.m; path = kindergarten/Library/RBStoryboardLink/RBStoryboardLink.m; sourceTree = SOURCE_ROOT; };
+		12F9F8B61B77548500CFDB1B /* RBStoryboardLinkSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RBStoryboardLinkSource.h; path = kindergarten/Library/RBStoryboardLink/RBStoryboardLinkSource.h; sourceTree = SOURCE_ROOT; };
+		12F9F8B71B77548500CFDB1B /* RBStoryboardModalSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RBStoryboardModalSegue.h; path = kindergarten/Library/RBStoryboardLink/RBStoryboardModalSegue.h; sourceTree = SOURCE_ROOT; };
+		12F9F8B81B77548500CFDB1B /* RBStoryboardModalSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RBStoryboardModalSegue.m; path = kindergarten/Library/RBStoryboardLink/RBStoryboardModalSegue.m; sourceTree = SOURCE_ROOT; };
+		12F9F8B91B77548500CFDB1B /* RBStoryboardPopoverSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RBStoryboardPopoverSegue.h; path = kindergarten/Library/RBStoryboardLink/RBStoryboardPopoverSegue.h; sourceTree = SOURCE_ROOT; };
+		12F9F8BA1B77548500CFDB1B /* RBStoryboardPopoverSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RBStoryboardPopoverSegue.m; path = kindergarten/Library/RBStoryboardLink/RBStoryboardPopoverSegue.m; sourceTree = SOURCE_ROOT; };
+		12F9F8BB1B77548500CFDB1B /* RBStoryboardPushSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RBStoryboardPushSegue.h; path = kindergarten/Library/RBStoryboardLink/RBStoryboardPushSegue.h; sourceTree = SOURCE_ROOT; };
+		12F9F8BC1B77548500CFDB1B /* RBStoryboardPushSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RBStoryboardPushSegue.m; path = kindergarten/Library/RBStoryboardLink/RBStoryboardPushSegue.m; sourceTree = SOURCE_ROOT; };
+		12F9F8BD1B77548500CFDB1B /* RBStoryboardSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RBStoryboardSegue.h; path = kindergarten/Library/RBStoryboardLink/RBStoryboardSegue.h; sourceTree = SOURCE_ROOT; };
+		12F9F8BE1B77548500CFDB1B /* RBStoryboardSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RBStoryboardSegue.m; path = kindergarten/Library/RBStoryboardLink/RBStoryboardSegue.m; sourceTree = SOURCE_ROOT; };
+		12F9F8BF1B77548500CFDB1B /* UIViewController+RBStoryboardLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+RBStoryboardLink.h"; path = "kindergarten/Library/RBStoryboardLink/UIViewController+RBStoryboardLink.h"; sourceTree = SOURCE_ROOT; };
+		12F9F8C01B77548500CFDB1B /* UIViewController+RBStoryboardLink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+RBStoryboardLink.m"; path = "kindergarten/Library/RBStoryboardLink/UIViewController+RBStoryboardLink.m"; sourceTree = SOURCE_ROOT; };
 		9911C1F81B5A06C80080FFA9 /* default_img.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = default_img.png; path = Resource/default_img.png; sourceTree = "<group>"; };
 		9911C1FA1B5A07CB0080FFA9 /* image_placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = image_placeholder.png; path = Resource/image_placeholder.png; sourceTree = "<group>"; };
 		9911C2001B5A6BA50080FFA9 /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
@@ -621,19 +624,19 @@
 		12AC16021B4918C3007C247B /* RBStoryboardLink */ = {
 			isa = PBXGroup;
 			children = (
-				12AC16031B4918C3007C247B /* RBStoryboardLink.h */,
-				12AC16041B4918C3007C247B /* RBStoryboardLink.m */,
-				12AC16051B4918C3007C247B /* RBStoryboardLinkSource.h */,
-				12AC16061B4918C3007C247B /* RBStoryboardModalSegue.h */,
-				12AC16071B4918C3007C247B /* RBStoryboardModalSegue.m */,
-				12AC16081B4918C3007C247B /* RBStoryboardPopoverSegue.h */,
-				12AC16091B4918C3007C247B /* RBStoryboardPopoverSegue.m */,
-				12AC160A1B4918C3007C247B /* RBStoryboardPushSegue.h */,
-				12AC160B1B4918C3007C247B /* RBStoryboardPushSegue.m */,
-				12AC160C1B4918C3007C247B /* RBStoryboardSegue.h */,
-				12AC160D1B4918C3007C247B /* RBStoryboardSegue.m */,
-				12AC160E1B4918C3007C247B /* UIViewController+RBStoryboardLink.h */,
-				12AC160F1B4918C3007C247B /* UIViewController+RBStoryboardLink.m */,
+				12F9F8B41B77548500CFDB1B /* RBStoryboardLink.h */,
+				12F9F8B51B77548500CFDB1B /* RBStoryboardLink.m */,
+				12F9F8B61B77548500CFDB1B /* RBStoryboardLinkSource.h */,
+				12F9F8B71B77548500CFDB1B /* RBStoryboardModalSegue.h */,
+				12F9F8B81B77548500CFDB1B /* RBStoryboardModalSegue.m */,
+				12F9F8B91B77548500CFDB1B /* RBStoryboardPopoverSegue.h */,
+				12F9F8BA1B77548500CFDB1B /* RBStoryboardPopoverSegue.m */,
+				12F9F8BB1B77548500CFDB1B /* RBStoryboardPushSegue.h */,
+				12F9F8BC1B77548500CFDB1B /* RBStoryboardPushSegue.m */,
+				12F9F8BD1B77548500CFDB1B /* RBStoryboardSegue.h */,
+				12F9F8BE1B77548500CFDB1B /* RBStoryboardSegue.m */,
+				12F9F8BF1B77548500CFDB1B /* UIViewController+RBStoryboardLink.h */,
+				12F9F8C01B77548500CFDB1B /* UIViewController+RBStoryboardLink.m */,
 			);
 			path = RBStoryboardLink;
 			sourceTree = "<group>";
@@ -948,6 +951,15 @@
 			name = tabicons;
 			sourceTree = "<group>";
 		};
+		12F9F8AD1B7751F400CFDB1B /* JSBadgeView */ = {
+			isa = PBXGroup;
+			children = (
+				12F9F8B11B77543000CFDB1B /* JSBadgeView.h */,
+				12F9F8B21B77543000CFDB1B /* JSBadgeView.m */,
+			);
+			name = JSBadgeView;
+			sourceTree = "<group>";
+		};
 		9911C1FF1B5A6BA50080FFA9 /* SDWebImage */ = {
 			isa = PBXGroup;
 			children = (
@@ -1057,9 +1069,10 @@
 		9997B9AB1B4D580100B908B6 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				12F9F8AD1B7751F400CFDB1B /* JSBadgeView */,
 				12AC16021B4918C3007C247B /* RBStoryboardLink */,
-				99C642921B6CB378008EF929 /* libqrencode */,
 				99C642A11B6CB378008EF929 /* QRCodeGenerator */,
+				99C642921B6CB378008EF929 /* libqrencode */,
 				99688A361B62854A00AA7A41 /* VPImageCropper */,
 				9911C2E71B5F36990080FFA9 /* Category */,
 				9911C2C71B5E825B0080FFA9 /* PhotoBrowser */,
@@ -1584,10 +1597,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				99688A391B62854A00AA7A41 /* VPImageCropperViewController.m in Sources */,
-				12AC16151B4918C3007C247B /* UIViewController+RBStoryboardLink.m in Sources */,
 				125090F21B650CD80046F40E /* KGPicPicker.m in Sources */,
 				12AC15F41B490BD1007C247B /* GartenViewController.m in Sources */,
 				9911C2361B5BC4F10080FFA9 /* KGImageTableViewCell.m in Sources */,
+				12F9F8C11B77548500CFDB1B /* RBStoryboardLink.m in Sources */,
 				9997BA231B4D580E00B908B6 /* MLTableAlert.m in Sources */,
 				12EAE1591B5D3A270084680C /* MJRefreshConst.m in Sources */,
 				9911C2291B5A6BA50080FFA9 /* SDWebImagePrefetcher.m in Sources */,
@@ -1595,7 +1608,6 @@
 				12EAE14C1B5D3A270084680C /* MJRefreshComponent.m in Sources */,
 				9990FB431B67B152006A80F7 /* KGActivityAlbum.m in Sources */,
 				9990FB3A1B650EEE006A80F7 /* PBProgressView.m in Sources */,
-				12AC16121B4918C3007C247B /* RBStoryboardPopoverSegue.m in Sources */,
 				12EAE14B1B5D3A270084680C /* MJRefreshBackFooter.m in Sources */,
 				12EAE1511B5D3A270084680C /* MJRefreshAutoStateFooter.m in Sources */,
 				9997BA171B4D580E00B908B6 /* CLLockMainView.m in Sources */,
@@ -1606,18 +1618,18 @@
 				99F17F681B50C3E800866F8F /* LoginViewContoller.m in Sources */,
 				9990FB491B67BF1E006A80F7 /* AlbumCollectionViewCell.m in Sources */,
 				9911C2D61B5E825C0080FFA9 /* PBImageView.m in Sources */,
-				12AC16101B4918C3007C247B /* RBStoryboardLink.m in Sources */,
 				9997BA251B4D580E00B908B6 /* MYIntroductionPanel.m in Sources */,
 				9997BA061B4D580E00B908B6 /* AFURLResponseSerialization.m in Sources */,
 				125090F71B68F2530046F40E /* GrowupEditViewController.m in Sources */,
 				9997BA041B4D580E00B908B6 /* AFURLConnectionOperation.m in Sources */,
-				12AC16131B4918C3007C247B /* RBStoryboardPushSegue.m in Sources */,
 				12EAE14D1B5D3A270084680C /* MJRefreshFooter.m in Sources */,
 				996D322E1B55525200CB648B /* KGVarible.m in Sources */,
 				9911C2ED1B5F37A00080FFA9 /* KGUIViewController.m in Sources */,
 				12F9F8931B74D79A00CFDB1B /* MainNavigationController.m in Sources */,
+				12F9F8C31B77548500CFDB1B /* RBStoryboardPopoverSegue.m in Sources */,
 				12EAE14A1B5D3A270084680C /* MJRefreshAutoFooter.m in Sources */,
 				99D55A541B5FC92A00C508A3 /* IntroductionViewController.m in Sources */,
+				12F9F8B31B77543000CFDB1B /* JSBadgeView.m in Sources */,
 				9997BA121B4D580E00B908B6 /* CoreLockConst.m in Sources */,
 				9911C2261B5A6BA50080FFA9 /* SDWebImageDownloader.m in Sources */,
 				9990FB391B650EEE006A80F7 /* LFRoundProgressView.m in Sources */,
@@ -1636,6 +1648,7 @@
 				12EAE1561B5D3A270084680C /* MJRefreshNormalHeader.m in Sources */,
 				99C642A41B6CB378008EF929 /* bitstream.c in Sources */,
 				12EAE0D81B5B65A50084680C /* GrowupTableViewController.m in Sources */,
+				12F9F8C51B77548600CFDB1B /* RBStoryboardSegue.m in Sources */,
 				9911C22A1B5A6BA50080FFA9 /* UIButton+WebCache.m in Sources */,
 				9911C2271B5A6BA50080FFA9 /* SDWebImageDownloaderOperation.m in Sources */,
 				9997BA151B4D580E00B908B6 /* CLLockItemView.m in Sources */,
@@ -1653,6 +1666,8 @@
 				9911C2211B5A6BA50080FFA9 /* MKAnnotationView+WebCache.m in Sources */,
 				12EAE15B1B5D3A270084680C /* UIScrollView+MJRefresh.m in Sources */,
 				9990FB401B675814006A80F7 /* AlbumCollectionViewController.m in Sources */,
+				12F9F8C61B77548600CFDB1B /* UIViewController+RBStoryboardLink.m in Sources */,
+				12F9F8C41B77548600CFDB1B /* RBStoryboardPushSegue.m in Sources */,
 				9997BA0F1B4D580E00B908B6 /* CLLockVC.m in Sources */,
 				9997BA081B4D580E00B908B6 /* ASTextField.m in Sources */,
 				9997BA051B4D580E00B908B6 /* AFURLRequestSerialization.m in Sources */,
@@ -1667,7 +1682,6 @@
 				9911C2251B5A6BA50080FFA9 /* SDWebImageDecoder.m in Sources */,
 				12C7949B1B44232300918497 /* BabyViewController.m in Sources */,
 				9911C22F1B5A6BA50080FFA9 /* UIImageView+WebCache.m in Sources */,
-				12AC16111B4918C3007C247B /* RBStoryboardModalSegue.m in Sources */,
 				1212C5621B52613000C11BD2 /* WebViewController.m in Sources */,
 				99F17F621B4F51E400866F8F /* MBProgressHUD.m in Sources */,
 				9911C22D1B5A6BA50080FFA9 /* UIImage+WebP.m in Sources */,
@@ -1686,7 +1700,7 @@
 				9911C2D71B5E825C0080FFA9 /* PBItemView.m in Sources */,
 				9911C22C1B5A6BA50080FFA9 /* UIImage+MultiFormat.m in Sources */,
 				9911C22E1B5A6BA50080FFA9 /* UIImageView+HighlightedWebCache.m in Sources */,
-				12AC16141B4918C3007C247B /* RBStoryboardSegue.m in Sources */,
+				12F9F8C21B77548500CFDB1B /* RBStoryboardModalSegue.m in Sources */,
 				99C642A71B6CB378008EF929 /* qrinput.c in Sources */,
 				99F17F551B4E91B800866F8F /* KGUser.m in Sources */,
 				9997BA011B4D580E00B908B6 /* AFHTTPSessionManager.m in Sources */,
