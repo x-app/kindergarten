@@ -166,8 +166,11 @@
 }
 
 #pragma mark - KGPicPickerDelegate
-- (void)doPicPicked:(UIImage *)image
+- (void)doPicPicked:(id)image
 {
+    if (![image isKindOfClass:[UIImage class]]) {
+        return;
+    }
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSData* imageData = [NSKeyedArchiver archivedDataWithRootObject:image];
     NSString *storeKeyName = @"";

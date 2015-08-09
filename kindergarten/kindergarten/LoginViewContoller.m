@@ -229,9 +229,6 @@
 }
 
 - (void)setFuncIcons {
-    if (![KGUtil isTeacherVersion]) {
-        return;
-    }
     UIWindow *window = [[UIApplication sharedApplication] keyWindow];
     if (window == nil) {
         return;
@@ -260,7 +257,11 @@
             UIViewController *curVC = sbLink.scene;
             if (curVC != nil && [curVC isKindOfClass:[KGUIViewController class]]) {
                 KGUIViewController *kgVC = (KGUIViewController *)curVC;
-                [kgVC setTeacherVersionFunc];
+                if ([KGUtil isTeacherVersion]) {
+                    [kgVC setTeacherVersionFunc];
+                } else {
+                    [kgVC setParentVersionFunc];
+                }
             }
         }
         /*if ([navi.visibleViewController isKindOfClass:[RBStoryboardLink class]]) {

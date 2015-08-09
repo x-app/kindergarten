@@ -221,7 +221,7 @@
         else if([btn.titleLabel.text  isEqual: @"请假处理"])
             [btn setTitle:@"进园" forState:UIControlStateNormal];
         else
-            [btn setHidden:true];
+            [btn setHidden:false]; 
     }
 
 }

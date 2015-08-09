@@ -79,7 +79,7 @@ static NSString * const reuseIdentifier = @"AlbumCell";
 
 - (KGPicPicker *)picPicker {
     if(_picPicker == nil) {
-        _picPicker = [[KGPicPicker alloc] initWithUIVC:self needCrop:FALSE];
+        _picPicker = [[KGPicPicker alloc] initWithUIVC:self needCrop:FALSE multiple:YES];
         _picPicker.delegate = self;
     }
     return _picPicker;
@@ -609,12 +609,12 @@ static NSString * const reuseIdentifier = @"AlbumCell";
 }
 
 #pragma mark - KGPicPickerDelegate
-- (void)doPicPicked:(UIImage *)image
+- (void)doPicPicked:(id)images
 {
-    //    NSLog(@"get image");
-    if(image == nil)
+    if (images == nil || ![images isKindOfClass:[NSArray class]]) {
         return;
-    
+    }
+    UIImage *image = [images objectAtIndex:0];
     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Growup" bundle:nil];
     GrowupEditViewController *vc = (GrowupEditViewController *)[storyBoard instantiateViewControllerWithIdentifier:@"GrowDocEdit"];
     
