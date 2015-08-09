@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #import "VPImageCropperViewController.h"
-
+#import "ELCImagePickerHeader.h"
 #define ORIGINAL_MAX_WIDTH 640.0f
 
 @protocol KGPicPickerDelegate
@@ -18,7 +18,7 @@
 
 @end
 
-@interface KGPicPicker:NSObject <UINavigationControllerDelegate, UIImagePickerControllerDelegate, VPImageCropperDelegate>
+@interface KGPicPicker:NSObject <UINavigationControllerDelegate, UIImagePickerControllerDelegate, VPImageCropperDelegate, ELCImagePickerControllerDelegate>
 
 @property(nonatomic,assign) id <KGPicPickerDelegate> delegate;
 
