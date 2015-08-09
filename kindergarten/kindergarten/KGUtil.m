@@ -460,6 +460,29 @@ static NSArray *month_cn;
     return [[UIApplication sharedApplication] topMostViewController];
 }
 
+
++ (void)lockTopMostVC {
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    UIViewController *tmVC = [[UIApplication sharedApplication] topMostViewController];
+    if (tmVC == nil) {
+        NSLog(@"top most vc is nil");
+    }
+    if ([tmVC isKindOfClass:[CLLockVC class]]) {
+        NSLog(@"already locked");
+        return;
+    }
+    if (!delegate.user.verified && !delegate.user.registering) {
+        NSLog(@"用户尚未注册或者验证没过");
+        [CLLockVC showVerifyLockVCInVC:tmVC forgetPwdBlock:^{
+            
+        } successBlock:^(CLLockVC *lockVC, NSString *pwd) {
+            NSLog(@"验证通过");
+            delegate.user.verified = YES;
+            [lockVC dismiss:1.0f];
+        }];
+    }
+}
+
 + (BOOL)isEmptyString:(NSString *)str {
     return (str == nil) || [str isKindOfClass:[NSNull class]] || [str isEqualToString:@""];
 }
@@ -813,28 +836,6 @@ static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq
     
     NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:url]];
     [KGUtil.getWebVC .webView loadRequest:request];
-}
-
-+ (void)lockTopMostVC {
-    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    UIViewController *tmVC = [[UIApplication sharedApplication] topMostViewController];
-    if (tmVC == nil) {
-        NSLog(@"top most vc is nil");
-    }
-    if ([tmVC isKindOfClass:[CLLockVC class]]) {
-        NSLog(@"already locked");
-        return;
-    }
-    if (!delegate.user.verified && !delegate.user.registering) {
-        NSLog(@"用户尚未注册或者验证没过");
-        [CLLockVC showVerifyLockVCInVC:tmVC forgetPwdBlock:^{
-            
-        } successBlock:^(CLLockVC *lockVC, NSString *pwd) {
-            NSLog(@"验证通过");
-            delegate.user.verified = YES;
-            [lockVC dismiss:1.0f];
-        }];
-    }
 }
 
 + (void)pushViewBecomeActive {
