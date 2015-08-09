@@ -609,16 +609,16 @@ static NSString * const reuseIdentifier = @"AlbumCell";
 }
 
 #pragma mark - KGPicPickerDelegate
-- (void)doPicPicked:(id)images
+- (void)doPicPicked:(NSArray *)images
 {
-    if (images == nil || ![images isKindOfClass:[NSArray class]]) {
+    if (images == nil || images.count == 0) {
         return;
     }
     //UIImage *image = [images objectAtIndex:0];
     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Growup" bundle:nil];
     GrowupEditViewController *vc = (GrowupEditViewController *)[storyBoard instantiateViewControllerWithIdentifier:@"GrowDocEdit"];
     
-    vc.images = images;
+    vc.images = [images mutableCopy];
     vc.delegate = self;
     vc.postType = ADD_ALBUM_PHOTO;
     vc.albumDirId = self.dirIdRecord;

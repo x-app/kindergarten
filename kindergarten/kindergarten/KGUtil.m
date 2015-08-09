@@ -662,7 +662,7 @@ static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq
     
     [KGUtil postRequest:url parameters:params success:success failure:failure inView:view showHud:showHud showError:true];
 }
-
+/*
 + (void)uploadImage:(NSString *)curl
               image:(UIImage *)image
         description:(NSString *)description
@@ -715,6 +715,102 @@ static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq
         }
         [formData appendPartWithFormData:descdata name:@"description"];
         [formData appendPartWithFileData:data name:@"picUrl" fileName:@"upload.jpg" mimeType:@"image/jpeg"];
+    } success:^(AFHTTPRequestOperation *operation,id responseObject) {
+        if(showHud)
+            [hud hide:YES];
+        
+        if (success != nil) {
+            success(operation, responseObject);
+        }
+    } failure:^(AFHTTPRequestOperation *operation,NSError *error) {
+        if(showHud)
+            [hud hide:YES];
+        
+        MBProgressHUD *messageHUD = [MBProgressHUD showHUDAddedTo:view animated:YES];
+        messageHUD.mode = MBProgressHUDModeText;
+        NSString *content = @"";
+        if (error.code == -1001) {
+            content = @"请求已超时, 请检查网络设置, 稍后重试";
+        } else {
+            content = @"请求失败, 请稍后重试";
+        }
+        messageHUD.labelText = content;
+        messageHUD.margin = 10.f;
+        messageHUD.removeFromSuperViewOnHide = YES;
+        [messageHUD hide:YES afterDelay:2];
+        if (failure != nil) {
+            failure(operation, error);
+        }
+    }];
+}
+*/
+
++ (void)uploadImage:(NSString *)curl
+             images:(NSArray *)images
+        description:(NSString *)description
+         customAttr:(NSString *)customAttr
+        customValue:(NSData *)customValue
+            success:(void (^)(AFHTTPRequestOperation *, id))success
+            failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
+             inView:(UIView *)view
+            showHud:(BOOL)showHud
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    manager.requestSerializer.timeoutInterval = 30.0f;
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
+    
+    //KGChild *curchild = [KGUtil getCurChild];
+    //NSString *childid = [NSString stringWithFormat:@"%@", curchild.cid];
+    //NSData *curchilddata = [childid dataUsingEncoding:NSUTF8StringEncoding];
+    
+    NSString *desc_encoded = [description stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSData* descdata = [desc_encoded dataUsingEncoding:NSUTF8StringEncoding];
+    
+    NSString *url = [[KGUtil getServerAppURL] stringByAppendingString:curl];
+    //    NSData* data = UIImagePNGRepresentation(image);
+    NSMutableData *imageData = [[NSMutableData alloc] init];
+    NSMutableArray *dataArray = [[NSMutableArray alloc] init];
+    for (int i = 0; i < images.count; i++) {
+        UIImage *image = [images objectAtIndex:i];
+        if (image == nil) {
+            continue;
+        }
+        NSData *data = UIImageJPEGRepresentation(image, 1.0);
+        NSLog(@"uplaod image size of fatctor 1.0 is %lu", (unsigned long)[data length]);
+        
+        float factor = 0.9;
+        while([data length] >= 1000000 && factor > 0)
+        {
+            data = UIImageJPEGRepresentation(image, factor);
+            NSLog(@"upload image size of factor %f is %lu", factor, (unsigned long)[data length]);
+            factor -= 0.1;
+        }
+        [dataArray addObject:data];
+        [imageData appendData:data];
+    }
+    MBProgressHUD *hud = nil;
+    if(showHud)
+    {
+        hud = [[MBProgressHUD alloc] initWithView:view];
+        [view addSubview:hud];
+        hud.labelText = @"正在上传...";
+        hud.removeFromSuperViewOnHide = YES;
+        [hud show:YES];
+    }
+    
+    [manager POST:url parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        //[formData appendPartWithFormData:curchilddata name:@"childId"];
+        if (customAttr && customValue) {
+            [formData appendPartWithFormData:customValue name:customAttr];
+        }
+        [formData appendPartWithFormData:descdata name:@"description"];
+        for (int i = 0; i < dataArray.count; i++) {
+            //NSString *name = [NSString stringWithFormat:@"picUrl%d", i];
+            NSString *file = [NSString stringWithFormat:@"upload%d.jpg", i];
+            [formData appendPartWithFileData:dataArray[i] name:@"picUrl" fileName:file mimeType:@"image/jpeg"];
+        }
+        //[formData appendPartWithFileData:imageData name:@"picUrl" fileName:@"upload.jpg" mimeType:@"image/jpeg"];
     } success:^(AFHTTPRequestOperation *operation,id responseObject) {
         if(showHud)
             [hud hide:YES];

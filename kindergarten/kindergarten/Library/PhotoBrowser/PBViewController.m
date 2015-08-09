@@ -97,8 +97,14 @@ const CGFloat segWidth = 20.f;
 
 
 /** push */
--(void)pushPhotoVC{
-    [_handleVC.navigationController pushViewController:self animated:YES];
+-(void)pushPhotoVC {
+    if (_handleVC.navigationController) {
+        [_handleVC.navigationController pushViewController:self animated:YES];
+    } else {
+        [_handleVC presentViewController:self animated:YES completion:^{
+            
+        }];
+    }
 }
 
 
@@ -637,7 +643,7 @@ const CGFloat segWidth = 20.f;
 
 
 //
--(void)dismiss{
+-(void)dismiss {
     [self.navigationController popViewControllerAnimated:YES];
     [self.reusablePhotoItemViewSetM removeAllObjects];
     [self.visiblePhotoItemViewDictM removeAllObjects];

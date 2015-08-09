@@ -166,9 +166,13 @@
 }
 
 #pragma mark - KGPicPickerDelegate
-- (void)doPicPicked:(id)image
+- (void)doPicPicked:(NSArray *)images
 {
-    if (![image isKindOfClass:[UIImage class]]) {
+    if (images == nil || images.count == 0) {
+        return;
+    }
+    UIImage *image = (UIImage *)[images objectAtIndex:0];
+    if (image == nil) {
         return;
     }
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];

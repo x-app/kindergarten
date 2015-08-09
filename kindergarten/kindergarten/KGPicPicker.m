@@ -120,8 +120,8 @@
             NSLog(@"Uknown asset type");
         }*/
     }
-    [self finishPicPicking:images];
-    //[self.delegate doPicPicked:images];
+    //[self finishPicPicking:images];
+    [self.delegate doPicPicked:images];
 }
 
 - (void)elcImagePickerControllerDidCancel:(ELCImagePickerController *)picker {
@@ -155,8 +155,8 @@
         else
         {
             NSArray *images = [NSArray arrayWithObject:portraitImg];
-            //[self.delegate doPicPicked:images];
-            [self finishPicPicking:images];
+            [self.delegate doPicPicked:images];
+            //[self finishPicPicking:images];
         }
     }];
 }
@@ -171,8 +171,8 @@
 {
     if (self.delegate) {
         NSArray *images = [NSArray arrayWithObject:editedImage];
-        //[self.delegate doPicPicked:images];
-        [self finishPicPicking:images];
+        [self.delegate doPicPicked:images];
+        //[self finishPicPicking:images];
     }
     [cropperViewController dismissViewControllerAnimated:YES completion:^{
     }];
@@ -293,7 +293,7 @@
     }];
     return result;
 }
-
+/*
 - (void)finishPicPicking:(NSArray *)images {
     if (self.delegate == nil) {
         return;
@@ -306,7 +306,7 @@
     } else {
         [self.delegate doPicPicked:[images objectAtIndex:0]];
     }
-}
+}*/
 
 
 @end

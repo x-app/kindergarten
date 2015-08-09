@@ -116,7 +116,7 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="dQK-H5-Gop">
                                 <rect key="frame" x="0.0" y="234" width="320" height="280"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="GIs-kG-HZ1">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="GIs-kG-HZ1">
                                     <size key="itemSize" width="80" height="80"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -130,14 +130,14 @@
                                             <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="cell_delete.png" translatesAutoresizingMaskIntoConstraints="NO" id="xXV-la-U1Z">
-                                                    <rect key="frame" x="64" y="0.0" width="20" height="20"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7G2-kV-gfD">
+                                                    <rect key="frame" x="1" y="1" width="78" height="78"/>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cell_delete.png" translatesAutoresizingMaskIntoConstraints="NO" id="xXV-la-U1Z">
+                                                    <rect key="frame" x="46.5" y="0.0" width="33.5" height="33.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="xXV-la-U1Z" secondAttribute="height" multiplier="1:1" id="xsA-Zd-Fnc"/>
                                                     </constraints>
-                                                </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7G2-kV-gfD">
-                                                    <rect key="frame" x="1" y="1" width="78" height="78"/>
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -148,7 +148,7 @@
                                             <constraint firstItem="7G2-kV-gfD" firstAttribute="leading" secondItem="M2w-iw-SVg" secondAttribute="leading" constant="1" id="a5C-wZ-IzQ"/>
                                             <constraint firstAttribute="bottom" secondItem="7G2-kV-gfD" secondAttribute="bottom" constant="1" id="bWf-AK-7jl"/>
                                             <constraint firstAttribute="trailing" secondItem="xXV-la-U1Z" secondAttribute="trailing" id="wP6-1e-JE9"/>
-                                            <constraint firstItem="xXV-la-U1Z" firstAttribute="width" secondItem="7G2-kV-gfD" secondAttribute="height" multiplier="20:80" id="wdf-Hg-dVb"/>
+                                            <constraint firstItem="xXV-la-U1Z" firstAttribute="width" secondItem="7G2-kV-gfD" secondAttribute="height" multiplier="30:70" id="wdf-Hg-dVb"/>
                                             <constraint firstItem="7G2-kV-gfD" firstAttribute="top" secondItem="M2w-iw-SVg" secondAttribute="top" constant="1" id="zSe-lt-Pzd"/>
                                         </constraints>
                                         <connections>

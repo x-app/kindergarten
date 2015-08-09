@@ -11,6 +11,8 @@
 #import "AlbumCollectionViewController.h"
 #import "KGImageTableViewController.h"
 #import "ImageEditCollectionViewCell.h"
+#import "PBViewController.h"
+
 @interface GrowupEditViewController ()<UIGestureRecognizerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextView *textView;
@@ -18,6 +20,11 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imgView;
 
 @property (weak, nonatomic) IBOutlet UICollectionView *imagesCollectionView;
+
+@property (nonatomic) BOOL isEditingImages;
+
+@property (nonatomic, strong) PBViewController *pbVC;
+@property (nonatomic, strong) NSMutableArray *imageInfos;
 @end
 
 @implementation GrowupEditViewController
@@ -32,13 +39,49 @@
     if(self.textView != nil)
         self.textView.delegate = self;
     
+    self.isEditingImages = NO;
+    
     self.imagesCollectionView.delegate = self;
     self.imagesCollectionView.dataSource = self;
+    
+    
+//    UITapGestureRecognizer *tapGR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(collectionViewTapAction:)];
+//    tapGR.delegate = self;
+//    [self.imagesCollectionView addGestureRecognizer:tapGR];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (PBViewController *)pbVC {
+    if (_pbVC == nil) {
+        _pbVC = [[PBViewController alloc] init];
+        _pbVC.handleVC = self;
+        if ([KGUtil isTeacherVersion]) {
+            //[_pbVC addAMenuItem:@"增加" icon:[UIImage imageNamed:@"icon_add.png"] target:self action:@selector(addPhotoToAlbumInPB:)];
+            //[_pbVC addAMenuItem:@"删除" icon:[UIImage imageNamed:@"icon_delete.png"] target:self action:@selector(deletePhotoFromAlbumInPB:)];
+        }
+    }
+    return _pbVC;
+}
+
+- (NSMutableArray *)imageInfos {
+    if (_imageInfos == nil) {
+        _imageInfos = [[NSMutableArray alloc] init];
+    }
+    return _imageInfos;
+}
+
+- (void)resetImageInfos {
+    [self.imageInfos removeAllObjects];
+    for (int i = 0; i < [self.images count]; i++) {
+        PBImageInfo *iInfo = [[PBImageInfo alloc] init];
+        iInfo.image = [self.images objectAtIndex:i];
+        [self.imageInfos addObject:iInfo];
+    }
+    self.pbVC.imageInfos = self.imageInfos;
 }
 
 /*
@@ -92,7 +135,7 @@
         }
     }
      [KGUtil uploadImage:url
-                   image:self.image
+                  images:self.images
              description:self.textView.text
               customAttr:attrName
              customValue:attrValue
@@ -149,7 +192,9 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     ImageEditCollectionViewCell *cell = (ImageEditCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"ImageEditCell" forIndexPath:indexPath];
-    cell.deleteItemView.hidden = YES;
+    cell.deleteItemView.hidden = !self.isEditingImages;
+    cell.imageItemView.contentMode = UIViewContentModeScaleAspectFill;
+    cell.imageItemView.clipsToBounds = YES;
     if (indexPath.row == self.images.count) {
         cell.imageItemView.image = [UIImage imageNamed:@"camera.png"];
         cell.isAddButton = YES;
@@ -161,15 +206,27 @@
         UILongPressGestureRecognizer *longPressGR = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressCellAction:)];
         [cell addGestureRecognizer:longPressGR];
         longPressGR.minimumPressDuration = 0.7;
-        longPressGR.delegate = self;
+        //longPressGR.delegate = self;
         longPressGR.view.tag = indexPath.row;
+        
+        UITapGestureRecognizer *tapPressGR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapDeleteItemAction:)];
+        [cell.deleteItemView addGestureRecognizer:tapPressGR];
+        tapPressGR.view.tag = indexPath.row;
     }
     return cell;
 }
 
 #pragma mark - UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    
+    if (self.isEditingImages) {
+        
+    } else {
+//        [self resetImageInfos];
+//        self.pbVC.index = 0;
+//        self.pbVC.rowIndex = indexPath.row;
+//        self.pbVC.sectionIndex = indexPath.section;
+//        [self.pbVC show];
+    }
 }
 
 #pragma mark UICollectionViewDelegateFlowLayout
@@ -177,8 +234,20 @@
     CGFloat screenWidth = [[UIScreen mainScreen] bounds].size.width;
     NSInteger colsNum = 4; //每行四个
     CGFloat unitMargin = 5;
-    CGFloat unitWidth = (int)((screenWidth - (colsNum + 1) * unitMargin) / colsNum) ;
+    CGFloat unitWidth = (int)((screenWidth - 5 - (colsNum + 1) * unitMargin) / colsNum) ;
     return CGSizeMake(unitWidth, unitWidth);
+}
+
+-(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+    return UIEdgeInsetsMake(5, 5, 5, 5);
+}
+
+#pragma mark 
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    if (touch.view != self.imagesCollectionView) {
+        return NO;
+    }
+    return YES;
 }
 
 #pragma mark - Actions
@@ -187,17 +256,24 @@
 }
 
 - (void)longPressCellAction:(id)sender {
-    NSArray *visibleCells = self.imagesCollectionView.visibleCells;
-    for (int i = 0; i < visibleCells.count; i++) {
-        ImageEditCollectionViewCell *curCell = (ImageEditCollectionViewCell *)[visibleCells objectAtIndex:i];
-        if (curCell == nil) {
-            continue;
-        }
-        if (!curCell.isAddButton) {
-            curCell.deleteItemView.hidden = NO;
-        }
-    }
+    self.isEditingImages = YES;
     [self.imagesCollectionView reloadData];
+}
+
+- (void)collectionViewTapAction:(id)sender {
+    self.isEditingImages = NO;
+    [self.imagesCollectionView reloadData];
+}
+
+- (void)tapDeleteItemAction:(id)sender {
+    UIGestureRecognizer *gr = (UIGestureRecognizer *)sender;
+    if (gr && gr.state == UIGestureRecognizerStateBegan) {
+        NSLog(@"delete image");
+        NSInteger imgIdx = gr.view.tag;
+        [self.images removeObjectAtIndex:imgIdx];
+        [self.imagesCollectionView reloadData];
+    }
+
 }
 
 @end

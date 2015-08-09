@@ -114,6 +114,11 @@
     
     //__block UIActivityIndicatorView *activityIndicator;
     __block CGRect windowFrame = [[UIScreen mainScreen] bounds];
+    if (self.imageInfo.image != nil) {
+        self.photoImageView.frame = windowFrame;
+        self.photoImageView.image = self.imageInfo.image;
+        return;
+    }
     CGRect placeholderFrame = CGRectMake(windowFrame.size.width / 2 - 50, windowFrame.size.height / 2 - 50, 100, 100);
     self.photoImageView.frame = placeholderFrame;
     //__weak UIImageView *weakImageView = self.photoImageView;
