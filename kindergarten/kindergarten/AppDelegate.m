@@ -160,8 +160,7 @@
     
     NSLog(@"did become active in AppDelegate");
     
-    //热启动时，执行推送到指定页面
-    [KGUtil pushViewBecomeActive];
+
     
     self.user.verified = NO;
     NSDate *curTime = [[NSDate alloc] init];
@@ -246,19 +245,33 @@
     NSLog(@"Received notification: %@", payload);
     self.isLaunchedByNotification = false;
     
+    [self doWithNotification:payload];
+    
     if (application.applicationState == UIApplicationStateActive)
     {//程序当前正处于前台
         NSLog(@"Received notification active");
         
+        //弹出是否打开推送页面
+        UIAlertView *hint = [[UIAlertView alloc] initWithTitle:@"请确认" message:@"收到推送通知，是否打开推送页面?" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
+        [hint show];
     }
     else if(application.applicationState == UIApplicationStateInactive)
     {//点击通知启动，程序在后台。进入这里
         NSLog(@"Received notification inactive");
 
-        self.isLaunchedByNotification = true;//从后台激活同冷启动一样处理
-        //如何通知当前vc切换view
+        //热启动时，执行推送到指定页面
+        //self.isLaunchedByNotification = true;//从后台激活同冷启动一样处理
+        [KGUtil pushViewByNotification];
+//        self.isLaunchedByNotification = false;
     }
-    [self doWithNotification:payload];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == 0)
+    {
+        [KGUtil pushViewByNotification];
+    }
 }
 
 - (void)doWithNotification:(NSDictionary*)payload

@@ -949,6 +949,7 @@ static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq
     [KGUtil.getWebVC.webView loadRequest:request];
 }
 
+// 供推送web页面用，每次都new webvc
 + (void)pushWebViewWithUrl:(NSString *)url inViewController:(UIViewController*)vc
 {
     if(url == nil || [url length] == 0 )
@@ -957,25 +958,29 @@ static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq
     if(vc == nil)
         return;
     
-    [vc.navigationController pushViewController:KGUtil.getWebVC animated:YES];
+    //指示当前webvc保留使用，willdisappear的时候不清空
+    [KGUtil getWebVC].keepUsing = true;
+    
+    WebViewController *wvc = [[WebViewController alloc] init];
+    [vc.navigationController pushViewController:wvc animated:YES];
     
     NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:url]];
-    [KGUtil.getWebVC .webView loadRequest:request];
+    [wvc.webView loadRequest:request];
 }
 
-+ (void)pushViewBecomeActive {
++ (void)pushViewByNotification {
     // 通过点击push message热启动应用，切换push到type页面。由Appdelegate调用
     // 此函数在didReceiveRemoteNotification之后触发，保证能够获取到push数据
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    if(delegate.isLaunchedByNotification)
+//    if(delegate.isLaunchedByNotification)
     {
 //        UIViewController *tmVC = [[UIApplication sharedApplication] topMostViewController];
 //        if (tmVC == nil) {
-//            NSLog(@"pushViewBecomeActive:top most vc is nil when");
+//            NSLog(@"pushViewByNotification most vc is nil when");
 //        }
 //        
-        delegate.isLaunchedByNotification = false;//只切换一次
+//        delegate.isLaunchedByNotification = false;//只切换一次
         if(delegate.curKGVC !=nil && [delegate.curKGVC isKindOfClass:[KGUIViewController class]])
         {
             if(delegate.pushUrl != nil && [delegate.pushUrl length] > 4 && [[delegate.pushUrl substringToIndex:4] isEqual:@"http"])

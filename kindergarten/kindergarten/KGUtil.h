@@ -96,7 +96,7 @@
 
 + (void)lockTopMostVC;
 
-+ (void)pushViewBecomeActive;
++ (void)pushViewByNotification;
 
 + (BOOL)isEmptyString:(NSString *)str;
 
