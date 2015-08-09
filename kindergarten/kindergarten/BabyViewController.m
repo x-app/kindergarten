@@ -258,8 +258,12 @@
 {
 //    count = 9;
     if(count < 1)
+    {
+        // app图标清0
+        [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
         return;
-    
+    }
+
     for(int i=0; i<self.func.count; i++)
     {
         UIImageView* iv = self.func[i];

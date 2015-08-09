@@ -21,6 +21,7 @@
 -(instancetype)init {
     self = [super init];
     
+    _keepUsing = false;
     
     CGRect windowFrame = [[UIScreen mainScreen] bounds];
     //windowFrame.size.height += 49;//height of tabbar
@@ -70,6 +71,9 @@
         return;
     }
     
+    if(self.keepUsing)
+        return;
+    
     [self clearWebView];
 }
 
@@ -81,6 +85,8 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     NSLog(@"didappear");
+    
+    self.keepUsing = false;
 }
 
 - (void)clearWebView
@@ -93,11 +99,11 @@
     [cache setDiskCapacity:0];
     [cache setMemoryCapacity:0];
     
-    NSHTTPCookie *cookie;
-    NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
-    for (cookie in [storage cookies]) {
-        [storage deleteCookie:cookie];
-    }
+//    NSHTTPCookie *cookie;
+//    NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+//    for (cookie in [storage cookies]) {
+//        [storage deleteCookie:cookie];
+//    }
 }
 
 - (void)didReceiveMemoryWarning {
