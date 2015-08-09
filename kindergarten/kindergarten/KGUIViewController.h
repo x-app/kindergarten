@@ -39,4 +39,8 @@ typedef enum {
 
 - (void)pushWebView:(NSString *)webViewType;
 
+- (void)setTeacherVersionFunc;
+
+- (void)setParentVersionFunc;
+
 @end

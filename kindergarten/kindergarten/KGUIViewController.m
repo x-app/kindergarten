@@ -278,6 +278,15 @@
     NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:url]];
     [[self webVC].webView loadRequest:request];
 }
+
+- (void)setTeacherVersionFunc {
+
+}
+
+- (void)setParentVersionFunc {
+    
+}
+
 /*
 - (void)showVerifyLock {
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];

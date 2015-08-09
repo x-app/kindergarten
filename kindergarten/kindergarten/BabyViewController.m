@@ -153,6 +153,7 @@
 }
 
 -(void) setTeacherVersionFunc{
+    [super setTeacherVersionFunc];
     for(int i=0; i<self.func.count; i++)
     {
         UIImageView* iv = self.func[i];
