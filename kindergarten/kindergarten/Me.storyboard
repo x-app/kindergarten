@@ -36,7 +36,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="password_icon.png" id="q6N-rM-L79">
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="password_icon-Small.png" id="q6N-rM-L79">
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
                                             </subviews>
@@ -54,7 +54,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="setting_icon.png" id="pku-Cj-35P">
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="clearcache_icon-Small.png" id="pku-Cj-35P">
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
                                             </subviews>
@@ -72,7 +72,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="feedback_icon.png" id="l5g-KV-7m7">
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="feedback_icon-Small.png" id="l5g-KV-7m7">
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
                                             </subviews>
@@ -90,7 +90,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="about_icon.png" id="YPK-Vd-Q9h">
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="about_icon-Small.png" id="YPK-Vd-Q9h">
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
                                             </subviews>
@@ -185,13 +185,13 @@ Copyright©2014</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2ZE-mI-XAt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1248" y="730"/>
+            <point key="canvasLocation" x="1254" y="494"/>
         </scene>
     </scenes>
     <resources>
-        <image name="about_icon.png" width="32" height="32"/>
-        <image name="feedback_icon.png" width="32" height="32"/>
-        <image name="password_icon.png" width="32" height="32"/>
-        <image name="setting_icon.png" width="32" height="32"/>
+        <image name="about_icon-Small.png" width="29" height="29"/>
+        <image name="clearcache_icon-Small.png" width="29" height="29"/>
+        <image name="feedback_icon-Small.png" width="29" height="29"/>
+        <image name="password_icon-Small.png" width="29" height="29"/>
     </resources>
 </document>
