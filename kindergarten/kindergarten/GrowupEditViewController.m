@@ -12,6 +12,7 @@
 #import "KGImageTableViewController.h"
 #import "ImageEditCollectionViewCell.h"
 #import "PBViewController.h"
+#import "KGConst.h"
 
 @interface GrowupEditViewController ()<UIGestureRecognizerDelegate>
 
@@ -44,6 +45,7 @@
     self.imagesCollectionView.delegate = self;
     self.imagesCollectionView.dataSource = self;
     
+    self.textView.text = self.placeHolderText;
     
 //    UITapGestureRecognizer *tapGR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(collectionViewTapAction:)];
 //    tapGR.delegate = self;
@@ -174,6 +176,27 @@
     textView.textColor = [UIColor blackColor];
 
     return YES;
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    if (range.location >= WORD_LIMIT)
+    {
+        return  NO;
+    }
+    else
+    {
+        return YES;
+    }
+}
+
+- (void)textViewDidChange:(UITextView *)textView
+{
+    //该判断用于联想输入
+    if (textView.text.length > WORD_LIMIT)
+    {
+        textView.text = [textView.text substringToIndex:WORD_LIMIT];
+    }
 }
 
 #pragma mark - UICollectionViewDatasource

@@ -15,4 +15,6 @@ extern NSString *const REQUEST_URL_INDEX;
 
 extern const int KG_PAGE_SIZE;
 
+extern const int WORD_LIMIT;
+
 #endif

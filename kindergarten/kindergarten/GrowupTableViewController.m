@@ -406,7 +406,9 @@
     GrowupEditViewController *vc = (GrowupEditViewController *)[storyBoard instantiateViewControllerWithIdentifier:@"GrowDocEdit"];
     
     vc.images = [images mutableCopy];
+    images = nil;
     vc.postType = ADD_GROWUP_DOC;
+    vc.placeHolderText = @"记录宝宝的成长...";
     vc.delegate = self;
     [self presentViewController:vc animated:YES
                           completion:^(void){

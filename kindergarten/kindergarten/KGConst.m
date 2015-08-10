@@ -14,3 +14,5 @@ NSString *const REQUEST_KEY = @"AbDJKME9KUIJHFDNjhdiosfHIkljmklJKJklIOWERjkljk89
 NSString *const REQUEST_UID = @"nugget";
 
 const int KG_PAGE_SIZE = 5;
+
+const int WORD_LIMIT = 30;

@@ -83,7 +83,7 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="记录宝宝的成长..." translatesAutoresizingMaskIntoConstraints="NO" id="Wgv-Ak-0we">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wgv-Ak-0we">
                                 <rect key="frame" x="0.0" y="64" width="320" height="160"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -133,8 +133,8 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7G2-kV-gfD">
                                                     <rect key="frame" x="1" y="1" width="78" height="78"/>
                                                 </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cell_delete.png" translatesAutoresizingMaskIntoConstraints="NO" id="xXV-la-U1Z">
-                                                    <rect key="frame" x="46.5" y="0.0" width="33.5" height="33.5"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="cell_delete.png" translatesAutoresizingMaskIntoConstraints="NO" id="xXV-la-U1Z">
+                                                    <rect key="frame" x="47" y="0.0" width="34" height="34"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="xXV-la-U1Z" secondAttribute="height" multiplier="1:1" id="xsA-Zd-Fnc"/>
                                                     </constraints>

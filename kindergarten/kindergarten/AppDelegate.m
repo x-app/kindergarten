@@ -298,7 +298,7 @@
         if(name == nil)
             name = @"";
         
-        NSDictionary *data = @{@"user_id": self.user.uid,
+        NSDictionary *data = @{@"uid": self.user.uid,
                                @"token": self.devicetoken,
                                @"name": name};
         NSDictionary *body = [KGUtil getRequestBody:data];
@@ -319,7 +319,7 @@
 {
     if(![KGUtil isEmptyString:self.lastUID] && ![KGUtil isEmptyString:self.devicetoken])
     {
-        NSDictionary *data = @{@"user_id": self.lastUID,
+        NSDictionary *data = @{@"uid": self.lastUID,
                                @"token": self.devicetoken};
         NSDictionary *body = [KGUtil getRequestBody:data];
         NSDictionary *params = @{@"type": @"LEAVE", @"sign": [KGUtil getRequestSign:body], @"body": body};
@@ -348,9 +348,9 @@ failure:(void (^)())failure
         if(name == nil)
             name = @"";
 
-        NSDictionary *data = @{@"delete_user_id": self.lastUID,
+        NSDictionary *data = @{@"delete_uid": self.lastUID,
                                @"delete_token": self.devicetoken,
-                               @"user_id": self.user.uid,
+                               @"uid": self.user.uid,
                                @"token": self.devicetoken,
                                @"name": name};
         NSDictionary *body = [KGUtil getRequestBody:data];
