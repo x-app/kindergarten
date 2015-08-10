@@ -38,6 +38,7 @@
 
 -(void)postToken;
 -(void)deleteToken;
-
+-(void)replaceToken:(void (^)())success
+            failure:(void (^)())failure;
 @end
 

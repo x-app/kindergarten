@@ -18,9 +18,9 @@
 @property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *func;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *funcbtns;
 
-
 @property (weak, nonatomic) IBOutlet UIImageView *repeatImage;
 
+@property (strong, nonatomic)JSBadgeView *mailBadge;
 @end
 
 @implementation BabyViewController
@@ -261,6 +261,12 @@
     {
         // app图标清0
         [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+        
+        if(self.mailBadge != nil)
+        {
+            [self.mailBadge removeFromSuperview];
+            self.mailBadge = nil;
+        }
         return;
     }
 
@@ -270,11 +276,18 @@
         
         if(iv.tag == 3)
         {
-            JSBadgeView *badgeView = [[JSBadgeView alloc] initWithParentView:iv alignment:JSBadgeViewAlignmentTopRight];
-            badgeView.badgeText = [NSString stringWithFormat:@"%ld", (long)count];
-            CGRect rect = [iv frame];
-            NSInteger dx = rect.size.width/2 - rect.size.width/2/sqrt(2);
-            [badgeView setBadgePositionAdjustment:CGPointMake(-dx, dx)];
+            if(self.mailBadge == nil)
+            {
+                self.mailBadge = [[JSBadgeView alloc] initWithParentView:iv alignment:JSBadgeViewAlignmentTopRight];
+                self.mailBadge.badgeText = [NSString stringWithFormat:@"%ld", (long)count];
+                CGRect rect = [iv frame];
+                NSInteger dx = rect.size.width/2 - rect.size.width/2/sqrt(2);
+                [self.mailBadge setBadgePositionAdjustment:CGPointMake(-dx, dx)];
+            }
+            else
+            {
+                [self.mailBadge setBadgeText:[NSString stringWithFormat:@"%ld", (long)count]];
+            }
 
             return;
         }
