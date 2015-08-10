@@ -292,11 +292,15 @@
 
 -(void)postToken
 {
-    if(self.user != nil && self.user.uid != nil && self.devicetoken != nil)
+    if(self.user != nil && ![KGUtil isEmptyString:self.user.uid] && ![KGUtil isEmptyString:self.devicetoken])
     {
+        NSString *name = self.user.name;
+        if(name == nil)
+            name = @"";
+        
         NSDictionary *data = @{@"user_id": self.user.uid,
                                @"token": self.devicetoken,
-                               @"name": self.user.name};
+                               @"name": name};
         NSDictionary *body = [KGUtil getRequestBody:data];
         NSDictionary *params = @{@"type": @"JOIN", @"sign": [KGUtil getRequestSign:body], @"body": body};
         
@@ -313,23 +317,7 @@
 
 -(void)deleteToken
 {
-    /*if(self.user != nil && self.user.uid != nil && self.devicetoken != nil)
-    {
-        NSDictionary *data = @{@"user_id": self.user.uid,
-                               @"token": self.devicetoken};
-        NSDictionary *body = [KGUtil getRequestBody:data];
-        NSDictionary *params = @{@"type": @"LEAVE", @"sign": [KGUtil getRequestSign:body], @"body": body};
-        
-        [KGUtil postRequest:[KGUtil getServerPushURL] parameters:params
-                    success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                        NSLog(@"delete token succ!");
-                    }
-                    failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                        NSLog(@"Error: %@", error);
-                    }
-                     inView:nil showHud:false showError:false];
-    }*/
-    if(![KGUtil isEmptyString:self.lastUID] && self.devicetoken != nil)
+    if(![KGUtil isEmptyString:self.lastUID] && ![KGUtil isEmptyString:self.devicetoken])
     {
         NSDictionary *data = @{@"user_id": self.lastUID,
                                @"token": self.devicetoken};
@@ -342,6 +330,40 @@
                     }
                     failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                         NSLog(@"Error: %@", error);
+                    }
+                     inView:nil showHud:false showError:false];
+    }
+}
+
+-(void)replaceToken:(void (^)())success
+failure:(void (^)())failure
+{
+    if(![KGUtil isEmptyString:self.devicetoken] && self.user != nil &&
+       ![KGUtil isEmptyString:self.user.uid])
+    {
+        if(self.lastUID == nil)
+            self.lastUID = @"";
+        
+        NSString *name = self.user.name;
+        if(name == nil)
+            name = @"";
+
+        NSDictionary *data = @{@"delete_user_id": self.lastUID,
+                               @"delete_token": self.devicetoken,
+                               @"user_id": self.user.uid,
+                               @"token": self.devicetoken,
+                               @"name": name};
+        NSDictionary *body = [KGUtil getRequestBody:data];
+        NSDictionary *params = @{@"type": @"REPLACE", @"sign": [KGUtil getRequestSign:body], @"body": body};
+        
+        [KGUtil postRequest:[KGUtil getServerPushURL] parameters:params
+                    success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                        NSLog(@"replace token succ!");
+                        success();
+                    }
+                    failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                        NSLog(@"replace token failure: %@", error);
+                        failure();
                     }
                      inView:nil showHud:false showError:false];
     }
