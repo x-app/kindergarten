@@ -89,16 +89,17 @@ const CGFloat segWidth = 20.f;
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
+    self.isVisible = NO;
     //[self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    self.isVisible = YES;
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    //[self pagesPrepare];
     [self setNavigationBarStyle];
 }
 
@@ -114,13 +115,6 @@ const CGFloat segWidth = 20.f;
         [rightButton addSubview:rightImageView];
         UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
         self.navigationItem.rightBarButtonItem = rightButtonItem;
-        
-        //UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithTitle:@"back" style:UIBarButtonItemStyleDone target:self action:@selector(backBtnAction:)];
-       // UIBarButtonItem *backItem2 = [UIBarButtonItem alloc] initwith
-        //self.navigationItem.leftBarButtonItem = backItem;
-        //self.navigationItem.leftBarButtonItem.target = self;
-        //[self.navigationItem.leftBarButtonItem respondsToSelector:@selector(backBtnAction:)];
-        //[_handleVC.navigationItem setBackBarButtonItem:backItem];
         [self setNavigationBarStyle];
     } else {
         [self restoreNavigationBarStyle];
@@ -146,7 +140,7 @@ const CGFloat segWidth = 20.f;
         item.sectionIndex = self.sectionIndex;
     }
     [KxMenu showMenuInView:self.view
-                  fromRect:rect//self.navigationController.navigationBar.frame// self..frame
+                  fromRect:rect
                  menuItems:self.menuItems];
 }
 
@@ -211,7 +205,7 @@ const CGFloat segWidth = 20.f;
 
 
 /** 每页准备 */
--(void)pagesPrepare{
+-(void)pagesPrepare {
     if (self.imageInfos == nil || self.imageInfos.count == 0) {
         return;
     }
@@ -221,6 +215,7 @@ const CGFloat segWidth = 20.f;
     
     //[self.reusablePhotoItemViewSetM removeAllObjects];
     //[self.visiblePhotoItemViewDictM removeAllObjects];
+    [self cleanPhotoBrowser];
     
     //展示页码对应的页面
     [self showWithPage:self.index];
@@ -240,6 +235,9 @@ const CGFloat segWidth = 20.f;
 }
 
 - (void)resetToIndex: (NSInteger)index{
+    if (!self.isVisible) {
+        return;
+    }
     if (self.imageInfos == nil || self.imageInfos.count == 0) {
         [self dismiss];
     }
@@ -247,58 +245,6 @@ const CGFloat segWidth = 20.f;
     self.index = index;
     [self pagesPrepare];
 }
-/*
-- (void)removePage: (NSInteger)page {
-    if (page < 0 || page >= self.imageInfos.count) {
-        return;
-    }
-    NSInteger nextPage = -1;
-    if (page == 0 && self.imageInfos.count == 1) {
-        //nextPage = 0;
-        [self dismiss];
-        return;
-    } else {
-        nextPage = (page == self.imageInfos.count - 1) ? self.imageInfos.count - 2 : page;
-    }
-    //[self showWithPage:nextPage];
-    //[self setPage:nextPage];
-    
-    //CGRect targetFrame = CGRectMake(-320, 0, 320, 568);
-    //self.scrollView.pagingEnabled = YES;
-    //CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
-    //CGPoint targetPoint = CGPointMake((screenWidth + segWidth) * nextPage, 0);
-    //[self.scrollView setContentOffset:targetPoint animated:YES];
-    //[self.imageInfos removeObjectAtIndex:page];
-    [self.imageInfos removeObjectAtIndex:page];
-    //self.pageCount = self.imageInfos.count;
-//    for (int i = 0; i < self.scrollView.subviews.count; i++) {
-//        UIView *view = [self.scrollView.subviews objectAtIndex:i];
-//        [view removeFromSuperview];
-//    }
-    [self.currentItemView removeFromSuperview];
-    //[self.visiblePhotoItemViewDictM removeObjectForKey:@(page)];
-    if (self.currentItemView) {
-        [self.reusablePhotoItemViewSetM removeObject:self.currentItemView];
-    }
-    if ([[self.visiblePhotoItemViewDictM allKeys] containsObject:@(page)]) {
-        [self.visiblePhotoItemViewDictM removeObjectForKey:@(page)];
-    }
-    //[self.reusablePhotoItemViewSetM removeAllObjects];
-    //[self.visiblePhotoItemViewDictM removeAllObjects];
-    self.index = nextPage;
-    self.page = nextPage;
-    [self pagesPrepare];
-    //[self showWithPage:nextPage];
-
-
-    //[self pagesPrepare];
-    //[_currentItemView removeFromSuperview];
-    //[self.scrollView setContentOffset:targetPoint animated:YES];
-    //self.page = nextPage;
-    //[self.scrollView scrollRectToVisible:targetFrame animated:YES];
-    //[self.scrollView scrollRectToVisible:CGRectMake(320 * nextPage, 0, 320, 568) animated:YES];
-    //[self.imageInfos removeObjectAtIndex:page];
-}*/
 
 /*
  *  展示页码对应的页面

@@ -33,6 +33,7 @@ typedef enum {
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *scrollViewRightMarginC;
 
+@property (nonatomic) BOOL isVisible;
 
 @property (nonatomic) NSInteger rowIndex;
 @property (nonatomic) NSInteger sectionIndex;
