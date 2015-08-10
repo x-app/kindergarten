@@ -201,16 +201,16 @@
 }
 
 #pragma mark - KGPicPickerDelegate
-- (void)doPicPicked:(id)image
+- (void)doPicPicked:(NSArray *)images
 {
-    if (image == nil || ![image isKindOfClass:[UIImage class]]) {
+    if (images == nil || images.count == 0) {
         return;
     }
     
     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Growup" bundle:nil];
     GrowupEditViewController *vc = (GrowupEditViewController *)[storyBoard instantiateViewControllerWithIdentifier:@"GrowDocEdit"];
     
-    vc.image = image;
+    vc.images = [images mutableCopy];
     vc.delegate = self;
     if (self.type == CLASS) {
         vc.postType = ADD_CLASS_DESC;

@@ -16,4 +16,6 @@
 
 @property (nonatomic) UIImage *placeHolder;
 
+@property (nonatomic, strong) UIImage *image;
+
 @end

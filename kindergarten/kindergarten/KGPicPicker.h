@@ -16,8 +16,8 @@
 
 //-(void)doPicPicked:(UIImage *)image;
 
-//多选模式时参数是NSArray, 单选模式是返回UIImage
-- (void)doPicPicked:(id)images;
+//单选模式时取索引为0的UIImage
+- (void)doPicPicked:(NSArray *)images;
 @end
 
 @interface KGPicPicker:NSObject <UINavigationControllerDelegate, UIImagePickerControllerDelegate, VPImageCropperDelegate, ELCImagePickerControllerDelegate>

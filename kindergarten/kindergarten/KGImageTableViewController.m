@@ -192,6 +192,11 @@
     [super viewDidAppear:animated];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    //有时候选中状态无法取消，手动调用该语句进行取消
+    [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:NO];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -210,13 +215,13 @@
 }
 
 #pragma mark - KGPicPickerDelegate
-- (void)doPicPicked:(id)image {
-    if (image == nil || ![image isKindOfClass:[UIImage class]]) {
+- (void)doPicPicked:(NSArray *)images {
+    if (images == nil || images.count == 0) {
         return;
     }
     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Growup" bundle:nil];
     GrowupEditViewController *vc = (GrowupEditViewController *)[storyBoard instantiateViewControllerWithIdentifier:@"GrowDocEdit"];
-    vc.image = image;
+    vc.images = [images mutableCopy];
     vc.delegate = self;
     if (self.type == HOMEWORK) {
         vc.postType = ADD_HOMEWORK;

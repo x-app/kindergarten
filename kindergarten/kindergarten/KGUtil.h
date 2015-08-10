@@ -64,7 +64,7 @@
               showHud:(BOOL)showHud;
 
 + (void)uploadImage:(NSString *)curl
-              image:(UIImage *)image
+             images:(NSArray *)images
         description:(NSString *)description
          customAttr:(NSString *)customAttr
         customValue:(NSData *)customValue
