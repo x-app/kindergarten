@@ -947,8 +947,6 @@
 		12F630171B49326C00BE67B6 /* Growup Storyboard */ = {
 			isa = PBXGroup;
 			children = (
-				993847141B77627300847290 /* ImageEditCollectionViewCell.h */,
-				993847151B77627300847290 /* ImageEditCollectionViewCell.m */,
 				12F630181B4932C000BE67B6 /* Growup.storyboard */,
 				12EAE0D91B5B8E550084680C /* GrowDocCell.h */,
 				12EAE0DA1B5B8E550084680C /* GrowDocCell.m */,
@@ -956,6 +954,8 @@
 				12EAE0D71B5B65A50084680C /* GrowupTableViewController.m */,
 				125090F51B68F2530046F40E /* GrowupEditViewController.h */,
 				125090F61B68F2530046F40E /* GrowupEditViewController.m */,
+				993847141B77627300847290 /* ImageEditCollectionViewCell.h */,
+				993847151B77627300847290 /* ImageEditCollectionViewCell.m */,
 				12EAE0DC1B5B8FE90084680C /* GrowDoc.h */,
 				12EAE0DD1B5B8FE90084680C /* GrowDoc.m */,
 			);

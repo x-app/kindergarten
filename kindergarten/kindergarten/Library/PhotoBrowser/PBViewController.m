@@ -92,6 +92,7 @@ const CGFloat segWidth = 20.f;
 
 /** 真正展示 */
 -(void)show{
+    [self pagesPrepare];
     [self pushPhotoVC];
 }
 
@@ -107,6 +108,10 @@ const CGFloat segWidth = 20.f;
     }
 }
 
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [self cleanPhotoBrowser];
+}
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
@@ -119,7 +124,7 @@ const CGFloat segWidth = 20.f;
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self pagesPrepare];
+    //[self pagesPrepare];
     [self setNavigationBarStyle];
 }
 
@@ -135,10 +140,26 @@ const CGFloat segWidth = 20.f;
         [rightButton addSubview:rightImageView];
         UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
         self.navigationItem.rightBarButtonItem = rightButtonItem;
+        
+        //UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithTitle:@"back" style:UIBarButtonItemStyleDone target:self action:@selector(backBtnAction:)];
+       // UIBarButtonItem *backItem2 = [UIBarButtonItem alloc] initwith
+        //self.navigationItem.leftBarButtonItem = backItem;
+        //self.navigationItem.leftBarButtonItem.target = self;
+        //[self.navigationItem.leftBarButtonItem respondsToSelector:@selector(backBtnAction:)];
+        //[_handleVC.navigationItem setBackBarButtonItem:backItem];
         [self setNavigationBarStyle];
     } else {
         [self restoreNavigationBarStyle];
     }
+}
+
+- (void)cleanPhotoBrowser {
+    for (int i = 0; i < self.scrollView.subviews.count; i++) {
+        UIView *view = [self.scrollView.subviews objectAtIndex:i];
+        [view removeFromSuperview];
+    }
+    [self.reusablePhotoItemViewSetM removeAllObjects];
+    [self.visiblePhotoItemViewDictM removeAllObjects];
 }
 
 - (void)clickRightButton:(UIButton *)sender {
@@ -349,14 +370,14 @@ const CGFloat segWidth = 20.f;
     if([self.visiblePhotoItemViewDictM objectForKey:@(page)] != nil) return;
     
     //取出重用photoItemView
-    PBItemView *photoItemView = [self dequeReusablePhotoItemView];
+    /*PBItemView *photoItemView = [self dequeReusablePhotoItemView];
     
     if(photoItemView == nil){//没有取到
         
         //重新创建
         photoItemView = [[[NSBundle mainBundle] loadNibNamed:@"PBItemView" owner:nil options:nil] firstObject];
-    }
-    
+    }*/
+    PBItemView *photoItemView = [[[NSBundle mainBundle] loadNibNamed:@"PBItemView" owner:nil options:nil] firstObject];
     NSLog(@"%p",&photoItemView);
     
     //数据覆盖
@@ -463,9 +484,9 @@ const CGFloat segWidth = 20.f;
 
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     
-    NSUInteger page = [self pageCalWithScrollView:scrollView];
+    //NSUInteger page = [self pageCalWithScrollView:scrollView];
     
-    [self reuserAndVisibleHandle:page];
+    //[self reuserAndVisibleHandle:page];
 }
 
 
@@ -564,14 +585,14 @@ const CGFloat segWidth = 20.f;
 //        [self.topBarLabel layoutIfNeeded];
 //    });
     
-    //dispatch_async(dispatch_get_main_queue(), ^{
+    dispatch_async(dispatch_get_main_queue(), ^{
         
         //显示对应的页面
         [self showWithPage:page];
         
         //获取当前显示中的photoItemView
         self.currentItemView = [self.visiblePhotoItemViewDictM objectForKey:@(self.page)];
-    //});
+    });
 }
 
 
@@ -586,7 +607,7 @@ const CGFloat segWidth = 20.f;
 
 
 /** 取出可重用照片视图 */
--(PBItemView *)dequeReusablePhotoItemView{
+/*-(PBItemView *)dequeReusablePhotoItemView{
     
     PBItemView *photoItemView = [self.reusablePhotoItemViewSetM anyObject];
     
@@ -599,10 +620,7 @@ const CGFloat segWidth = 20.f;
     }
     
     return photoItemView;
-}
-
-
-
+}*/
 
 
 /** 可重用集合 */
@@ -637,17 +655,22 @@ const CGFloat segWidth = 20.f;
     [self showWithPage:nextPage];
 }
 
+/*
 - (IBAction)backBtnAction:(UIButton *)sender {
     [self dismiss];
 }
 
 
 //
--(void)dismiss {
+- (void)dismiss {
     [self.navigationController popViewControllerAnimated:YES];
+    for (int i = 0; i < self.scrollView.subviews.count; i++) {
+        UIView *view = [self.scrollView.subviews objectAtIndex:i];
+        [view removeFromSuperview];
+    }
     [self.reusablePhotoItemViewSetM removeAllObjects];
     [self.visiblePhotoItemViewDictM removeAllObjects];
-}
+}*/
 
 
 

@@ -611,6 +611,7 @@ static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq
         hud = [[MBProgressHUD alloc] initWithView:view];
         [view addSubview:hud];
         hud.labelText = @"加载中";
+        hud.labelFont = [UIFont systemFontOfSize:14];
         hud.removeFromSuperViewOnHide = YES;
         [hud show:YES];
     }
@@ -637,6 +638,7 @@ static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq
                 content = @"请求失败, 请稍后重试";
             }
             messageHUD.labelText = content;
+            hud.labelFont = [UIFont systemFontOfSize:14];
             messageHUD.margin = 10.f;
             messageHUD.removeFromSuperViewOnHide = YES;
             [messageHUD hide:YES afterDelay:2];
@@ -744,7 +746,7 @@ static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq
     }];
 }
 */
-
+/*
 + (void)uploadImage:(NSString *)curl
              images:(NSArray *)images
         description:(NSString *)description
@@ -817,6 +819,107 @@ static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq
         
         if (success != nil) {
             success(operation, responseObject);
+        }
+    } failure:^(AFHTTPRequestOperation *operation,NSError *error) {
+        if(showHud)
+            [hud hide:YES];
+        
+        MBProgressHUD *messageHUD = [MBProgressHUD showHUDAddedTo:view animated:YES];
+        messageHUD.mode = MBProgressHUDModeText;
+        NSString *content = @"";
+        if (error.code == -1001) {
+            content = @"请求已超时, 请检查网络设置, 稍后重试";
+        } else {
+            content = @"请求失败, 请稍后重试";
+        }
+        messageHUD.labelText = content;
+        messageHUD.margin = 10.f;
+        messageHUD.removeFromSuperViewOnHide = YES;
+        [messageHUD hide:YES afterDelay:2];
+        if (failure != nil) {
+            failure(operation, error);
+        }
+    }];
+}
+*/
+
++ (void)uploadImage:(NSString *)curl
+             images:(NSArray *)images
+        description:(NSString *)description
+         customAttr:(NSString *)customAttr
+        customValue:(NSData *)customValue
+            success:(void (^)(AFHTTPRequestOperation *, id))success
+            failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
+             inView:(UIView *)view
+            showHud:(BOOL)showHud
+{
+    if (images == nil || images.count == 0) {
+        return;
+    }
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    manager.requestSerializer.timeoutInterval = 30.0f;
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
+    
+    NSString *desc_encoded = [description stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSData* descdata = [desc_encoded dataUsingEncoding:NSUTF8StringEncoding];
+    
+    NSString *url = [[KGUtil getServerAppURL] stringByAppendingString:curl];
+    
+    NSInteger imagesCount = images.count;
+    NSLog(@"====>%ld个图片等待上传", (long)imagesCount);
+    
+    //取出第一个UIImage上传
+    UIImage *image = [images objectAtIndex:0];
+    //除了第一个之外的其他images重新作为一个数组递归上传
+    NSArray *otherImages = nil;
+    if (imagesCount > 1) {
+        NSIndexSet *otherIdxs = [[NSIndexSet alloc] initWithIndexesInRange:NSMakeRange(1, imagesCount - 1)];
+        otherImages = [images objectsAtIndexes:otherIdxs];
+    }
+    if (image == nil) {
+        //递归上传下一个图片
+        [KGUtil uploadImage:curl images:otherImages description:description customAttr:customAttr customValue:customValue success:success failure:failure inView:view showHud:showHud];
+        return;
+    }
+    //压缩图片至1MB以内
+    NSData *data = UIImageJPEGRepresentation(image, 1.0);
+    //NSLog(@"upload image size of fatctor 1.0 is %lu", (unsigned long)[data length]);
+    float factor = 0.9;
+    while([data length] >= 1000000 && factor > 0)
+    {
+        data = UIImageJPEGRepresentation(image, factor);
+        //NSLog(@"upload image size of factor %f is %lu", factor, (unsigned long)[data length]);
+        factor -= 0.1;
+    }
+    
+    MBProgressHUD *hud = nil;
+    if(showHud)
+    {
+        hud = [[MBProgressHUD alloc] initWithView:view];
+        [view addSubview:hud];
+        hud.labelText = (imagesCount > 1) ? [NSString stringWithFormat:@"正在上传...剩余%ld张", (long)imagesCount] : @"正在上传...";
+        hud.removeFromSuperViewOnHide = YES;
+        [hud show:YES];
+    }
+    
+    [manager POST:url parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        if (customAttr && customValue) {
+            [formData appendPartWithFormData:customValue name:customAttr];
+        }
+        [formData appendPartWithFormData:descdata name:@"description"];
+        [formData appendPartWithFileData:data name:@"picUrl" fileName:@"upload.jpg" mimeType:@"image/jpeg"];
+    } success:^(AFHTTPRequestOperation *operation,id responseObject) {
+        if (imagesCount == 1) {
+            if(showHud)
+                [hud hide:YES];
+            
+            if (success != nil) {
+                success(operation, responseObject);
+            }
+        } else {
+            //递归上传下一个图片
+            [KGUtil uploadImage:curl images:otherImages description:description customAttr:customAttr customValue:customValue success:success failure:failure inView:view showHud:showHud];
         }
     } failure:^(AFHTTPRequestOperation *operation,NSError *error) {
         if(showHud)
