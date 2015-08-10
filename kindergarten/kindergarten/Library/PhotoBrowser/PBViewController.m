@@ -58,40 +58,15 @@ const CGFloat segWidth = 20.f;
                                             action:selector]];
 }
 
-- (void)addAMenuItem:(NSString *)title icon:(UIImage *)image opType:(PhotoBrowserOperationType)optype opBlock:(void(^)(NSInteger section, NSInteger row, NSInteger imageIndex))opblock {
-    if (optype == OP_ADD_PHOTO) {
-        
-    } else if (optype == OP_DELETE_PHOTO) {
-        self.deletePhotoBlock = opblock;
-        [self.menuItems addObject:[KxMenuItem menuItem:title
-                                                 image:image
-                                                target:self
-                                                action:@selector(deletePhotoAction:)]];
-    }
-}
-
-- (void)deletePhotoAction:(id)sender {
-    [self removePage:self.page];
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 
 /** 真正展示 */
 -(void)show{
+    [self pagesPrepare];
     [self pushPhotoVC];
 }
 
@@ -107,6 +82,10 @@ const CGFloat segWidth = 20.f;
     }
 }
 
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [self cleanPhotoBrowser];
+}
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
@@ -119,7 +98,7 @@ const CGFloat segWidth = 20.f;
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self pagesPrepare];
+    //[self pagesPrepare];
     [self setNavigationBarStyle];
 }
 
@@ -135,34 +114,31 @@ const CGFloat segWidth = 20.f;
         [rightButton addSubview:rightImageView];
         UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
         self.navigationItem.rightBarButtonItem = rightButtonItem;
+        
+        //UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithTitle:@"back" style:UIBarButtonItemStyleDone target:self action:@selector(backBtnAction:)];
+       // UIBarButtonItem *backItem2 = [UIBarButtonItem alloc] initwith
+        //self.navigationItem.leftBarButtonItem = backItem;
+        //self.navigationItem.leftBarButtonItem.target = self;
+        //[self.navigationItem.leftBarButtonItem respondsToSelector:@selector(backBtnAction:)];
+        //[_handleVC.navigationItem setBackBarButtonItem:backItem];
         [self setNavigationBarStyle];
     } else {
         [self restoreNavigationBarStyle];
     }
 }
 
+- (void)cleanPhotoBrowser {
+    for (int i = 0; i < self.scrollView.subviews.count; i++) {
+        UIView *view = [self.scrollView.subviews objectAtIndex:i];
+        [view removeFromSuperview];
+    }
+    //[self.reusablePhotoItemViewSetM removeAllObjects];
+    [self.visiblePhotoItemViewDictM removeAllObjects];
+}
+
 - (void)clickRightButton:(UIButton *)sender {
-    //[self removePage:self.page];
-    //[self addAPage];
-    //return;
-    //NSLog(@"click");
-    /*NSArray *menuItems =
-    @[
-      [KxMenuItem menuItem:@"转存至成长档案"
-                     image:[UIImage imageNamed:@"baby_icon_normal.png"]
-                    target:self
-                    action:@selector(pushMenuItem:)],
-      
-      [KxMenuItem menuItem:@"保存至本地相册"
-                     image:[UIImage imageNamed:@"save.png"]
-                    target:self
-                    action:@selector(saveImageToLocalAlbum:)],
-      ];*/
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
     CGRect rect = CGRectMake(screenBounds.size.width - 80, self.navigationController.navigationBar.frame.origin.y, 100, self.navigationController.navigationBar.frame.size.height);
-//    UIView *cView = [[UIView alloc] initWithFrame:rect];
-//    cView.backgroundColor = [UIColor redColor];
-//    [self.view addSubview:cView];
     for (int i = 0; i < _menuItems.count; i++) {
         KxMenuItem *item = (KxMenuItem *)[_menuItems objectAtIndex:i];
         item.imageIndex = self.page;
@@ -243,8 +219,8 @@ const CGFloat segWidth = 20.f;
     
     CGFloat widthEachPage = frame.size.width + segWidth;
     
-    [self.reusablePhotoItemViewSetM removeAllObjects];
-    [self.visiblePhotoItemViewDictM removeAllObjects];
+    //[self.reusablePhotoItemViewSetM removeAllObjects];
+    //[self.visiblePhotoItemViewDictM removeAllObjects];
     
     //展示页码对应的页面
     [self showWithPage:self.index];
@@ -267,16 +243,11 @@ const CGFloat segWidth = 20.f;
     if (self.imageInfos == nil || self.imageInfos.count == 0) {
         [self dismiss];
     }
-    for (int i = 0; i < self.scrollView.subviews.count; i++) {
-        UIView *view = [self.scrollView.subviews objectAtIndex:i];
-        [view removeFromSuperview];
-    }
-    [self.reusablePhotoItemViewSetM removeAllObjects];
-    [self.visiblePhotoItemViewDictM removeAllObjects];
+    [self cleanPhotoBrowser];
     self.index = index;
     [self pagesPrepare];
 }
-
+/*
 - (void)removePage: (NSInteger)page {
     if (page < 0 || page >= self.imageInfos.count) {
         return;
@@ -327,7 +298,7 @@ const CGFloat segWidth = 20.f;
     //[self.scrollView scrollRectToVisible:targetFrame animated:YES];
     //[self.scrollView scrollRectToVisible:CGRectMake(320 * nextPage, 0, 320, 568) animated:YES];
     //[self.imageInfos removeObjectAtIndex:page];
-}
+}*/
 
 /*
  *  展示页码对应的页面
@@ -349,14 +320,14 @@ const CGFloat segWidth = 20.f;
     if([self.visiblePhotoItemViewDictM objectForKey:@(page)] != nil) return;
     
     //取出重用photoItemView
-    PBItemView *photoItemView = [self dequeReusablePhotoItemView];
+    /*PBItemView *photoItemView = [self dequeReusablePhotoItemView];
     
     if(photoItemView == nil){//没有取到
         
         //重新创建
         photoItemView = [[[NSBundle mainBundle] loadNibNamed:@"PBItemView" owner:nil options:nil] firstObject];
-    }
-    
+    }*/
+    PBItemView *photoItemView = [[[NSBundle mainBundle] loadNibNamed:@"PBItemView" owner:nil options:nil] firstObject];
     NSLog(@"%p",&photoItemView);
     
     //数据覆盖
@@ -463,9 +434,9 @@ const CGFloat segWidth = 20.f;
 
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     
-    NSUInteger page = [self pageCalWithScrollView:scrollView];
+    //NSUInteger page = [self pageCalWithScrollView:scrollView];
     
-    [self reuserAndVisibleHandle:page];
+    //[self reuserAndVisibleHandle:page];
 }
 
 
@@ -477,7 +448,7 @@ const CGFloat segWidth = 20.f;
 }
 
 
-
+/*
 -(void)reuserAndVisibleHandle:(NSUInteger)page{
     
     //遍历可视视图字典，除了page之外的所有视图全部移除，并加入重用集合
@@ -489,12 +460,12 @@ const CGFloat segWidth = 20.f;
             
             photoItemView.alpha=0;
             
-            [self.reusablePhotoItemViewSetM addObject:photoItemView];
+            //[self.reusablePhotoItemViewSetM addObject:photoItemView];
             
             [self.visiblePhotoItemViewDictM removeObjectForKey:key];
         }
     }];
-}
+}*/
 
 
 
@@ -564,14 +535,14 @@ const CGFloat segWidth = 20.f;
 //        [self.topBarLabel layoutIfNeeded];
 //    });
     
-    //dispatch_async(dispatch_get_main_queue(), ^{
+    dispatch_async(dispatch_get_main_queue(), ^{
         
         //显示对应的页面
         [self showWithPage:page];
         
         //获取当前显示中的photoItemView
         self.currentItemView = [self.visiblePhotoItemViewDictM objectForKey:@(self.page)];
-    //});
+    });
 }
 
 
@@ -586,7 +557,7 @@ const CGFloat segWidth = 20.f;
 
 
 /** 取出可重用照片视图 */
--(PBItemView *)dequeReusablePhotoItemView{
+/*-(PBItemView *)dequeReusablePhotoItemView{
     
     PBItemView *photoItemView = [self.reusablePhotoItemViewSetM anyObject];
     
@@ -599,21 +570,18 @@ const CGFloat segWidth = 20.f;
     }
     
     return photoItemView;
-}
-
-
-
+}*/
 
 
 /** 可重用集合 */
--(NSMutableSet *)reusablePhotoItemViewSetM{
+/*-(NSMutableSet *)reusablePhotoItemViewSetM{
     
     if(_reusablePhotoItemViewSetM ==nil){
         _reusablePhotoItemViewSetM =[NSMutableSet set];
     }
     
     return _reusablePhotoItemViewSetM;
-}
+}*/
 
 
 /** 显示中视图字典 */
@@ -637,16 +605,8 @@ const CGFloat segWidth = 20.f;
     [self showWithPage:nextPage];
 }
 
-- (IBAction)backBtnAction:(UIButton *)sender {
-    [self dismiss];
-}
-
-
-//
--(void)dismiss {
+- (void)dismiss {
     [self.navigationController popViewControllerAnimated:YES];
-    [self.reusablePhotoItemViewSetM removeAllObjects];
-    [self.visiblePhotoItemViewDictM removeAllObjects];
 }
 
 

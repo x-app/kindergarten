@@ -87,34 +87,8 @@
     
     if(self.imageInfo == nil) return;
     
-    //创建imageView
-    //UIImage *img_placeholder = [UIImage imageNamed:@"PBResource.bundle/empty_picture"];
-    //UIImage *image = [self remakeImageWithFullSize:img_placeholder size:[UIScreen mainScreen].bounds.size zoom:0.3f];
-    
-    //self.photoImageView.image = image;
-    
-    //if(image == nil) return;
-    
-    /*[self.photoImageView imageWithUrlStr:_photoModel.image_HD_U phImage:image progressBlock:^(NSInteger receivedSize, NSInteger expectedSize) {
-        
-        _progressView.hidden = NO;
-        
-        CGFloat progress = receivedSize /((CGFloat)expectedSize);
-        
-        _progressView.progress = progress;
-        
-    } completedBlock:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        
-        self.hasImage = image !=nil;
-        
-        if(image!=nil && _progressView.progress <1.0f) {
-            _progressView.progress = 1.0f;
-        }
-    }];*/
-    
-    //__block UIActivityIndicatorView *activityIndicator;
     __block CGRect windowFrame = [[UIScreen mainScreen] bounds];
-    if (self.imageInfo.image != nil) {
+    if (self.imageInfo.image != nil) { //如果已经传入了image，直接展现
         self.photoImageView.frame = windowFrame;
         self.photoImageView.image = self.imageInfo.image;
         return;
@@ -123,13 +97,16 @@
     self.photoImageView.frame = placeholderFrame;
     //__weak UIImageView *weakImageView = self.photoImageView;
     UIImage *placeHolder = (self.imageInfo.placeHolder == nil) ? [UIImage imageNamed:@"PBResource.bundle/empty_picture"] : self.imageInfo.placeHolder;
+    _progressView.hidden = NO;
+    _progressView.progress = 0.0f;
     [self.photoImageView sd_setImageWithURL:[NSURL URLWithString:self.imageInfo.imageURL]
                       //placeholderImage:[UIImage imageNamed:@"PBResource.bundle/empty_picture"]
                         placeholderImage:placeHolder
                                options:SDWebImageLowPriority | SDWebImageRetryFailed//SDWebImageProgressiveDownload
                               progress:^(NSInteger receivedSize, NSInteger expectedSize) {
                                   //self.photoImageView.frame = placeholderFrame;
-                                  NSLog(@">>>>%f", (double)receivedSize/expectedSize);
+                                  
+                                  //NSLog(@">>>>%f", (double)receivedSize/expectedSize);
                                   /*if (!activityIndicator) {
                                       activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
                                       [weakImageView addSubview:activityIndicator];
@@ -137,10 +114,9 @@
                                       //activityIndicator.center = weakImageView.center;
                                       [activityIndicator startAnimating];
                                   }*/
-                                  _progressView.hidden = NO;
-                                  
-                                  CGFloat progress = receivedSize /((CGFloat)expectedSize);
-                                  
+                                  _progressView.hidden = NO; 
+                                  //最开始开始下载时expectedSize是-1
+                                  CGFloat progress = (expectedSize < 0 || receivedSize < 0) ? 0.0f : receivedSize /((CGFloat)expectedSize);
                                   _progressView.progress = progress;
                               }
                              completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
@@ -174,7 +150,7 @@
         _descLabel.text = self.imageInfo.imageDesc;
     }
 }
-
+/*
 -(UIImage *)remakeImageWithFullSize:(UIImage *)image size:(CGSize)fullSize zoom:(CGFloat)zoom{
     
     //新建上下文
@@ -197,7 +173,7 @@
     UIGraphicsEndImageContext();
     
     return newImage;
-}
+}*/
 
 
 -(PBImageView *)photoImageView{
@@ -271,26 +247,6 @@
         [self.scrollView setZoomScale:1.0f animated:YES];
     }
 }
-
-
-
-
-//
-//
-//
-///*
-// *  旋转手势
-// */
-//-(void)rota:(UIRotationGestureRecognizer *)rotaGesture{
-//    
-//    NSLog(@"旋转");
-//    self.photoImageView.transform = CGAffineTransformRotate(rotaGesture.view.transform, rotaGesture.rotation);
-//    rotaGesture.rotation = 0;
-//}
-
-
-
-
 
 /*
  *  处理bottomView
@@ -439,52 +395,10 @@
     return self.photoImageView.frame;
 }
 
-/*
--(void)zoomDismiss:(void(^)())compeletionBlock{
-    
-    //隐藏图片
-    //self.imageInfo.sourceImageView.hidden = YES;
-    
-    [UIView animateWithDuration:.4f animations:^{
-        
-        self.bgView.alpha=0;
-        
-        self.bottomView.alpha=0;
-    }];
-    
-    
-    [UIView animateWithDuration:.5f delay:0 usingSpringWithDamping:.6f initialSpringVelocity:10 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        self.photoImageView.contentMode = self.photoModel.sourceImageView.contentMode;
-        self.photoImageView.frame = self.photoModel.sourceFrame;
-        self.photoImageView.clipsToBounds = YES;
-    } completion:^(BOOL finished) {
-        
-        //显示图片
-        self.photoModel.sourceImageView.hidden = NO;
-        
-        if(finished && compeletionBlock!=nil) compeletionBlock();
-    }];
-}*/
-
-
-
-//
-//
-//-(CGFloat)zoomScale{
-//    return self.scrollView.zoomScale;
-//}
 
 -(void)setZoomScale:(CGFloat)zoomScale{
     _zoomScale = zoomScale;
     [self.scrollView setZoomScale:zoomScale animated:YES];
 }
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
 
 @end

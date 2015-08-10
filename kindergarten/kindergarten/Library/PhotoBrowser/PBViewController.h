@@ -54,7 +54,7 @@ typedef enum {
 @property (nonatomic,assign) NSUInteger index;
 
 /** 可重用集合 */
-@property (nonatomic,strong) NSMutableSet *reusablePhotoItemViewSetM;
+//@property (nonatomic,strong) NSMutableSet *reusablePhotoItemViewSetM;
 
 /** 显示中视图字典 */
 @property (nonatomic,strong) NSMutableDictionary *visiblePhotoItemViewDictM;
@@ -68,11 +68,8 @@ typedef enum {
 /** 当前显示中的itemView */
 @property (nonatomic,weak) PBItemView *currentItemView;
 
-@property (nonatomic,copy) void (^deletePhotoBlock)(NSInteger section, NSInteger row, NSInteger imageIndex);
 
-@property (nonatomic,copy) void (^addPhotoBlock)(NSInteger section, NSInteger row, NSInteger imageIndex);
-
-- (void)removePage: (NSInteger)page;
+//- (void)removePage: (NSInteger)page;
 
 - (void)resetAsPageRemoved;
 

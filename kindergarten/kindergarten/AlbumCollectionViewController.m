@@ -456,9 +456,6 @@ static NSString * const reuseIdentifier = @"AlbumCell";
         NSString *code = [responseObject objectForKey:@"code"];
         if ([code isEqualToString:@"000000"]) {
             [self reloadData];
-//            if (isInPB) {
-//                [self.pbVC removePage:index];
-//            }
             [self resetImageInfos:self.curAlbumIndex];
             [self.pbVC resetAsPageRemoved];
         } else {

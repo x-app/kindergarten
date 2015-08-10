@@ -289,34 +289,9 @@
                 delegate.user.registered = YES;
                 delegate.user.verified = YES;
                 delegate.user.registering = NO;
-                [delegate deleteToken];
-                [delegate postToken];
-                [self saveCustomData];
-                [self.navigationController dismissViewControllerAnimated:YES completion:^{
-                    //UIWindow *window = [[UIApplication sharedApplication] keyWindow];
-                    //NSArray *views = window.subviews;
-                    /*UITabBarController *tbVC = (UITabBarController *)[KGUtil getTopMostViewController];
-                    if (tbVC == nil) {
-                        return;
-                    }
-                    NSArray *cVCArray = tbVC.customizableViewControllers;
-                    for (int i = 0; i < cVCArray.count; i++) {
-                        UINavigationController *navi = (UINavigationController *)[tbVC.customizableViewControllers objectAtIndex:i];
-                        if (navi == nil) {
-                            continue;
-                        }
-                        if ([navi.visibleViewController isKindOfClass:[RBStoryboardLink class]]) {
-                            RBStoryboardLink *sbLink = (RBStoryboardLink *)navi.visibleViewController;
-                            UIViewController *curVC = sbLink.scene;
-                            if (curVC != nil && [curVC isKindOfClass:[KGUIViewController class]]) {
-                                KGUIViewController *kgVC = (KGUIViewController *)curVC;
-                                [kgVC setTeacherVersionFunc];
-                            }
-                            //KGUIViewController *kgVC = (KGUIViewController *)navi.visibleViewController;
-                            //[kgVC setTeacherVersionFunc];
-                        }
-                    }*/
-                }];
+                //[delegate deleteToken];
+                //[delegate postToken];
+                [self requestReplaceToken];
             }];
             
             if (self.fromVC != nil) {
@@ -479,6 +454,18 @@
      showError:true];
 }
 
+- (void)requestReplaceToken {
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [delegate replaceToken:^{
+        [self saveCustomData];
+        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    } failure:^{
+        UIAlertView *hint = [[UIAlertView alloc] initWithTitle:@"注意" message:@"注册请求失败,请重试" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        hint.tag = 2;
+        [hint show];
+    }];
+}
+
 #pragma mark -- Test Actions --
 
 - (IBAction)test:(UIButton *)sender {
@@ -505,22 +492,26 @@
 
 #pragma mark UIAlertViewDelegate
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    NSLog(@"click alert view");
-    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    if (buttonIndex == 0) { //确定-直接进入忘记密码的模式
-        delegate.user.regMode = 1;
-        if ([KGUtil isTeacherVersion]) {
-            [self queryClassInfo: delegate.user.uid];
-        } else {
-            [self queryChildInfo:delegate.user.uid];
+    if (alertView.tag == 1) { //注册的第一步已注册的情况下询问是否召回密码
+        AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        if (buttonIndex == 0) { //确定-直接进入忘记密码的模式
+            delegate.user.regMode = 1;
+            if ([KGUtil isTeacherVersion]) {
+                [self queryClassInfo: delegate.user.uid];
+            } else {
+                [self queryChildInfo:delegate.user.uid];
+            }
+            //[self.navigationController pushViewController:self.nextVC animated:YES];
+        } else { //取消-返回main.storyboard--20150807日修改，不再返回main，直接取消
+            //        delegate.user.registering = NO;
+            //        [self.navigationController dismissViewControllerAnimated:YES completion:^{
+            //            [KGUtil lockTopMostVC];
+            //        }];
         }
-        //[self.navigationController pushViewController:self.nextVC animated:YES];
-    } else { //取消-返回main.storyboard--20150807日修改，不再返回main，直接取消
-//        delegate.user.registering = NO;
-//        [self.navigationController dismissViewControllerAnimated:YES completion:^{
-//            [KGUtil lockTopMostVC];
-//        }];
+    } else if (alertView.tag == 2) { //token处理失败时提示重试
+        [self requestReplaceToken];
     }
+   
 }
 #pragma mark UITextFieldDelegate
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{

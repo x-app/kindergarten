@@ -70,6 +70,7 @@
                 if (![delegate.user.question isEqualToString:@""]) { //用户的密保问题不为空, 说明已经注册过了
                     UIAlertView *hint = [[UIAlertView alloc] initWithTitle:@"请确认" message:@"当前用户已经注册,你是否是要找回密码?" delegate:current.self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
                     //current.nextVC = next;
+                    hint.tag = 1;
                     [hint show];
                 } else {
                     if ([KGUtil isTeacherVersion]) {
