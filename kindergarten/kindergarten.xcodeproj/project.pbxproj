@@ -167,6 +167,8 @@
 		996D322E1B55525200CB648B /* KGVarible.m in Sources */ = {isa = PBXBuildFile; fileRef = 996D322D1B55525200CB648B /* KGVarible.m */; };
 		99709B6B1B59E45000150176 /* KGImageTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99709B6A1B59E45000150176 /* KGImageTableViewController.m */; };
 		99709B6E1B59E50A00150176 /* KGHomework.m in Sources */ = {isa = PBXBuildFile; fileRef = 99709B6D1B59E50A00150176 /* KGHomework.m */; };
+		999063991B79EDB80026500F /* PhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 999063981B79EDB80026500F /* PhotoCollectionViewCell.m */; };
+		9990639C1B79EDD90026500F /* PhotoCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9990639B1B79EDD90026500F /* PhotoCollectionViewController.m */; };
 		9990FB391B650EEE006A80F7 /* LFRoundProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9990FB361B650EEE006A80F7 /* LFRoundProgressView.m */; };
 		9990FB3A1B650EEE006A80F7 /* PBProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9990FB381B650EEE006A80F7 /* PBProgressView.m */; };
 		9990FB3D1B6677BE006A80F7 /* Album.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9990FB3C1B6677BE006A80F7 /* Album.storyboard */; };
@@ -504,6 +506,10 @@
 		99709B6A1B59E45000150176 /* KGImageTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KGImageTableViewController.m; sourceTree = "<group>"; };
 		99709B6C1B59E50A00150176 /* KGHomework.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KGHomework.h; sourceTree = "<group>"; };
 		99709B6D1B59E50A00150176 /* KGHomework.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KGHomework.m; sourceTree = "<group>"; };
+		999063971B79EDB80026500F /* PhotoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoCollectionViewCell.h; sourceTree = "<group>"; };
+		999063981B79EDB80026500F /* PhotoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCollectionViewCell.m; sourceTree = "<group>"; };
+		9990639A1B79EDD90026500F /* PhotoCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoCollectionViewController.h; sourceTree = "<group>"; };
+		9990639B1B79EDD90026500F /* PhotoCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCollectionViewController.m; sourceTree = "<group>"; };
 		9990FB351B650EEE006A80F7 /* LFRoundProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFRoundProgressView.h; sourceTree = "<group>"; };
 		9990FB361B650EEE006A80F7 /* LFRoundProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFRoundProgressView.m; sourceTree = "<group>"; };
 		9990FB371B650EEE006A80F7 /* PBProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBProgressView.h; sourceTree = "<group>"; };
@@ -1177,6 +1183,10 @@
 				9990FB451B67B182006A80F7 /* KGActivityAlbumInfo.m */,
 				9990FB471B67BF1E006A80F7 /* AlbumCollectionViewCell.h */,
 				9990FB481B67BF1E006A80F7 /* AlbumCollectionViewCell.m */,
+				999063971B79EDB80026500F /* PhotoCollectionViewCell.h */,
+				999063981B79EDB80026500F /* PhotoCollectionViewCell.m */,
+				9990639A1B79EDD90026500F /* PhotoCollectionViewController.h */,
+				9990639B1B79EDD90026500F /* PhotoCollectionViewController.m */,
 			);
 			name = "Album Storyboard";
 			sourceTree = "<group>";
@@ -1729,6 +1739,7 @@
 				9911C2361B5BC4F10080FFA9 /* KGImageTableViewCell.m in Sources */,
 				12F9F92B1B775F5B00CFDB1B /* ELCAsset.m in Sources */,
 				12F9F8C11B77548500CFDB1B /* RBStoryboardLink.m in Sources */,
+				9990639C1B79EDD90026500F /* PhotoCollectionViewController.m in Sources */,
 				9997BA231B4D580E00B908B6 /* MLTableAlert.m in Sources */,
 				12EAE1591B5D3A270084680C /* MJRefreshConst.m in Sources */,
 				9911C2291B5A6BA50080FFA9 /* SDWebImagePrefetcher.m in Sources */,
@@ -1759,6 +1770,7 @@
 				12F9F8C31B77548500CFDB1B /* RBStoryboardPopoverSegue.m in Sources */,
 				12EAE14A1B5D3A270084680C /* MJRefreshAutoFooter.m in Sources */,
 				99D55A541B5FC92A00C508A3 /* IntroductionViewController.m in Sources */,
+				999063991B79EDB80026500F /* PhotoCollectionViewCell.m in Sources */,
 				12F9F8B31B77543000CFDB1B /* JSBadgeView.m in Sources */,
 				9997BA121B4D580E00B908B6 /* CoreLockConst.m in Sources */,
 				9911C2261B5A6BA50080FFA9 /* SDWebImageDownloader.m in Sources */,

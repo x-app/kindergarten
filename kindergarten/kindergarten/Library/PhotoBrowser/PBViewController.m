@@ -84,7 +84,7 @@ const CGFloat segWidth = 20.f;
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
-    [self cleanPhotoBrowser];
+    //[self cleanPhotoBrowser];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -121,7 +121,16 @@ const CGFloat segWidth = 20.f;
     }
 }
 
+- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    if (viewController == self) {
+
+    } else {
+        [self cleanPhotoBrowser];
+    }
+}
+
 - (void)cleanPhotoBrowser {
+    NSLog(@">>>>clear photobrowser");
     for (int i = 0; i < self.scrollView.subviews.count; i++) {
         UIView *view = [self.scrollView.subviews objectAtIndex:i];
         [view removeFromSuperview];

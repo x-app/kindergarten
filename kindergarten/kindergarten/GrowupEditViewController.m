@@ -215,7 +215,6 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     ImageEditCollectionViewCell *cell = (ImageEditCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"ImageEditCell" forIndexPath:indexPath];
-    cell.deleteItemView.hidden = !self.isEditingImages;
     cell.imageItemView.contentMode = UIViewContentModeScaleAspectFill;
     cell.imageItemView.clipsToBounds = YES;
     if (indexPath.row == self.images.count) {
@@ -225,6 +224,8 @@
         cell.isAddButton = NO;
         cell.imageItemView.image = [self.images objectAtIndex:indexPath.row];
     }
+    //非编辑状态或者是增加按钮时，隐藏删除图标
+    cell.deleteItemView.hidden = !self.isEditingImages || cell.isAddButton;
     if (self.postType == ADD_ALBUM_PHOTO) {
         UILongPressGestureRecognizer *longPressGR = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressCellAction:)];
         [cell addGestureRecognizer:longPressGR];
@@ -296,7 +297,6 @@
         [self.images removeObjectAtIndex:imgIdx];
         [self.imagesCollectionView reloadData];
     }
-
 }
 
 @end

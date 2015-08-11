@@ -10,7 +10,6 @@
 
 @interface AlbumCollectionViewController : UICollectionViewController<UICollectionViewDelegateFlowLayout>
 
-
 @property (nonatomic, strong) NSMutableArray *activityAlbums;
 
 - (void)dismissPhotoBrowser;
