@@ -361,6 +361,7 @@
 //    if (self.imageInfos == nil || self.imageInfos.count == 0) {
 //        return;
 //    }
+    [self resetImageInfos];
     self.pbVC.index = indexPath.row;
     self.pbVC.rowIndex = indexPath.row;
     self.pbVC.sectionIndex = indexPath.section;

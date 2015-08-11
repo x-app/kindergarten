@@ -18,6 +18,7 @@
 #import "PBViewController.h"
 #import "KGPicPicker.h"
 #import "GrowupEditViewController.h"
+#import "PhotoCollectionViewController.h"
 
 @interface AlbumCollectionViewController ()<UIAlertViewDelegate, UIGestureRecognizerDelegate, UIActionSheetDelegate, KGPicPickerDelegate, KGPostImageDelegate>
 
@@ -131,15 +132,25 @@ static NSString * const reuseIdentifier = @"AlbumCell";
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
+#pragma mark - Navigation segue
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if (![segue.identifier isEqualToString:@"showPhotosInAlbumSegue"]) {
+        return;
+    }
+    PhotoCollectionViewController *nextVC = (PhotoCollectionViewController *)segue.destinationViewController;
+    if (nextVC == nil) {
+        return;
+    }
+    AlbumCollectionViewCell *cell = (AlbumCollectionViewCell *)sender;
+    if (cell == nil || cell.tag < 0 || cell.tag >= self.activityAlbums.count) {
+        return;
+    }
+    nextVC.activityAlbum = [self.activityAlbums objectAtIndex:cell.tag];
 }
-*/
+
 
 #pragma mark UICollectionViewDataSource
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -152,15 +163,12 @@ static NSString * const reuseIdentifier = @"AlbumCell";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     AlbumCollectionViewCell *cell = (AlbumCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"AlbumCell" forIndexPath:indexPath];
+    cell.tag = indexPath.row;
     //cell.backgroundColor = [UIColor blackColor];
     KGActivityAlbum *curAlbum = (KGActivityAlbum *)[self.activityAlbums objectAtIndex:indexPath.row];
     cell.albumNameLabel.text = [NSString stringWithFormat:@"%@(%ld)", curAlbum.dirName, (long)curAlbum.albumInfos.count] ;
-    cell.albumImageView.contentMode = UIViewContentModeScaleAspectFill;
-    cell.albumImageView.clipsToBounds = YES;
-    cell.album2ndImageView.contentMode = UIViewContentModeScaleAspectFill;
-    cell.album2ndImageView.clipsToBounds = YES;
-    cell.album3rdImageView.contentMode = UIViewContentModeScaleAspectFill;
-    cell.album3rdImageView.clipsToBounds = YES;
+    [cell setImageViewsBorder];
+    [cell prepareImageViews];
     NSString *coverUrl = [curAlbum getCoverUrl];
     //cell.album2ndImageView.image = [UIImage imageNamed:@"image_placeholder"];
     //cell.album3rdImageView.image = [UIImage imageNamed:@"image_placeholder"];
@@ -218,33 +226,12 @@ static NSString * const reuseIdentifier = @"AlbumCell";
     if (curAlbum == nil) {
         return;
     }
+    /*
     if (curAlbum.albumInfos && curAlbum.albumInfos.count == 0) {
         //todo 新增
         [self addPhotoToAlbum:curAlbum.dirId];
         return;
     }
-    /*NSMutableArray *imageInfos = [[NSMutableArray alloc] initWithCapacity:[curAlbum.albumInfos count]];
-    for (int i = 0; i < [curAlbum.albumInfos count]; i++) {
-        KGActivityAlbumInfo *aInfo = (KGActivityAlbumInfo *)[curAlbum.albumInfos objectAtIndex:i];
-        PBImageInfo *iInfo = [[PBImageInfo alloc] init];
-        iInfo.imageURL = [NSString stringWithFormat:@"%@%@", [KGUtil getServerAppURL], aInfo.picUrl];
-        //iInfo.imageTitle = [NSString stringWithFormat:@"%ld/%ld", (long)(i + 1), (long)curAlbum.albumInfos.count];
-        iInfo.imageDesc = aInfo.desc;
-        [imageInfos addObject:iInfo];
-    }
-    PBViewController *pbVC = [[PBViewController alloc] init];
-    pbVC.index = 0;
-    pbVC.handleVC = self;
-    pbVC.rowIndex = indexPath.row;
-    pbVC.sectionIndex = indexPath.section;
-    pbVC.imageInfos = imageInfos;
-    if ([KGUtil isTeacherVersion]) {
-        [pbVC addAMenuItem:@"增加照片" icon:[UIImage imageNamed:@"baby_icon_normal.png"] target:self action:@selector(addPhotoToAlbumInPB:)];
-        [pbVC addAMenuItem:@"删除照片" icon:[UIImage imageNamed:@"baby_icon_normal.png"] target:self action:@selector(deletePhotoFromAlbumInPB:)];
-    } else {
-        [pbVC addAMenuItem:@"转存至成长档案" icon:[UIImage imageNamed:@"baby_icon_normal.png"] target:self action:@selector(saveToGrowupDoc:)];
-    }
-    [pbVC show];*/
     [self resetImageInfos:indexPath.row];
     self.curAlbumIndex = indexPath.row;
     self.pbVC.index = 0;
@@ -252,6 +239,7 @@ static NSString * const reuseIdentifier = @"AlbumCell";
     self.pbVC.rowIndex = indexPath.row;
     self.pbVC.sectionIndex = indexPath.section;
     [self.pbVC show];
+     */
 }
 
 #pragma mark UICollectionViewDelegate
@@ -288,17 +276,23 @@ static NSString * const reuseIdentifier = @"AlbumCell";
 #pragma mark UICollectionViewDelegateFlowLayout
 //定义每个UICollectionView 的大小
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    CGFloat unitWidth = 150;
+    /*CGFloat unitWidth = 150;
     CGFloat unitMargin = 5;
     CGFloat screenWidth = [[UIScreen mainScreen] bounds].size.width;
     NSUInteger numInARow = (int)((screenWidth - unitMargin) / (unitMargin + unitWidth));
     CGFloat realWith = (screenWidth - unitMargin) / numInARow - unitMargin;
-    return CGSizeMake(realWith, realWith);
+    return CGSizeMake(realWith, realWith);*/
+    
+    CGFloat screenWidth = [[UIScreen mainScreen] bounds].size.width;
+    NSInteger colsNum = 3; //每行四个
+    CGFloat unitMargin = 5;
+    CGFloat unitWidth = (int)((screenWidth - 5 - (colsNum + 1) * unitMargin) / colsNum) ;
+    return CGSizeMake(unitWidth, unitWidth + 30);
 }
 
 //定义每个UICollectionView 的 margin
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    return UIEdgeInsetsMake(5, 2.5, 5, 2.5);
+    return UIEdgeInsetsMake(5, 5, 5, 5);
 }
 
 #pragma mark methods
