@@ -25,6 +25,9 @@
 @property (strong, nonatomic) NSArray *qstnList;
 @property (strong, nonatomic) MLTableAlert *tableAlert;
 
+
+@property (strong, nonatomic) CLLockVC *lockVC;
+
 @end
 
 @implementation LoginViewContoller
@@ -284,6 +287,9 @@
         [CLLockVC showSettingLockVCInVC:self successBlock:^(CLLockVC *lockVC, NSString *pwd) {
             NSLog(@"密码设置成功");
             [self setFuncIcons];
+            self.lockVC = lockVC;
+            [self requestReplaceToken];
+            /*
             AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
             [lockVC dismissViewControllerAnimated:NO completion:^(void) {
                 delegate.user.registered = YES;
@@ -298,7 +304,7 @@
                 NSLog(@"return to fromVC");
                 //[self dismissViewControllerAnimated:NO completion:nil];
                 //[self presentViewController:self.fromVC animated:YES completion:nil];
-            }
+            }*/
         }];
     }
 }
@@ -457,8 +463,19 @@
 - (void)requestReplaceToken {
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     [delegate replaceToken:^{
-        [self saveCustomData];
-        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+        if (self.lockVC != nil) {
+            [self.lockVC dismissViewControllerAnimated:NO completion:^(void) {
+                delegate.user.registered = YES;
+                delegate.user.verified = YES;
+                delegate.user.registering = NO;
+                //[delegate deleteToken];
+                //[delegate postToken];
+                //[self requestReplaceToken];
+                [self saveCustomData];
+                [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+                self.lockVC = nil;
+            }];
+        }
     } failure:^{
         UIAlertView *hint = [[UIAlertView alloc] initWithTitle:@"注意" message:@"注册请求失败,请重试" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
         hint.tag = 2;
