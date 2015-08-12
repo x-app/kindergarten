@@ -67,6 +67,7 @@ const CGFloat segWidth = 20.f;
 /** 真正展示 */
 -(void)show{
     [self pagesPrepare];
+    //[self cleanPhotoBrowser];
     [self pushPhotoVC];
 }
 
@@ -84,12 +85,16 @@ const CGFloat segWidth = 20.f;
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
-    //[self cleanPhotoBrowser];
+    self.isVisible = NO;
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
+//    if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
+//        // back button was pressed.  We know this is true because self is no longer
+//        // in the navigation stack.
+//        [self cleanPhotoBrowser];
+//    }
     [super viewWillDisappear:animated];
-    self.isVisible = NO;
     //[self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
@@ -125,7 +130,8 @@ const CGFloat segWidth = 20.f;
     if (viewController == self) {
 
     } else {
-        [self cleanPhotoBrowser];
+        //[self cleanPhotoBrowser];
+        //self.navigationController.delegate = nil;
     }
 }
 
@@ -225,7 +231,7 @@ const CGFloat segWidth = 20.f;
     //[self.reusablePhotoItemViewSetM removeAllObjects];
     //[self.visiblePhotoItemViewDictM removeAllObjects];
     [self cleanPhotoBrowser];
-    
+
     //展示页码对应的页面
     [self showWithPage:self.index];
     //self.page = self.index;
@@ -262,6 +268,7 @@ const CGFloat segWidth = 20.f;
     if (self.imageInfos == nil || self.imageInfos.count == 0) {
         return;
     }
+
 //    PBImageInfo *curImgInfo = (PBImageInfo *)[self.imageInfos objectAtIndex:page];
 //    NSString *text = curImgInfo.imageTitle;
 //    if ([KGUtil isEmptyString:text]) {
@@ -273,7 +280,7 @@ const CGFloat segWidth = 20.f;
 //    }
     //如果对应页码对应的视图正在显示中，就不用再显示了
     if([self.visiblePhotoItemViewDictM objectForKey:@(page)] != nil) return;
-    
+
     //取出重用photoItemView
     /*PBItemView *photoItemView = [self dequeReusablePhotoItemView];
     
@@ -284,7 +291,7 @@ const CGFloat segWidth = 20.f;
     }*/
     PBItemView *photoItemView = [[[NSBundle mainBundle] loadNibNamed:@"PBItemView" owner:nil options:nil] firstObject];
     NSLog(@"%p",&photoItemView);
-    
+
     //数据覆盖
     photoItemView.ItemViewSingleTapBlock = ^(){
         [self singleTap];
@@ -293,18 +300,19 @@ const CGFloat segWidth = 20.f;
     //到这里，photoItemView一定有值，而且一定显示为当前页
     //加入到当前显示中的字典
     [self.visiblePhotoItemViewDictM setObject:photoItemView forKey:@(page)];
-    
+
     //传递数据
     //设置页标
     photoItemView.pageIndex = page;
+
     photoItemView.imageInfo = self.imageInfos[page];
-    
+
     [self.scrollView addSubview:photoItemView];
     
     //    [UIView animateWithDuration:.01 animations:^{
     photoItemView.alpha=1;
     //    }];
-    
+
     //这里有一个奇怪的重影bug，必须这样解决
     
     //    photoItemView.hidden=YES;
@@ -318,6 +326,9 @@ const CGFloat segWidth = 20.f;
 }
 
 
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    NSLog(@"Photobrowser prepare for segue");
+}
 
 
 -(void)singleTap{
@@ -562,6 +573,10 @@ const CGFloat segWidth = 20.f;
 
 - (void)dismiss {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)dealloc {
+    NSLog(@">>>>>>>>>>dealloc PhotoBrowser");
 }
 
 

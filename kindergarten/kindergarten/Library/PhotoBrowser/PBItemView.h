@@ -12,7 +12,7 @@
 
 
 /** 相册模型 */
-@property (nonatomic,strong)  PBImageInfo *imageInfo;
+@property (nonatomic,weak)  PBImageInfo *imageInfo;
 
 /** 缩放比例回归正常 */
 @property (nonatomic,assign) BOOL isScaleNormal;

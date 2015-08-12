@@ -25,7 +25,7 @@ typedef enum {
 
 
 /** 外部操作控制器 */
-@property (nonatomic,weak) UIViewController *handleVC;
+@property (nonatomic, weak) UIViewController *handleVC;
 
 /** scrollView */
 @property (weak, nonatomic) IBOutlet  PBScrollView *scrollView;
@@ -39,7 +39,7 @@ typedef enum {
 @property (nonatomic) NSInteger sectionIndex;
 
 /** 相册数组 */
-@property (nonatomic,strong) NSMutableArray *imageInfos;
+@property (nonatomic, weak) NSMutableArray *imageInfos;
 
 /** 总页数 */
 //@property (nonatomic,assign) NSUInteger pageCount;
@@ -84,5 +84,7 @@ typedef enum {
               action:(SEL)selector;
 
 - (void)dismiss;
+
+- (void)cleanPhotoBrowser;
 
 @end

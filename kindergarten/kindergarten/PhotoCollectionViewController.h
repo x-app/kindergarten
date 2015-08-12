@@ -11,6 +11,6 @@
 
 @interface PhotoCollectionViewController : UICollectionViewController<UICollectionViewDelegateFlowLayout>
 
-@property (nonatomic, strong) KGActivityAlbum *activityAlbum;
+@property (nonatomic, weak) KGActivityAlbum *activityAlbum;
 
 @end

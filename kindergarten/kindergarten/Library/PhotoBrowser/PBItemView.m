@@ -39,16 +39,6 @@
 /** imageView的双击 */
 @property (nonatomic,strong) UITapGestureRecognizer *tap_double_imageViewGesture;
 
-
-
-
-
-
-
-
-
-
-
 /** 双击放大 */
 @property (nonatomic,assign) BOOL isDoubleClickZoom;
 
