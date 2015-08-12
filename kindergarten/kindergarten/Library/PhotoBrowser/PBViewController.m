@@ -89,12 +89,13 @@ const CGFloat segWidth = 20.f;
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
 //    if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
 //        // back button was pressed.  We know this is true because self is no longer
 //        // in the navigation stack.
+//        NSLog(@"---------->>>");
 //        [self cleanPhotoBrowser];
 //    }
-    [super viewWillDisappear:animated];
     //[self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
@@ -574,10 +575,10 @@ const CGFloat segWidth = 20.f;
 - (void)dismiss {
     [self.navigationController popViewControllerAnimated:YES];
 }
-
-- (void)dealloc {
-    NSLog(@">>>>>>>>>>dealloc PhotoBrowser");
-}
+//
+//- (void)dealloc {
+//    NSLog(@">>>>>>>>>>dealloc PhotoBrowser");
+//}
 
 
 

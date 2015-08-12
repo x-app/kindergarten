@@ -428,6 +428,7 @@ static NSInteger const numPerRow = 4;
     self.deletePhotoButton.enabled = self.isEditing;
     self.addPhotoButton.enabled = !self.isEditing;
     self.navigationItem.title = self.isEditing ? @"选择项目" : @"";
+    self.editButton.title = self.isEditing ? @"取消" : @"选择";
     NSArray *allRows = self.collectionView.indexPathsForVisibleItems;
     if (self.isEditing == NO) { //当取消编辑时，把以选中的项目取消掉
         for (NSIndexPath *selectedRow in allRows) {
@@ -446,9 +447,11 @@ static NSInteger const numPerRow = 4;
     
 }
 
-
-- (void)dealloc {
-    NSLog(@">>>>>>>>>>dealloc photo collection view");
-}
+//
+//- (void)dealloc {
+//    NSLog(@">>>>>>>>>>dealloc photo collection view");
+//    _imageInfos = nil;
+//    _pbVC = nil;
+//}
 
 @end
