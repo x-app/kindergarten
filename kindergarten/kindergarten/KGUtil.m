@@ -898,7 +898,8 @@ static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq
     {
         hud = [[MBProgressHUD alloc] initWithView:view];
         [view addSubview:hud];
-        hud.labelText = (imagesCount > 1) ? [NSString stringWithFormat:@"正在上传...剩余%ld张", (long)imagesCount] : @"正在上传...";
+        //hud.labelText = (imagesCount > 1) ? [NSString stringWithFormat:@"正在上传...剩余%ld张", (long)imagesCount] : @"正在上传...";
+        hud.labelText = [NSString stringWithFormat:@"正在上传...剩余%ld张", (long)imagesCount];
         hud.removeFromSuperViewOnHide = YES;
         [hud show:YES];
     }

@@ -13,6 +13,12 @@
 - (void)prepareImageView {
     self.photoImageView.contentMode = UIViewContentModeScaleAspectFill;
     self.photoImageView.clipsToBounds = YES;
+    self.overlayImageView.hidden = !self.isSelected;
+}
+
+- (void)setIsSelected:(BOOL)isSelected {
+    _isSelected = isSelected;
+    self.overlayImageView.hidden = !_isSelected;
 }
 
 @end

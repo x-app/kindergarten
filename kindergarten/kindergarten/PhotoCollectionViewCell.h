@@ -11,7 +11,12 @@
 @interface PhotoCollectionViewCell : UICollectionViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *photoImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *overlayImageView;
+
+@property (nonatomic) BOOL isSelected;
 
 - (void)prepareImageView;
+
+- (void)setIsSelected:(BOOL)isSelected;
 
 @end

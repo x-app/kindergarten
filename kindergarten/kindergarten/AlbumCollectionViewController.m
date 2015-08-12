@@ -144,6 +144,7 @@ static NSString * const reuseIdentifier = @"AlbumCell";
     if (nextVC == nil) {
         return;
     }
+    nextVC.albumVC = self;
     AlbumCollectionViewCell *cell = (AlbumCollectionViewCell *)sender;
     if (cell == nil || cell.tag < 0 || cell.tag >= self.activityAlbums.count) {
         return;

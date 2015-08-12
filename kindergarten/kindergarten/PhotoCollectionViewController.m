@@ -24,6 +24,8 @@
 
 @property (nonatomic, strong) PBViewController *pbVC;
 
+@property (nonatomic) BOOL isEditing;
+
 @end
 
 @implementation PhotoCollectionViewController
@@ -37,7 +39,9 @@ static NSInteger const numPerRow = 4;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.isEditing = NO;
+    [self.navigationController setToolbarHidden:NO];
+    //self.collectionView.allowsMultipleSelection = YES;
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -55,7 +59,13 @@ static NSInteger const numPerRow = 4;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self.navigationController setToolbarHidden:NO animated:YES];
     NSLog(@"PhotoCollectionView will appear");
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.navigationController setToolbarHidden:YES animated:YES];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -165,10 +175,10 @@ static NSInteger const numPerRow = 4;
         return;
     }
     KxMenuItem *item = (KxMenuItem *)sender;
-    [self deletePhotoFromAlbum:item.sectionIndex row:item.rowIndex index:item.imageIndex isInPB:YES];
+    [self deletePhotoFromAlbum:item.sectionIndex row:item.rowIndex index:item.imageIndex];
 }
 
-- (void)deletePhotoFromAlbum:(NSInteger)section row:(NSInteger)row index:(NSInteger)index isInPB:(BOOL)isInPB {
+- (void)deletePhotoFromAlbum:(NSInteger)section row:(NSInteger)row index:(NSInteger)index {
     if (index < 0 || index >= self.activityAlbum.albumInfos.count) {
         return;
     }
@@ -191,7 +201,10 @@ static NSInteger const numPerRow = 4;
         NSString *code = [responseObject objectForKey:@"code"];
         if ([code isEqualToString:@"000000"]) {
             [self reloadData];
-            [self resetImageInfos];
+            //[self resetImageInfos];
+            if (self.albumVC) {
+                [self.albumVC.collectionView reloadData];
+            }
             [self.pbVC resetAsPageRemoved];
         } else {
             [KGUtil showCheckMark:@"删除失败" checked:NO inView:view];
@@ -224,7 +237,9 @@ static NSInteger const numPerRow = 4;
                 [self.activityAlbum.albumInfos addObject:kgAInfo];
             }
             [self.collectionView reloadData];
-
+            if (self.albumVC) {
+                [self.albumVC.collectionView reloadData];
+            }
             [self resetImageInfos];
             [self.pbVC resetToIndex:0];
         }
@@ -264,10 +279,16 @@ static NSInteger const numPerRow = 4;
                                   completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                                   }];
     
+//    UITapGestureRecognizer *tapPressGR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapCellAction:)];
+//    [cell addGestureRecognizer:tapPressGR];
+//    tapPressGR.view.tag = indexPath.row;
+    
     PBImageInfo *iInfo = [[PBImageInfo alloc] init];
     iInfo.imageURL = [NSString stringWithFormat:@"%@%@", [KGUtil getServerAppURL], info.picUrl];
     iInfo.imageDesc = info.desc;
     [self.imageInfos addObject:iInfo];
+    
+    
 
     // Configure the cell
     
@@ -280,11 +301,33 @@ static NSInteger const numPerRow = 4;
         return;
     }
     //[self resetImageInfos];
-    
-    self.pbVC.index = indexPath.row;
-    self.pbVC.rowIndex = indexPath.row;
-    self.pbVC.sectionIndex = indexPath.section;
-    [self.pbVC show];
+    if (self.isEditing) {
+//        NSArray *selectedRows = self.collectionView.indexPathsForSelectedItems;
+//        for (NSIndexPath *selectedRow in selectedRows) {
+//            if ((selectedRow.section == indexPath.section) && (selectedRow.row == indexPath.row)) {
+//                //NSLog(@"%ld", indexPath.row);
+//                //PhotoCollectionViewCell *cell = (PhotoCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+//                //PhotoCollectionViewCell *cell = (PhotoCollectionViewCell *)collectionView.visibleCells[indexPath.row];
+//                PhotoCollectionViewCell *cell = (PhotoCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+//                cell.isSelected = !cell.isSelected;
+//                cell.overlayImageView.hidden = !cell.isSelected;
+//                //[collectionView reloadItemsAtIndexPaths:[NSArray arrayWithObject:indexPath]];
+//                [collectionView reloadData];
+//            }
+//        }
+//        NSLog(@"%ld", indexPath.row);
+//        //PhotoCollectionViewCell *cell = (PhotoCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+//        //PhotoCollectionViewCell *cell = (PhotoCollectionViewCell *)collectionView.visibleCells[indexPath.row];
+        PhotoCollectionViewCell *cell = (PhotoCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+        cell.isSelected = !cell.isSelected;
+//        //[collectionView reloadItemsAtIndexPaths:[NSArray arrayWithObject:indexPath]];
+//        [collectionView reloadData];
+    } else {
+        self.pbVC.index = indexPath.row;
+        self.pbVC.rowIndex = indexPath.row;
+        self.pbVC.sectionIndex = indexPath.section;
+        [self.pbVC show];
+    }
     /*PBViewController *pbVC = [[PBViewController alloc] init];
     pbVC.imageInfos = self.imageInfos;
     pbVC.index = indexPath.row;
@@ -357,6 +400,7 @@ static NSInteger const numPerRow = 4;
     vc.images = [images mutableCopy];
     vc.delegate = self;
     vc.postType = ADD_ALBUM_PHOTO;
+    vc.albumDirId = self.activityAlbum.dirId;
     [self presentViewController:vc animated:YES
                      completion:^(void){
                      }];
@@ -377,6 +421,31 @@ static NSInteger const numPerRow = 4;
         [self.picPicker selectPhoto];
     }
 }
+
+#pragma mark actions
+- (IBAction)editButtonAction:(UIBarButtonItem *)sender {
+    self.isEditing = !self.isEditing;
+    self.deletePhotoButton.enabled = self.isEditing;
+    self.addPhotoButton.enabled = !self.isEditing;
+    self.navigationItem.title = self.isEditing ? @"选择项目" : @"";
+    NSArray *allRows = self.collectionView.indexPathsForVisibleItems;
+    if (self.isEditing == NO) { //当取消编辑时，把以选中的项目取消掉
+        for (NSIndexPath *selectedRow in allRows) {
+            PhotoCollectionViewCell *cell = (PhotoCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:selectedRow];
+            if (cell == nil || cell.isSelected == NO) {
+                continue;
+            }
+            cell.isSelected = NO;
+        }
+    }
+}
+- (IBAction)addPhotoAction:(UIBarButtonItem *)sender {
+    [self addPhotoToAlbum];
+}
+- (IBAction)deletePhotoAction:(UIBarButtonItem *)sender {
+    
+}
+
 
 - (void)dealloc {
     NSLog(@">>>>>>>>>>dealloc photo collection view");
