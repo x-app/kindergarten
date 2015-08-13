@@ -38,7 +38,7 @@
 
 + (void)showAlert:(NSString *)content inView:(id)view;
 
-+ (void)showLoading:(id)view;
++ (void)showLoading:(NSString *)title inView:(id)view;
 
 + (void)showCheckMark:(NSString *)infoText checked:(BOOL)checked inView:(id)view;
 

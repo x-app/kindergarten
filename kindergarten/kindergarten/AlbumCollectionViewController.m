@@ -31,10 +31,10 @@
 
 @property (nonatomic, strong) KGPicPicker *picPicker;      //拍照or从相册选择控件
 
-@property (nonatomic, strong) PBViewController *pbVC;
+//@property (nonatomic, strong) PBViewController *pbVC;
 
 @property (nonatomic) NSInteger curAlbumIndex;
-@property (nonatomic, strong) NSMutableArray *imageInfos;
+//@property (nonatomic, strong) NSMutableArray *imageInfos;
 
 @end
 
@@ -85,7 +85,7 @@ static NSString * const reuseIdentifier = @"AlbumCell";
     }
     return _picPicker;
 }
-
+/*
 - (PBViewController *)pbVC {
     if (_pbVC == nil) {
         _pbVC = [[PBViewController alloc] init];
@@ -99,15 +99,15 @@ static NSString * const reuseIdentifier = @"AlbumCell";
         }
     }
     return _pbVC;
-}
-
+}*/
+/*
 - (NSMutableArray *)imageInfos {
     if (_imageInfos == nil) {
         _imageInfos = [[NSMutableArray alloc] init];
     }
     return _imageInfos;
-}
-
+}*/
+/*
 - (void)resetImageInfos:(NSInteger)index {
     if (index < 0 || index >= self.activityAlbums.count) {
         return;
@@ -125,7 +125,7 @@ static NSString * const reuseIdentifier = @"AlbumCell";
         [self.imageInfos addObject:iInfo];
     }
     self.pbVC.imageInfos = self.imageInfos;
-}
+}*/
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -144,6 +144,7 @@ static NSString * const reuseIdentifier = @"AlbumCell";
     if (nextVC == nil) {
         return;
     }
+    nextVC.albumVC = self;
     AlbumCollectionViewCell *cell = (AlbumCollectionViewCell *)sender;
     if (cell == nil || cell.tag < 0 || cell.tag >= self.activityAlbums.count) {
         return;
@@ -219,13 +220,13 @@ static NSString * const reuseIdentifier = @"AlbumCell";
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row >= [self.activityAlbums count] || indexPath.row < 0) {
+    /*if (indexPath.row >= [self.activityAlbums count] || indexPath.row < 0) {
         return;
     }
     KGActivityAlbum *curAlbum = (KGActivityAlbum *)[self.activityAlbums objectAtIndex:indexPath.row];
     if (curAlbum == nil) {
         return;
-    }
+    }*/
     /*
     if (curAlbum.albumInfos && curAlbum.albumInfos.count == 0) {
         //todo 新增
@@ -450,8 +451,8 @@ static NSString * const reuseIdentifier = @"AlbumCell";
         NSString *code = [responseObject objectForKey:@"code"];
         if ([code isEqualToString:@"000000"]) {
             [self reloadData];
-            [self resetImageInfos:self.curAlbumIndex];
-            [self.pbVC resetAsPageRemoved];
+            //[self resetImageInfos:self.curAlbumIndex];
+            //[self.pbVC resetAsPageRemoved];
         } else {
             [KGUtil showCheckMark:@"删除失败" checked:NO inView:view];
         }
@@ -519,8 +520,8 @@ static NSString * const reuseIdentifier = @"AlbumCell";
                 [self.collectionView.footer noticeNoMoreData];
             }
             if (self.curAlbumIndex >= 0 && self.curAlbumIndex < self.activityAlbums.count) {
-                [self resetImageInfos:self.curAlbumIndex];
-                [self.pbVC resetToIndex:0];
+                //[self resetImageInfos:self.curAlbumIndex];
+                //[self.pbVC resetToIndex:0];
             }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -531,7 +532,7 @@ static NSString * const reuseIdentifier = @"AlbumCell";
 }
 
 - (void)dismissPhotoBrowser {
-    [self.pbVC dismiss];
+    //[self.pbVC dismiss];
 }
 
 #pragma mark actions
