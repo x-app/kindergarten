@@ -150,7 +150,7 @@ static NSArray *month_cn;
     [hud hide:YES afterDelay:2];
 }
 
-+ (void)showLoading:(id)view {
++ (void)showLoading:(NSString *)title inView:(id)view {
     if (![view isKindOfClass:[UIView class]]) {
         return;
     }
@@ -158,11 +158,10 @@ static NSArray *month_cn;
     [view addSubview:hud];
     
     //HUD.delegate = self;
-    hud.labelText = @"Loading";
-    
+    hud.labelText = [KGUtil isEmptyString:title] ? @"Loading" : title;
+    hud.labelFont = [UIFont systemFontOfSize:13];
+    hud.removeFromSuperViewOnHide = YES;
     [hud show:YES];
-    
-    //[HUD showWhileExecuting:@selector(myTask) onTarget:self withObject:nil animated:YES];
 }
 
 + (void)showCheckMark:(NSString *)infoText checked:(BOOL)checked inView:(id)view {

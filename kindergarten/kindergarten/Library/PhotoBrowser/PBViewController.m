@@ -448,14 +448,14 @@ const CGFloat segWidth = 20.f;
 
 
 -(void)setImageInfos:(NSMutableArray *)imageInfos {
-    NSLog(@"[PhotoBrowserViewController]setImageInfos");
+    //NSLog(@"[PhotoBrowserViewController]setImageInfos");
     _imageInfos = imageInfos;
-    
+
     //self.pageCount = imageInfos.count;
-    if (_imageInfos == nil || self.imageInfos.count == 0) {
+    if (_imageInfos == nil || _imageInfos.count == 0) {
         return;
     }
-    
+
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.3f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         //初始化页码信息
         self.page = _index;

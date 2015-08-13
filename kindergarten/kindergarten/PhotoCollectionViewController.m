@@ -15,6 +15,7 @@
 #import "PBViewController.h"
 #import "KGPicPicker.h"
 #import "GrowupEditViewController.h"
+#import "MBProgressHUD.h"
 
 @interface PhotoCollectionViewController ()<UIActionSheetDelegate, KGPicPickerDelegate, KGPostImageDelegate>
 
@@ -25,6 +26,15 @@
 @property (nonatomic, strong) PBViewController *pbVC;
 
 @property (nonatomic) BOOL isEditing;
+
+@property (nonatomic, strong) NSMutableArray *deleteIndexs;
+
+// 针对多图同时删除时的一些辅助属性
+@property (nonatomic) BOOL isDeleting;                //当前是否正在删除
+@property (nonatomic) NSInteger deleteCount;          //总计要删除的数目
+@property (nonatomic) NSInteger deleteIndex;          //当前正在删除的条目的索引
+@property (nonatomic, strong) NSArray *deleteInfoIds; //待删除的相册图片的信息id
+@property (nonatomic, strong) MBProgressHUD *hud;     //删除时的hud
 
 @end
 
@@ -59,8 +69,9 @@ static NSInteger const numPerRow = 4;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self.navigationController setToolbarHidden:NO animated:YES];
-    NSLog(@"PhotoCollectionView will appear");
+    if ([KGUtil isTeacherVersion]) {
+        [self.navigationController setToolbarHidden:NO animated:YES];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -70,7 +81,30 @@ static NSInteger const numPerRow = 4;
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    NSLog(@"PhotoCollectionView did appear");
+}
+
+- (NSMutableArray *)deleteIndexs {
+    if (_deleteIndexs == nil) {
+        _deleteIndexs = [[NSMutableArray alloc] init];
+    }
+    return _deleteIndexs;
+}
+
+- (NSArray *)deleteInfoIds {
+    if (_deleteInfoIds == nil) {
+        _deleteInfoIds = [[NSArray alloc] init];
+    }
+    return _deleteInfoIds;
+}
+
+- (MBProgressHUD *)hud {
+    if (_hud == nil) {
+        _hud = [[MBProgressHUD alloc] initWithView:self.view];
+        [self.view addSubview:_hud];
+        _hud.labelFont = [UIFont systemFontOfSize:13];
+        _hud.removeFromSuperViewOnHide = YES;
+    }
+    return _hud;
 }
 
 - (KGPicPicker *)picPicker {
@@ -166,6 +200,7 @@ static NSInteger const numPerRow = 4;
                                                     cancelButtonTitle:@"取消"
                                                destructiveButtonTitle:nil
                                                     otherButtonTitles:@"拍照", @"从相册中选取", nil];
+    choiceSheet.tag = 1;
     [choiceSheet showInView:self.view];
 }
 
@@ -215,6 +250,57 @@ static NSInteger const numPerRow = 4;
     } inView:view showHud:YES showError:true];
 }
 
+- (void)deletePhotosFromAlbum:(NSArray *)infoIds {
+    if (infoIds == nil || infoIds.count == 0) {
+        return;
+    }
+    self.deleteCount = infoIds.count;
+    self.deleteIndex = 0;
+    self.isDeleting = YES;
+    self.deleteInfoIds = infoIds;
+    self.hud.labelText = @"删除中";
+    [self.hud show:YES];
+    [self deleteAPhotoFromAlbum:self.deleteIndex];
+}
+
+- (void)deleteAPhotoFromAlbum:(NSInteger)dIndex {
+//    if (dIndex < 0 || dIndex >= self.deleteInfoIds.count) {
+//        return;
+//    }
+    self.hud.labelText = [NSString stringWithFormat:@"正在删除%ld/%ld", (long)(dIndex + 1), (long)self.deleteCount];
+    NSInteger activitiesAlbumInfoId = [[self.deleteInfoIds objectAtIndex:dIndex] integerValue];
+    NSDictionary *data = @{@"activitiesAlbumInfoId": @(activitiesAlbumInfoId)};
+    NSDictionary *body = [KGUtil getRequestBody:data];
+    NSDictionary *params = @{@"uid": REQUEST_UID, @"sign": [KGUtil getRequestSign:body], @"body":body};
+    NSString *urlSuffix = @"/teacher/deleteActivitiesAlbumInfo";
+    NSString *url = [[KGUtil getServerAppURL] stringByAppendingString:urlSuffix];
+    UIView *view = [KGUtil getTopMostViewController].view;
+    [KGUtil postRequest:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"JSON: %@", responseObject);
+        NSString *code = [responseObject objectForKey:@"code"];
+        if ([code isEqualToString:@"000000"]) {
+            if (dIndex == self.deleteInfoIds.count - 1) { //已经删除到当前最后一张
+                [self.hud hide:YES];
+                [self setAllSelectedCellToUnselected];
+                [self reloadData];
+                //[self resetImageInfos];
+                if (self.albumVC) {
+                    [self.albumVC.collectionView reloadData];
+                }
+                [KGUtil showCheckMark:@"删除完毕" checked:YES inView:self.view];
+                //[self.pbVC resetAsPageRemoved];
+            } else {
+                [self deleteAPhotoFromAlbum:(dIndex + 1)];
+            }
+        } else {
+            [self deleteAPhotoFromAlbum:(dIndex + 1)];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+        [self deleteAPhotoFromAlbum:(dIndex + 1)];
+    } inView:view showHud:NO showError:NO];
+}
+
 - (void)reloadActivityAlbum {
     NSDictionary *data = @{@"directoryId": @(self.activityAlbum.dirId)};
     NSDictionary *body = [KGUtil getRequestBody:data];
@@ -246,6 +332,29 @@ static NSInteger const numPerRow = 4;
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
     } inView:self.collectionView showHud:NO showError:true];
+}
+
+- (NSInteger)selectedCount {
+    NSArray *allRows = self.collectionView.indexPathsForVisibleItems;
+    NSInteger count = 0;
+    for (NSIndexPath *indexPath in allRows) {
+        PhotoCollectionViewCell *cell = (PhotoCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+        if (cell != nil && cell.isSelected) {
+            count++;
+        }
+    }
+    return count;
+}
+
+- (void)setAllSelectedCellToUnselected {
+    NSArray *allRows = self.collectionView.indexPathsForVisibleItems;
+    for (NSIndexPath *selectedRow in allRows) {
+        PhotoCollectionViewCell *cell = (PhotoCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:selectedRow];
+        if (cell == nil || cell.isSelected == NO) {
+            continue;
+        }
+        cell.isSelected = NO;
+    }
 }
 
 /*
@@ -320,6 +429,8 @@ static NSInteger const numPerRow = 4;
 //        //PhotoCollectionViewCell *cell = (PhotoCollectionViewCell *)collectionView.visibleCells[indexPath.row];
         PhotoCollectionViewCell *cell = (PhotoCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
         cell.isSelected = !cell.isSelected;
+        NSInteger sCount = [self selectedCount];
+        self.navigationItem.title = (sCount > 0) ? [NSString stringWithFormat:@"已选择%ld张", (long)sCount] : @"选择项目";
 //        //[collectionView reloadItemsAtIndexPaths:[NSArray arrayWithObject:indexPath]];
 //        [collectionView reloadData];
     } else {
@@ -413,12 +524,24 @@ static NSInteger const numPerRow = 4;
 
 #pragma mark UIActionSheetDelegate
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == 0) {
-        // 拍照
-        [self.picPicker takePhoto];
-    } else if (buttonIndex == 1) {
-        // 从相册中选取
-        [self.picPicker selectPhoto];
+    if (actionSheet.tag == 1) { //增加相册图片
+        if (buttonIndex == 0) {
+            // 拍照
+            [self.picPicker takePhoto];
+        } else if (buttonIndex == 1) {
+            // 从相册中选取
+            [self.picPicker selectPhoto];
+        }
+    } else if (actionSheet.tag == 2) {
+        NSMutableArray *infoIds = [[NSMutableArray alloc] init];
+        for (int i = 0; i < self.deleteIndexs.count; i++) {
+            KGActivityAlbumInfo *info = (KGActivityAlbumInfo *)[self.activityAlbum.albumInfos objectAtIndex:i];
+            if (info == nil) {
+                return;
+            }
+            [infoIds addObject:@(info.infoId)];
+        }
+        [self deletePhotosFromAlbum:[infoIds copy]];
     }
 }
 
@@ -429,22 +552,48 @@ static NSInteger const numPerRow = 4;
     self.addPhotoButton.enabled = !self.isEditing;
     self.navigationItem.title = self.isEditing ? @"选择项目" : @"";
     self.editButton.title = self.isEditing ? @"取消" : @"选择";
-    NSArray *allRows = self.collectionView.indexPathsForVisibleItems;
     if (self.isEditing == NO) { //当取消编辑时，把以选中的项目取消掉
-        for (NSIndexPath *selectedRow in allRows) {
-            PhotoCollectionViewCell *cell = (PhotoCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:selectedRow];
-            if (cell == nil || cell.isSelected == NO) {
-                continue;
-            }
-            cell.isSelected = NO;
-        }
+        [self setAllSelectedCellToUnselected];
     }
+//    NSArray *allRows = self.collectionView.indexPathsForVisibleItems;
+//    if (self.isEditing == NO) { //当取消编辑时，把以选中的项目取消掉
+//        for (NSIndexPath *selectedRow in allRows) {
+//            PhotoCollectionViewCell *cell = (PhotoCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:selectedRow];
+//            if (cell == nil || cell.isSelected == NO) {
+//                continue;
+//            }
+//            cell.isSelected = NO;
+//        }
+//    }
 }
+
 - (IBAction)addPhotoAction:(UIBarButtonItem *)sender {
     [self addPhotoToAlbum];
 }
+
 - (IBAction)deletePhotoAction:(UIBarButtonItem *)sender {
-    
+    if (!self.isEditing) {
+        return;
+    }
+    NSArray *allRows = self.collectionView.indexPathsForVisibleItems;
+    [self.deleteIndexs removeAllObjects];
+    for (NSIndexPath *indexPath in allRows) {
+        PhotoCollectionViewCell *cell = (PhotoCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+        if (cell != nil && cell.isSelected) {
+            [self.deleteIndexs addObject:@(indexPath.row)];
+        }
+    }
+    if (self.deleteIndexs.count == 0) {
+        return;
+    }
+    NSString *menuTitle = [NSString stringWithFormat:@"删除%ld张相片", (long)self.deleteIndexs.count];
+    UIActionSheet *choiceSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                             delegate:self
+                                                    cancelButtonTitle:@"取消"
+                                               destructiveButtonTitle:nil
+                                                    otherButtonTitles:menuTitle, nil];
+    choiceSheet.tag = 2;
+    [choiceSheet showInView:self.view];
 }
 
 //
