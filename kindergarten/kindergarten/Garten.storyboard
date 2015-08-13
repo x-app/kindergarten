@@ -428,6 +428,9 @@
                         <outlet property="classNameLabel" destination="HBm-9c-gwf" id="rfb-46-Fi9"/>
                         <outlet property="headerBgImageView" destination="ybr-1f-K3h" id="jY6-ie-eYo"/>
                         <outlet property="repeatImage" destination="e02-qw-JFl" id="D8l-fH-hqc"/>
+                        <outlet property="repeatImgHeight" destination="fPx-dY-uqO" id="z41-Ja-o4E"/>
+                        <outlet property="repeatImgTopVertical" destination="Ynw-N6-F2y" id="rf5-dp-ZUQ"/>
+                        <outlet property="topSpace" destination="DAS-5D-kek" id="5ep-wA-n61"/>
                         <outletCollection property="func" destination="6ga-m6-jd5" id="mnq-xc-QxO"/>
                         <outletCollection property="func" destination="dWY-Lr-RMm" id="ofZ-H7-Syu"/>
                         <outletCollection property="func" destination="YAA-tH-pdV" id="lqQ-z1-cQ9"/>

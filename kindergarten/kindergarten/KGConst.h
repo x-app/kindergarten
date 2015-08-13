@@ -9,6 +9,9 @@
 #ifndef kindergarten_KGConst_h
 #define kindergarten_KGConst_h
 
+#define screen_height   [[UIScreen mainScreen] nativeBounds].size.height
+#define screen_width   [[UIScreen mainScreen] nativeBounds].size.width
+
 extern NSString *const REQUEST_KEY;
 extern NSString *const REQUEST_UID;
 extern NSString *const REQUEST_URL_INDEX;

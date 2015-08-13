@@ -80,16 +80,19 @@
 
 #pragma TableViewDatasource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.functions count];
+    if(section ==0)
+        return 3;
+    else return 1;
+//    return [self.functions count];
 }
-
--(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    return @"尊敬的黄晓伟用户, 您好！";
-}
+//
+//-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+//    return @"尊敬的黄晓伟用户, 您好！";
+//}
 
 
 -(NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section{
@@ -106,7 +109,13 @@
     //NSString *cellId = [NSString stringWithFormat:@"funcCell%ld", indexPath.row];
     //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"" forIndexPath:indexPath];
     //UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    MeFunction *curFunc = (MeFunction *)[self.functions objectAtIndex:indexPath.row];
+    
+    NSInteger index = indexPath.row;
+    if (indexPath.section == 1) {
+        index = 3;
+    }
+    
+    MeFunction *curFunc = (MeFunction *)[self.functions objectAtIndex:index];
     if (curFunc != nil) {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:curFunc.cellId forIndexPath:indexPath];
         cell.textLabel.text = curFunc.title;
@@ -121,6 +130,9 @@
 //
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    if(section > 0)
+        return nil;
+    
     UIView* customView = [[UIView alloc] initWithFrame:CGRectMake(10.0, 0.0, 300.0, 44.0)];
     
     UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectZero];
@@ -137,7 +149,10 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 40.0;
+    if(section == 0)
+        return 40.0;
+    else
+        return 0;
 }
 
 
@@ -171,11 +186,16 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row >= [self.functions count] || indexPath.row < 0) {
-        return;
+//    if (indexPath.row >= [self.functions count] || indexPath.row < 0) {
+//        return;
+//    }
+    
+    NSInteger index = indexPath.row;
+    if (indexPath.section == 1) {
+        index = 3;
     }
     
-    MeFunction *curFunc = [self.functions objectAtIndex:indexPath.row];
+    MeFunction *curFunc = [self.functions objectAtIndex:index];
     switch (curFunc.type) {
         case CHANGE_PSWD: {
             BOOL hasPwd = [CLLockVC hasPwd];

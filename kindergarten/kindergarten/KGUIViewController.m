@@ -8,7 +8,7 @@
 
 #import "KGUIViewController.h"
 #import "AppDelegate.h"
-//#import "CLLockVC.h"
+#import "KGConst.h"
 #import "KGUtil.h"
 #import "KGPicPicker.h"
 
@@ -16,6 +16,10 @@
 
 @property (nonatomic) NSInteger tapImageTag; //0表示头像 1是背景图
 @property (nonatomic) KGPicPicker *kgpp;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topSpace;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *repeatImgTopVertical;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *repeatImgHeight;
 
 @end
 
@@ -48,6 +52,18 @@
     UITapGestureRecognizer *headerBgTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(editHeaderBg)];
     [self.headerBgImageView addGestureRecognizer:headerBgTap];
     // Do any additional setup after loading the view.
+}
+
+-(void)viewDidLayoutSubviews
+{
+    //    [((UIScrollView *)self.view) setContentSize: CGSizeMake(screen_width, screen_height)];
+    NSLog(@"%f", screen_height);
+    if(screen_height < 1136)//4/4s
+    {
+        self.topSpace.constant = -10;
+        self.repeatImgHeight.constant = 0;
+        //    self.repeatImgTopVertical.constant = -50;
+    }
 }
 
 - (void)editHeaderBg {

@@ -579,6 +579,9 @@
                         <outlet property="classNameLabel" destination="Qis-D9-Kie" id="6nE-kP-hat"/>
                         <outlet property="headerBgImageView" destination="gll-bn-W8T" id="37O-46-b7K"/>
                         <outlet property="repeatImage" destination="9wf-lW-GFx" id="JyZ-kw-wm5"/>
+                        <outlet property="repeatImgHeight" destination="0xe-TX-Bm6" id="Eoe-fE-yzZ"/>
+                        <outlet property="repeatImgTopVertical" destination="lRL-7O-J5B" id="i1X-36-ues"/>
+                        <outlet property="topSpace" destination="OAM-8f-d8i" id="5Uh-Mp-KLJ"/>
                         <outletCollection property="func" destination="rfp-ey-NBH" id="F52-WD-8tK"/>
                         <outletCollection property="func" destination="Ke7-S9-mQ9" id="cYL-ha-pAN"/>
                         <outletCollection property="func" destination="LVv-fw-90e" id="3RC-mO-Fkx"/>
