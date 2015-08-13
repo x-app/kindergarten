@@ -10,6 +10,7 @@
 #import "KGUtil.h"
 #import "AppDelegate.h"
 #import "KGChild.h"
+#import "KGConst.h"
 #import "JSBadgeView.h"
 
 @interface BabyViewController ()
@@ -32,6 +33,8 @@
     NSLog(@"BabyViewDidLoad");
        
     self.repeatImage.image = [self.repeatImage.image resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0) resizingMode:UIImageResizingModeTile];
+//    if(screen_height < 1136)//4/4s
+//        [self.repeatImage setHidden:true];
     
     for(int i=0; i<[self.func count]; i++)
     {
@@ -66,6 +69,11 @@
             [KGUtil pushWebViewWithUrl:delegate.pushUrl inViewController:self];
     }
 }
+
+//- (void)updateViewConstraints
+//{
+//    [super updateViewConstraints];
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
