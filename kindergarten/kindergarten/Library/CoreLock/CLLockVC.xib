@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
@@ -23,7 +24,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KgF-qv-NVk">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eS4-xU-78v" customClass="CLLockLabel">
+                        <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eS4-xU-78v" customClass="CLLockLabel">
                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="P00-Xf-Ra6"/>
@@ -65,10 +66,9 @@
                             </variation>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="eS4-xU-78v" secondAttribute="trailing" id="93q-6I-sTd"/>
-                        <constraint firstAttribute="centerY" secondItem="wiY-EU-cXp" secondAttribute="centerY" id="FMA-j0-L4a">
+                        <constraint firstAttribute="centerY" secondItem="wiY-EU-cXp" secondAttribute="top" constant="50" id="FMA-j0-L4a">
                             <variation key="heightClass=regular-widthClass=compact" constant="30"/>
                         </constraint>
                         <constraint firstItem="eS4-xU-78v" firstAttribute="top" secondItem="wiY-EU-cXp" secondAttribute="bottom" constant="60" id="WZE-hm-OOw">
@@ -110,7 +110,7 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7sf-Mh-lGn">
                             <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                             <state key="normal" title="新用户请注册">
-                                <color key="titleColor" red="0.94509803921568625" green="0.94509803921568625" blue="0.94509803921568625" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleColor" red="0.94730508209999997" green="0.94730508209999997" blue="0.94730508209999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
@@ -119,8 +119,9 @@
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="00Q-Um-xQy">
                             <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <state key="normal" title="忘记手势密码">
-                                <color key="titleColor" red="0.94509803921568625" green="0.88235294117647056" blue="0.94509803921568625" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleColor" red="0.99808633209999997" green="0.99808633209999997" blue="0.99808633209999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
@@ -229,9 +230,9 @@
             </variation>
             <connections>
                 <outlet property="bottomMarginC" destination="Oa9-Jc-qXi" id="Eh3-K2-sjl"/>
-                <outlet property="infoViewTopMoveC" destination="FMA-j0-L4a" id="vM8-9T-YIr"/>
+                <outlet property="forgetBtn" destination="00Q-Um-xQy" id="wJI-JZ-0Rj"/>
                 <outlet property="labelTopMarginC" destination="WZE-hm-OOw" id="chV-Xh-2za"/>
-                <outlet property="registerBtn" destination="7sf-Mh-lGn" id="2Mv-wr-7xY"/>
+                <outlet property="registerBtn" destination="7sf-Mh-lGn" id="R5V-Of-fVX"/>
                 <outlet property="topC" destination="i8z-EM-k1V" id="P5K-X5-aZI"/>
             </connections>
             <point key="canvasLocation" x="271" y="264"/>
