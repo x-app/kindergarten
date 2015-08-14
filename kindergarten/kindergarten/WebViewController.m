@@ -52,6 +52,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.hidesBottomBarWhenPushed = YES;
 }
 
 -(void)viewWillDisappear:(BOOL)animated
