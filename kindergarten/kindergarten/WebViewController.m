@@ -91,6 +91,31 @@
     self.keepUsing = false;
 }
 
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    // 处理事件
+    NSString *requestString = [[request URL] absoluteString];
+    NSArray *components = [requestString componentsSeparatedByString:@"::"];//native::popview:
+    
+    if (components != nil && [components count] > 0) {
+        NSString *pocotol = [components objectAtIndex:0];
+        if ([pocotol isEqualToString:@"native"]) {
+            NSString *commandStr = [components objectAtIndex:1];
+            NSArray *commandArray = [commandStr componentsSeparatedByString:@":"];
+            if (commandArray != nil && [commandArray count] > 0) {
+                NSString *command = [commandArray objectAtIndex:0];
+                if ([command isEqualToString:@"popview"]) {
+//                    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"消息" message:@"网页发出了登录请求" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+//                    [alert show];
+                    [self.navigationController popViewControllerAnimated:YES];
+                }
+            }
+            return NO;
+        }
+    }
+    return YES;
+}
+
 - (void)clearWebView
 {
     [self.webView stopLoading];
