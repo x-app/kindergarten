@@ -42,14 +42,10 @@
     [super awakeFromNib];
     
     if(iphone4x_3_5){
-        
-        _topC.constant =30;
-        
+//        _topC.constant = 30;
         _bottomMarginC.constant = -30;
-        
-        _infoViewTopMoveC.constant = -10;
-        
-        _labelTopMarginC.constant = 10;
+//        //_infoViewTopMoveC.constant = 50;
+//        _labelTopMarginC.constant = -10;
     }
 }
 

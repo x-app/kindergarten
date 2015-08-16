@@ -50,7 +50,7 @@ static NSInteger const numPerRow = 4;
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.isEditing = NO;
-//    [self.navigationController setToolbarHidden:NO];
+    
     //self.collectionView.allowsMultipleSelection = YES;
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = NO;
