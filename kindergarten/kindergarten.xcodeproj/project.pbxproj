@@ -159,6 +159,7 @@
 		9911C2DC1B5E825C0080FFA9 /* PBViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9911C2D41B5E825C0080FFA9 /* PBViewController.xib */; };
 		9911C2EA1B5F36990080FFA9 /* UIViewController+TopMostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9911C2E91B5F36990080FFA9 /* UIViewController+TopMostViewController.m */; };
 		9911C2ED1B5F37A00080FFA9 /* KGUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9911C2EC1B5F37A00080FFA9 /* KGUIViewController.m */; };
+		9927042D1B818A0100AED421 /* KGAppIntroView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9927042C1B818A0100AED421 /* KGAppIntroView.m */; };
 		993847161B77627300847290 /* ImageEditCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 993847151B77627300847290 /* ImageEditCollectionViewCell.m */; };
 		993847181B77650000847290 /* cell_delete.png in Resources */ = {isa = PBXBuildFile; fileRef = 993847171B77650000847290 /* cell_delete.png */; };
 		99688A341B6261D300AA7A41 /* as_password_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 99688A321B6261D300AA7A41 /* as_password_icon.png */; };
@@ -211,8 +212,6 @@
 		9997BA211B4D580E00B908B6 /* MLTableAlertShadowMask.png in Resources */ = {isa = PBXBuildFile; fileRef = 9997B9F61B4D580E00B908B6 /* MLTableAlertShadowMask.png */; };
 		9997BA221B4D580E00B908B6 /* MLTableAlertShadowMask@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9997B9F71B4D580E00B908B6 /* MLTableAlertShadowMask@2x.png */; };
 		9997BA231B4D580E00B908B6 /* MLTableAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 9997B9F91B4D580E00B908B6 /* MLTableAlert.m */; };
-		9997BA241B4D580E00B908B6 /* MYBlurIntroductionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9997B9FC1B4D580E00B908B6 /* MYBlurIntroductionView.m */; };
-		9997BA251B4D580E00B908B6 /* MYIntroductionPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9997B9FE1B4D580E00B908B6 /* MYIntroductionPanel.m */; };
 		99ABD5911B47FC3500B8DB8B /* help_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 99ABD58D1B47FC3500B8DB8B /* help_1.png */; };
 		99ABD5921B47FC3500B8DB8B /* help_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 99ABD58E1B47FC3500B8DB8B /* help_2.png */; };
 		99ABD5931B47FC3500B8DB8B /* help_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 99ABD58F1B47FC3500B8DB8B /* help_3.png */; };
@@ -493,6 +492,8 @@
 		9911C2E91B5F36990080FFA9 /* UIViewController+TopMostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+TopMostViewController.m"; sourceTree = "<group>"; };
 		9911C2EB1B5F37A00080FFA9 /* KGUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KGUIViewController.h; sourceTree = "<group>"; };
 		9911C2EC1B5F37A00080FFA9 /* KGUIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KGUIViewController.m; sourceTree = "<group>"; };
+		9927042B1B818A0100AED421 /* KGAppIntroView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KGAppIntroView.h; sourceTree = "<group>"; };
+		9927042C1B818A0100AED421 /* KGAppIntroView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KGAppIntroView.m; sourceTree = "<group>"; };
 		993847141B77627300847290 /* ImageEditCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageEditCollectionViewCell.h; sourceTree = "<group>"; };
 		993847151B77627300847290 /* ImageEditCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageEditCollectionViewCell.m; sourceTree = "<group>"; };
 		993847171B77650000847290 /* cell_delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cell_delete.png; path = Resource/cell_delete.png; sourceTree = "<group>"; };
@@ -582,10 +583,6 @@
 		9997B9F71B4D580E00B908B6 /* MLTableAlertShadowMask@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MLTableAlertShadowMask@2x.png"; sourceTree = "<group>"; };
 		9997B9F81B4D580E00B908B6 /* MLTableAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLTableAlert.h; sourceTree = "<group>"; };
 		9997B9F91B4D580E00B908B6 /* MLTableAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLTableAlert.m; sourceTree = "<group>"; };
-		9997B9FB1B4D580E00B908B6 /* MYBlurIntroductionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYBlurIntroductionView.h; sourceTree = "<group>"; };
-		9997B9FC1B4D580E00B908B6 /* MYBlurIntroductionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYBlurIntroductionView.m; sourceTree = "<group>"; };
-		9997B9FD1B4D580E00B908B6 /* MYIntroductionPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYIntroductionPanel.h; sourceTree = "<group>"; };
-		9997B9FE1B4D580E00B908B6 /* MYIntroductionPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYIntroductionPanel.m; sourceTree = "<group>"; };
 		99ABD58D1B47FC3500B8DB8B /* help_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = help_1.png; path = Resource/help_1.png; sourceTree = "<group>"; };
 		99ABD58E1B47FC3500B8DB8B /* help_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = help_2.png; path = Resource/help_2.png; sourceTree = "<group>"; };
 		99ABD58F1B47FC3500B8DB8B /* help_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = help_3.png; path = Resource/help_3.png; sourceTree = "<group>"; };
@@ -744,6 +741,8 @@
 				9911C2EC1B5F37A00080FFA9 /* KGUIViewController.m */,
 				125090F01B650CD80046F40E /* KGPicPicker.h */,
 				125090F11B650CD80046F40E /* KGPicPicker.m */,
+				9927042B1B818A0100AED421 /* KGAppIntroView.h */,
+				9927042C1B818A0100AED421 /* KGAppIntroView.m */,
 			);
 			path = kindergarten;
 			sourceTree = "<group>";
@@ -1210,7 +1209,6 @@
 				9997B9CC1B4D580E00B908B6 /* CoreLock */,
 				9997B9E51B4D580E00B908B6 /* FrameWork */,
 				9997B9EE1B4D580E00B908B6 /* MLTableAlert */,
-				9997B9FA1B4D580E00B908B6 /* MYBlurIntroductionView */,
 			);
 			name = Library;
 			sourceTree = "<group>";
@@ -1410,18 +1408,6 @@
 				9997B9F71B4D580E00B908B6 /* MLTableAlertShadowMask@2x.png */,
 			);
 			path = Images;
-			sourceTree = "<group>";
-		};
-		9997B9FA1B4D580E00B908B6 /* MYBlurIntroductionView */ = {
-			isa = PBXGroup;
-			children = (
-				9997B9FB1B4D580E00B908B6 /* MYBlurIntroductionView.h */,
-				9997B9FC1B4D580E00B908B6 /* MYBlurIntroductionView.m */,
-				9997B9FD1B4D580E00B908B6 /* MYIntroductionPanel.h */,
-				9997B9FE1B4D580E00B908B6 /* MYIntroductionPanel.m */,
-			);
-			name = MYBlurIntroductionView;
-			path = Library/MYBlurIntroductionView;
 			sourceTree = "<group>";
 		};
 		99ABD5951B47FC5800B8DB8B /* Resource */ = {
@@ -1758,7 +1744,6 @@
 				99F17F681B50C3E800866F8F /* LoginViewContoller.m in Sources */,
 				9990FB491B67BF1E006A80F7 /* AlbumCollectionViewCell.m in Sources */,
 				9911C2D61B5E825C0080FFA9 /* PBImageView.m in Sources */,
-				9997BA251B4D580E00B908B6 /* MYIntroductionPanel.m in Sources */,
 				9997BA061B4D580E00B908B6 /* AFURLResponseSerialization.m in Sources */,
 				125090F71B68F2530046F40E /* GrowupEditViewController.m in Sources */,
 				9997BA041B4D580E00B908B6 /* AFURLConnectionOperation.m in Sources */,
@@ -1789,6 +1774,7 @@
 				12C7949E1B44232300918497 /* ClassViewController.m in Sources */,
 				12EAE1561B5D3A270084680C /* MJRefreshNormalHeader.m in Sources */,
 				99C642A41B6CB378008EF929 /* bitstream.c in Sources */,
+				9927042D1B818A0100AED421 /* KGAppIntroView.m in Sources */,
 				12EAE0D81B5B65A50084680C /* GrowupTableViewController.m in Sources */,
 				12F9F8C51B77548600CFDB1B /* RBStoryboardSegue.m in Sources */,
 				9911C22A1B5A6BA50080FFA9 /* UIButton+WebCache.m in Sources */,
@@ -1829,7 +1815,6 @@
 				1212C5621B52613000C11BD2 /* WebViewController.m in Sources */,
 				99F17F621B4F51E400866F8F /* MBProgressHUD.m in Sources */,
 				9911C22D1B5A6BA50080FFA9 /* UIImage+WebP.m in Sources */,
-				9997BA241B4D580E00B908B6 /* MYBlurIntroductionView.m in Sources */,
 				99F17F651B4F56DE00866F8F /* LoginSegue.m in Sources */,
 				12F9F9301B775F5B00CFDB1B /* ELCOverlayImageView.m in Sources */,
 				99F1ED9E1B70459000175CFB /* KGTeacherDesc.m in Sources */,

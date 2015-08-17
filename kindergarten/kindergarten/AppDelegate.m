@@ -8,12 +8,15 @@
 
 #import "AppDelegate.h"
 #import "KGUtil.h"
-//#import "MYBlurIntroductionView.h"
+#import "KGAppIntroView.h"
 
-@interface AppDelegate ()
+@interface AppDelegate ()<KGAppIntroViewDelegate>
 
 //app退出激活状态时的时间(按home键退出,下拉通知菜单, 上拉控制中心时触发)
 @property (nonatomic, strong) NSDate *resignActiveTime;
+
+@property KGAppIntroView *introView;
+
 
 @end
 
@@ -89,12 +92,24 @@
     NSInteger visitTimes = [userDefaults integerForKey:@"visitTimes"];
     
 //    for the first time test
-    visitTimes = 0;
+    //visitTimes = 0;
     //
     if (visitTimes == 0) {
-        //create UI
+        
         CGRect windowFrame = [[UIScreen mainScreen] bounds];
         UIWindow *theWindow = [[UIWindow alloc] initWithFrame:windowFrame];
+        theWindow.backgroundColor = [UIColor whiteColor];
+        [self setWindow:theWindow];
+        
+        self.introView = [[KGAppIntroView alloc] initWithFrame:windowFrame];
+        self.introView.delegate = self;
+        [[self window] addSubview:self.introView];
+        
+        //create UI
+        /*
+        CGRect windowFrame = [[UIScreen mainScreen] bounds];
+        UIWindow *theWindow = [[UIWindow alloc] initWithFrame:windowFrame];
+        theWindow.backgroundColor = [UIColor whiteColor];
         [self setWindow:theWindow];
         
         CGFloat frameWidth = windowFrame.size.width;
@@ -113,14 +128,14 @@
         
         
         introductionView.delegate = self;
-        [introductionView setBackgroundColor:[UIColor whiteColor]];
+        [introductionView setBackgroundColor:[UIColor clearColor]];
 
         //Build the introduction with desired panels
         [introductionView buildIntroductionWithPanels:panels];
         
-        [[self window] addSubview:introductionView];
+        [[self window] addSubview:introductionView];*/
     } else {
-        [self introduction:nil didFinishWithType:0];
+        //[self introduction:nil didFinishWithType:0];
     }
     visitTimes++;
     
@@ -186,7 +201,7 @@
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     [self window].rootViewController = [mainStoryboard instantiateInitialViewController];
 }*/
-
+/*
 #pragma mark - MYIntroduction Delegate
 
 -(void)introduction:(MYBlurIntroductionView *)introductionView didChangeToPanel:(MYIntroductionPanel *)panel withIndex:(NSInteger)panelIndex{
@@ -202,6 +217,17 @@
     //loginViewController.appWindow = [self window];
     //UINavigationController *loginVC = (UINavigationController *)self.window.rootViewController;
     //loginVC. = [self window];
+}*/
+#pragma mark - KGAppIntroDelegate
+- (void)onDoneButtonPressed {
+    [UIView animateWithDuration:.5 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        self.introView.alpha = 0;
+    } completion:^(BOOL finished) {
+        [self.introView removeFromSuperview];
+        UIStoryboard *loginStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        [self window].rootViewController = [loginStoryboard instantiateInitialViewController];
+        [KGUtil lockTopMostVC];
+    }];
 }
 
 #pragma mark - webvc
