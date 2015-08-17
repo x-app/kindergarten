@@ -89,7 +89,7 @@
     NSInteger visitTimes = [userDefaults integerForKey:@"visitTimes"];
     
 //    for the first time test
-    //visitTimes = 0;
+    visitTimes = 0;
     //
     if (visitTimes == 0) {
         //create UI

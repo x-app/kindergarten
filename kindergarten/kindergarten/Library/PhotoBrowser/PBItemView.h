@@ -20,6 +20,9 @@
 /** 单击 */
 @property (nonatomic,copy) void (^ItemViewSingleTapBlock)();
 
+/*缩放时调用的block*/
+@property (nonatomic,copy) void (^viewZoomBlock)();
+
 /** 当前的页标 */
 @property (nonatomic,assign) NSUInteger pageIndex;
 
