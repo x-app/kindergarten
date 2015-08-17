@@ -32,10 +32,10 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DuQ-Om-ad9" userLabel="BottomView">
                     <rect key="frame" x="0.0" y="556" width="600" height="44"/>
                     <subviews>
-                        <toolbar clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.5" contentMode="scaleAspectFill" barStyle="blackTranslucent" translatesAutoresizingMaskIntoConstraints="NO" id="uqI-LA-Cn8">
+                        <toolbar clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="uqI-LA-Cn8">
                             <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                             <items/>
-                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </toolbar>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S5c-Jh-L8M" userLabel="TitleLabel">
                             <rect key="frame" x="15" y="10" width="575" height="0.0"/>

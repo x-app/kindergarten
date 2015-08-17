@@ -231,7 +231,6 @@
         CGFloat y = loc.y - wh * .5f;
         CGRect rect = (CGRect){CGPointMake(x, y),CGSizeMake(wh, wh)};
         
-        
         [self.scrollView zoomToRect:rect animated:YES];
     }else{
         [self.scrollView setZoomScale:1.0f animated:YES];
@@ -280,7 +279,7 @@
 
 
 -(void)scrollViewDidZoom:(UIScrollView *)scrollView{
-    
+    NSLog(@"PBItemView->scrollViewDidZoom");
     if(scrollView.zoomScale <=1) scrollView.zoomScale = 1.0f;
     
     CGFloat xcenter = scrollView.center.x , ycenter = scrollView.center.y;
@@ -290,6 +289,14 @@
     ycenter = scrollView.contentSize.height > scrollView.frame.size.height ? scrollView.contentSize.height/2 : ycenter;
     
     [self.photoImageView setCenter:CGPointMake(xcenter, ycenter)];
+    if (self.viewZoomBlock != nil) {
+        self.viewZoomBlock();
+    }
+
+}
+
+- (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(CGFloat)scale {
+    NSLog(@"PBItemView->scrollViewDidEndZooming");
 }
 
 

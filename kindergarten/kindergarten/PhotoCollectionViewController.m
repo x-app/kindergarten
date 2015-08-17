@@ -555,16 +555,7 @@ static NSInteger const numPerRow = 4;
     if (self.isEditing == NO) { //当取消编辑时，把以选中的项目取消掉
         [self setAllSelectedCellToUnselected];
     }
-//    NSArray *allRows = self.collectionView.indexPathsForVisibleItems;
-//    if (self.isEditing == NO) { //当取消编辑时，把以选中的项目取消掉
-//        for (NSIndexPath *selectedRow in allRows) {
-//            PhotoCollectionViewCell *cell = (PhotoCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:selectedRow];
-//            if (cell == nil || cell.isSelected == NO) {
-//                continue;
-//            }
-//            cell.isSelected = NO;
-//        }
-//    }
+    self.navigationItem.hidesBackButton = self.isEditing;
 }
 
 - (IBAction)addPhotoAction:(UIBarButtonItem *)sender {

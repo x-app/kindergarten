@@ -191,7 +191,8 @@ const CGFloat segWidth = 20.f;
 - (void)setNavigationBarStyle {
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.translucent = YES;
-    self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
+    self.navigationController.navigationBar.alpha = 1.0;
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
     //self.navigationItem.leftBarButtonItem.tintColor = [UIColor redColor];
 }
 
@@ -297,6 +298,22 @@ const CGFloat segWidth = 20.f;
     photoItemView.ItemViewSingleTapBlock = ^(){
         [self singleTap];
     };
+    photoItemView.viewZoomBlock = ^() {
+//        [self.navigationController.navigationBar setNeedsDisplay];
+//        self.navigationController.navigationBar.barTintColor = [UIColor clearColor];
+//        [self.navigationController.view setNeedsDisplay];
+        //self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+        //[self setNavigationBarStyle];
+        //self.navigationController.navigationBar.backgroundColor = [UIColor clearColor];
+        CGPoint curOffsetP = self.scrollView.contentOffset;
+        [self.scrollView setContentOffset:CGPointMake(curOffsetP.x, curOffsetP.y + 0.5) animated:NO];
+        //[self.scrollView setNeedsDisplay];
+        //self.navigationController.navigationBar.translucent = YES;
+        //self.navigationController.navigationBar.shadowImage = nil;
+        //self.navigationController.view.backgroundColor = [UIColor clearColor];
+        //[self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+        //self.navigationController.navigationBar.backgroundColor = [UIColor clearColor];
+    };
     
     //到这里，photoItemView一定有值，而且一定显示为当前页
     //加入到当前显示中的字典
@@ -349,8 +366,8 @@ const CGFloat segWidth = 20.f;
     }];*/
     BOOL isHidden = [self.navigationController.navigationBar isHidden];
     [self.navigationController setNavigationBarHidden:!isHidden animated:YES];
-    [self setNavigationBarStyle];
-    
+    //[self setNavigationBarStyle];
+
     [self.scrollView.subviews enumerateObjectsUsingBlock:^(UIView *subView, NSUInteger idx, BOOL *stop) {
         
         if([subView isKindOfClass:[PBItemView class]]){
@@ -413,7 +430,6 @@ const CGFloat segWidth = 20.f;
     //重围
     self.dragPage = 0;
 }
-
 
 /*
 -(void)reuserAndVisibleHandle:(NSUInteger)page{
