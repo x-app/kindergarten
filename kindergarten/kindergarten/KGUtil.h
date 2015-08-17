@@ -89,7 +89,7 @@
 
 + (NSString *)getServerPushURL;
 
-+ (WebViewController *)getWebVC;
+//+ (WebViewController *)getWebVC;
 
 + (void)pushWebView:(NSString *)webViewType inViewController:(UIViewController*)vc;
 + (void)pushWebViewWithUrl:(NSString *)url inViewController:(UIViewController*)vc;

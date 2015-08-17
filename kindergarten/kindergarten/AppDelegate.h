@@ -14,7 +14,7 @@
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate, MYIntroductionDelegate>
 
-@property (strong, nonatomic)WebViewController *webVC;
+//@property (strong, nonatomic)WebViewController *webVC;
 
 @property (strong, nonatomic) UIWindow *window;
 

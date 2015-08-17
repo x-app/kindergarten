@@ -297,11 +297,12 @@ static NSArray *month_cn;
     return delegate.varible.server_push_url;
 }
 
-+ (WebViewController *)getWebVC
-{
-    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    return delegate.webVC;
-}
+//+ (WebViewController *)getWebVC
+//{
+//    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+//    return delegate.webVC;
+//}
+
 + (UIViewController *)getTopMostViewController {
     return [[UIApplication sharedApplication] topMostViewController];
 }
@@ -1023,11 +1024,6 @@ static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq
         return;
     }
     
-    KGUtil.getWebVC.title = title;
-    //    [KGUtil.getWebVC clearWebView];
-    
-    [vc.navigationController pushViewController:KGUtil.getWebVC animated:YES];
-    
     //get url
     NSString *uid = [KGUtil getUser].uid;
     NSInteger cid = 0;
@@ -1048,8 +1044,13 @@ static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq
     NSString *url = [KGUtil getRequestHtmlUrl:curl bodyStr:body];
     //
     
-    NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:url]];
-    [KGUtil.getWebVC.webView loadRequest:request];
+    WebViewController *webvc = [[WebViewController alloc] init];;
+    webvc.title = title;
+    webvc.url = url;
+    webvc.hidesBottomBarWhenPushed = true;
+    //[KGUtil.getWebVC clearWebView];
+    
+    [vc.navigationController pushViewController:webvc animated:YES];
 }
 
 // 供推送web页面用，每次都new webvc
@@ -1062,13 +1063,12 @@ static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq
         return;
     
     //指示当前webvc保留使用，willdisappear的时候不清空
-    [KGUtil getWebVC].keepUsing = true;
+//    [KGUtil getWebVC].keepUsing = true;
     
     WebViewController *wvc = [[WebViewController alloc] init];
+    wvc.url = url;
+    wvc.hidesBottomBarWhenPushed = true;
     [vc.navigationController pushViewController:wvc animated:YES];
-    
-    NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:url]];
-    [wvc.webView loadRequest:request];
 }
 
 + (void)pushViewByNotification {

@@ -25,11 +25,11 @@
 
 @implementation KGUIViewController
 
-- (WebViewController*)webVC
-{
-    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    return delegate.webVC;
-}
+//- (WebViewController*)webVC
+//{
+//    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+//    return delegate.webVC;
+//}
 
 - (KGPicPicker*)kgpp
 {
