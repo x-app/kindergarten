@@ -202,6 +202,20 @@ static NSArray *month_cn;
     }
 }
 
++ (void)setCurClassId:(NSInteger)index
+{
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    if (index > 0 && index < [delegate.user.classes count]) {
+        delegate.user.classIdx = index;
+    }
+}
+
++ (NSMutableArray *)getClasses
+{
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    return delegate.user.classes;
+}
+
 + (KGClass *)getCurClass {
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     if ([delegate.user.classes count] >= 1) {
@@ -229,6 +243,11 @@ static NSArray *month_cn;
         return delegate.user.classes[0];
      */
     return nil;
+}
+
++ (NSMutableArray *)getChilds {
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    return delegate.user.childs;
 }
 
 + (KGChild *)getCurChild {
@@ -265,6 +284,14 @@ static NSArray *month_cn;
         return delegate.user.childs[0];
     */
     return nil;
+}
+
++ (void)setCurChildId:(NSInteger)index
+{
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    if (index > 0 && index < [delegate.user.childs count]) {
+        delegate.user.childIdx = index;
+    }
 }
 
 + (NSString *)getMonthZn:(NSInteger)index{

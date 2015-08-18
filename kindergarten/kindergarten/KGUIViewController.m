@@ -11,6 +11,7 @@
 #import "KGConst.h"
 #import "KGUtil.h"
 #import "KGPicPicker.h"
+#import "MLTableAlert.h"
 
 @interface KGUIViewController () <UIActionSheetDelegate, KGPicPickerDelegate>
 
@@ -51,7 +52,13 @@
     [self.babyPortraitImageView addGestureRecognizer:portraitTap];
     UITapGestureRecognizer *headerBgTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(editHeaderBg)];
     [self.headerBgImageView addGestureRecognizer:headerBgTap];
-    // Do any additional setup after loading the view.
+    
+    // add change user event
+    UITapGestureRecognizer *childLabelTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(babyLabelTouchUpInside:)];
+    UITapGestureRecognizer *classLabelTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(classLabelTouchUpInside:)];
+    
+    [self.babyNameLabel addGestureRecognizer:childLabelTapGestureRecognizer];
+    [self.classNameLabel addGestureRecognizer:classLabelTapGestureRecognizer];
 }
 
 -(void)viewDidLayoutSubviews
@@ -210,6 +217,112 @@
     [KGUtil pushWebView:webViewType inViewController:self];
 }
 
+#pragma mark - label touch
+-(void) babyLabelTouchUpInside:(UITapGestureRecognizer *)recognizer{
+    
+//    UILabel *label=(UILabel*)recognizer.view;
+//    NSLog(@"%@被点击了",label.text);
+    if([KGUtil isTeacherVersion])
+        return;
+
+    MLTableAlert *tableAlert = [MLTableAlert tableAlertWithTitle:@"宝宝选择" cancelButtonTitle:@"取消" numberOfRows:^NSInteger(NSInteger section) {
+            if(![KGUtil isTeacherVersion])
+            {
+                return [KGUtil getChilds].count;
+            }
+            return 0;
+        }
+        andCells:^UITableViewCell *(MLTableAlert *alert, NSIndexPath *indexPath) {
+            static NSString *CellIdentifier = @"CellIdentifier";
+            UITableViewCell *cell = [alert.table dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (cell == nil) {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+            }
+            
+            if(![KGUtil isTeacherVersion])
+            {
+                KGChild *child = [[KGUtil getChilds] objectAtIndex:indexPath.row];
+                
+                cell.textLabel.text = child.name;
+                return cell;
+
+            }
+            return nil;
+        }];
+    
+    
+        // Setting custom alert height
+        tableAlert.height = 50;
+    
+    // configure actions to perform
+    [tableAlert configureSelectionBlock:^(NSIndexPath *selectedIndex){
+        if(![KGUtil isTeacherVersion])
+        {
+            KGChild *child = [[KGUtil getChilds] objectAtIndex:selectedIndex.row];
+            self.babyNameLabel.text = child.name;
+            
+            [KGUtil setCurChildId:selectedIndex.row];
+        }
+    } andCompletionBlock:^{
+        NSLog(@"cancelled");
+    }];
+    
+    // show the alert
+    [tableAlert show];
+    
+}
+
+-(void) classLabelTouchUpInside:(UITapGestureRecognizer *)recognizer{
+    if(![KGUtil isTeacherVersion])
+        return;
+    
+    MLTableAlert *tableAlert = [MLTableAlert tableAlertWithTitle:@"班级选择" cancelButtonTitle:@"取消" numberOfRows:^NSInteger(NSInteger section) {
+        if([KGUtil isTeacherVersion])
+        {
+            return [KGUtil getClasses].count;
+        }
+        return 0;
+    }
+    andCells:^UITableViewCell *(MLTableAlert *alert, NSIndexPath *indexPath) {
+        static NSString *CellIdentifier = @"CellIdentifier";
+        UITableViewCell *cell = [alert.table dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        }
+        
+        if([KGUtil isTeacherVersion])
+        {
+            KGClass *class = [[KGUtil getClasses] objectAtIndex:indexPath.row];
+            
+            cell.textLabel.text = class.className;
+            return cell;
+            
+        }
+        return nil;
+    }];
+    
+    
+    // Setting custom alert height
+    tableAlert.height = 50;
+    
+    // configure actions to perform
+    [tableAlert configureSelectionBlock:^(NSIndexPath *selectedIndex){
+        if([KGUtil isTeacherVersion])
+        {
+            KGClass *class = [[KGUtil getClasses] objectAtIndex:selectedIndex.row];
+            self.classNameLabel.text = class.className;
+            
+            [KGUtil setCurClassId:selectedIndex.row];
+        }
+    } andCompletionBlock:^{
+        NSLog(@"cancelled");
+    }];
+    
+    // show the alert
+    [tableAlert show];
+}
+
+#pragma mark -
 - (void)setTeacherVersionFunc {
 
 }

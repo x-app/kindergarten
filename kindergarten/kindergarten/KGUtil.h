@@ -74,9 +74,16 @@
             showHud:(BOOL)showHud;
 
 + (KGVarible *)getVarible;
+
++ (NSMutableArray *)getChilds;
 + (KGChild *)getCurChild;
++ (void)setCurChildId:(NSInteger)index;
+
++ (NSMutableArray *)getClasses;
 + (KGClass *)getCurClass;
 + (NSInteger)getCurClassId;
++ (void)setCurClassId:(NSInteger)index;
+
 + (KGUser *)getUser;
 
 + (NSString *)getMonthZn:(NSInteger)index;
