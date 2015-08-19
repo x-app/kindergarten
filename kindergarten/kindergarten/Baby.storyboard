@@ -30,7 +30,7 @@
                                     <constraint firstAttribute="width" constant="72" id="Vmk-WV-9Mg"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="江苏省南京市南戈特幼儿园小1班" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qis-D9-Kie">
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="江苏省南京市南戈特幼儿园小1班" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qis-D9-Kie">
                                 <rect key="frame" x="16" y="370" width="400" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="400" id="LeV-RQ-EGE"/>
@@ -45,7 +45,7 @@
                                     </mask>
                                 </variation>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="赖楚妍" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZeP-b7-Bfi" colorLabel="IBBuiltInLabel-Green">
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="赖楚妍" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZeP-b7-Bfi" colorLabel="IBBuiltInLabel-Green">
                                 <rect key="frame" x="108" y="342" width="80" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="och-ao-e2p"/>

@@ -29,9 +29,12 @@
 //    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:246/255.0 green:246/255.0 blue:246/255.0 alpha:1]];
 //    [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
     
-    // IOS8 新系统需要使用新的代码咯
+    // 修复Push到下一级右上角可恶的黑条
+    self.window.backgroundColor = [UIColor whiteColor];
+    
+    // register notification
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
-    {
+    {// IOS8 新系统需要使用新的代码咯
         [[UIApplication sharedApplication] registerUserNotificationSettings:
             [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge)
                                               categories:nil]];
@@ -63,13 +66,20 @@
         }
     }
     
+    // init data
+    self.resignActiveTime = nil;
+    
+    NSHTTPCookie *cookie;
+    NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    for (cookie in [storage cookies]) {
+        [storage deleteCookie:cookie];
+    }
+    
+    // restore data
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSInteger versionInUD  = [[userDefaults objectForKey:@"appVersion"] integerValue];
     self.appVersion = versionInUD;
-    
-    self.resignActiveTime = nil;
-    // 修复Push到下一级右上角可恶的黑条
-    self.window.backgroundColor = [UIColor whiteColor];
+
     self.user = [[KGUser alloc] init];
     self.user.verified = NO;
     self.user.registered = NO;
@@ -89,6 +99,7 @@
         [self.varible fromDictionary:variDict];
     }
     
+    // init welcome
     NSInteger visitTimes = [userDefaults integerForKey:@"visitTimes"];
     
 //    for the first time test
@@ -138,10 +149,8 @@
         //[self introduction:nil didFinishWithType:0];
     }
     visitTimes++;
-    
     //存储时，除NSNumber类型使用对应的类型意外，其他的都是使用setObject:forKey:
     [userDefaults setInteger:visitTimes forKey:@"visitTimes"];
-    
     //这里建议同步存储到磁盘中，但是不是必须的
     [userDefaults synchronize];
     
@@ -230,23 +239,23 @@
     }];
 }
 
-#pragma mark - webvc
-- (WebViewController*)webVC
-{
-    if(_webVC == nil){
-        _webVC = [[WebViewController alloc] init];
-        
-        _webVC.hidesBottomBarWhenPushed = YES;
-    
-        NSHTTPCookie *cookie;
-        NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
-        for (cookie in [storage cookies]) {
-            [storage deleteCookie:cookie];
-        }
-    }
-    
-    return _webVC;
-}
+//#pragma mark - webvc
+//- (WebViewController*)webVC
+//{
+//    if(_webVC == nil){
+//        _webVC = [[WebViewController alloc] init];
+//        
+////        _webVC.hidesBottomBarWhenPushed = YES;
+//    
+//        NSHTTPCookie *cookie;
+//        NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+//        for (cookie in [storage cookies]) {
+//            [storage deleteCookie:cookie];
+//        }
+//    }
+//    
+//    return _webVC;
+//}
 
 #pragma mark - push
 - (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken

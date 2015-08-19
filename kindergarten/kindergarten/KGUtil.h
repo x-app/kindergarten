@@ -74,9 +74,16 @@
             showHud:(BOOL)showHud;
 
 + (KGVarible *)getVarible;
+
++ (NSMutableArray *)getChilds;
 + (KGChild *)getCurChild;
++ (void)setCurChildId:(NSInteger)index;
+
++ (NSMutableArray *)getClasses;
 + (KGClass *)getCurClass;
 + (NSInteger)getCurClassId;
++ (void)setCurClassId:(NSInteger)index;
+
 + (KGUser *)getUser;
 
 + (NSString *)getMonthZn:(NSInteger)index;
@@ -89,7 +96,7 @@
 
 + (NSString *)getServerPushURL;
 
-+ (WebViewController *)getWebVC;
+//+ (WebViewController *)getWebVC;
 
 + (void)pushWebView:(NSString *)webViewType inViewController:(UIViewController*)vc;
 + (void)pushWebViewWithUrl:(NSString *)url inViewController:(UIViewController*)vc;

@@ -202,6 +202,20 @@ static NSArray *month_cn;
     }
 }
 
++ (void)setCurClassId:(NSInteger)index
+{
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    if (index > 0 && index < [delegate.user.classes count]) {
+        delegate.user.classIdx = index;
+    }
+}
+
++ (NSMutableArray *)getClasses
+{
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    return delegate.user.classes;
+}
+
 + (KGClass *)getCurClass {
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     if ([delegate.user.classes count] >= 1) {
@@ -229,6 +243,11 @@ static NSArray *month_cn;
         return delegate.user.classes[0];
      */
     return nil;
+}
+
++ (NSMutableArray *)getChilds {
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    return delegate.user.childs;
 }
 
 + (KGChild *)getCurChild {
@@ -267,6 +286,14 @@ static NSArray *month_cn;
     return nil;
 }
 
++ (void)setCurChildId:(NSInteger)index
+{
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    if (index > 0 && index < [delegate.user.childs count]) {
+        delegate.user.childIdx = index;
+    }
+}
+
 + (NSString *)getMonthZn:(NSInteger)index{
     if(month_cn == nil)
         month_cn = @[@"一月", @"二月", @"三月", @"四月", @"五月", @"六月", @"七月", @"八月", @"九月", @"十月", @"十一月", @"十二月"];
@@ -297,11 +324,12 @@ static NSArray *month_cn;
     return delegate.varible.server_push_url;
 }
 
-+ (WebViewController *)getWebVC
-{
-    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    return delegate.webVC;
-}
+//+ (WebViewController *)getWebVC
+//{
+//    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+//    return delegate.webVC;
+//}
+
 + (UIViewController *)getTopMostViewController {
     return [[UIApplication sharedApplication] topMostViewController];
 }
@@ -1023,11 +1051,6 @@ static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq
         return;
     }
     
-    KGUtil.getWebVC.title = title;
-    //    [KGUtil.getWebVC clearWebView];
-    
-    [vc.navigationController pushViewController:KGUtil.getWebVC animated:YES];
-    
     //get url
     NSString *uid = [KGUtil getUser].uid;
     NSInteger cid = 0;
@@ -1048,8 +1071,13 @@ static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq
     NSString *url = [KGUtil getRequestHtmlUrl:curl bodyStr:body];
     //
     
-    NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:url]];
-    [KGUtil.getWebVC.webView loadRequest:request];
+    WebViewController *webvc = [[WebViewController alloc] init];;
+    webvc.title = title;
+    webvc.url = url;
+    webvc.hidesBottomBarWhenPushed = true;
+    //[KGUtil.getWebVC clearWebView];
+    
+    [vc.navigationController pushViewController:webvc animated:YES];
 }
 
 // 供推送web页面用，每次都new webvc
@@ -1062,13 +1090,12 @@ static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq
         return;
     
     //指示当前webvc保留使用，willdisappear的时候不清空
-    [KGUtil getWebVC].keepUsing = true;
+//    [KGUtil getWebVC].keepUsing = true;
     
     WebViewController *wvc = [[WebViewController alloc] init];
+    wvc.url = url;
+    wvc.hidesBottomBarWhenPushed = true;
     [vc.navigationController pushViewController:wvc animated:YES];
-    
-    NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:url]];
-    [wvc.webView loadRequest:request];
 }
 
 + (void)pushViewByNotification {

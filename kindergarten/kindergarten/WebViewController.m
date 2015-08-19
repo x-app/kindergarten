@@ -10,7 +10,7 @@
 #import "UIViewController+TopMostViewController.h"
 #import "WebViewController.h"
 
-@interface WebViewController ()
+@interface WebViewController () <UIGestureRecognizerDelegate>
 
 @property (strong, nonatomic)UIActivityIndicatorView *activityIndicator;
 
@@ -18,52 +18,83 @@
 
 @implementation WebViewController
 
--(instancetype)init {
-    self = [super init];
-    
-    _keepUsing = false;
-    
-    CGRect windowFrame = [[UIScreen mainScreen] bounds];
-    //windowFrame.size.height += 49;//height of tabbar
-    
-    //[self.view setFrame:windowFrame];
-    //[self.view setBackgroundColor:[UIColor whiteColor]];
-    self.webView = [[UIWebView alloc] initWithFrame:windowFrame];
-    //[self.webView setBackgroundColor:[UIColor whiteColor]];
-    
-    
-    //NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.baidu.com"]];
-    [self.view addSubview: self.webView];
-    //[self.webView loadRequest:request];
-    
-    [self.webView setDelegate:self];
-    
-    /* 没有动画效果
-    UISwipeGestureRecognizer  *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipe:)];
-    [self.webView addGestureRecognizer:swipeRight];
-    
-    UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipe:)];
-    swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
-    [self.webView addGestureRecognizer:swipeLeft];
-    */
-    
-    return self;
-}
+//-(instancetype)init {
+//    self = [super init];
+//    
+//    return self;
+//}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.hidesBottomBarWhenPushed = YES;
+    //    CGRect windowFrame = [[UIScreen mainScreen] bounds];
+    //windowFrame.size.height += 49;//height of tabbar
+    _webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
+    _webView.delegate=self;
+    
+    [self.view addSubview: _webView];
+    
+    UIScrollView *scollview = (UIScrollView *)[[_webView subviews] objectAtIndex:0];
+    scollview.bounces = NO;
+    
+    [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.url]]];
+    
+    _keepUsing = false;
+    
+    
+    /* 没有动画效果
+     UISwipeGestureRecognizer  *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipe:)];
+     [self.webView addGestureRecognizer:swipeRight];
+     
+     UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipe:)];
+     swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
+     [self.webView addGestureRecognizer:swipeLeft];
+     */
+    
+//    self.navigationController.delegate = self;
+    
+//    self.hidesBottomBarWhenPushed = YES;
+    
+//    self.navigationController.hidesBarsOnSwipe = YES;
+    
+//    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    
+//    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+//    self.navigationController.interactivePopGestureRecognizer.delegate = nil;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    NSLog(@"willappear");
+//    [self.navigationController.view sendSubviewToBack:self.navigationController.navigationBar];
+    // hide nav bar
+//    [[self navigationController] setNavigationBarHidden:YES animated:YES];
+    
+    // enable slide-back
+//    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+//        self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+//        self.navigationController.interactivePopGestureRecognizer.delegate = self;
+//    }
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    NSLog(@"didappear");
+    
+    self.keepUsing = false;
 }
 
 -(void)viewWillDisappear:(BOOL)animated
 {
     NSLog(@"willdisappear");
+//    [self.navigationController.view bringSubviewToFront:self.navigationController.navigationBar];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
     NSLog(@"diddisappear");
+    /*
     UIViewController *tmVC = [[UIApplication sharedApplication] topMostViewController];
     if (tmVC == nil) {
         return;
@@ -76,19 +107,41 @@
     if(self.keepUsing)
         return;
     
-    [self clearWebView];
+    [self clearWebView];*/
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
-    NSLog(@"willappear");
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    NSLog(@"didappear");
+    // 处理事件
+    NSString *requestString = [[request URL] absoluteString];
+    NSArray *components = [requestString componentsSeparatedByString:@"::"];//native::popview:
     
-    self.keepUsing = false;
+    if (components != nil && [components count] > 0) {
+        NSString *pocotol = [components objectAtIndex:0];
+        if ([pocotol isEqualToString:@"native"]) {
+            NSString *commandStr = [components objectAtIndex:1];
+            NSArray *commandArray = [commandStr componentsSeparatedByString:@":"];
+            if (commandArray != nil && [commandArray count] > 0) {
+                NSString *command = [commandArray objectAtIndex:0];
+                if ([command isEqualToString:@"popview"]) {
+//                    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"消息" message:@"网页发出了登录请求" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+//                    [alert show];
+                    [self.navigationController popViewControllerAnimated:YES];
+                }
+            }
+            return NO;
+        }
+    }
+    return YES;
+}
+
+-(void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    //NSLog(@"in delegate!");
+    if (viewController == self) {
+//        [navigationController setNavigationBarHidden:true];
+    } else {
+//        [navigationController setNavigationBarHidden:false];
+    }
 }
 
 - (void)clearWebView
@@ -175,6 +228,11 @@
     } else {
         [self nextPage];
     }
+}
+
+#pragma mark -
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
+    return YES;
 }
 
 @end

@@ -259,7 +259,7 @@
 		self.cancelButton.titleLabel.shadowOffset = CGSizeMake(0, -1);
 		self.cancelButton.titleLabel.shadowColor = [[UIColor blackColor] colorWithAlphaComponent:0.75];
 		[self.cancelButton setTitle:self.cancelButtonTitle forState:UIControlStateNormal];
-		[self.cancelButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+		[self.cancelButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 		[self.cancelButton setBackgroundColor:[UIColor clearColor]];
 		[self.cancelButton setBackgroundImage:[[UIImage imageNamed:@"MLTableAlertButton.png"] stretchableImageWithLeftCapWidth:5 topCapHeight:0] forState:UIControlStateNormal];
 		[self.cancelButton setBackgroundImage:[[UIImage imageNamed:@"MLTableAlertButtonPressed.png"] stretchableImageWithLeftCapWidth:5 topCapHeight:0] forState:UIControlStateHighlighted];
