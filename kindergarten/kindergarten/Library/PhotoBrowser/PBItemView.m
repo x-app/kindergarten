@@ -112,7 +112,7 @@
                              completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                                  self.photoImageView.frame = windowFrame;
 
-                                 NSLog(@"load image compelted");
+                                 //NSLog(@"load image compelted");
                                  //[activityIndicator removeFromSuperview];
                                  //activityIndicator = nil;
                                  if(image!=nil && _progressView.progress <1.0f) {

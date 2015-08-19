@@ -97,6 +97,18 @@ static NSInteger const numPerRow = 4;
     return _deleteInfoIds;
 }
 
+- (void)setIsEditing:(BOOL)isEditing {
+    _isEditing = isEditing;
+    self.deletePhotoButton.enabled = _isEditing;
+    self.addPhotoButton.enabled = !_isEditing;
+    self.navigationItem.title = _isEditing ? @"选择项目" : @"";
+    self.editButton.title = _isEditing ? @"取消" : @"选择";
+    if (_isEditing == NO) { //当取消编辑时，把以选中的项目取消掉
+        [self setAllSelectedCellToUnselected];
+    }
+    self.navigationItem.hidesBackButton = _isEditing;
+}
+
 - (MBProgressHUD *)hud {
     if (_hud == nil) {
         _hud = [[MBProgressHUD alloc] initWithView:self.view];
@@ -109,7 +121,7 @@ static NSInteger const numPerRow = 4;
 
 - (KGPicPicker *)picPicker {
     if(_picPicker == nil) {
-        _picPicker = [[KGPicPicker alloc] initWithUIVC:self needCrop:FALSE multiple:YES];
+        _picPicker = [[KGPicPicker alloc] initWithUIVC:self.navigationController needCrop:FALSE multiple:YES];
         _picPicker.delegate = self;
     }
     return _picPicker;
@@ -287,6 +299,7 @@ static NSInteger const numPerRow = 4;
                 if (self.albumVC) {
                     [self.albumVC.collectionView reloadData];
                 }
+                self.isEditing = NO;
                 [KGUtil showCheckMark:@"删除完毕" checked:YES inView:self.view];
                 //[self.pbVC resetAsPageRemoved];
             } else {
@@ -392,10 +405,10 @@ static NSInteger const numPerRow = 4;
 //    [cell addGestureRecognizer:tapPressGR];
 //    tapPressGR.view.tag = indexPath.row;
     
-    PBImageInfo *iInfo = [[PBImageInfo alloc] init];
+    /*PBImageInfo *iInfo = [[PBImageInfo alloc] init];
     iInfo.imageURL = [NSString stringWithFormat:@"%@%@", [KGUtil getServerAppURL], info.picUrl];
     iInfo.imageDesc = info.desc;
-    [self.imageInfos addObject:iInfo];
+    [self.imageInfos addObject:iInfo];*/
     
     
 
@@ -437,6 +450,7 @@ static NSInteger const numPerRow = 4;
         self.pbVC.index = indexPath.row;
         self.pbVC.rowIndex = indexPath.row;
         self.pbVC.sectionIndex = indexPath.section;
+        [self resetImageInfos];
         [self.pbVC show];
     }
     /*PBViewController *pbVC = [[PBViewController alloc] init];
@@ -512,7 +526,7 @@ static NSInteger const numPerRow = 4;
     vc.delegate = self;
     vc.postType = ADD_ALBUM_PHOTO;
     vc.albumDirId = self.activityAlbum.dirId;
-    [self presentViewController:vc animated:YES
+    [self.navigationController presentViewController:vc animated:YES
                      completion:^(void){
                      }];
 }
@@ -548,14 +562,14 @@ static NSInteger const numPerRow = 4;
 #pragma mark actions
 - (IBAction)editButtonAction:(UIBarButtonItem *)sender {
     self.isEditing = !self.isEditing;
-    self.deletePhotoButton.enabled = self.isEditing;
+    /*self.deletePhotoButton.enabled = self.isEditing;
     self.addPhotoButton.enabled = !self.isEditing;
     self.navigationItem.title = self.isEditing ? @"选择项目" : @"";
     self.editButton.title = self.isEditing ? @"取消" : @"选择";
     if (self.isEditing == NO) { //当取消编辑时，把以选中的项目取消掉
         [self setAllSelectedCellToUnselected];
     }
-    self.navigationItem.hidesBackButton = self.isEditing;
+    self.navigationItem.hidesBackButton = self.isEditing;*/
 }
 
 - (IBAction)addPhotoAction:(UIBarButtonItem *)sender {
