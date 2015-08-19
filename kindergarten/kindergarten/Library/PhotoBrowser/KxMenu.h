@@ -29,9 +29,7 @@
 + (instancetype) menuItem:(NSString *) title
                     image:(UIImage *) image
                    target:(id)target
-                   action:(SEL) action;
-
-@property (nonatomic, copy) void (^actionBlock)();
+                   action:(SEL)action;
 
 @end
 

@@ -538,7 +538,7 @@ static NSString * const reuseIdentifier = @"AlbumCell";
 #pragma mark actions
 - (IBAction)addButtonAction:(id)sender {
     NSLog(@"add new album");
-    UIAlertView *hint = [[UIAlertView alloc] initWithTitle:@"新增相册" message:@"请输入您所要新建相册的目录名" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
+    UIAlertView *hint = [[UIAlertView alloc] initWithTitle:@"新增相册" message:@"请输入您所要新建相册的目录名" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
     hint.alertViewStyle = UIAlertViewStylePlainTextInput;
     //current.nextVC = next;
     hint.tag = 0;//表示新增相册
@@ -558,10 +558,20 @@ static NSString * const reuseIdentifier = @"AlbumCell";
 }
 
 #pragma mark -- UIAlertViewDelegate --
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+- (BOOL)alertViewShouldEnableFirstOtherButton:(UIAlertView *)alertView {
+    if (alertView.tag == 0) {
+        if (![KGUtil isEmptyString:[alertView textFieldAtIndex:0].text]) {
+            return YES;
+        }
+        return NO;
+    }
+    return YES;
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     NSLog(@"click alert view");
     if (alertView.tag == 0) {  //新增相册目录
-        if (buttonIndex == 0) { //确定
+        if (buttonIndex == 1) { //确定
             NSString *dirName = [alertView textFieldAtIndex:0].text;
             if ([KGUtil isEmptyString:dirName]) {
                 [KGUtil showCheckMark:@"目录名不可为空" checked:NO inView:self.collectionView];

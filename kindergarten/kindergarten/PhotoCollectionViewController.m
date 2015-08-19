@@ -101,7 +101,7 @@ static NSInteger const numPerRow = 4;
     _isEditing = isEditing;
     self.deletePhotoButton.enabled = _isEditing;
     self.addPhotoButton.enabled = !_isEditing;
-    self.navigationItem.title = _isEditing ? @"选择项目" : @"";
+    self.navigationItem.title = _isEditing ? @"选择项目" : _activityAlbum.dirName;
     self.editButton.title = _isEditing ? @"取消" : @"选择";
     if (_isEditing == NO) { //当取消编辑时，把以选中的项目取消掉
         [self setAllSelectedCellToUnselected];
@@ -547,15 +547,17 @@ static NSInteger const numPerRow = 4;
             [self.picPicker selectPhoto];
         }
     } else if (actionSheet.tag == 2) {
-        NSMutableArray *infoIds = [[NSMutableArray alloc] init];
-        for (int i = 0; i < self.deleteIndexs.count; i++) {
-            KGActivityAlbumInfo *info = (KGActivityAlbumInfo *)[self.activityAlbum.albumInfos objectAtIndex:i];
-            if (info == nil) {
-                return;
+        if (buttonIndex == 0) {
+            NSMutableArray *infoIds = [[NSMutableArray alloc] init];
+            for (int i = 0; i < self.deleteIndexs.count; i++) {
+                KGActivityAlbumInfo *info = (KGActivityAlbumInfo *)[self.activityAlbum.albumInfos objectAtIndex:i];
+                if (info == nil) {
+                    return;
+                }
+                [infoIds addObject:@(info.infoId)];
             }
-            [infoIds addObject:@(info.infoId)];
+            [self deletePhotosFromAlbum:[infoIds copy]];
         }
-        [self deletePhotosFromAlbum:[infoIds copy]];
     }
 }
 
