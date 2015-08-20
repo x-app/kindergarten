@@ -20,4 +20,6 @@ extern const int KG_PAGE_SIZE;
 
 extern const int WORD_LIMIT;
 
+extern const int MAX_PHOTO_SELECTION_NUM;
+
 #endif

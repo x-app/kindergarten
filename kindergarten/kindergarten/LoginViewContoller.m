@@ -288,19 +288,21 @@
             NSLog(@"密码设置成功");
             [self setFuncIcons];
             self.lockVC = lockVC;
-            [self requestReplaceToken];
-            /*
+            //[self requestReplaceToken];
+            
             AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
             [lockVC dismissViewControllerAnimated:NO completion:^(void) {
                 delegate.user.registered = YES;
                 delegate.user.verified = YES;
                 delegate.user.registering = NO;
+                [self saveCustomData];
+                [self.navigationController dismissViewControllerAnimated:YES completion:nil];
                 //[delegate deleteToken];
                 //[delegate postToken];
-                [self requestReplaceToken];
+                //[self requestReplaceToken];
             }];
             
-            if (self.fromVC != nil) {
+            /*if (self.fromVC != nil) {
                 NSLog(@"return to fromVC");
                 //[self dismissViewControllerAnimated:NO completion:nil];
                 //[self presentViewController:self.fromVC animated:YES completion:nil];

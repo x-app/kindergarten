@@ -24,6 +24,8 @@
 
 @property(nonatomic,assign) id <KGPicPickerDelegate> delegate;
 
+@property(nonatomic) NSInteger maxNumber;
+
 -(instancetype)initWithUIVC:(UIViewController *)uiVC needCrop:(BOOL)needCrop;
 
 -(instancetype)initWithUIVC:(UIViewController *)uiVC needCrop:(BOOL)needCrop multiple:(BOOL)multiple;

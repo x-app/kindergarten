@@ -9,9 +9,11 @@
 #import "KGPicPicker.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "ELCImagePickerController.h"
+#import "KGConst.h"
+
 @interface KGPicPicker()
 
-@property (nonatomic, weak)UIViewController* uiVC;
+@property (nonatomic, weak) UIViewController* uiVC;
 
 @property (nonatomic) BOOL needCrop;
 
@@ -22,7 +24,7 @@
 @implementation KGPicPicker
 
 - (instancetype)initWithUIVC:(UIViewController *)uiVC needCrop:(BOOL)needCrop {
-    self = [self init];
+    //self = [self init];
     return [self initWithUIVC:uiVC needCrop:needCrop multiple:NO];
 }
 
@@ -35,6 +37,7 @@
     _uiVC = uiVC;
     _needCrop = needCrop;
     _multipleSelection = multiple;
+    _maxNumber = MAX_PHOTO_SELECTION_NUM;
     
     return self;
 }
@@ -66,7 +69,7 @@
     if (self.multipleSelection) {
         ELCImagePickerController *elcPicker = [[ELCImagePickerController alloc] initImagePicker];
         
-        elcPicker.maximumImagesCount = 100; //Set the maximum number of images to select to 100
+        elcPicker.maximumImagesCount = self.maxNumber; //Set the maximum number of images to select to 100
         elcPicker.returnsOriginalImage = YES; //Only return the fullScreenImage, not the fullResolutionImage
         elcPicker.returnsImage = YES; //Return UIimage if YES. If NO, only return asset location information
         elcPicker.onOrder = NO; //For multiple image selection, display and return order of selected images

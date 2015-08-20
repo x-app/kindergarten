@@ -13,19 +13,22 @@
 #import "ImageEditCollectionViewCell.h"
 #import "PBViewController.h"
 #import "KGConst.h"
+#import "KGPicPicker.h"
 
-@interface GrowupEditViewController ()<UIGestureRecognizerDelegate>
+@interface GrowupEditViewController ()<UIGestureRecognizerDelegate, KGPicPickerDelegate, UIActionSheetDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextView *textView;
-
-@property (weak, nonatomic) IBOutlet UIImageView *imgView;
 
 @property (weak, nonatomic) IBOutlet UICollectionView *imagesCollectionView;
 
 @property (nonatomic) BOOL isEditingImages;
 
 @property (nonatomic, strong) PBViewController *pbVC;
+
 @property (nonatomic, strong) NSMutableArray *imageInfos;
+
+@property (nonatomic, strong) KGPicPicker *picPicker;
+
 @end
 
 @implementation GrowupEditViewController
@@ -33,9 +36,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    if(self.image != nil)
-        [self.imgView setImage:self.image];
     
     if(self.textView != nil)
         self.textView.delegate = self;
@@ -55,6 +55,14 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (KGPicPicker *)picPicker {
+    if(_picPicker == nil) {
+        _picPicker = [[KGPicPicker alloc] initWithUIVC:self needCrop:FALSE multiple:YES];
+        _picPicker.delegate = self;
+    }
+    return _picPicker;
 }
 
 - (PBViewController *)pbVC {
@@ -136,40 +144,54 @@
             return;
         }
     }
-     [KGUtil uploadImage:url
-                  images:self.images
-             description:self.textView.text
-              customAttr:attrName
-             customValue:attrValue
-                 success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                     NSString *code = [responseObject objectForKey:@"code"];
-                     if ([code isEqualToString:@"000000"]) {
-                         NSLog(@"succ");
-                         //reload
-                         //     [self loadNewData:true];
-                         [self dismissViewControllerAnimated:YES completion:^{
-                             if(self.delegate)
-                                 [self.delegate reloadData];
-                         }];
+    [KGUtil uploadImage:url
+                 images:self.images
+            description:self.textView.text
+             customAttr:attrName
+            customValue:attrValue
+                success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                    NSString *code = [responseObject objectForKey:@"code"];
+                    if ([code isEqualToString:@"000000"]) {
+                        NSLog(@"succ");
+                        //reload
+                        //     [self loadNewData:true];
+                        [self dismissViewControllerAnimated:YES completion:^{
+                            if(self.delegate)
+                                [self.delegate reloadData];
+                        }];
                         /*if(self.delegate)// && [self.delegate respondsToSelector:@selector(reloadData)])
-                             [self.delegate reloadData];*/
-                     }
-                     else
-                     {
+                         [self.delegate reloadData];*/
+                    }
+                    else
+                    {
                         NSString *msg = [responseObject objectForKey:@"msg"];
                         if([msg length] > 0)
                             NSLog(@"Error: %@", msg);
-                     }
-                 }
-                 failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                     NSLog(@"Error: %@", error);
-                 }
-                  inView:self.view
-                 showHud:true];
+                    }
+                }
+                failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                    NSLog(@"Error: %@", error);
+                }
+                 inView:self.view
+                showHud:true];
 }
 
 - (IBAction)onCancel:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    UIAlertView *hint = [[UIAlertView alloc] initWithTitle:@"退出此次编辑？" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"退出", nil];
+    hint.tag = 1;
+    [hint show];
+    //[self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - UIAlertView delegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (alertView.tag == 1) {
+        if (buttonIndex == 1) { //确定退出
+            [self dismissViewControllerAnimated:YES completion:nil];
+        } else { //取消
+            
+        }
+    }
 }
 
 #pragma mark - textview delegate
@@ -253,6 +275,16 @@
 //        self.pbVC.rowIndex = indexPath.row;
 //        self.pbVC.sectionIndex = indexPath.section;
 //        [self.pbVC show];
+        ImageEditCollectionViewCell *cell = (ImageEditCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+        if (cell.isAddButton) {
+            UIActionSheet *choiceSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                                     delegate:self
+                                                            cancelButtonTitle:@"取消"
+                                                       destructiveButtonTitle:nil
+                                                            otherButtonTitles:@"拍照", @"从相册中选取", nil];
+            choiceSheet.tag = 1;
+            [choiceSheet showInView:self.view];
+        }
     }
 }
 
@@ -299,6 +331,31 @@
         NSInteger imgIdx = gr.view.tag;
         [self.images removeObjectAtIndex:imgIdx];
         [self.imagesCollectionView reloadData];
+    }
+}
+
+#pragma mark - KGPicPickerDelegate
+- (void)doPicPicked:(NSArray *)images
+{
+    if (images == nil || images.count == 0) {
+        return;
+    }
+    [self.images addObjectsFromArray:images];
+    [self.imagesCollectionView reloadData];
+}
+
+
+#pragma mark UIActionSheetDelegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (actionSheet.tag == 1) { //增加图片
+        if (buttonIndex == 0) {
+            // 拍照
+            [self.picPicker takePhoto];
+        } else if (buttonIndex == 1) {
+            // 从相册中选取
+            self.picPicker.maxNumber = MAX_PHOTO_SELECTION_NUM - self.images.count;
+            [self.picPicker selectPhoto];
+        }
     }
 }
 
