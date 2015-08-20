@@ -40,8 +40,10 @@
     {
         UIImageView* v= self.func[i];
         //[(UIControl *)v addTarget:self action:@selector(onImageClick:) forControlEvents:UIControlEventTouchUpInside];
-        UITapGestureRecognizer *singleTap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onImageClick:)];
-        [v addGestureRecognizer:singleTap1];
+        if(v == nil)
+            continue;
+        UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onImageClick:)];
+        [v addGestureRecognizer:singleTap];
     }
     
     if([KGUtil isTeacherVersion])
@@ -183,21 +185,21 @@
             [iv setImage:[UIImage imageNamed:@"home_roll.png"]];
         else if(iv.tag == 4)
             [iv setImage:[UIImage imageNamed:@"home_leave.png"]];
-        if(iv.tag >= 5)
+        else if(iv.tag >= 5)
             [iv setHidden:true];
     }
     
     for(int i=0; i<self.funcbtns.count; i++)
     {
         UIButton* btn = self.funcbtns[i];
-        if([btn.titleLabel.text  isEqual: @"接送授权"])
+        if(btn.tag == 1)
            [btn setTitle:@"健康" forState:UIControlStateNormal];
-        else if([btn.titleLabel.text  isEqual: @"晨检"])
+        else if(btn.tag == 2)
             [btn setTitle:@"点名" forState:UIControlStateNormal];
-        else if([btn.titleLabel.text  isEqual: @"信箱"]){
+        else if(btn.tag == 3){
             
         }
-        else if([btn.titleLabel.text  isEqual: @"进园"])
+        else if(btn.tag == 4)
             [btn setTitle:@"请假处理" forState:UIControlStateNormal];
         else
             [btn setHidden:true];
@@ -216,21 +218,21 @@
             [iv setImage:[UIImage imageNamed:@"home_check.png"]];
         else if(iv.tag == 4)
             [iv setImage:[UIImage imageNamed:@"home_goin.png"]];
-        if(iv.tag >= 5)
+        else if(iv.tag >= 5)
             [iv setHidden:false];
     }
     
     for(int i=0; i<self.funcbtns.count; i++)
     {
         UIButton* btn = self.funcbtns[i];
-        if([btn.titleLabel.text  isEqual: @"健康"])
+        if(btn.tag == 1)
             [btn setTitle:@"接送授权" forState:UIControlStateNormal];
-        else if([btn.titleLabel.text  isEqual: @"点名"])
+        else if(btn.tag == 2)
             [btn setTitle:@"晨检" forState:UIControlStateNormal];
-        else if([btn.titleLabel.text  isEqual: @"信箱"]){
+        else if(btn.tag == 3){
             
         }
-        else if([btn.titleLabel.text  isEqual: @"请假处理"])
+        else if(btn.tag == 4)
             [btn setTitle:@"进园" forState:UIControlStateNormal];
         else
             [btn setHidden:false];

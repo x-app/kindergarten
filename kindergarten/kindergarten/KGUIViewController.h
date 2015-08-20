@@ -37,6 +37,8 @@ typedef enum {
 @property (weak, nonatomic) IBOutlet UIImageView *babyPortraitImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *headerBgImageView;
 
+@property (weak, nonatomic) IBOutlet UIImageView *downImg;
+
 - (void)pushWebView:(NSString *)webViewType;
 
 - (void)setTeacherVersionFunc;
