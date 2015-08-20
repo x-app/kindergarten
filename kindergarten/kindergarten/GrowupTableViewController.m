@@ -281,7 +281,7 @@
                                       }
                                   }
                                  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                                     NSLog(@"load image compelted");
+                                     //NSLog(@"load image compelted");
                                      [activityIndicator removeFromSuperview];
                                      activityIndicator = nil;
                                      

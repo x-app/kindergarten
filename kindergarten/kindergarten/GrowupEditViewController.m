@@ -147,9 +147,12 @@
                          NSLog(@"succ");
                          //reload
                          //     [self loadNewData:true];
-                        [self dismissViewControllerAnimated:YES completion:nil];
-                        if(self.delegate)// && [self.delegate respondsToSelector:@selector(reloadData)])
-                             [self.delegate reloadData];
+                         [self dismissViewControllerAnimated:YES completion:^{
+                             if(self.delegate)
+                                 [self.delegate reloadData];
+                         }];
+                        /*if(self.delegate)// && [self.delegate respondsToSelector:@selector(reloadData)])
+                             [self.delegate reloadData];*/
                      }
                      else
                      {

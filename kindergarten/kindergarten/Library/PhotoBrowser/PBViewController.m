@@ -84,11 +84,15 @@ const CGFloat segWidth = 20.f;
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
+    NSLog(@"PhotoBrowser->viewDidDisappear");
+
     [super viewDidDisappear:animated];
     self.isVisible = NO;
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
+    NSLog(@"PhotoBrowser->viewWillDisappear");
+
     [super viewWillDisappear:animated];
 //    if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
 //        // back button was pressed.  We know this is true because self is no longer
@@ -100,11 +104,13 @@ const CGFloat segWidth = 20.f;
 }
 
 -(void)viewDidAppear:(BOOL)animated {
+    NSLog(@"PhotoBrowser->viewDidAppear");
     [super viewDidAppear:animated];
     self.isVisible = YES;
 }
 
 -(void)viewWillAppear:(BOOL)animated{
+    NSLog(@"PhotoBrowser->viewWillAppear");
     [super viewWillAppear:animated];
     [self setNavigationBarStyle];
 }
@@ -238,6 +244,7 @@ const CGFloat segWidth = 20.f;
     [self showWithPage:self.index];
     //self.page = self.index;
     //设置contentSize
+    //self.scrollView.frame = CGRectMake(widthEachPage * self.imageInfos.count, 0, widthEachPage * (self.imageInfos.count + 1), frame.size.height);
     self.scrollView.contentSize = CGSizeMake(widthEachPage * self.imageInfos.count, 0);
     self.scrollView.isScrollToIndex = NO;
     self.scrollView.index = _index;

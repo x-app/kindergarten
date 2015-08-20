@@ -12,6 +12,8 @@
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 @interface KxMenuView : UIView
+@property (nonatomic) BOOL isShown;
+@property (nonatomic) BOOL inAnimation;
 @end
 
 @interface KxMenuOverlay : UIView
@@ -127,6 +129,9 @@
 - (void)showMenuInView:(UIView *)view
               fromRect:(CGRect)rect
              menuItems:(NSArray *)menuItems {
+    if (self.inAnimation) {
+        return;
+    }
     _menuItems = menuItems;
     
     _contentView = [self mkContentView];
@@ -144,12 +149,15 @@
     self.frame = (CGRect){self.frame.origin, self.frame.size.width, 1};
     _contentView.frame = (CGRect){_contentView.frame.origin.x, _contentView.frame.origin.y - _contentView.frame.size.height, _contentView.frame.size.width, _contentView.frame.size.height};
     //self.alpha = 0.1;
+    self.inAnimation = YES;
     [UIView animateWithDuration:0.3
                      animations:^(void) {
                          self.alpha = 1.0f;
                          self.frame = toFrame;
                          _contentView.frame = toContentFrame;
                      } completion:^(BOOL completed) {
+                         self.isShown = YES;
+                         self.inAnimation = NO;
                          //_contentView.hidden = NO;
                      }];
    
@@ -158,8 +166,12 @@
 - (void)dismissMenu:(BOOL)animated {
     if (self.superview) {
         if (animated) {
+            if (self.inAnimation) {
+                return;
+            }
             _contentView.hidden = YES;            
             const CGRect toFrame = (CGRect){self.frame.origin, self.frame.size.width, 0};
+            self.inAnimation = YES;
             [UIView animateWithDuration:0.3
                              animations:^(void) {
                                  //self.alpha = 0;
@@ -169,12 +181,15 @@
                                      [self.superview removeFromSuperview];
                                  }
                                  [self removeFromSuperview];
+                                 self.isShown = NO;
+                                 self.inAnimation = NO;
                              }];
         } else {
             if ([self.superview isKindOfClass:[KxMenuOverlay class]]) {
                 [self.superview removeFromSuperview];
             }
             [self removeFromSuperview];
+            self.isShown = NO;
         }
     }
 }
@@ -420,18 +435,21 @@ static UIColor *gTintColor;
     NSParameterAssert(menuItems.count);
     
     if (_menuView) {
-        [_menuView dismissMenu:YES];
-        _menuView = nil;
-        return;
+        if (_menuView.isShown) {
+            [_menuView dismissMenu:YES];
+            //_menuView = nil;
+            return;
+        }
+    } else {
+        _menuView = [[KxMenuView alloc] init];
     }
-    _menuView = [[KxMenuView alloc] init];
-    [_menuView showMenuInView:view fromRect:rect menuItems:menuItems];    
+    [_menuView showMenuInView:view fromRect:rect menuItems:menuItems];
 }
 
 - (void)dismissMenu {
     if (_menuView) {
         [_menuView dismissMenu:YES];
-        _menuView = nil;
+        //_menuView = nil;
     }
 }
 
