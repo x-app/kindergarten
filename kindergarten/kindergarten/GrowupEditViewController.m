@@ -68,11 +68,9 @@
 - (PBViewController *)pbVC {
     if (_pbVC == nil) {
         _pbVC = [[PBViewController alloc] init];
+        _pbVC.showOneMenuOnly = YES;
         _pbVC.handleVC = self;
-        if ([KGUtil isTeacherVersion]) {
-            //[_pbVC addAMenuItem:@"增加" icon:[UIImage imageNamed:@"icon_add.png"] target:self action:@selector(addPhotoToAlbumInPB:)];
-            //[_pbVC addAMenuItem:@"删除" icon:[UIImage imageNamed:@"icon_delete.png"] target:self action:@selector(deletePhotoFromAlbumInPB:)];
-        }
+        [_pbVC showMenuItem:@"删除" icon:[UIImage imageNamed:@"icon_delete.png"] target:self action:@selector(deleteImageInPB:)];
     }
     return _pbVC;
 }
@@ -92,6 +90,16 @@
         [self.imageInfos addObject:iInfo];
     }
     self.pbVC.imageInfos = self.imageInfos;
+}
+
+- (void)deleteImage:(NSInteger)index {
+    if (index < 0 || index >= self.images.count) {
+        return;
+    }
+    [self.images removeObjectAtIndex:index];
+    [self.imagesCollectionView reloadData];
+    [self resetImageInfos];
+    [self.pbVC resetAsPageRemoved];
 }
 
 /*
@@ -191,6 +199,10 @@
         } else { //取消
             
         }
+    } else if (alertView.tag == 0) {
+        if (buttonIndex == 1) {
+            [self deleteImage:self.pbVC.page];
+        }
     }
 }
 
@@ -232,7 +244,7 @@
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     if (self.postType == ADD_ALBUM_PHOTO) {
         //活动相册支持多图, 仿照微信, 最后一个cell是类似于微信的增加按钮
-        return self.images.count + 1;
+        return (self.images.count < MAX_PHOTO_SELECTION_NUM) ? self.images.count + 1 : self.images.count;
     } else {
         return self.images.count;
     }
@@ -242,7 +254,7 @@
     ImageEditCollectionViewCell *cell = (ImageEditCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"ImageEditCell" forIndexPath:indexPath];
     cell.imageItemView.contentMode = UIViewContentModeScaleAspectFill;
     cell.imageItemView.clipsToBounds = YES;
-    if (indexPath.row == self.images.count) {
+    if (indexPath.row == self.images.count && self.images.count < MAX_PHOTO_SELECTION_NUM) {
         cell.imageItemView.image = [UIImage imageNamed:@"camera.png"];
         cell.isAddButton = YES;
     } else {
@@ -284,6 +296,12 @@
                                                             otherButtonTitles:@"拍照", @"从相册中选取", nil];
             choiceSheet.tag = 1;
             [choiceSheet showInView:self.view];
+        } else {
+            self.pbVC.index = indexPath.row;
+            self.pbVC.rowIndex = indexPath.row;
+            self.pbVC.sectionIndex = indexPath.section;
+            [self resetImageInfos];
+            [self.pbVC show];
         }
     }
 }
@@ -332,6 +350,21 @@
         [self.images removeObjectAtIndex:imgIdx];
         [self.imagesCollectionView reloadData];
     }
+}
+
+- (void)deleteImageInPB:(id)sender {
+//    if (![sender isKindOfClass:[KxMenuItem class]]) {
+//        return;
+//    }
+//    KxMenuItem *item = (KxMenuItem *)sender;
+//    [self deleteImage:item.imageIndex];
+    if (![sender isKindOfClass:[PBViewController class]]) {
+        return;
+    }
+
+    UIAlertView *hint = [[UIAlertView alloc] initWithTitle:@"删除这张相片？" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"删除", nil];
+    hint.tag = 0;
+    [hint show];
 }
 
 #pragma mark - KGPicPickerDelegate

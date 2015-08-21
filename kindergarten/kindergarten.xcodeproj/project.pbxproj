@@ -177,6 +177,8 @@
 		9990FB431B67B152006A80F7 /* KGActivityAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 9990FB421B67B152006A80F7 /* KGActivityAlbum.m */; };
 		9990FB461B67B182006A80F7 /* KGActivityAlbumInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 9990FB451B67B182006A80F7 /* KGActivityAlbumInfo.m */; };
 		9990FB491B67BF1E006A80F7 /* AlbumCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9990FB481B67BF1E006A80F7 /* AlbumCollectionViewCell.m */; };
+		9995DFED1B861CEB00BB6F86 /* back_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9995DFEB1B861CEB00BB6F86 /* back_arrow@2x.png */; };
+		9995DFEE1B861CEB00BB6F86 /* back_arrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9995DFEC1B861CEB00BB6F86 /* back_arrow@3x.png */; };
 		9997B9FF1B4D580E00B908B6 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9997B9AE1B4D580E00B908B6 /* AFHTTPRequestOperation.m */; };
 		9997BA001B4D580E00B908B6 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9997B9B01B4D580E00B908B6 /* AFHTTPRequestOperationManager.m */; };
 		9997BA011B4D580E00B908B6 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9997B9B21B4D580E00B908B6 /* AFHTTPSessionManager.m */; };
@@ -524,6 +526,8 @@
 		9990FB451B67B182006A80F7 /* KGActivityAlbumInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KGActivityAlbumInfo.m; sourceTree = "<group>"; };
 		9990FB471B67BF1E006A80F7 /* AlbumCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumCollectionViewCell.h; sourceTree = "<group>"; };
 		9990FB481B67BF1E006A80F7 /* AlbumCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumCollectionViewCell.m; sourceTree = "<group>"; };
+		9995DFEB1B861CEB00BB6F86 /* back_arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "back_arrow@2x.png"; path = "Resource/back_arrow@2x.png"; sourceTree = "<group>"; };
+		9995DFEC1B861CEB00BB6F86 /* back_arrow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "back_arrow@3x.png"; path = "Resource/back_arrow@3x.png"; sourceTree = "<group>"; };
 		9997B9AD1B4D580E00B908B6 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		9997B9AE1B4D580E00B908B6 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		9997B9AF1B4D580E00B908B6 /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -1416,6 +1420,8 @@
 				12F9F8A61B74D9F500CFDB1B /* tabicons */,
 				99F1EDD41B734ED700175CFB /* icon_add.png */,
 				99F1EDD51B734ED700175CFB /* icon_delete.png */,
+				9995DFEB1B861CEB00BB6F86 /* back_arrow@2x.png */,
+				9995DFEC1B861CEB00BB6F86 /* back_arrow@3x.png */,
 				12DEACFF1B4D682C00C437BE /* funcicons */,
 				125090F31B68E09B0046F40E /* camera.png */,
 				9911C1F81B5A06C80080FFA9 /* default_img.png */,
@@ -1647,6 +1653,7 @@
 				12F9F9821B7A348F00CFDB1B /* park_icon_normal@3x.png in Resources */,
 				9997BA1F1B4D580E00B908B6 /* MLTableAlertButtonPressed.png in Resources */,
 				12F9F9751B7A348F00CFDB1B /* class_icon_selected@2x.png in Resources */,
+				9995DFEE1B861CEB00BB6F86 /* back_arrow@3x.png in Resources */,
 				12F9F9711B7A348F00CFDB1B /* park_icon_selected.png in Resources */,
 				12F9F9701B7A348F00CFDB1B /* my_icon_selected@3x.png in Resources */,
 				99F1EDD71B734ED700175CFB /* icon_delete.png in Resources */,
@@ -1679,6 +1686,7 @@
 				12F9F94B1B78ED5900CFDB1B /* about_icon-Small@2x.png in Resources */,
 				9997BA0A1B4D580E00B908B6 /* text_field@2x.png in Resources */,
 				12F9F9531B78ED5900CFDB1B /* password_icon-Small.png in Resources */,
+				9995DFED1B861CEB00BB6F86 /* back_arrow@2x.png in Resources */,
 				99ABD5921B47FC3500B8DB8B /* help_2.png in Resources */,
 				12EAE1581B5D3A270084680C /* MJRefresh.bundle in Resources */,
 				9997BA211B4D580E00B908B6 /* MLTableAlertShadowMask.png in Resources */,

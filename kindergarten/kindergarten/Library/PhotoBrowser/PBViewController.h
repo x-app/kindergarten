@@ -69,6 +69,8 @@ typedef enum {
 /** 当前显示中的itemView */
 @property (nonatomic,weak) PBItemView *currentItemView;
 
+//是否只显示一个菜单，吧菜单图标加入pb的右上角
+@property (nonatomic) BOOL showOneMenuOnly;
 
 //- (void)removePage: (NSInteger)page;
 
@@ -79,6 +81,12 @@ typedef enum {
 - (void)show;
 
 - (void)addAMenuItem:(NSString *)title
+                icon:(UIImage *)image
+              target:(id)trgt
+              action:(SEL)selector;
+
+//适用于只有一个菜单项，清除其他菜单项
+- (void)showMenuItem:(NSString *)title
                 icon:(UIImage *)image
               target:(id)trgt
               action:(SEL)selector;

@@ -122,8 +122,11 @@
                  fromRect:(CGRect)fromRect {
     const CGSize contentSize = _contentView.frame.size;
     const CGFloat outerWidth = view.bounds.size.width;
-    const CGFloat frameY = fromRect.origin.y + fromRect.size.height;
-    self.frame = CGRectMake(outerWidth - contentSize.width, frameY, contentSize.width, contentSize.height);
+    //20150821 将self.frame.origin.y由frameY改成0
+    //因为在PB中增加了一个跟navigationBar同高(64)的自定义view，因此overlayView的frame.origin.y改成64
+    //而self是overlayView的subview，所以这里origin.y设成0了。
+    //const CGFloat frameY = fromRect.origin.y + fromRect.size.height;
+    self.frame = CGRectMake(outerWidth - contentSize.width, 0, contentSize.width, contentSize.height);
 }
 
 - (void)showMenuInView:(UIView *)view
@@ -137,27 +140,32 @@
     _contentView = [self mkContentView];
     [self addSubview:_contentView];
     [self setupFrameInView:view fromRect:rect];
-        
-    KxMenuOverlay *overlay = [[KxMenuOverlay alloc] initWithFrame:view.bounds];
+    
+    CGRect overlayRect = CGRectMake(view.frame.origin.x, view.frame.origin.y + 64, view.frame.size.width, view.frame.size.height - 64);
+    KxMenuOverlay *overlay = [[KxMenuOverlay alloc] initWithFrame:overlayRect];
     [overlay addSubview:self];
     [view addSubview:overlay];
     
     //_contentView.hidden = YES;
     const CGRect toFrame = self.frame;
-    const CGRect toContentFrame = _contentView.frame;
+    //const CGRect toContentFrame = _contentView.frame;
     //self.frame = (CGRect){self.arrowPoint, self.frame.size.width, 0};
     self.frame = (CGRect){self.frame.origin, self.frame.size.width, 1};
-    _contentView.frame = (CGRect){_contentView.frame.origin.x, _contentView.frame.origin.y - _contentView.frame.size.height, _contentView.frame.size.width, _contentView.frame.size.height};
-    //self.alpha = 0.1;
+    //_contentView.frame = (CGRect){_contentView.frame.origin.x, _contentView.frame.origin.y - _contentView.frame.size.height, _contentView.frame.size.width, _contentView.frame.size.height};
+    //_contentView.frame = (CGRect){_contentView.frame.origin.x, _contentView.frame.origin.y, _contentView.frame.size.width, 1};
+    _contentView.alpha = 0.1;
+    self.alpha = 0.1;
     self.inAnimation = YES;
-    [UIView animateWithDuration:0.3
+    [UIView animateWithDuration:0.2
                      animations:^(void) {
                          self.alpha = 1.0f;
                          self.frame = toFrame;
-                         _contentView.frame = toContentFrame;
+                         //_contentView.frame = toContentFrame;
+                         //_contentView.alpha = 1.0;
                      } completion:^(BOOL completed) {
                          self.isShown = YES;
                          self.inAnimation = NO;
+                         _contentView.alpha = 1.0;
                          //_contentView.hidden = NO;
                      }];
    
@@ -172,7 +180,7 @@
             _contentView.hidden = YES;            
             const CGRect toFrame = (CGRect){self.frame.origin, self.frame.size.width, 0};
             self.inAnimation = YES;
-            [UIView animateWithDuration:0.3
+            [UIView animateWithDuration:0.2
                              animations:^(void) {
                                  //self.alpha = 0;
                                  self.frame = toFrame;

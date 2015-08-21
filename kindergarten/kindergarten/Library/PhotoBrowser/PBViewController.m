@@ -13,32 +13,48 @@
 
 @property (nonatomic, strong) NSMutableArray *menuItems;
 
+@property (weak, nonatomic) IBOutlet UIView *topBarView;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UIButton *rightButton;
+@property (weak, nonatomic) IBOutlet UIButton *leftButton;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topBarHeightC;
+
 @end
 
 const CGFloat segWidth = 20.f;
 
 @implementation PBViewController
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self vcPrepare];
     self.navigationController.delegate = self;
     
-    UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0 , 100, 44)];
+    /*UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0 , 100, 44)];
     titleLabel.backgroundColor = [UIColor clearColor];  //设置Label背景透明
     titleLabel.font = [UIFont boldSystemFontOfSize:12];  //设置文本字体与大小
     titleLabel.textColor = [UIColor whiteColor];  //设置文本颜色
     titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.text = @"";
-    self.navigationItem.titleView = titleLabel;
+    self.navigationItem.titleView = titleLabel;*/
+    [self.navigationItem setLeftBarButtonItem:nil];
+    [self.navigationItem setBackBarButtonItem:nil];
+    
     
     self.scrollView.backgroundColor = [UIColor blackColor];
-    
-    [self.menuItems addObject:[KxMenuItem menuItem:@"保存至本地相册"
-                                             image:[UIImage imageNamed:@"save.png"]
-                                            target:self
-                                            action:@selector(saveImageToLocalAlbum:)]];
+    if (!self.showOneMenuOnly) {
+        [self.menuItems addObject:[KxMenuItem menuItem:@"保存至本地相册"
+                                                 image:[UIImage imageNamed:@"save.png"]
+                                                target:self
+                                                action:@selector(saveImageToLocalAlbum:)]];
+    }
+    [self setNeedsStatusBarAppearanceUpdate];
     // Do any additional setup after loading the view.
+}
+
+-(UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
 }
 
 - (NSMutableArray *)menuItems {
@@ -52,6 +68,19 @@ const CGFloat segWidth = 20.f;
                 icon:(UIImage *)image
               target:(id)trgt
               action:(SEL)selector {
+    [self.menuItems addObject:[KxMenuItem menuItem:title
+                                             image:image
+                                            target:trgt
+                                            action:selector]];
+}
+
+
+- (void)showMenuItem:(NSString *)title
+                icon:(UIImage *)image
+              target:(id)trgt
+              action:(SEL)selector {
+    self.showOneMenuOnly = YES;
+    [self.menuItems removeAllObjects];
     [self.menuItems addObject:[KxMenuItem menuItem:title
                                              image:image
                                             target:trgt
@@ -84,16 +113,13 @@ const CGFloat segWidth = 20.f;
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
-    NSLog(@"PhotoBrowser->viewDidDisappear");
-
-    [super viewDidDisappear:animated];
     self.isVisible = NO;
+    [KxMenu dismissMenu];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
-    NSLog(@"PhotoBrowser->viewWillDisappear");
-
-    [super viewWillDisappear:animated];
+    //[self restoreNavigationBarStyle];
+//    [self.navigationController setNavigationBarHidden:NO animated:YES];
 //    if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
 //        // back button was pressed.  We know this is true because self is no longer
 //        // in the navigation stack.
@@ -104,21 +130,26 @@ const CGFloat segWidth = 20.f;
 }
 
 -(void)viewDidAppear:(BOOL)animated {
-    NSLog(@"PhotoBrowser->viewDidAppear");
-    [super viewDidAppear:animated];
     self.isVisible = YES;
-}
-
--(void)viewWillAppear:(BOOL)animated{
-    NSLog(@"PhotoBrowser->viewWillAppear");
-    [super viewWillAppear:animated];
     [self setNavigationBarStyle];
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [self setNavigationBarStyle];
+    //[self.navigationController setNavigationBarHidden:YES animated:YES];
+    //self.navigationController.navigationBar.frame = CGRectMake(0,0,320,1);
+}
+
 -(void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
-    //NSLog(@"in delegate!");
+    NSLog(@"pb in navigation delegate!");
     if (viewController == self) {
-        UIImage *rightImage = [UIImage imageNamed:@"gallery_more_icon.png"];
+        /*UIImage *rightImage = [UIImage imageNamed:@"gallery_more_icon.png"];
+        if (self.showOneMenuOnly && self.menuItems.count >= 1) {
+            KxMenuItem *menuItem = [self.menuItems objectAtIndex:0];
+            if (menuItem != nil) {
+                rightImage = menuItem.image;
+            }
+        }
         UIImageView *rightImageView = [[UIImageView alloc] initWithImage:rightImage];
         rightImageView.contentMode = UIViewContentModeScaleAspectFill;
         rightImageView.frame = CGRectMake(5, 0, 10, 20);
@@ -126,7 +157,7 @@ const CGFloat segWidth = 20.f;
         [rightButton addTarget:self action:@selector(clickRightButton:) forControlEvents:UIControlEventTouchUpInside];
         [rightButton addSubview:rightImageView];
         UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
-        self.navigationItem.rightBarButtonItem = rightButtonItem;
+        self.navigationItem.rightBarButtonItem = rightButtonItem;*/
         [self setNavigationBarStyle];
     } else {
         [self restoreNavigationBarStyle];
@@ -152,18 +183,60 @@ const CGFloat segWidth = 20.f;
     [self.visiblePhotoItemViewDictM removeAllObjects];
 }
 
-- (void)clickRightButton:(UIButton *)sender {
-    CGRect screenBounds = [[UIScreen mainScreen] bounds];
-    CGRect rect = CGRectMake(screenBounds.size.width - 80, self.navigationController.navigationBar.frame.origin.y, 100, self.navigationController.navigationBar.frame.size.height);
-    for (int i = 0; i < _menuItems.count; i++) {
-        KxMenuItem *item = (KxMenuItem *)[_menuItems objectAtIndex:i];
-        item.imageIndex = self.page;
-        item.rowIndex = self.rowIndex;
-        item.sectionIndex = self.sectionIndex;
+
+
+- (IBAction)rightButtonAction:(id)sender {
+    NSLog(@"right button touch up inside");
+    if (self.showOneMenuOnly && self.menuItems.count >= 1) {
+        KxMenuItem *menuItem = [self.menuItems objectAtIndex:0];
+        if (menuItem == nil) {
+            return;
+        }
+        if (menuItem.target && [menuItem.target respondsToSelector:menuItem.action]) {
+            [menuItem.target performSelectorOnMainThread:menuItem.action withObject:self waitUntilDone:YES];
+        }
+    } else {
+        CGRect screenBounds = [[UIScreen mainScreen] bounds];
+        //CGRect rect = CGRectMake(screenBounds.size.width - 80, self.navigationController.navigationBar.frame.origin.y, 100, self.navigationController.navigationBar.frame.size.height);
+        CGRect rect = CGRectMake(screenBounds.size.width - 80, self.topBarView.frame.origin.y, 100, self.topBarView.frame.size.height);
+        for (int i = 0; i < _menuItems.count; i++) {
+            KxMenuItem *item = (KxMenuItem *)[_menuItems objectAtIndex:i];
+            item.imageIndex = self.page;
+            item.rowIndex = self.rowIndex;
+            item.sectionIndex = self.sectionIndex;
+        }
+        [KxMenu showMenuInView:self.view
+                      fromRect:rect
+                     menuItems:self.menuItems];
     }
-    [KxMenu showMenuInView:self.view
-                  fromRect:rect
-                 menuItems:self.menuItems];
+}
+
+- (IBAction)leftButtonAction:(id)sender {
+    [self dismiss];
+}
+
+- (void)clickRightButton:(UIButton *)sender {
+    if (self.showOneMenuOnly && self.menuItems.count >= 1) {
+        KxMenuItem *menuItem = [self.menuItems objectAtIndex:0];
+        if (menuItem == nil) {
+            return;
+        }
+        if (menuItem.target && [menuItem.target respondsToSelector:menuItem.action]) {
+            [menuItem.target performSelectorOnMainThread:menuItem.action withObject:self waitUntilDone:YES];
+        }
+    } else {
+        CGRect screenBounds = [[UIScreen mainScreen] bounds];
+        CGRect rect = CGRectMake(screenBounds.size.width - 80, self.navigationController.navigationBar.frame.origin.y, 100, self.navigationController.navigationBar.frame.size.height);
+        for (int i = 0; i < _menuItems.count; i++) {
+            KxMenuItem *item = (KxMenuItem *)[_menuItems objectAtIndex:i];
+            item.imageIndex = self.page;
+            item.rowIndex = self.rowIndex;
+            item.sectionIndex = self.sectionIndex;
+        }
+        [KxMenu showMenuInView:self.view
+                      fromRect:rect
+                     menuItems:self.menuItems];
+    }
 }
 
 - (void)saveImageToLocalAlbum: (id)sender {
@@ -195,17 +268,40 @@ const CGFloat segWidth = 20.f;
 }
 
 - (void)setNavigationBarStyle {
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    self.navigationController.navigationBar.translucent = YES;
-    self.navigationController.navigationBar.alpha = 1.0;
-    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+//    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+//    self.navigationController.navigationBar.translucent = YES;
+//    self.navigationController.navigationBar.alpha = 1.0;
+//    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+    //self.navigationItem.hidesBackButton = YES;
+    //self.navigationController.navigationBar.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 0);
     //self.navigationItem.leftBarButtonItem.tintColor = [UIColor redColor];
+    //[self.navigationController.navigationBar setHidden:YES];
+    //[self.navigationController setNavigationBarHidden:YES animated:YES];
+    self.navigationController.navigationBar.alpha = 0;
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    //self.navigationItem.hidesBackButton = YES;
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+    if (self.showOneMenuOnly && self.menuItems.count >= 1) {
+        KxMenuItem *menuItem = [self.menuItems objectAtIndex:0];
+        if (menuItem != nil) {
+            UIImageView *rightButtonImageView = [[UIImageView alloc] initWithImage:menuItem.image];
+            rightButtonImageView.frame = CGRectMake(0, 0, 20, 20);
+            [self.rightButton setImage:menuItem.image forState:UIControlStateNormal];
+        }
+    }
 }
 
 - (void)restoreNavigationBarStyle {
-    self.navigationController.navigationBar.tintColor = nil;
+//    self.navigationController.navigationBar.tintColor = nil;
+//    self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
+//    self.navigationController.navigationBar.translucent = NO;
+    //self.navigationItem.hidesBackButton = NO;
+    //self.navigationController.navigationBar.frame = CGRectMake(0, 24, [UIScreen mainScreen].bounds.size.width, 40);
+    //[self.navigationController setNavigationBarHidden:NO animated:YES];
+    self.navigationController.navigationBar.alpha = 1;
     self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
-    self.navigationController.navigationBar.translucent = NO;
+    self.navigationController.navigationBar.tintColor = nil;
+    //self.navigationItem.hidesBackButton = NO;
 }
 
 
@@ -358,21 +454,22 @@ const CGFloat segWidth = 20.f;
 
 -(void)singleTap{
     
-    /*CGFloat h = _topBarView.frame.size.height;
-    
+    CGFloat h = _topBarView.frame.size.height;
+    //CGFloat w = _topBarView.frame.size.width;
     BOOL show = _topBarView.tag == 0;
     
-    _topBarView.tag = show?1:0;
+    _topBarView.tag = show ? 1 : 0;
     
-    _topBarHeightC.constant = show?-h:0;
+    _topBarHeightC.constant = show ? -h : 0;
+    //_topBarView.frame = show ? CGRectMake(0, 0, w, 64) : CGRectMake(0, 0, w, 0);
     
     [UIView animateWithDuration:.25f animations:^{
-        
         [_topBarView setNeedsLayout];
         [_topBarView layoutIfNeeded];
-    }];*/
-    BOOL isHidden = [self.navigationController.navigationBar isHidden];
-    [self.navigationController setNavigationBarHidden:!isHidden animated:YES];
+    }];
+    
+    //BOOL isHidden = [self.navigationController.navigationBar isHidden];
+    //[self.navigationController setNavigationBarHidden:!isHidden animated:YES];
     //[self setNavigationBarStyle];
 
     [self.scrollView.subviews enumerateObjectsUsingBlock:^(UIView *subView, NSUInteger idx, BOOL *stop) {
@@ -496,10 +593,12 @@ const CGFloat segWidth = 20.f;
     if ([KGUtil isEmptyString:text]) {
         text = [NSString stringWithFormat:@"%@ / %@", @(page + 1) , @(self.imageInfos.count)];
     }
-    UILabel *titleLabel = (UILabel *)self.navigationItem.titleView;
+    /*UILabel *titleLabel = (UILabel *)self.navigationItem.titleView;
     if (titleLabel != nil) {
         titleLabel.text = text;
-    }
+    }*/
+    self.titleLabel.text = text;
+    
     if(_page !=0 && _page == page) return;
     
     _lastPage = page;
@@ -534,17 +633,6 @@ const CGFloat segWidth = 20.f;
         self.currentItemView = [self.visiblePhotoItemViewDictM objectForKey:@(self.page)];
     });
 }
-
-
-
-
-
-
--(UIStatusBarStyle)preferredStatusBarStyle{
-    
-    return UIStatusBarStyleLightContent;
-}
-
 
 /** 取出可重用照片视图 */
 /*-(PBItemView *)dequeReusablePhotoItemView{
@@ -596,7 +684,12 @@ const CGFloat segWidth = 20.f;
 }
 
 - (void)dismiss {
-    [self.navigationController popViewControllerAnimated:YES];
+    if (self.navigationController) {
+        [self.navigationController popViewControllerAnimated:YES];
+    } else {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+    [KxMenu dismissMenu];
 }
 //
 //- (void)dealloc {
