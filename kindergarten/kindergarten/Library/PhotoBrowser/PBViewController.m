@@ -18,6 +18,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *rightButton;
 @property (weak, nonatomic) IBOutlet UIButton *leftButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *topBarHeightC;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomBarHeightC;
+@property (weak, nonatomic) IBOutlet UIView *bottomBarView;
+@property (weak, nonatomic) IBOutlet UILabel *descLabel;
 
 @end
 
@@ -41,11 +44,10 @@ const CGFloat segWidth = 20.f;
     [self.navigationItem setLeftBarButtonItem:nil];
     [self.navigationItem setBackBarButtonItem:nil];
     
-    
     self.scrollView.backgroundColor = [UIColor blackColor];
     if (!self.showOneMenuOnly) {
         [self.menuItems addObject:[KxMenuItem menuItem:@"保存至本地相册"
-                                                 image:[UIImage imageNamed:@"save.png"]
+                                                 image:[UIImage imageNamed:@"icon_save.png"]
                                                 target:self
                                                 action:@selector(saveImageToLocalAlbum:)]];
     }
@@ -455,24 +457,27 @@ const CGFloat segWidth = 20.f;
 -(void)singleTap{
     
     CGFloat h = _topBarView.frame.size.height;
-    //CGFloat w = _topBarView.frame.size.width;
+    CGFloat bh = _bottomBarView.frame.size.height;
+
     BOOL show = _topBarView.tag == 0;
     
     _topBarView.tag = show ? 1 : 0;
     
     _topBarHeightC.constant = show ? -h : 0;
     //_topBarView.frame = show ? CGRectMake(0, 0, w, 64) : CGRectMake(0, 0, w, 0);
-    
+    _bottomBarHeightC.constant = show ? -bh : 0;
     [UIView animateWithDuration:.25f animations:^{
         [_topBarView setNeedsLayout];
         [_topBarView layoutIfNeeded];
+        [_bottomBarView setNeedsLayout];
+        [_bottomBarView layoutIfNeeded];
     }];
     
     //BOOL isHidden = [self.navigationController.navigationBar isHidden];
     //[self.navigationController setNavigationBarHidden:!isHidden animated:YES];
     //[self setNavigationBarStyle];
 
-    [self.scrollView.subviews enumerateObjectsUsingBlock:^(UIView *subView, NSUInteger idx, BOOL *stop) {
+    /*[self.scrollView.subviews enumerateObjectsUsingBlock:^(UIView *subView, NSUInteger idx, BOOL *stop) {
         
         if([subView isKindOfClass:[PBItemView class]]){
             
@@ -480,7 +485,7 @@ const CGFloat segWidth = 20.f;
             
             [itemView handleBottomView];
         }
-    }];
+    }];*/
 }
 
 
@@ -598,7 +603,9 @@ const CGFloat segWidth = 20.f;
         titleLabel.text = text;
     }*/
     self.titleLabel.text = text;
-    
+    if (![KGUtil isEmptyString:curImgInfo.imageDesc]) {
+        self.descLabel.text = curImgInfo.imageDesc;
+    }
     if(_page !=0 && _page == page) return;
     
     _lastPage = page;

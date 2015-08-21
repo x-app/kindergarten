@@ -16,15 +16,15 @@
 
 @property (weak, nonatomic) IBOutlet PBProgressView *progressView;
 
-@property (weak, nonatomic) IBOutlet UIView *bottomView;
-
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-
-@property (weak, nonatomic) IBOutlet UILabel *descLabel;
-
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomMarginC;
-
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *rightMarginC;
+//@property (weak, nonatomic) IBOutlet UIView *bottomView;
+//
+//@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+//
+//@property (weak, nonatomic) IBOutlet UILabel *descLabel;
+//
+//@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomMarginC;
+//
+//@property (weak, nonatomic) IBOutlet NSLayoutConstraint *rightMarginC;
 
 @property (weak, nonatomic) IBOutlet UIView *bgView;
 
@@ -56,7 +56,7 @@
     
     //数据准备
     [self dataPrepare];
-    
+
     //添加手势
     [self addGestureRecognizer:self.tap_single_viewGesture];
     [self addGestureRecognizer:self.tap_double_viewGesture];
@@ -133,12 +133,12 @@
     
     //标题
     //_titleLabel.text = self.imageInfo.imageTitle;
-    if (self.imageInfo.imageDesc == nil || [self.imageInfo.imageDesc isKindOfClass:[NSNull class]] || [self.imageInfo.imageDesc isEqualToString:@""]) {
+    /*if (self.imageInfo.imageDesc == nil || [self.imageInfo.imageDesc isKindOfClass:[NSNull class]] || [self.imageInfo.imageDesc isEqualToString:@""]) {
         _descLabel.hidden = YES;
     } else {
         _descLabel.hidden = NO;
         _descLabel.text = self.imageInfo.imageDesc;
-    }
+    }*/
 }
 /*
 -(UIImage *)remakeImageWithFullSize:(UIImage *)image size:(CGSize)fullSize zoom:(CGFloat)zoom{
@@ -240,7 +240,7 @@
 /*
  *  处理bottomView
  */
--(void)handleBottomView{
+/*-(void)handleBottomView{
     
     CGFloat h = _bottomView.frame.size.height;
     
@@ -256,7 +256,7 @@
         [_bottomView layoutIfNeeded];
     }];
     
-}
+}*/
 
 
 
