@@ -53,7 +53,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="600" height="64"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gHX-xy-gRo">
-                            <rect key="frame" x="175" y="29" width="250" height="25"/>
+                            <rect key="frame" x="175" y="31" width="250" height="25"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="250" id="Lsx-dJ-OIa"/>
                                 <constraint firstAttribute="height" constant="25" id="aUt-WZ-fkP"/>
@@ -94,7 +94,7 @@
                     <color key="backgroundColor" red="0.13725490196078433" green="0.13725490196078433" blue="0.14117647058823529" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="bottom" secondItem="gHX-xy-gRo" secondAttribute="bottom" constant="10" id="1WY-4I-5Hw"/>
+                        <constraint firstAttribute="bottom" secondItem="gHX-xy-gRo" secondAttribute="bottom" constant="8" id="1WY-4I-5Hw"/>
                         <constraint firstAttribute="centerX" secondItem="gHX-xy-gRo" secondAttribute="centerX" id="LcK-nt-tlP"/>
                         <constraint firstAttribute="bottom" secondItem="hVV-Zj-pYr" secondAttribute="bottom" constant="10" id="RO9-de-eFw"/>
                         <constraint firstAttribute="height" constant="64" id="fFW-JY-Kih"/>
