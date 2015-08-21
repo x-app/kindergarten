@@ -9,7 +9,7 @@
 #import "PBViewController.h"
 #import "AppDelegate.h"
 #import "KGUtil.h"
-@interface PBViewController ()<UIScrollViewDelegate>
+@interface PBViewController ()<UIScrollViewDelegate, UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) NSMutableArray *menuItems;
 
@@ -32,7 +32,7 @@ const CGFloat segWidth = 20.f;
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self vcPrepare];
-    self.navigationController.delegate = self;
+    //self.navigationController.delegate = self;
     
     /*UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0 , 100, 44)];
     titleLabel.backgroundColor = [UIColor clearColor];  //设置Label背景透明
@@ -52,7 +52,19 @@ const CGFloat segWidth = 20.f;
                                                 action:@selector(saveImageToLocalAlbum:)]];
     }
     [self setNeedsStatusBarAppearanceUpdate];
+    
+    self.navigationController.interactivePopGestureRecognizer.delegate = self;
+    [self.navigationController.interactivePopGestureRecognizer setEnabled:YES];
+    
     // Do any additional setup after loading the view.
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    return YES;
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldBeRequiredToFailByGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    return [gestureRecognizer isKindOfClass:UIScreenEdgePanGestureRecognizer.class];
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle{
@@ -115,31 +127,25 @@ const CGFloat segWidth = 20.f;
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
     self.isVisible = NO;
     [KxMenu dismissMenu];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
-    //[self restoreNavigationBarStyle];
-//    [self.navigationController setNavigationBarHidden:NO animated:YES];
-//    if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
-//        // back button was pressed.  We know this is true because self is no longer
-//        // in the navigation stack.
-//        NSLog(@"---------->>>");
-//        [self cleanPhotoBrowser];
-//    }
-    //[self.navigationController setNavigationBarHidden:NO animated:YES];
+    [super viewWillDisappear:animated];
+    [self restoreNavigationBarStyle];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     self.isVisible = YES;
     [self setNavigationBarStyle];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     [self setNavigationBarStyle];
-    //[self.navigationController setNavigationBarHidden:YES animated:YES];
-    //self.navigationController.navigationBar.frame = CGRectMake(0,0,320,1);
 }
 
 -(void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
@@ -166,17 +172,8 @@ const CGFloat segWidth = 20.f;
     }
 }
 
-- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
-    if (viewController == self) {
-
-    } else {
-        //[self cleanPhotoBrowser];
-        //self.navigationController.delegate = nil;
-    }
-}
-
 - (void)cleanPhotoBrowser {
-    NSLog(@">>>>clear photobrowser");
+    //NSLog(@">>>>clear photobrowser");
     for (int i = 0; i < self.scrollView.subviews.count; i++) {
         UIView *view = [self.scrollView.subviews objectAtIndex:i];
         [view removeFromSuperview];
@@ -184,8 +181,6 @@ const CGFloat segWidth = 20.f;
     //[self.reusablePhotoItemViewSetM removeAllObjects];
     [self.visiblePhotoItemViewDictM removeAllObjects];
 }
-
-
 
 - (IBAction)rightButtonAction:(id)sender {
     NSLog(@"right button touch up inside");
@@ -278,11 +273,11 @@ const CGFloat segWidth = 20.f;
     //self.navigationController.navigationBar.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 0);
     //self.navigationItem.leftBarButtonItem.tintColor = [UIColor redColor];
     //[self.navigationController.navigationBar setHidden:YES];
-    //[self.navigationController setNavigationBarHidden:YES animated:YES];
-    self.navigationController.navigationBar.alpha = 0;
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    //self.navigationItem.hidesBackButton = YES;
-    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+//    self.navigationController.navigationBar.alpha = 0;
+//    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+//    self.navigationItem.hidesBackButton = YES;
+//    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
     if (self.showOneMenuOnly && self.menuItems.count >= 1) {
         KxMenuItem *menuItem = [self.menuItems objectAtIndex:0];
         if (menuItem != nil) {
@@ -299,10 +294,10 @@ const CGFloat segWidth = 20.f;
 //    self.navigationController.navigationBar.translucent = NO;
     //self.navigationItem.hidesBackButton = NO;
     //self.navigationController.navigationBar.frame = CGRectMake(0, 24, [UIScreen mainScreen].bounds.size.width, 40);
-    //[self.navigationController setNavigationBarHidden:NO animated:YES];
-    self.navigationController.navigationBar.alpha = 1;
-    self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
-    self.navigationController.navigationBar.tintColor = nil;
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+//    self.navigationController.navigationBar.alpha = 1;
+//    self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
+//    self.navigationController.navigationBar.tintColor = nil;
     //self.navigationItem.hidesBackButton = NO;
 }
 
@@ -403,7 +398,7 @@ const CGFloat segWidth = 20.f;
     photoItemView.ItemViewSingleTapBlock = ^(){
         [self singleTap];
     };
-    photoItemView.viewZoomBlock = ^() {
+    /*photoItemView.viewZoomBlock = ^() {
 //        [self.navigationController.navigationBar setNeedsDisplay];
 //        self.navigationController.navigationBar.barTintColor = [UIColor clearColor];
 //        [self.navigationController.view setNeedsDisplay];
@@ -418,7 +413,7 @@ const CGFloat segWidth = 20.f;
         //self.navigationController.view.backgroundColor = [UIColor clearColor];
         //[self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
         //self.navigationController.navigationBar.backgroundColor = [UIColor clearColor];
-    };
+    };*/
     
     //到这里，photoItemView一定有值，而且一定显示为当前页
     //加入到当前显示中的字典
