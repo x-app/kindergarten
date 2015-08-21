@@ -115,7 +115,7 @@
     {
         UIButton* btn = self.funcbtns[i];
         
-        if([btn.titleLabel.text  isEqual: @"班级统计"])
+        if(btn.tag == 5)
             [btn setHidden:false];
     }
 }
@@ -133,7 +133,7 @@
     {
         UIButton* btn = self.funcbtns[i];
         
-        if([btn.titleLabel.text  isEqual: @"班级统计"])
+        if(btn.tag == 5)
             [btn setHidden:true];
     }
 }

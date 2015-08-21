@@ -59,6 +59,10 @@
     
     [self.babyNameLabel addGestureRecognizer:childLabelTapGestureRecognizer];
     [self.classNameLabel addGestureRecognizer:classLabelTapGestureRecognizer];
+    
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(classLabelTouchUpInside:)];
+    [self.downImg addGestureRecognizer:singleTap];
+    
 }
 
 -(void)viewDidLayoutSubviews
@@ -163,6 +167,15 @@
             self.babyNameLabel.text = curChild.name;
             self.classNameLabel.text = [NSString stringWithFormat:@"%@%@", KGUtil.getVarible.parkName, curChild.className];
         }
+    }
+    
+    if([KGUtil isTeacherVersion])
+    {
+        self.downImg.hidden = false;
+    }
+    else
+    {
+        self.downImg.hidden = true;
     }
 
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
