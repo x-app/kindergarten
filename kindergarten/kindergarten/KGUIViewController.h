@@ -32,12 +32,14 @@ typedef enum {
 @interface KGUIViewController : UIViewController
 
 //- (WebViewController*)webVC;
-@property (weak, nonatomic) IBOutlet UILabel *babyNameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *classNameLabel;
+
 @property (weak, nonatomic) IBOutlet UIImageView *babyPortraitImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *headerBgImageView;
 
-@property (weak, nonatomic) IBOutlet UIImageView *downImg;
+@property (weak, nonatomic) IBOutlet UILabel *childNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *classNameLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *classSelImg;
+@property (weak, nonatomic) IBOutlet UIImageView *childSelImg;
 
 - (void)pushWebView:(NSString *)webViewType;
 

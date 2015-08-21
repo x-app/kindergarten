@@ -423,8 +423,8 @@
                     <navigationItem key="navigationItem" id="d4b-9i-YN0"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
-                        <outlet property="babyNameLabel" destination="D4F-ak-rbm" id="9Ws-4L-QCK"/>
                         <outlet property="babyPortraitImageView" destination="51v-WQ-nDN" id="kg2-8d-fUz"/>
+                        <outlet property="childNameLabel" destination="D4F-ak-rbm" id="lpd-YS-beR"/>
                         <outlet property="classNameLabel" destination="HBm-9c-gwf" id="rfb-46-Fi9"/>
                         <outlet property="headerBgImageView" destination="ybr-1f-K3h" id="jY6-ie-eYo"/>
                         <outlet property="repeatImage" destination="e02-qw-JFl" id="D8l-fH-hqc"/>

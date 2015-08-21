@@ -176,9 +176,9 @@
 
 -(void)animateOut
 {
+    self.appWindow.hidden = YES;
+    [self.appWindow resignKeyWindow];
     [self removeFromSuperview];
-				self.appWindow.hidden = YES;
-				[self.appWindow resignKeyWindow];
 //	[UIView animateWithDuration:1.0/7.5 animations:^{
 //		self.alertBg.transform = CGAffineTransformMakeScale(0.9, 0.9);
 //	} completion:^(BOOL finished) {
@@ -283,15 +283,15 @@
 
 -(void)dismissTableAlert
 {
-	// dismiss the alert with its animation
-	[self animateOut];
-	
 	// perform actions contained in completionBlock if the
 	// cancel button of the alert has been pressed
 	// if completionBlock == nil, nothing is performed
 	if (self.completionBlock != nil)
 		if (!self.cellSelected)
 			self.completionBlock();
+    
+    // dismiss the alert with its animation
+    [self animateOut];
 }
 
 // Allows the alert to be first responder
@@ -338,13 +338,14 @@
 	// set cellSelected to YES so the completionBlock won't be
 	// executed because a cell has been pressed instead of the cancel button
 	self.cellSelected = YES;
-	// dismiss the alert
-	[self dismissTableAlert];
 	
 	// perform actions contained in the selectionBlock if it isn't nil
 	// add pass the selected indexPath
 	if (self.selectionBlock != nil)
 		self.selectionBlock(indexPath);
+    
+    // dismiss the alert
+    [self dismissTableAlert];
 }
 
 @end
