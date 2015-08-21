@@ -550,9 +550,10 @@ static NSInteger const numPerRow = 4;
         if (buttonIndex == 0) {
             NSMutableArray *infoIds = [[NSMutableArray alloc] init];
             for (int i = 0; i < self.deleteIndexs.count; i++) {
-                KGActivityAlbumInfo *info = (KGActivityAlbumInfo *)[self.activityAlbum.albumInfos objectAtIndex:i];
+                NSInteger dIndex = [[self.deleteIndexs objectAtIndex:i] integerValue];
+                KGActivityAlbumInfo *info = (KGActivityAlbumInfo *)[self.activityAlbum.albumInfos objectAtIndex:dIndex];
                 if (info == nil) {
-                    return;
+                    continue;
                 }
                 [infoIds addObject:@(info.infoId)];
             }
