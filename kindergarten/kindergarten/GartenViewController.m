@@ -45,13 +45,6 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
-//    KGChild *curChild = KGUtil.getCurChild;
-//    if(curChild)
-//    {
-//        self.babyNameLabel.text = curChild.name;
-//        self.classNameLabel.text = [NSString stringWithFormat:@"%@%@", KGUtil.getVarible.parkName, curChild.className];
-//    }
 }
 
 - (void)didReceiveMemoryWarning {

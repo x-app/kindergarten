@@ -14,8 +14,6 @@
 
 @property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *func;
 @property (weak, nonatomic) IBOutlet UIImageView *repeatImage;
-//@property (weak, nonatomic) IBOutlet UILabel *babyNameLabel;
-//@property (weak, nonatomic) IBOutlet UILabel *classNameLabel;
 
 @end
 

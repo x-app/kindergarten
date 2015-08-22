@@ -55,14 +55,15 @@
     
     // add change user event
     UITapGestureRecognizer *childLabelTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(babyLabelTouchUpInside:)];
+    UITapGestureRecognizer *childLabelTapGestureRecognizer2 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(babyLabelTouchUpInside:)];
     UITapGestureRecognizer *classLabelTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(classLabelTouchUpInside:)];
+    UITapGestureRecognizer *classLabelTapGestureRecognizer2 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(classLabelTouchUpInside:)];
     
-    [self.babyNameLabel addGestureRecognizer:childLabelTapGestureRecognizer];
+    [self.childNameLabel addGestureRecognizer:childLabelTapGestureRecognizer];
     [self.classNameLabel addGestureRecognizer:classLabelTapGestureRecognizer];
-    
-    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(classLabelTouchUpInside:)];
-    [self.downImg addGestureRecognizer:singleTap];
-    
+
+    [self.childSelImg addGestureRecognizer:childLabelTapGestureRecognizer2];
+    [self.classSelImg addGestureRecognizer:classLabelTapGestureRecognizer2];
 }
 
 -(void)viewDidLayoutSubviews
@@ -157,25 +158,34 @@
     if ([KGUtil isTeacherVersion]) {
         KGClass *curClass = [KGUtil getCurClass];
         if (curClass) {
-            self.babyNameLabel.text = [KGUtil getUser].name;
+            self.childNameLabel.text = [KGUtil getUser].name;
             self.classNameLabel.text = [NSString stringWithFormat:@"%@%@", KGUtil.getVarible.parkName, curClass.className];
         }
     } else {
         KGChild *curChild = KGUtil.getCurChild;
         if(curChild)
         {
-            self.babyNameLabel.text = curChild.name;
+            self.childNameLabel.text = curChild.name;
             self.classNameLabel.text = [NSString stringWithFormat:@"%@%@", KGUtil.getVarible.parkName, curChild.className];
         }
     }
     
     if([KGUtil isTeacherVersion])
     {
-        self.downImg.hidden = false;
+        if([[KGUtil getClasses] count] > 1)
+            self.classSelImg.hidden = false;
+        else
+            self.classSelImg.hidden = true;
+
+        self.childSelImg.hidden = true;
     }
     else
     {
-        self.downImg.hidden = true;
+        self.classSelImg.hidden = true;
+        if([[KGUtil getChilds] count] > 1)
+            self.childSelImg.hidden = false;
+        else
+            self.childSelImg.hidden = true;
     }
 
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -272,7 +282,7 @@
         if(![KGUtil isTeacherVersion])
         {
             KGChild *child = [[KGUtil getChilds] objectAtIndex:selectedIndex.row];
-            self.babyNameLabel.text = child.name;
+            self.childNameLabel.text = child.name;
             
             [KGUtil setCurChildId:selectedIndex.row];
         }

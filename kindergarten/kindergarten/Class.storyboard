@@ -504,8 +504,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="qMZ-sE-KoC"/>
                     <connections>
-                        <outlet property="babyNameLabel" destination="Mx3-eL-D9R" id="zE5-zm-6DL"/>
                         <outlet property="babyPortraitImageView" destination="Wld-70-fzb" id="wm1-hX-bFL"/>
+                        <outlet property="childNameLabel" destination="Mx3-eL-D9R" id="fu2-lf-sVZ"/>
                         <outlet property="classNameLabel" destination="XXF-Dw-ja3" id="nkx-2D-Nkf"/>
                         <outlet property="headerBgImageView" destination="JpJ-xX-TSm" id="DB6-O9-qjD"/>
                         <outlet property="repeatImage" destination="H5Q-Z9-4EZ" id="klo-7T-dwX"/>
