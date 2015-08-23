@@ -23,13 +23,14 @@
 @interface AlbumCollectionViewController ()<UIAlertViewDelegate, UIGestureRecognizerDelegate, UIActionSheetDelegate, KGPicPickerDelegate, KGPostImageDelegate>
 
 @property (nonatomic) NSInteger pageIndex;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *addButton;
+
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *addButton; //右上角的增加按钮
 
 @property (nonatomic) NSInteger longPressedIndex; //记录长按删除目录时的索引
 
 @property (nonatomic) NSInteger dirIdRecord; //记录点击cell时的目录id
 
-@property (nonatomic, strong) KGPicPicker *picPicker;      //拍照or从相册选择控件
+@property (nonatomic, strong) KGPicPicker *picPicker; //拍照or从相册选择控件
 
 //@property (nonatomic, strong) PBViewController *pbVC;
 
@@ -85,47 +86,6 @@ static NSString * const reuseIdentifier = @"AlbumCell";
     }
     return _picPicker;
 }
-/*
-- (PBViewController *)pbVC {
-    if (_pbVC == nil) {
-        _pbVC = [[PBViewController alloc] init];
-        _pbVC.handleVC = self;
-        //_pbVC.imageInfos = self.imageInfos;
-        if ([KGUtil isTeacherVersion]) {
-            [_pbVC addAMenuItem:@"增加照片" icon:[UIImage imageNamed:@"icon_add.png"] target:self action:@selector(addPhotoToAlbumInPB:)];
-            [_pbVC addAMenuItem:@"删除照片" icon:[UIImage imageNamed:@"icon_delete.png"] target:self action:@selector(deletePhotoFromAlbumInPB:)];
-        } else {
-            [_pbVC addAMenuItem:@"转存至成长档案" icon:[UIImage imageNamed:@"icon_add.png"] target:self action:@selector(saveToGrowupDoc:)];
-        }
-    }
-    return _pbVC;
-}*/
-/*
-- (NSMutableArray *)imageInfos {
-    if (_imageInfos == nil) {
-        _imageInfos = [[NSMutableArray alloc] init];
-    }
-    return _imageInfos;
-}*/
-/*
-- (void)resetImageInfos:(NSInteger)index {
-    if (index < 0 || index >= self.activityAlbums.count) {
-        return;
-    }
-    KGActivityAlbum *curAlbum = (KGActivityAlbum *)[self.activityAlbums objectAtIndex:index];
-    if (curAlbum == nil) {
-        return;
-    }
-    [self.imageInfos removeAllObjects];
-    for (int i = 0; i < [curAlbum.albumInfos count]; i++) {
-        KGActivityAlbumInfo *aInfo = (KGActivityAlbumInfo *)[curAlbum.albumInfos objectAtIndex:i];
-        PBImageInfo *iInfo = [[PBImageInfo alloc] init];
-        iInfo.imageURL = [NSString stringWithFormat:@"%@%@", [KGUtil getServerAppURL], aInfo.picUrl];
-        iInfo.imageDesc = aInfo.desc;
-        [self.imageInfos addObject:iInfo];
-    }
-    self.pbVC.imageInfos = self.imageInfos;
-}*/
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -219,32 +179,13 @@ static NSString * const reuseIdentifier = @"AlbumCell";
     return cell;
 }
 
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    /*if (indexPath.row >= [self.activityAlbums count] || indexPath.row < 0) {
-        return;
-    }
-    KGActivityAlbum *curAlbum = (KGActivityAlbum *)[self.activityAlbums objectAtIndex:indexPath.row];
-    if (curAlbum == nil) {
-        return;
-    }*/
-    /*
-    if (curAlbum.albumInfos && curAlbum.albumInfos.count == 0) {
-        //todo 新增
-        [self addPhotoToAlbum:curAlbum.dirId];
-        return;
-    }
-    [self resetImageInfos:indexPath.row];
-    self.curAlbumIndex = indexPath.row;
-    self.pbVC.index = 0;
-    //self.pbVC.imageInfos = self.imageInfos;
-    self.pbVC.rowIndex = indexPath.row;
-    self.pbVC.sectionIndex = indexPath.section;
-    [self.pbVC show];
-     */
-}
+
 
 #pragma mark UICollectionViewDelegate
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+}
 /*
 // Uncomment this method to specify if the specified item should be highlighted during tracking
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -277,18 +218,11 @@ static NSString * const reuseIdentifier = @"AlbumCell";
 #pragma mark UICollectionViewDelegateFlowLayout
 //定义每个UICollectionView 的大小
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    /*CGFloat unitWidth = 150;
-    CGFloat unitMargin = 5;
-    CGFloat screenWidth = [[UIScreen mainScreen] bounds].size.width;
-    NSUInteger numInARow = (int)((screenWidth - unitMargin) / (unitMargin + unitWidth));
-    CGFloat realWith = (screenWidth - unitMargin) / numInARow - unitMargin;
-    return CGSizeMake(realWith, realWith);*/
-    
     CGFloat screenWidth = [[UIScreen mainScreen] bounds].size.width;
     NSInteger colsNum = 3; //每行四个
     CGFloat unitMargin = 5;
     CGFloat unitWidth = (int)((screenWidth - 5 - (colsNum + 1) * unitMargin) / colsNum) ;
-    return CGSizeMake(unitWidth, unitWidth + 30);
+    return CGSizeMake(unitWidth, unitWidth + 30); //高度+30给label
 }
 
 //定义每个UICollectionView 的 margin
@@ -297,14 +231,14 @@ static NSString * const reuseIdentifier = @"AlbumCell";
 }
 
 #pragma mark methods
-- (KGActivityAlbum *)getAlbum: (NSInteger)albumIndex {
+- (KGActivityAlbum *)getAlbum:(NSInteger)albumIndex {
     if (albumIndex < 0 || albumIndex >= self.activityAlbums.count) {
         return nil;
     }
     return self.activityAlbums[albumIndex];
 }
 
-- (KGActivityAlbumInfo *)getAlbumInfo: (NSInteger)albumIndex infoIndex:(NSInteger)infoIndex {
+- (KGActivityAlbumInfo *)getAlbumInfo:(NSInteger)albumIndex infoIndex:(NSInteger)infoIndex {
     if (albumIndex < 0 || albumIndex >= self.activityAlbums.count) {
         return nil;
     }
@@ -317,47 +251,6 @@ static NSString * const reuseIdentifier = @"AlbumCell";
     }
     return [curAlbum.albumInfos objectAtIndex:infoIndex];
 }
-
-
-- (void)saveToGrowupDoc:(id)sender {
-    if (![sender isKindOfClass:[KxMenuItem class]]) {
-        return;
-    }
-    KxMenuItem *item = (KxMenuItem *)sender;
-    NSInteger indexInPB = item.imageIndex;
-    NSInteger rowInSelf = item.rowIndex;
-    KGActivityAlbumInfo *info = [self getAlbumInfo:rowInSelf infoIndex:indexInPB];
-    if (info == nil) {
-        return;
-    }
-    KGActivityAlbum *album = [self getAlbum:rowInSelf];
-    if (album == nil) {
-        return;
-    }
-    NSString *desc = [KGUtil isEmptyString:info.desc] ? [NSString stringWithFormat:@"%@[%ld/%ld]", album.dirName, (long)(indexInPB + 1), (long)album.albumInfos.count]: info.desc;
-    NSDictionary *data = @{@"childId": @([[KGUtil getCurChild] cid]),
-                           @"activitiesAlbumInfoId": @(info.infoId),
-                           @"description": desc};
-    NSDictionary *body = [KGUtil getRequestBody:data];
-    NSDictionary *params = @{@"uid": REQUEST_UID, @"sign": [KGUtil getRequestSign:body], @"body":body};
-    NSString *urlSuffix = @"/parent/savePicToGrowthArchive";
-    NSString *url = [[KGUtil getServerAppURL] stringByAppendingString:urlSuffix];
-    [KGUtil postRequest:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"JSON: %@", responseObject);
-        NSString *code = [responseObject objectForKey:@"code"];
-        if ([code isEqualToString:@"000000"]) {
-            [KGUtil showCheckMark:@"转存成功" checked:YES inView:[KGUtil getTopMostViewController].view];
-        } else {
-            NSString *msg = [responseObject objectForKey:@"msg"];
-            NSString *hint = [NSString stringWithFormat:@"转存失败: %@", msg];
-            [KGUtil showCheckMark:hint checked:NO inView:[KGUtil getTopMostViewController].view];
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
-        [KGUtil showCheckMark:@"保存至成长档案失败" checked:YES inView:self.collectionView];
-    } inView:[KGUtil getTopMostViewController].view showHud:YES showError:true];
-}
-
 
 - (void)addNewAlbumDir:(NSString *)dirName classId:(NSInteger)classId {
     NSDictionary *data = @{@"classId": @(classId),
@@ -376,19 +269,6 @@ static NSString * const reuseIdentifier = @"AlbumCell";
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
     } inView:self.collectionView showHud:NO showError:true];
-}
-
-- (void)addPhotoToAlbumInPB:(id)sender {
-    if (![sender isKindOfClass:[KxMenuItem class]]) {
-        return;
-    }
-    KxMenuItem *item = (KxMenuItem *)sender;
-    NSInteger rowInSelf = item.rowIndex;
-    KGActivityAlbum *album = [self getAlbum:rowInSelf];
-    if (album == nil) {
-        return;
-    }
-    [self addPhotoToAlbum:album.dirId];
 }
 
 - (void)addPhotoToAlbum:(NSInteger)dirId {
@@ -421,45 +301,6 @@ static NSString * const reuseIdentifier = @"AlbumCell";
         NSLog(@"Error: %@", error);
         [KGUtil showCheckMark:@"请求删除失败" checked:NO inView:tmView];
     } inView:tmView showHud:YES showError:true];
-}
-
-- (void)deletePhotoFromAlbumInPB:(id)sender {
-    if (![sender isKindOfClass:[KxMenuItem class]]) {
-        return;
-    }
-    KxMenuItem *item = (KxMenuItem *)sender;
-    [self deletePhotoFromAlbum:item.sectionIndex row:item.rowIndex index:item.imageIndex isInPB:YES];
-}
-
-- (void)deletePhotoFromAlbum:(NSInteger)section row:(NSInteger)row index:(NSInteger)index isInPB:(BOOL)isInPB {
-    KGActivityAlbumInfo *info = [self getAlbumInfo:row infoIndex:index];
-    if (info == nil) {
-        return;
-    }
-    [self deletePhotoFromAlbum:info.infoId index:index isInPB:isInPB];
-}
-
-- (void)deletePhotoFromAlbum:(NSInteger)activitiesAlbumInfoId index:(NSInteger)index isInPB:(BOOL)isInPB{
-    NSDictionary *data = @{@"activitiesAlbumInfoId": @(activitiesAlbumInfoId)};
-    NSDictionary *body = [KGUtil getRequestBody:data];
-    NSDictionary *params = @{@"uid": REQUEST_UID, @"sign": [KGUtil getRequestSign:body], @"body":body};
-    NSString *urlSuffix = @"/teacher/deleteActivitiesAlbumInfo";
-    NSString *url = [[KGUtil getServerAppURL] stringByAppendingString:urlSuffix];
-    UIView *view = [KGUtil getTopMostViewController].view; //isInPB ? self.pbVC.view : self.collectionView;
-    [KGUtil postRequest:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"JSON: %@", responseObject);
-        NSString *code = [responseObject objectForKey:@"code"];
-        if ([code isEqualToString:@"000000"]) {
-            [self reloadData];
-            //[self resetImageInfos:self.curAlbumIndex];
-            //[self.pbVC resetAsPageRemoved];
-        } else {
-            [KGUtil showCheckMark:@"删除失败" checked:NO inView:view];
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
-        [KGUtil showCheckMark:@"请求删除失败" checked:NO inView:view];
-    } inView:view showHud:YES showError:true];
 }
 
 - (NSMutableArray *)activityAlbums {
@@ -531,9 +372,6 @@ static NSString * const reuseIdentifier = @"AlbumCell";
     } inView:self.collectionView showHud:NO showError:true];
 }
 
-- (void)dismissPhotoBrowser {
-    //[self.pbVC dismiss];
-}
 
 #pragma mark actions
 - (IBAction)addButtonAction:(id)sender {
@@ -548,8 +386,12 @@ static NSString * const reuseIdentifier = @"AlbumCell";
 - (void)longPressCellAction:(id)sender {
     UIGestureRecognizer *gr = (UIGestureRecognizer *)sender;
     if (gr && gr.state == UIGestureRecognizerStateBegan) {
-        NSLog(@"delete directory");
-        UIAlertView *hint = [[UIAlertView alloc] initWithTitle:@"删除相册" message:@"是否确定要删除当前相册目录" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
+        AlbumCollectionViewCell *cell = (AlbumCollectionViewCell *)gr.view;
+        if (cell == nil) {
+            return;
+        }
+        NSString *alertMessage = [NSString stringWithFormat:@"确定删除相册目录\"%@\"?", cell.albumNameLabel.text];
+        UIAlertView *hint = [[UIAlertView alloc] initWithTitle:@"删除相册" message:alertMessage delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
         hint.tag = 1;//表示删除相册
         NSLog(@"%ld", (long)gr.view.tag);
         self.longPressedIndex = gr.view.tag;
@@ -633,7 +475,6 @@ static NSString * const reuseIdentifier = @"AlbumCell";
 - (void)reloadData {
     self.pageIndex = 1;
     [self loadAlbumData:YES];
-    //[self dismissPhotoBrowser];
 }
 
 @end

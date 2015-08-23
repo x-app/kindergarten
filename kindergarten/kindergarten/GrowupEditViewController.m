@@ -255,7 +255,7 @@
     cell.imageItemView.contentMode = UIViewContentModeScaleAspectFill;
     cell.imageItemView.clipsToBounds = YES;
     if (indexPath.row == self.images.count && self.images.count < MAX_PHOTO_SELECTION_NUM) {
-        cell.imageItemView.image = [UIImage imageNamed:@"camera.png"];
+        cell.imageItemView.image = [UIImage imageNamed:@"icon_add_image.pngwwww"];
         cell.isAddButton = YES;
     } else {
         cell.isAddButton = NO;

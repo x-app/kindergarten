@@ -17,7 +17,7 @@
 #import "GrowupEditViewController.h"
 #import "MBProgressHUD.h"
 
-@interface PhotoCollectionViewController ()<UIActionSheetDelegate, KGPicPickerDelegate, KGPostImageDelegate>
+@interface PhotoCollectionViewController ()<UIAlertViewDelegate, UIActionSheetDelegate, KGPicPickerDelegate, KGPostImageDelegate>
 
 @property (nonatomic, strong) NSMutableArray *imageInfos;  //为PhotoBrowser提供的图像信息数组
 
@@ -28,6 +28,8 @@
 @property (nonatomic) BOOL isEditing;
 
 @property (nonatomic, strong) NSMutableArray *deleteIndexs;
+
+@property (nonatomic) BOOL needEmptyAlert;
 
 // 针对多图同时删除时的一些辅助属性
 @property (nonatomic) BOOL isDeleting;                //当前是否正在删除
@@ -50,7 +52,7 @@ static NSInteger const numPerRow = 4;
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.isEditing = NO;
-    
+    self.needEmptyAlert = YES;
     //self.collectionView.allowsMultipleSelection = YES;
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -81,6 +83,15 @@ static NSInteger const numPerRow = 4;
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    if (self.activityAlbum.albumInfos.count == 0) {
+        if (self.needEmptyAlert) {
+            UIAlertView *hint = [[UIAlertView alloc] initWithTitle:@"" message:@"相册目录为空, 现在就添加相片?" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:@"暂不", nil];
+            hint.tag = 0;
+            [hint show];
+        }
+    } else {
+        self.needEmptyAlert = NO;
+    }
 }
 
 - (NSMutableArray *)deleteIndexs {
@@ -380,7 +391,7 @@ static NSInteger const numPerRow = 4;
 }
 */
 
-#pragma mark <UICollectionViewDataSource>
+#pragma mark UICollectionViewDataSource
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
@@ -417,7 +428,7 @@ static NSInteger const numPerRow = 4;
     return cell;
 }
 
-#pragma mark <UICollectionViewDelegate>
+#pragma mark UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (self.activityAlbum.albumInfos == nil || self.activityAlbum.albumInfos.count == 0) {
         return;
@@ -558,6 +569,17 @@ static NSInteger const numPerRow = 4;
                 [infoIds addObject:@(info.infoId)];
             }
             [self deletePhotosFromAlbum:[infoIds copy]];
+        }
+    }
+}
+
+#pragma mark - UIAlertView delegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (alertView.tag == 0) { //当相册目录为空时提醒增加
+        self.needEmptyAlert = NO;
+        if (buttonIndex == 0) { //确定
+            [self addPhotoToAlbum];
+        } else { //暂不
         }
     }
 }
