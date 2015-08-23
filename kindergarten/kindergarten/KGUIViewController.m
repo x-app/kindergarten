@@ -17,6 +17,10 @@
 
 @property (nonatomic) NSInteger tapImageTag; //0表示头像 1是背景图
 @property (nonatomic) KGPicPicker *kgpp;
+@property (nonatomic) NSString *headBGPicName;
+@property (nonatomic) NSString *headPortraitPicName;
+@property (nonatomic) NSString *portraitKey;//NSDefaults的portraitKey
+@property (nonatomic) NSString *topbgKey;//NSDefaults的topbgKey
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *topSpace;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *repeatImgTopVertical;
@@ -78,6 +82,83 @@
     }
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    //NSLog(@"KGUIViewController:viewDidAppear");
+    
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    delegate.curKGVC = self;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    if([KGUtil isTeacherVersion]){
+        _headBGPicName = @"home_top_bg3.png";
+        _headPortraitPicName = @"teacher_home_head_img.png";
+        _portraitKey = @"teacher_portrait_img";
+        _topbgKey = @"teacher_topbg_img";
+    }else {
+        _headBGPicName = @"home_top_bg.png";
+        _headPortraitPicName = @"parent_home_head_img.png";
+        _portraitKey = @"parent_portrait_img";
+        _topbgKey = @"parent_topbg_img";
+    }
+    
+    if ([KGUtil isTeacherVersion]) {
+        KGClass *curClass = [KGUtil getCurClass];
+        if (curClass) {
+            self.childNameLabel.text = [KGUtil getUser].name;
+            self.classNameLabel.text = [NSString stringWithFormat:@"%@%@", KGUtil.getVarible.parkName, curClass.className];
+        }
+    } else {
+        KGChild *curChild = KGUtil.getCurChild;
+        if(curChild)
+        {
+            self.childNameLabel.text = curChild.name;
+            self.classNameLabel.text = [NSString stringWithFormat:@"%@%@", KGUtil.getVarible.parkName, curChild.className];
+        }
+    }
+    
+    if([KGUtil isTeacherVersion])
+    {
+        if([[KGUtil getClasses] count] > 1)
+            self.classSelImg.hidden = false;
+        else
+            self.classSelImg.hidden = true;
+        
+        self.childSelImg.hidden = true;
+    }
+    else
+    {
+        self.classSelImg.hidden = true;
+        if([[KGUtil getChilds] count] > 1)
+            self.childSelImg.hidden = false;
+        else
+            self.childSelImg.hidden = true;
+    }
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    //portrait
+    NSData *pImageData = (NSData *)[userDefaults objectForKey:self.portraitKey];
+    if (pImageData != nil) {
+        UIImage *pImage = (UIImage *)[NSKeyedUnarchiver unarchiveObjectWithData: pImageData];
+        if (pImage != nil) {
+            self.babyPortraitImageView.image = pImage;
+        }
+    } else {
+        self.babyPortraitImageView.image = [UIImage imageNamed:self.headPortraitPicName];
+    }
+    //bg
+    NSData *hImageData = (NSData *)[userDefaults objectForKey:self.topbgKey];
+    if (hImageData != nil) {
+        UIImage *hImage = (UIImage *)[NSKeyedUnarchiver unarchiveObjectWithData: hImageData];
+        if (hImage != nil) {
+            self.headerBgImageView.image = hImage;
+        }
+    } else {
+        self.headerBgImageView.image = [UIImage imageNamed:self.headBGPicName];
+    }
+}
+
+#pragma mark -
 - (void)editHeaderBg {
     self.tapImageTag = 1;
     [self editImageAction];
@@ -106,13 +187,14 @@
         // 从相册中选取
         [self.kgpp selectPhoto];
     } else if (buttonIndex == 2) {
+        // 恢复默认
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         if (self.tapImageTag == 1) {
-            self.headerBgImageView.image = [UIImage imageNamed:@"home_top_bg.png"];
-            [userDefaults removeObjectForKey:@"headerBgImage"];
+            self.headerBgImageView.image = [UIImage imageNamed:self.headBGPicName];
+            [userDefaults removeObjectForKey:self.topbgKey];
         } else if (self.tapImageTag == 0) {
-            self.babyPortraitImageView.image = [UIImage imageNamed:@"head.jpg"];
-            [userDefaults removeObjectForKey:@"babyPortraitImage"];
+            self.babyPortraitImageView.image = [UIImage imageNamed:self.headPortraitPicName];
+            [userDefaults removeObjectForKey:self.portraitKey];
         }
         [userDefaults synchronize];
     }
@@ -121,94 +203,6 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    //NSLog(@"KGUIViewController:viewDidAppear");
-    
-    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    delegate.curKGVC = self;
-
-//    [self showVerifyLock];
-//    
-//    [[NSNotificationCenter defaultCenter]
-//     addObserver:self
-//     selector:@selector(applicationDidBecomeActiveNotification:)
-//     name:UIApplicationDidBecomeActiveNotification
-//     object:[UIApplication sharedApplication]];
-//    KGChild *curChild = KGUtil.getCurChild;
-//    if(curChild)
-//    {
-//        self.babyNameLabel.text = curChild.name;
-//        self.classNameLabel.text = [NSString stringWithFormat:@"%@%@", KGUtil.getVarible.parkName, curChild.className];
-//    }
-//    
-//    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-//    //[userDefaults setObject:editedImage forKey:@"babyPortraitImage"];
-//    NSData *pImageData = (NSData *)[userDefaults objectForKey:@"babyPortraitImage"];
-//    if (pImageData != nil) {
-//        UIImage *pImage = (UIImage *)[NSKeyedUnarchiver unarchiveObjectWithData: pImageData];
-//        if (pImage != nil) {
-//            self.babyPortraitImageView.image = pImage;
-//        }
-//    }
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    if ([KGUtil isTeacherVersion]) {
-        KGClass *curClass = [KGUtil getCurClass];
-        if (curClass) {
-            self.childNameLabel.text = [KGUtil getUser].name;
-            self.classNameLabel.text = [NSString stringWithFormat:@"%@%@", KGUtil.getVarible.parkName, curClass.className];
-        }
-    } else {
-        KGChild *curChild = KGUtil.getCurChild;
-        if(curChild)
-        {
-            self.childNameLabel.text = curChild.name;
-            self.classNameLabel.text = [NSString stringWithFormat:@"%@%@", KGUtil.getVarible.parkName, curChild.className];
-        }
-    }
-    
-    if([KGUtil isTeacherVersion])
-    {
-        if([[KGUtil getClasses] count] > 1)
-            self.classSelImg.hidden = false;
-        else
-            self.classSelImg.hidden = true;
-
-        self.childSelImg.hidden = true;
-    }
-    else
-    {
-        self.classSelImg.hidden = true;
-        if([[KGUtil getChilds] count] > 1)
-            self.childSelImg.hidden = false;
-        else
-            self.childSelImg.hidden = true;
-    }
-
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    //[userDefaults setObject:editedImage forKey:@"babyPortraitImage"];
-    NSData *pImageData = (NSData *)[userDefaults objectForKey:@"babyPortraitImage"];
-    if (pImageData != nil) {
-        UIImage *pImage = (UIImage *)[NSKeyedUnarchiver unarchiveObjectWithData: pImageData];
-        if (pImage != nil) {
-            self.babyPortraitImageView.image = pImage;
-        }
-    } else {
-        self.babyPortraitImageView.image = [UIImage imageNamed:@"head.jpg"];
-    }
-    
-    NSData *hImageData = (NSData *)[userDefaults objectForKey:@"headerBgImage"];
-    if (hImageData != nil) {
-        UIImage *hImage = (UIImage *)[NSKeyedUnarchiver unarchiveObjectWithData: hImageData];
-        if (hImage != nil) {
-            self.headerBgImageView.image = hImage;
-        }
-    } else {
-        self.headerBgImageView.image = [UIImage imageNamed:@"home_top_bg.png"];
-    }
 }
 
 #pragma mark - KGPicPickerDelegate
@@ -225,10 +219,10 @@
     NSData* imageData = [NSKeyedArchiver archivedDataWithRootObject:image];
     NSString *storeKeyName = @"";
     if (self.tapImageTag == 0) {
-        storeKeyName = @"babyPortraitImage";
+        storeKeyName = self.portraitKey;
         self.babyPortraitImageView.image = image;
     } else if (self.tapImageTag == 1) {
-        storeKeyName = @"headerBgImage";
+        storeKeyName = self.topbgKey;
         self.headerBgImageView.image = image;
     }
     [userDefaults setObject:imageData forKey:storeKeyName];
@@ -333,7 +327,7 @@
         if([KGUtil isTeacherVersion])
         {
             KGClass *class = [[KGUtil getClasses] objectAtIndex:selectedIndex.row];
-            self.classNameLabel.text = class.className;
+            self.classNameLabel.text = [NSString stringWithFormat:@"%@%@", KGUtil.getVarible.parkName, class.className];
             
             [KGUtil setCurClassId:selectedIndex.row];
         }

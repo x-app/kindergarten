@@ -23,9 +23,13 @@
 		125090F21B650CD80046F40E /* KGPicPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 125090F11B650CD80046F40E /* KGPicPicker.m */; };
 		125090F41B68E09B0046F40E /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 125090F31B68E09B0046F40E /* camera.png */; };
 		125090F71B68F2530046F40E /* GrowupEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 125090F61B68F2530046F40E /* GrowupEditViewController.m */; };
-		1266D5C21B495B8A00E7253F /* head.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1266D5BF1B495B8A00E7253F /* head.jpg */; };
 		1266D5C31B495B8A00E7253F /* home_top_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 1266D5C01B495B8A00E7253F /* home_top_bg.png */; };
 		1266D5C41B495B8A00E7253F /* repeat_img.png in Resources */ = {isa = PBXBuildFile; fileRef = 1266D5C11B495B8A00E7253F /* repeat_img.png */; };
+		127AE59A1B89BF9900A8716E /* teacher_home_head_img.png in Resources */ = {isa = PBXBuildFile; fileRef = 127AE5991B89BF9900A8716E /* teacher_home_head_img.png */; };
+		127AE59C1B89C00F00A8716E /* home_top_bg3.png in Resources */ = {isa = PBXBuildFile; fileRef = 127AE59B1B89C00F00A8716E /* home_top_bg3.png */; };
+		127AE59F1B89C02500A8716E /* home_top_bg2.png in Resources */ = {isa = PBXBuildFile; fileRef = 127AE59D1B89C02500A8716E /* home_top_bg2.png */; };
+		127AE5A21B89C03200A8716E /* home_top_bg4.png in Resources */ = {isa = PBXBuildFile; fileRef = 127AE5A11B89C03200A8716E /* home_top_bg4.png */; };
+		127AE5A41B89C0F700A8716E /* parent_home_head_img.png in Resources */ = {isa = PBXBuildFile; fileRef = 127AE5A31B89C0F700A8716E /* parent_home_head_img.png */; };
 		12AC15DA1B48FB4D007C247B /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12AC15D91B48FB4D007C247B /* Login.storyboard */; };
 		12AC15F41B490BD1007C247B /* GartenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AC15F31B490BD1007C247B /* GartenViewController.m */; };
 		12AC15F71B490D80007C247B /* MeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AC15F61B490D80007C247B /* MeViewController.m */; };
@@ -285,9 +289,13 @@
 		125090F31B68E09B0046F40E /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = camera.png; path = Resource/camera.png; sourceTree = "<group>"; };
 		125090F51B68F2530046F40E /* GrowupEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GrowupEditViewController.h; sourceTree = "<group>"; };
 		125090F61B68F2530046F40E /* GrowupEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GrowupEditViewController.m; sourceTree = "<group>"; };
-		1266D5BF1B495B8A00E7253F /* head.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = head.jpg; path = Resource/head.jpg; sourceTree = "<group>"; };
 		1266D5C01B495B8A00E7253F /* home_top_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = home_top_bg.png; path = Resource/home_top_bg.png; sourceTree = "<group>"; };
 		1266D5C11B495B8A00E7253F /* repeat_img.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = repeat_img.png; path = Resource/repeat_img.png; sourceTree = "<group>"; };
+		127AE5991B89BF9900A8716E /* teacher_home_head_img.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = teacher_home_head_img.png; path = Resource/teacher_home_head_img.png; sourceTree = "<group>"; };
+		127AE59B1B89C00F00A8716E /* home_top_bg3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = home_top_bg3.png; path = Resource/home_top_bg3.png; sourceTree = "<group>"; };
+		127AE59D1B89C02500A8716E /* home_top_bg2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = home_top_bg2.png; path = Resource/home_top_bg2.png; sourceTree = "<group>"; };
+		127AE5A11B89C03200A8716E /* home_top_bg4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = home_top_bg4.png; path = Resource/home_top_bg4.png; sourceTree = "<group>"; };
+		127AE5A31B89C0F700A8716E /* parent_home_head_img.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = parent_home_head_img.png; path = Resource/parent_home_head_img.png; sourceTree = "<group>"; };
 		12AC15D91B48FB4D007C247B /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		12AC15F21B490BD1007C247B /* GartenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GartenViewController.h; sourceTree = "<group>"; };
 		12AC15F31B490BD1007C247B /* GartenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GartenViewController.m; sourceTree = "<group>"; };
@@ -1436,9 +1444,13 @@
 				9911C1F81B5A06C80080FFA9 /* default_img.png */,
 				9911C1FA1B5A07CB0080FFA9 /* image_placeholder.png */,
 				99F17F481B4D5C3600866F8F /* bg_11.png */,
-				1266D5BF1B495B8A00E7253F /* head.jpg */,
+				127AE5A31B89C0F700A8716E /* parent_home_head_img.png */,
+				127AE5991B89BF9900A8716E /* teacher_home_head_img.png */,
 				99B3DA9F1B6911E1007BBAE9 /* gallery_more_icon.png */,
 				1266D5C01B495B8A00E7253F /* home_top_bg.png */,
+				127AE59D1B89C02500A8716E /* home_top_bg2.png */,
+				127AE59B1B89C00F00A8716E /* home_top_bg3.png */,
+				127AE5A11B89C03200A8716E /* home_top_bg4.png */,
 				1266D5C11B495B8A00E7253F /* repeat_img.png */,
 				99ABD5961B47FC9B00B8DB8B /* help_1.xib */,
 				99ABD59E1B48030400B8DB8B /* help_2.xib */,
@@ -1614,6 +1626,7 @@
 				99ABD5941B47FC3500B8DB8B /* help_4.png in Resources */,
 				12F9F96E1B7A348F00CFDB1B /* my_icon_selected.png in Resources */,
 				99ABD5911B47FC3500B8DB8B /* help_1.png in Resources */,
+				127AE59A1B89BF9900A8716E /* teacher_home_head_img.png in Resources */,
 				12F9F9511B78ED5900CFDB1B /* feedback_icon-Small@2x.png in Resources */,
 				12F9F94C1B78ED5900CFDB1B /* about_icon-Small@3x.png in Resources */,
 				12F9F9851B7A348F00CFDB1B /* my_icon_normal@3x.png in Resources */,
@@ -1646,6 +1659,7 @@
 				12E038251B4A91680021B266 /* Garten.storyboard in Resources */,
 				1225667B1B57F7780007733E /* park_intro.png in Resources */,
 				12F9F9761B7A348F00CFDB1B /* class_icon_selected@3x.png in Resources */,
+				127AE5A21B89C03200A8716E /* home_top_bg4.png in Resources */,
 				12F9F9741B7A348F00CFDB1B /* class_icon_selected.png in Resources */,
 				12F9F94D1B78ED5900CFDB1B /* clearcache_icon-Small.png in Resources */,
 				9997BA1E1B4D580E00B908B6 /* MLTableAlertButton@2x.png in Resources */,
@@ -1677,9 +1691,9 @@
 				9997BA091B4D580E00B908B6 /* text_field.png in Resources */,
 				12F9F9541B78ED5900CFDB1B /* password_icon-Small@2x.png in Resources */,
 				12F9F9771B7A348F00CFDB1B /* baby_icon_selected.png in Resources */,
+				127AE5A41B89C0F700A8716E /* parent_home_head_img.png in Resources */,
 				12F9F9801B7A348F00CFDB1B /* park_icon_normal.png in Resources */,
 				9911C1F91B5A06C80080FFA9 /* default_img.png in Resources */,
-				1266D5C21B495B8A00E7253F /* head.jpg in Resources */,
 				12F9F94A1B78ED5900CFDB1B /* about_icon-Small.png in Resources */,
 				12DEACF81B4D682500C437BE /* home_check.png in Resources */,
 				12F9F9371B77606A00CFDB1B /* ELCAlbumPickerController.xib in Resources */,
@@ -1695,6 +1709,7 @@
 				12F9F9341B775F5B00CFDB1B /* Overlay.png in Resources */,
 				1266D5C31B495B8A00E7253F /* home_top_bg.png in Resources */,
 				12F9F94B1B78ED5900CFDB1B /* about_icon-Small@2x.png in Resources */,
+				127AE59F1B89C02500A8716E /* home_top_bg2.png in Resources */,
 				9997BA0A1B4D580E00B908B6 /* text_field@2x.png in Resources */,
 				12F9F9531B78ED5900CFDB1B /* password_icon-Small.png in Resources */,
 				9995DFED1B861CEB00BB6F86 /* back_arrow@2x.png in Resources */,
@@ -1709,6 +1724,7 @@
 				9990FB3D1B6677BE006A80F7 /* Album.storyboard in Resources */,
 				1225667C1B57F7780007733E /* park_menu.png in Resources */,
 				12F9F9501B78ED5900CFDB1B /* feedback_icon-Small.png in Resources */,
+				127AE59C1B89C00F00A8716E /* home_top_bg3.png in Resources */,
 				122566731B57DE190007733E /* class_grow.png in Resources */,
 				122566751B57DE190007733E /* class_photo.png in Resources */,
 				12F9F8721B6E388400CFDB1B /* home_roll.png in Resources */,

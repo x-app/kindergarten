@@ -26,7 +26,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     //设置全局导航条风格和颜色
-//    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:246/255.0 green:246/255.0 blue:246/255.0 alpha:1]];
+//    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:187/255.0 green:221/255.0 blue:217/255.0 alpha:1]];
 //    [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
     
     // 修复Push到下一级右上角可恶的黑条
