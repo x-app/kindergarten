@@ -45,6 +45,8 @@
 			<false/>
 		</dict>
 	</dict>
+	<key>CFBundleDisplayName</key>
+	<string>家园通</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
