@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
@@ -29,7 +29,7 @@
         <scene sceneID="iVB-Z4-4oz">
             <objects>
                 <navigationController storyboardIdentifier="BabyNC" automaticallyAdjustsScrollViewInsets="NO" id="Xkm-EG-Mpe" customClass="MainNavigationController" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" tag="1" title="宝宝" image="baby_icon_normal.png" id="acW-dT-cKf"/>
+                    <tabBarItem key="tabBarItem" tag="1" title="宝宝" image="baby_icon_normal-Small.png" id="acW-dT-cKf"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="DX2-UJ-uii">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -96,7 +96,7 @@
         <scene sceneID="qMn-1j-bqc">
             <objects>
                 <navigationController storyboardIdentifier="ClassNC" automaticallyAdjustsScrollViewInsets="NO" id="WCa-r2-hy1" customClass="MainNavigationController" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" tag="2" title="班级" image="class_icon_normal.png" id="cPa-gy-q4n"/>
+                    <tabBarItem key="tabBarItem" tag="2" title="班级" image="class_icon_normal-Small.png" id="cPa-gy-q4n"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="dgE-BU-ZCo">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -115,7 +115,7 @@
         <scene sceneID="bjb-Mn-Okh">
             <objects>
                 <navigationController storyboardIdentifier="ParkNC" automaticallyAdjustsScrollViewInsets="NO" id="fuQ-aX-yWs" customClass="MainNavigationController" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" tag="3" title="园区" image="park_icon_normal.png" id="49y-NY-SGT"/>
+                    <tabBarItem key="tabBarItem" tag="3" title="园区" image="park_icon_normal-Small.png" id="49y-NY-SGT"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ylF-fq-EBT">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -134,7 +134,7 @@
         <scene sceneID="48s-3U-M0B">
             <objects>
                 <navigationController storyboardIdentifier="MyNC" automaticallyAdjustsScrollViewInsets="NO" id="kaN-Ny-OA9" customClass="MainNavigationController" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" tag="4" title="我" image="my_icon_normal.png" id="hMz-Ub-jHo"/>
+                    <tabBarItem key="tabBarItem" tag="4" title="我" image="my_icon_normal-Small.png" id="hMz-Ub-jHo"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="FBb-Xj-fHh">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -199,9 +199,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="baby_icon_normal.png" width="29" height="29"/>
-        <image name="class_icon_normal.png" width="29" height="29"/>
-        <image name="my_icon_normal.png" width="29" height="29"/>
-        <image name="park_icon_normal.png" width="29" height="29"/>
+        <image name="baby_icon_normal-Small.png" width="29" height="29"/>
+        <image name="class_icon_normal-Small.png" width="29" height="29"/>
+        <image name="my_icon_normal-Small.png" width="29" height="29"/>
+        <image name="park_icon_normal-Small.png" width="29" height="29"/>
     </resources>
 </document>

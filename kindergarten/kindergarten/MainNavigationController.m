@@ -19,13 +19,13 @@
     // Do any additional setup after loading the view.
     
     if(self.tabBarItem.tag == 1)
-        self.tabBarItem.selectedImage=[UIImage imageNamed:@"baby_icon_selected.png"];//选中图片
+        self.tabBarItem.selectedImage=[UIImage imageNamed:@"baby_icon_selected-Small.png"];//选中图片
     else if(self.tabBarItem.tag == 2)
-        self.tabBarItem.selectedImage=[UIImage imageNamed:@"class_icon_selected.png"];//选中图片
+        self.tabBarItem.selectedImage=[UIImage imageNamed:@"class_icon_selected-Small.png"];//选中图片
     else if(self.tabBarItem.tag == 3)
-        self.tabBarItem.selectedImage=[UIImage imageNamed:@"park_icon_selected.png"];//选中图片
+        self.tabBarItem.selectedImage=[UIImage imageNamed:@"park_icon_selected-Small.png"];//选中图片
     else if(self.tabBarItem.tag == 4)
-        self.tabBarItem.selectedImage=[UIImage imageNamed:@"my_icon_selected.png"];//选中图片
+        self.tabBarItem.selectedImage=[UIImage imageNamed:@"my_icon_selected-Small.png"];//选中图片
 
 }
 
