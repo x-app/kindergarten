@@ -14,6 +14,8 @@
 
 + (UIImage *)decodedImageWithImage:(UIImage *)image {
     // do not decode animated images
+    return image;
+    /*
     if (image.images) { return image; }
 
     CGImageRef imageRef = image.CGImage;
@@ -45,6 +47,7 @@
     CGImageRelease(imageRefWithAlpha);
 
     return imageWithAlpha;
+     */
 }
 
 @end

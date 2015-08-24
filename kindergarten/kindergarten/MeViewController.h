@@ -11,7 +11,6 @@
 
 @interface MeViewController : KGUIViewController<UITableViewDataSource, UITableViewDelegate>
 
-
 @property (weak, nonatomic) IBOutlet UITableView *funcTableView;
 
 @end

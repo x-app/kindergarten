@@ -627,10 +627,8 @@ static NSInteger const numPerRow = 4;
 }
 
 //
-//- (void)dealloc {
-//    NSLog(@">>>>>>>>>>dealloc photo collection view");
-//    _imageInfos = nil;
-//    _pbVC = nil;
-//}
+- (void)dealloc {
+    NSLog(@"dealloc PhotoCollectionViewController");
+}
 
 @end
