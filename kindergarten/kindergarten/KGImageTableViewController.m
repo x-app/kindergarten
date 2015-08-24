@@ -44,16 +44,17 @@
         self.title = @"教师风采";
     }
 
+    __weak __typeof(self)wself = self;
     // 设置下拉刷新
     self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        self.pageIndex = 1;
-        [self loadTableData:YES];
+        wself.pageIndex = 1;
+        [wself loadTableData:YES];
     }];
     [self.tableView.header beginRefreshing];
     
     // 设置上拉刷新
     self.tableView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        [self loadTableData:NO];
+        [wself loadTableData:NO];
     }];
     // 首次不显示
     self.tableView.footer.hidden = YES;
@@ -138,6 +139,7 @@
         return;
     }
     NSString *url = [[KGUtil getServerAppURL] stringByAppendingString:urlSuffix];
+    __weak __typeof(self)wself = self;
     [KGUtil postRequest:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON: %@", responseObject);
         NSString *code = [responseObject objectForKey:@"code"];
@@ -146,45 +148,45 @@
             NSInteger pageTotalCount = [[obj objectForKey:@"pageTotalCnt"] integerValue];
             NSArray *objlistArray = (NSArray *)[responseObject objectForKey:@"objlist"];
             if (loadAll == YES) {
-                [self.imageTableRowInfos removeAllObjects];
-                self.imageTableRowInfos = [[NSMutableArray alloc] initWithCapacity:[objlistArray count]];;
+                [wself.imageTableRowInfos removeAllObjects];
+                wself.imageTableRowInfos = [[NSMutableArray alloc] initWithCapacity:[objlistArray count]];;
             }
             for (int i = 0; i < [objlistArray count]; i++) {
                 NSDictionary *hwDict = [objlistArray objectAtIndex:i];
-                if (self.type == HOMEWORK) {
+                if (wself.type == HOMEWORK) {
                     KGHomework *homework = [[KGHomework alloc] initWithDesc:[hwDict objectForKey:@"description"]
                                                                     classId:[[hwDict objectForKey:@"classId"] integerValue]
                                                                  homeworkId:[[hwDict objectForKey:@"homeworkId"] integerValue]
                                                                      picUrl:[hwDict objectForKey:@"picUrl"]
                                                                 smallPicUrl:[hwDict objectForKey:@"smallPicUrl"]
                                                                    createAt:[hwDict objectForKey:@"createTime"]];
-                    [self.imageTableRowInfos addObject:homework];
-                } else if (self.type == TEACHER) {
+                    [wself.imageTableRowInfos addObject:homework];
+                } else if (wself.type == TEACHER) {
                     KGTeacherDesc *teacherDesc = [[KGTeacherDesc alloc] initWithDesc:[hwDict objectForKey:@"description"]
                                                                        teacherDescId:[[hwDict objectForKey:@"teacherDescId"] integerValue]
                                                                               picUrl:[hwDict objectForKey:@"picUrl"]
                                                                          smallPicUrl:[hwDict objectForKey:@"smallPicUrl"]
                                                                             createAt:[hwDict objectForKey:@"createTime"]];
-                    [self.imageTableRowInfos addObject:teacherDesc];
+                    [wself.imageTableRowInfos addObject:teacherDesc];
                 }
             }
-            [self.tableView reloadData];
+            [wself.tableView reloadData];
             
-            self.tableView.footer.hidden = NO;
-            [self.tableView.header endRefreshing];
-            [self.tableView.footer endRefreshing];
-            if (self.imageTableRowInfos.count < pageTotalCount) {
-                self.pageIndex += 1;
+            wself.tableView.footer.hidden = NO;
+            [wself.tableView.header endRefreshing];
+            [wself.tableView.footer endRefreshing];
+            if (wself.imageTableRowInfos.count < pageTotalCount) {
+                wself.pageIndex += 1;
             } else {
-                [self.tableView.footer noticeNoMoreData];
+                [wself.tableView.footer noticeNoMoreData];
             }
-            [self resetImageInfos];
-            [self.pbVC resetToIndex:0];
+            [wself resetImageInfos];
+            [wself.pbVC resetToIndex:0];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
-        [self.tableView.header endRefreshing];
-        [self.tableView.footer endRefreshing];
+        [wself.tableView.header endRefreshing];
+        [wself.tableView.footer endRefreshing];
     } inView:self.tableView showHud:NO showError:true];
 }
 
@@ -400,15 +402,16 @@
     NSString *url = [[KGUtil getServerAppURL] stringByAppendingString:urlSuffix];
     UIView *view = [KGUtil getTopMostViewController].view;
     BOOL showHud = (view != nil);
+    __weak __typeof(self)wself = self;
     [KGUtil postRequest:url
              parameters:params
                 success:^(AFHTTPRequestOperation *operation, id responseObject) {
                     NSLog(@"JSON: %@", responseObject);
                     NSString *code = [responseObject objectForKey:@"code"];
                     if ([code isEqualToString:@"000000"]) {
-                        [self doDeleteImageTableRow:indexPath];
-                        [self resetImageInfos];
-                        [self.pbVC resetAsPageRemoved];
+                        [wself doDeleteImageTableRow:indexPath];
+                        [wself resetImageInfos];
+                        [wself.pbVC resetAsPageRemoved];
                     } else {
                         [KGUtil showCheckMark:@"删除失败" checked:NO inView:view];
                     }
@@ -463,6 +466,10 @@
                                                destructiveButtonTitle:nil
                                                     otherButtonTitles:@"拍照", @"从相册中选取", nil];
     [choiceSheet showInView:self.view];
+}
+
+-(void)dealloc {
+    NSLog(@"dealloc KGImageTableViewController");
 }
 
 @end
