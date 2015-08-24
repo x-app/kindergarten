@@ -16,11 +16,11 @@
 #import "UIImageView+WebCache.h"
 #import "PBImageInfo.h"
 #import "PBViewController.h"
-#import "KGPicPicker.h"
+//#import "KGPicPicker.h"
 #import "GrowupEditViewController.h"
 #import "PhotoCollectionViewController.h"
 
-@interface AlbumCollectionViewController ()<UIAlertViewDelegate, UIGestureRecognizerDelegate, UIActionSheetDelegate, KGPicPickerDelegate, KGPostImageDelegate>
+@interface AlbumCollectionViewController ()<UIAlertViewDelegate, UIGestureRecognizerDelegate/*, UIActionSheetDelegate,KGPicPickerDelegate, KGPostImageDelegate*/>
 
 @property (nonatomic) NSInteger pageIndex;
 
@@ -30,12 +30,14 @@
 
 @property (nonatomic) NSInteger dirIdRecord; //记录点击cell时的目录id
 
-@property (nonatomic, strong) KGPicPicker *picPicker; //拍照or从相册选择控件
+//@property (nonatomic, strong) KGPicPicker *picPicker; //拍照or从相册选择控件
 
 //@property (nonatomic, strong) PBViewController *pbVC;
 
 @property (nonatomic) NSInteger curAlbumIndex;
 //@property (nonatomic, strong) NSMutableArray *imageInfos;
+
+@property (nonatomic) BOOL receiveMemoryWarning;
 
 @end
 
@@ -56,18 +58,21 @@ static NSString * const reuseIdentifier = @"AlbumCell";
     //[self.collectionView registerClass:[AlbumCollectionViewCell class] forCellWithReuseIdentifier:@"AlbumCell"];
     
     // 设置下拉刷新
+    __weak AlbumCollectionViewController* wself = self;
     self.collectionView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        self.pageIndex = 1;
-        [self loadAlbumData:YES];
+        wself.pageIndex = 1;
+        [wself loadAlbumData:YES];
     }];
     [self.collectionView.header beginRefreshing];
     
     // 设置上拉刷新
     self.collectionView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        [self loadAlbumData:NO];
+        [wself loadAlbumData:NO];
     }];
     // 首次不显示
     self.collectionView.footer.hidden = YES;
+    
+    [[SDWebImageManager sharedManager] imageCache].shouldCacheImagesInMemory = NO;
     
     // 非教师时隐藏
     if (![KGUtil isTeacherVersion]) {
@@ -78,7 +83,7 @@ static NSString * const reuseIdentifier = @"AlbumCell";
     
     // Do any additional setup after loading the view.
 }
-
+/*
 - (KGPicPicker *)picPicker {
     if(_picPicker == nil) {
         _picPicker = [[KGPicPicker alloc] initWithUIVC:self needCrop:FALSE multiple:YES];
@@ -86,9 +91,15 @@ static NSString * const reuseIdentifier = @"AlbumCell";
     }
     return _picPicker;
 }
+*/
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+    NSLog(@"Album receive memory warning");
+    self.receiveMemoryWarning = YES;
+    //[[SDWebImageManager sharedManager] imageCache].shouldCacheImagesInMemory = NO;
+    //[[SDImageCache sharedImageCache] setValue:nil forKey:@"memCache"];
+    //[[[SDWebImageManager sharedManager] imageCache] clearMemory];
     // Dispose of any resources that can be recreated.
 }
 
@@ -133,6 +144,12 @@ static NSString * const reuseIdentifier = @"AlbumCell";
     NSString *coverUrl = [curAlbum getCoverUrl];
     //cell.album2ndImageView.image = [UIImage imageNamed:@"image_placeholder"];
     //cell.album3rdImageView.image = [UIImage imageNamed:@"image_placeholder"];
+//    if (self.receiveMemoryWarning) {
+//        NSLog(@"clear in cellForItemAtIndexPath");
+//        //[[SDImageCache sharedImageCache] setValue:nil forKey:@"memCache"];
+//        [[[SDWebImageManager sharedManager] imageCache] clearMemory];
+//    }
+    //[[SDWebImageManager sharedManager] imageCache].shouldCacheImagesInMemory = NO;
 
     if ([coverUrl isEqualToString:@""]) {
         cell.albumImageView.image = [UIImage imageNamed:@"camera.png"];
@@ -142,7 +159,7 @@ static NSString * const reuseIdentifier = @"AlbumCell";
         NSString *url = [NSString stringWithFormat:@"%@%@", [KGUtil getServerAppURL], coverUrl];
         [cell.albumImageView sd_setImageWithURL:[NSURL URLWithString:url]
                                placeholderImage:[UIImage imageNamed:@"image_placeholder"]
-                                        options:SDWebImageProgressiveDownload
+                                        options:SDWebImageRetryFailed
                                       completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                                       }];
         if ([KGUtil isEmptyString:[curAlbum get2ndCoverUrl]]) {
@@ -153,7 +170,7 @@ static NSString * const reuseIdentifier = @"AlbumCell";
             NSString *url2nd = [NSString stringWithFormat:@"%@%@", [KGUtil getServerAppURL], [curAlbum get2ndCoverUrl]];
             [cell.album2ndImageView sd_setImageWithURL:[NSURL URLWithString:url2nd]
                                       placeholderImage:[UIImage imageNamed:@"image_placeholder"]
-                                               options:SDWebImageProgressiveDownload
+                                               options:SDWebImageRetryFailed
                                              completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                                              }];
             if ([KGUtil isEmptyString:[curAlbum get3rdCoverUrl]]) {
@@ -163,7 +180,7 @@ static NSString * const reuseIdentifier = @"AlbumCell";
                 NSString *url3rd = [NSString stringWithFormat:@"%@%@", [KGUtil getServerAppURL], [curAlbum get3rdCoverUrl]];
                 [cell.album3rdImageView sd_setImageWithURL:[NSURL URLWithString:url3rd]
                                           placeholderImage:[UIImage imageNamed:@"image_placeholder"]
-                                                   options:SDWebImageProgressiveDownload
+                                                   options:SDWebImageRetryFailed
                                                  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                                                  }];
             }
@@ -270,7 +287,7 @@ static NSString * const reuseIdentifier = @"AlbumCell";
         NSLog(@"Error: %@", error);
     } inView:self.collectionView showHud:NO showError:true];
 }
-
+/*
 - (void)addPhotoToAlbum:(NSInteger)dirId {
     UIActionSheet *choiceSheet = [[UIActionSheet alloc] initWithTitle:nil
                                                              delegate:self
@@ -280,7 +297,7 @@ static NSString * const reuseIdentifier = @"AlbumCell";
     choiceSheet.tag = dirId;
     [choiceSheet showInView:self.view];
 }
-
+*/
 - (void)deleteAlbumDir:(NSInteger)directoryId {
     NSDictionary *data = @{@"directoryId": @(directoryId)};
     NSDictionary *body = [KGUtil getRequestBody:data];
@@ -314,21 +331,22 @@ static NSString * const reuseIdentifier = @"AlbumCell";
 - (void)loadAlbumData:(BOOL)loadAll {
     NSDictionary *data = @{@"classId": @([KGUtil getCurClassId]),
                            @"pageIndex": @(self.pageIndex),
-                           @"pageSize": @(10)};
+                           @"pageSize": @(12)};
     NSDictionary *body = [KGUtil getRequestBody:data];
     NSDictionary *params = @{@"uid": REQUEST_UID, @"sign": [KGUtil getRequestSign:body], @"body":body};
     NSString *urlSuffix = @"/system/pageQueryDirectory";
     NSString *url = [[KGUtil getServerAppURL] stringByAppendingString:urlSuffix];
+    __weak AlbumCollectionViewController *weakSelf = self;
     [KGUtil postRequest:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"JSON: %@", responseObject);
+        //NSLog(@"JSON: %@", responseObject);
         NSString *code = [responseObject objectForKey:@"code"];
         if ([code isEqualToString:@"000000"]) {
             NSDictionary *obj = [responseObject objectForKey:@"obj"];
             NSInteger pageTotalCount = [[obj objectForKey:@"pageTotalCnt"] integerValue];
             NSArray *albumArray = (NSArray *)[responseObject objectForKey:@"objlist"];
             if (loadAll == YES) {
-                [self.activityAlbums removeAllObjects];
-                self.activityAlbums = [[NSMutableArray alloc] initWithCapacity:[albumArray count]];;
+                [weakSelf.activityAlbums removeAllObjects];
+                weakSelf.activityAlbums = [[NSMutableArray alloc] initWithCapacity:[albumArray count]];;
             }
             for (int i = 0; i < albumArray.count; i++) {
                 NSDictionary *curAlbum = [albumArray objectAtIndex:i];
@@ -347,29 +365,33 @@ static NSString * const reuseIdentifier = @"AlbumCell";
                                                                                        pic:[curInfo objectForKey:@"picUrl"]];
                     [kgAlbum.albumInfos addObject:kgAInfo];
                 }
-                [self.activityAlbums addObject:kgAlbum];
+                [weakSelf.activityAlbums addObject:kgAlbum];
             }
+            //if (self.receiveMemoryWarning) {
+            //    NSLog(@"clear in load albums");
+            //[[[SDWebImageManager sharedManager] imageCache] clearMemory];
+                //[[SDImageCache sharedImageCache] setValue:nil forKey:@"memCache"];
+            //}
+            [weakSelf.collectionView reloadData];
             
-            [self.collectionView reloadData];
-            
-            self.collectionView.footer.hidden = NO;
-            [self.collectionView.header endRefreshing];
-            [self.collectionView.footer endRefreshing];
-            if (self.activityAlbums.count < pageTotalCount) {
-                self.pageIndex += 1;
+            weakSelf.collectionView.footer.hidden = NO;
+            [weakSelf.collectionView.header endRefreshing];
+            [weakSelf.collectionView.footer endRefreshing];
+            if (weakSelf.activityAlbums.count < pageTotalCount) {
+                weakSelf.pageIndex += 1;
             } else {
-                [self.collectionView.footer noticeNoMoreData];
+                [weakSelf.collectionView.footer noticeNoMoreData];
             }
-            if (self.curAlbumIndex >= 0 && self.curAlbumIndex < self.activityAlbums.count) {
+            if (weakSelf.curAlbumIndex >= 0 && weakSelf.curAlbumIndex < weakSelf.activityAlbums.count) {
                 //[self resetImageInfos:self.curAlbumIndex];
                 //[self.pbVC resetToIndex:0];
             }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
-        [self.collectionView.header endRefreshing];
-        [self.collectionView.footer endRefreshing];
-    } inView:self.collectionView showHud:NO showError:true];
+        [weakSelf.collectionView.header endRefreshing];
+        [weakSelf.collectionView.footer endRefreshing];
+    } inView:weakSelf.collectionView showHud:NO showError:true];
 }
 
 
@@ -439,7 +461,7 @@ static NSString * const reuseIdentifier = @"AlbumCell";
     }
 }
 
-
+/*
 #pragma mark UIActionSheetDelegate
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     self.dirIdRecord = actionSheet.tag;
@@ -475,6 +497,12 @@ static NSString * const reuseIdentifier = @"AlbumCell";
 - (void)reloadData {
     self.pageIndex = 1;
     [self loadAlbumData:YES];
+}
+*/
+
+- (void)dealloc {
+    NSLog(@"dealloc AlbumCollectionViewController");
+    //[[UIApplication sharedApplication] performSelector:@selector(_performMemoryWarning)];
 }
 
 @end

@@ -254,16 +254,17 @@ static NSInteger const numPerRow = 4;
     NSString *urlSuffix = @"/teacher/deleteActivitiesAlbumInfo";
     NSString *url = [[KGUtil getServerAppURL] stringByAppendingString:urlSuffix];
     UIView *view = [KGUtil getTopMostViewController].view; //isInPB ? self.pbVC.view : self.collectionView;
+    __weak __typeof(self)wself = self;
     [KGUtil postRequest:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON: %@", responseObject);
         NSString *code = [responseObject objectForKey:@"code"];
         if ([code isEqualToString:@"000000"]) {
-            [self reloadData];
+            [wself reloadData];
             //[self resetImageInfos];
-            if (self.albumVC) {
-                [self.albumVC.collectionView reloadData];
+            if (wself.albumVC) {
+                [wself.albumVC.collectionView reloadData];
             }
-            [self.pbVC resetAsPageRemoved];
+            [wself.pbVC resetAsPageRemoved];
         } else {
             [KGUtil showCheckMark:@"删除失败" checked:NO inView:view];
         }
@@ -298,30 +299,31 @@ static NSInteger const numPerRow = 4;
     NSString *urlSuffix = @"/teacher/deleteActivitiesAlbumInfo";
     NSString *url = [[KGUtil getServerAppURL] stringByAppendingString:urlSuffix];
     UIView *view = [KGUtil getTopMostViewController].view;
+    __weak __typeof(self)wself = self;
     [KGUtil postRequest:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON: %@", responseObject);
         NSString *code = [responseObject objectForKey:@"code"];
         if ([code isEqualToString:@"000000"]) {
-            if (dIndex == self.deleteInfoIds.count - 1) { //已经删除到当前最后一张
-                [self.hud hide:YES];
-                [self setAllSelectedCellToUnselected];
-                [self reloadData];
+            if (dIndex == wself.deleteInfoIds.count - 1) { //已经删除到当前最后一张
+                [wself.hud hide:YES];
+                [wself setAllSelectedCellToUnselected];
+                [wself reloadData];
                 //[self resetImageInfos];
-                if (self.albumVC) {
-                    [self.albumVC.collectionView reloadData];
+                if (wself.albumVC) {
+                    [wself.albumVC.collectionView reloadData];
                 }
-                self.isEditing = NO;
+                wself.isEditing = NO;
                 [KGUtil showCheckMark:@"删除完毕" checked:YES inView:self.view];
                 //[self.pbVC resetAsPageRemoved];
             } else {
-                [self deleteAPhotoFromAlbum:(dIndex + 1)];
+                [wself deleteAPhotoFromAlbum:(dIndex + 1)];
             }
         } else {
-            [self deleteAPhotoFromAlbum:(dIndex + 1)];
+            [wself deleteAPhotoFromAlbum:(dIndex + 1)];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
-        [self deleteAPhotoFromAlbum:(dIndex + 1)];
+        [wself deleteAPhotoFromAlbum:(dIndex + 1)];
     } inView:view showHud:NO showError:NO];
 }
 
@@ -331,12 +333,13 @@ static NSInteger const numPerRow = 4;
     NSDictionary *params = @{@"uid": REQUEST_UID, @"sign": [KGUtil getRequestSign:body], @"body":body};
     NSString *urlSuffix = @"/system/queryActivitiesAlbumInfo";
     NSString *url = [[KGUtil getServerAppURL] stringByAppendingString:urlSuffix];
+    __weak __typeof(self)wself = self;
     [KGUtil postRequest:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON: %@", responseObject);
         NSString *code = [responseObject objectForKey:@"code"];
         if ([code isEqualToString:@"000000"]) {
             NSArray *infosArray = (NSArray *)[responseObject objectForKey:@"objlist"];
-            [self.activityAlbum.albumInfos removeAllObjects];
+            [wself.activityAlbum.albumInfos removeAllObjects];
             for (int i = 0; i < infosArray.count; i++) {
                 NSDictionary *curInfo = [infosArray objectAtIndex:i];
                 KGActivityAlbumInfo *kgAInfo = [[KGActivityAlbumInfo alloc] initWithId:[[curInfo objectForKey:@"activitiesAlbumInfoId"] integerValue]
@@ -344,14 +347,14 @@ static NSInteger const numPerRow = 4;
                                                                                  dirId:[[curInfo objectForKey:@"directoryId"] integerValue]
                                                                               smallPic:[curInfo objectForKey:@"smallPicUrl"]
                                                                                    pic:[curInfo objectForKey:@"picUrl"]];
-                [self.activityAlbum.albumInfos addObject:kgAInfo];
+                [wself.activityAlbum.albumInfos addObject:kgAInfo];
             }
-            [self.collectionView reloadData];
-            if (self.albumVC) {
-                [self.albumVC.collectionView reloadData];
+            [wself.collectionView reloadData];
+            if (wself.albumVC) {
+                [wself.albumVC.collectionView reloadData];
             }
-            [self resetImageInfos];
-            [self.pbVC resetToIndex:0];
+            [wself resetImageInfos];
+            [wself.pbVC resetToIndex:0];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
@@ -627,10 +630,8 @@ static NSInteger const numPerRow = 4;
 }
 
 //
-//- (void)dealloc {
-//    NSLog(@">>>>>>>>>>dealloc photo collection view");
-//    _imageInfos = nil;
-//    _pbVC = nil;
-//}
+- (void)dealloc {
+    NSLog(@"dealloc PhotoCollectionViewController");
+}
 
 @end

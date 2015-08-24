@@ -694,9 +694,9 @@ const CGFloat segWidth = 20.f;
     [KxMenu dismissMenu];
 }
 //
-//- (void)dealloc {
-//    NSLog(@">>>>>>>>>>dealloc PhotoBrowser");
-//}
+- (void)dealloc {
+    NSLog(@"dealloc PBViewController");
+}
 
 
 

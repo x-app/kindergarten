@@ -170,8 +170,8 @@
 //}
 
 - (void)clearAppCache {
-    [[[SDWebImageManager sharedManager] imageCache] clearDisk];
     [[[SDWebImageManager sharedManager] imageCache] clearMemory];
+    [[[SDWebImageManager sharedManager] imageCache] clearDisk];
     
     NSURLCache * cache = [NSURLCache sharedURLCache];
     [cache removeAllCachedResponses];
@@ -235,6 +235,10 @@
         default:
             break;
     }
+}
+
+- (void)dealloc {
+    NSLog(@"dealloc MeViewController");
 }
 
 

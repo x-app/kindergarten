@@ -62,7 +62,7 @@ FOUNDATION_STATIC_INLINE NSUInteger SDCacheCostForImage(UIImage *image) {
 @property (strong, nonatomic) NSString *diskCachePath;
 @property (strong, nonatomic) NSMutableArray *customPaths;
 @property (SDDispatchQueueSetterSementics, nonatomic) dispatch_queue_t ioQueue;
-
+@property (strong, nonatomic) NSString *fullNamespace;
 @end
 
 
@@ -90,7 +90,7 @@ FOUNDATION_STATIC_INLINE NSUInteger SDCacheCostForImage(UIImage *image) {
 
 - (id)initWithNamespace:(NSString *)ns diskCacheDirectory:(NSString *)directory {
     if ((self = [super init])) {
-        NSString *fullNamespace = [@"com.hackemist.SDWebImageCache." stringByAppendingString:ns];
+        _fullNamespace = [@"com.hackemist.SDWebImageCache." stringByAppendingString:ns];
 
         // initialise PNG signature data
         kPNGSignatureData = [NSData dataWithBytes:kPNGSignatureBytes length:8];
@@ -103,11 +103,11 @@ FOUNDATION_STATIC_INLINE NSUInteger SDCacheCostForImage(UIImage *image) {
 
         // Init the memory cache
         _memCache = [[AutoPurgeCache alloc] init];
-        _memCache.name = fullNamespace;
+        _memCache.name = _fullNamespace;
 
         // Init the disk cache
         if (directory != nil) {
-            _diskCachePath = [directory stringByAppendingPathComponent:fullNamespace];
+            _diskCachePath = [directory stringByAppendingPathComponent:_fullNamespace];
         } else {
             NSString *path = [self makeDiskCachePath:ns];
             _diskCachePath = path;
@@ -433,6 +433,18 @@ FOUNDATION_STATIC_INLINE NSUInteger SDCacheCostForImage(UIImage *image) {
 
 - (NSUInteger)maxMemoryCost {
     return self.memCache.totalCostLimit;
+}
+
+- (void)setShouldCacheImagesInMemory:(BOOL)shouldCacheImagesInMemory {
+    if (shouldCacheImagesInMemory != _shouldCacheImagesInMemory) {
+        _shouldCacheImagesInMemory = shouldCacheImagesInMemory;
+        if (_shouldCacheImagesInMemory) {
+            self.memCache = [[NSCache alloc] init];
+            self.memCache.name = _fullNamespace;
+        } else {
+            self.memCache = nil;
+        }
+    }
 }
 
 - (NSUInteger)maxMemoryCountLimit {
