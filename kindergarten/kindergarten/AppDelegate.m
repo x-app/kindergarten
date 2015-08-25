@@ -93,7 +93,7 @@
     self.varible.server_index_url = @"http://app.nugget-nj.com/kindergarten_index";
     //self.varible.server_app_url = @"http://app.nugget-nj.com/nugget_app";
     //self.varible.server_push_url = @"http://slice.eu.org:8080/pushservice/api";
-    self.varible.server_push_url = @"http://app.nugget-nj.com/pushservice/testapi";
+    self.varible.server_push_url = @"http://app.nugget-nj.com/pushservice/api";
 
     
     NSDictionary *variDict = [userDefaults objectForKey:@"varible"];
