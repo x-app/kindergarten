@@ -180,11 +180,11 @@
         UIImageView* iv = self.func[i];
         
         if(iv.tag == 1)
-            [iv setImage:[UIImage imageNamed:@"home_health.png"]];
+            [iv setImage:[UIImage imageNamed:@"home_health-60.png"]];
         else if(iv.tag ==2)
-            [iv setImage:[UIImage imageNamed:@"home_roll.png"]];
+            [iv setImage:[UIImage imageNamed:@"home_roll-60.png"]];
         else if(iv.tag == 4)
-            [iv setImage:[UIImage imageNamed:@"home_leave.png"]];
+            [iv setImage:[UIImage imageNamed:@"home_handle_leave-60.png"]];
         else if(iv.tag >= 5)
             [iv setHidden:true];
     }
@@ -213,11 +213,11 @@
         UIImageView* iv = self.func[i];
         
         if(iv.tag == 1)
-            [iv setImage:[UIImage imageNamed:@"home_pickup.png"]];
+            [iv setImage:[UIImage imageNamed:@"home_pickup-60.png"]];
         else if(iv.tag ==2)
-            [iv setImage:[UIImage imageNamed:@"home_check.png"]];
+            [iv setImage:[UIImage imageNamed:@"home_check-60.png"]];
         else if(iv.tag == 4)
-            [iv setImage:[UIImage imageNamed:@"home_goin.png"]];
+            [iv setImage:[UIImage imageNamed:@"home_goin-60.png"]];
         else if(iv.tag >= 5)
             [iv setHidden:false];
     }

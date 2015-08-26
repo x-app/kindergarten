@@ -92,8 +92,8 @@
     self.varible = [[KGVarible alloc] init];
     self.varible.server_index_url = @"http://app.nugget-nj.com/kindergarten_index";
     //self.varible.server_app_url = @"http://app.nugget-nj.com/nugget_app";
-    //self.varible.server_push_url = @"http://slice.eu.org:8080/pushservice/api";
-    self.varible.server_push_url = @"http://app.nugget-nj.com/pushservice/testapi";
+//    self.varible.server_push_url = @"http://slice.eu.org:8080/pushservice/api";
+    self.varible.server_push_url = @"http://app.nugget-nj.com/pushservice/api";
 
     
     NSDictionary *variDict = [userDefaults objectForKey:@"varible"];
@@ -191,7 +191,7 @@
     self.user.verified = NO;
     NSDate *curTime = [[NSDate alloc] init];
     //第一次进入系统或者非激活状态超过一分钟，返回时需要重新lock
-    if (self.resignActiveTime == nil || [curTime timeIntervalSinceDate:self.resignActiveTime] > 0) {
+    if (self.resignActiveTime == nil || [curTime timeIntervalSinceDate:self.resignActiveTime] > 600) {
         [KGUtil lockTopMostVC];
     }
 }
