@@ -156,6 +156,8 @@
     //这里建议同步存储到磁盘中，但是不是必须的
     [userDefaults synchronize];
     
+    [NSThread sleepForTimeInterval:1.0];//设置启动页面时间
+    
     return YES;
 }
 
