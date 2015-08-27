@@ -26,6 +26,9 @@
         self.tabBarItem.selectedImage=[UIImage imageNamed:@"park_icon_selected-Small.png"];//选中图片
     else if(self.tabBarItem.tag == 4)
         self.tabBarItem.selectedImage=[UIImage imageNamed:@"my_icon_selected-Small.png"];//选中图片
+    
+    //tabicon selected color
+    self.tabBarController.tabBar.tintColor = [UIColor colorWithRed:0 green:211/255.0 blue:2/255.0 alpha:1];
 
 }
 

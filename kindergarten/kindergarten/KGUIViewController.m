@@ -103,12 +103,16 @@
     }
     
     if ([KGUtil isTeacherVersion]) {
+        self.childNameLabel.textColor = [UIColor colorWithRed:223/255.0 green:44/255.0 blue:79/255.0 alpha:1];
+        
         KGClass *curClass = [KGUtil getCurClass];
         if (curClass) {
             self.childNameLabel.text = [KGUtil getUser].name;
             self.classNameLabel.text = [NSString stringWithFormat:@"%@%@", KGUtil.getVarible.parkName, curClass.className];
         }
     } else {
+        self.childNameLabel.textColor = [UIColor colorWithRed:0/255.0 green:152/255.0 blue:83/255.0 alpha:1];
+        
         KGChild *curChild = KGUtil.getCurChild;
         if(curChild)
         {
