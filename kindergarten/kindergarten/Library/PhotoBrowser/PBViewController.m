@@ -392,7 +392,7 @@ const CGFloat segWidth = 20.f;
         photoItemView = [[[NSBundle mainBundle] loadNibNamed:@"PBItemView" owner:nil options:nil] firstObject];
     }*/
     PBItemView *photoItemView = [[[NSBundle mainBundle] loadNibNamed:@"PBItemView" owner:nil options:nil] firstObject];
-    NSLog(@"%p",&photoItemView);
+    //NSLog(@"%p",&photoItemView);
 
     //数据覆盖
     photoItemView.ItemViewSingleTapBlock = ^(){
