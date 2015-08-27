@@ -22,6 +22,8 @@
 @property (weak, nonatomic) IBOutlet UIView *bottomBarView;
 @property (weak, nonatomic) IBOutlet UILabel *descLabel;
 
+@property (weak, nonatomic) id oldDelegate;
+
 @end
 
 const CGFloat segWidth = 20.f;
@@ -53,8 +55,11 @@ const CGFloat segWidth = 20.f;
     }
     [self setNeedsStatusBarAppearanceUpdate];
     
-    self.navigationController.interactivePopGestureRecognizer.delegate = self;
-    [self.navigationController.interactivePopGestureRecognizer setEnabled:YES];
+    //self.navigationController.interactivePopGestureRecognizer.delegate = self;
+    
+    //self.navigationController.interactivePopGestureRecognizer.delegate = self;
+    //[self.navigationController.interactivePopGestureRecognizer setEnabled:YES];
+    //[self.navigationController.interactivePopGestureRecognizer addTarget:self action:@selector(dismiss)];
     
     // Do any additional setup after loading the view.
 }
@@ -147,30 +152,30 @@ const CGFloat segWidth = 20.f;
     [super viewWillAppear:animated];
     [self setNavigationBarStyle];
 }
-
--(void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
-    NSLog(@"pb in navigation delegate!");
-    if (viewController == self) {
-        /*UIImage *rightImage = [UIImage imageNamed:@"gallery_more_icon.png"];
-        if (self.showOneMenuOnly && self.menuItems.count >= 1) {
-            KxMenuItem *menuItem = [self.menuItems objectAtIndex:0];
-            if (menuItem != nil) {
-                rightImage = menuItem.image;
-            }
-        }
-        UIImageView *rightImageView = [[UIImageView alloc] initWithImage:rightImage];
-        rightImageView.contentMode = UIViewContentModeScaleAspectFill;
-        rightImageView.frame = CGRectMake(5, 0, 10, 20);
-        UIButton *rightButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
-        [rightButton addTarget:self action:@selector(clickRightButton:) forControlEvents:UIControlEventTouchUpInside];
-        [rightButton addSubview:rightImageView];
-        UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
-        self.navigationItem.rightBarButtonItem = rightButtonItem;*/
-        [self setNavigationBarStyle];
-    } else {
-        [self restoreNavigationBarStyle];
-    }
-}
+//
+//-(void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+//    NSLog(@"pb in navigation delegate!");
+//    if (viewController == self) {
+//        /*UIImage *rightImage = [UIImage imageNamed:@"gallery_more_icon.png"];
+//        if (self.showOneMenuOnly && self.menuItems.count >= 1) {
+//            KxMenuItem *menuItem = [self.menuItems objectAtIndex:0];
+//            if (menuItem != nil) {
+//                rightImage = menuItem.image;
+//            }
+//        }
+//        UIImageView *rightImageView = [[UIImageView alloc] initWithImage:rightImage];
+//        rightImageView.contentMode = UIViewContentModeScaleAspectFill;
+//        rightImageView.frame = CGRectMake(5, 0, 10, 20);
+//        UIButton *rightButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+//        [rightButton addTarget:self action:@selector(clickRightButton:) forControlEvents:UIControlEventTouchUpInside];
+//        [rightButton addSubview:rightImageView];
+//        UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
+//        self.navigationItem.rightBarButtonItem = rightButtonItem;*/
+//        [self setNavigationBarStyle];
+//    } else {
+//        [self restoreNavigationBarStyle];
+//    }
+//}
 
 - (void)cleanPhotoBrowser {
     //NSLog(@">>>>clear photobrowser");
@@ -394,9 +399,10 @@ const CGFloat segWidth = 20.f;
     PBItemView *photoItemView = [[[NSBundle mainBundle] loadNibNamed:@"PBItemView" owner:nil options:nil] firstObject];
     //NSLog(@"%p",&photoItemView);
 
+    __weak PBViewController *wself = self;
     //数据覆盖
     photoItemView.ItemViewSingleTapBlock = ^(){
-        [self singleTap];
+        [wself singleTap];
     };
     /*photoItemView.viewZoomBlock = ^() {
 //        [self.navigationController.navigationBar setNeedsDisplay];
@@ -575,10 +581,10 @@ const CGFloat segWidth = 20.f;
     if (_imageInfos == nil || _imageInfos.count == 0) {
         return;
     }
-
+    __weak PBViewController *wself = self;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.3f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         //初始化页码信息
-        self.page = _index;
+        wself.page = _index;
     });
 }
 
@@ -625,14 +631,14 @@ const CGFloat segWidth = 20.f;
 //        [self.topBarLabel setNeedsLayout];
 //        [self.topBarLabel layoutIfNeeded];
 //    });
-    
+    __weak PBViewController *wself = self;
     dispatch_async(dispatch_get_main_queue(), ^{
         
         //显示对应的页面
-        [self showWithPage:page];
+        [wself showWithPage:page];
         
         //获取当前显示中的photoItemView
-        self.currentItemView = [self.visiblePhotoItemViewDictM objectForKey:@(self.page)];
+        wself.currentItemView = [wself.visiblePhotoItemViewDictM objectForKey:@(wself.page)];
     });
 }
 
@@ -686,6 +692,7 @@ const CGFloat segWidth = 20.f;
 }
 
 - (void)dismiss {
+    NSLog(@"dismiss PBViewController");
     if (self.navigationController) {
         [self.navigationController popViewControllerAnimated:YES];
     } else {
