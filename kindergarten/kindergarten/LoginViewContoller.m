@@ -51,7 +51,7 @@
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSInteger versionInUD  = [[userDefaults objectForKey:@"appVersion"] integerValue];
     [self.userTypeControl setSelectedSegmentIndex:versionInUD];
-    NSLog(@"LoginViewController did load");
+    //NSLog(@"LoginViewController did load");
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -95,35 +95,27 @@
         //NSDictionary *params = @{@"uid": REQUEST_UID, @"sign": [KGUtil getRequestSign:body], @"body":body};
         NSString *urlSuffix = [KGUtil isTeacherVersion] ? @"/teacher/register" : @"/parent/register";
         NSString *url = [[KGUtil getServerAppURL] stringByAppendingString:urlSuffix];
-        [KGUtil postRequest:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSLog(@"JSON: %@", responseObject);
-            NSString *code = [responseObject objectForKey:@"code"];
-            if ([code isEqualToString:@"000000"]) {
-                NSDictionary *obj = [responseObject objectForKey:@"obj"];
-                delegate.user.uid = [obj objectForKey:@"iuid"];
-                if ([KGUtil isTeacherVersion]) {
-                    delegate.user.teacherID = [(NSString *)[obj objectForKey:@"teacherid"] integerValue];
-                } else {
-                    delegate.user.parentID = [(NSString *)[obj objectForKey:@"parentid"] integerValue];
-                }
-                [self setGesturePswd];
-                //下面开始查询幼儿信息
-//                NSString *childUrl = [[KGUtil getServerAppURL] stringByAppendingString:@"parent/queryChildInfo"];
-//                NSDictionary *data = @{@"iuid": delegate.user.uid};
-//                NSDictionary *childBody = [KGUtil getRequestBody:data];
-//                NSDictionary *childParams = @{@"uid": REQUEST_UID, @"sign": [KGUtil getRequestSign:childBody], @"body": body};
-//                [KGUtil postRequest:childUrl parameters:childParams success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//                    NSLog(@"JSON: %@", responseObject);
-//                    [self setGesturePswd];
-//                } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//                    //查询幼儿失败
-//                } inView:self.view];
-            }
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"Error: %@", error);
-        } inView:self.view
-         showHud:true
-         showError:true];
+        [KGUtil postRequest:url parameters:params
+                    success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                        NSLog(@"JSON: %@", responseObject);
+                        NSString *code = [responseObject objectForKey:@"code"];
+                        if ([code isEqualToString:@"000000"]) {
+                            NSDictionary *obj = [responseObject objectForKey:@"obj"];
+                            delegate.user.uid = [obj objectForKey:@"iuid"];
+                            if ([KGUtil isTeacherVersion]) {
+                                delegate.user.teacherID = [(NSString *)[obj objectForKey:@"teacherid"] integerValue];
+                            } else {
+                                delegate.user.parentID = [(NSString *)[obj objectForKey:@"parentid"] integerValue];
+                            }
+                            [self setGesturePswd];
+                        }
+                    }
+                    failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                        NSLog(@"Error: %@", error);
+                    }
+                     inView:self.view
+                    showHud:true
+                  showError:true];
     }
 }
 /**
@@ -489,13 +481,13 @@
 - (IBAction)test:(UIButton *)sender {
     self.nameTextField.text = @"左玲玲";
     self.idNoTextField.text = @"430421198608170228";
-    self.parkTextField.text = @"江苏南京市南戈特幼儿园";
+    //self.parkTextField.text = @"江苏南京市南戈特幼儿园";
 }
 
 - (IBAction)setFakeProfile:(UIButton *)sender {
     self.nameTextField.text = @"黄晓伟";
     self.idNoTextField.text = @"350582197903050273";
-    self.parkTextField.text = @"江苏南京市南戈特幼儿园";
+    //self.parkTextField.text = @"江苏南京市南戈特幼儿园";
 }
 - (IBAction)jumpToMain:(UIButton *)sender {
     /*AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -504,7 +496,7 @@
     [self.navigationController dismissViewControllerAnimated:NO completion:nil];*/
     self.nameTextField.text = @"许阿密";
     self.idNoTextField.text = @"350582199303073606";
-    self.parkTextField.text = @"江苏南京市南戈特幼儿园";
+    //self.parkTextField.text = @"江苏南京市南戈特幼儿园";
 }
 
 
@@ -569,6 +561,10 @@
     //存储班级class
     
     [userDefaults synchronize];
+}
+
+- (void)dealloc {
+    NSLog(@"dealloc LoginVC");
 }
 
 /*

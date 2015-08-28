@@ -73,7 +73,7 @@
 -(void)viewDidLayoutSubviews
 {
     //    [((UIScrollView *)self.view) setContentSize: CGSizeMake(screen_width, screen_height)];
-    NSLog(@"%f", screen_height);
+    //NSLog(@"%f", screen_height);
     if(screen_height < 1136)//4/4s
     {
         self.topSpace.constant = -10;

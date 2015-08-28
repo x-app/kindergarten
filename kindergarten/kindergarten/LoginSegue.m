@@ -17,8 +17,8 @@
 {
     //[self profileToQuestion];
     NSLog(@"verify user profile");
-    LoginViewContoller *current = self.sourceViewController;
-    LoginViewContoller *next = self.destinationViewController;
+    __block LoginViewContoller *current = self.sourceViewController;
+    __block LoginViewContoller *next = self.destinationViewController;
     if ([current.parkTextField.text isEqualToString:@""]) {
         [KGUtil showAlert:@"请选择所在幼儿园" inView:current.view];
         return;

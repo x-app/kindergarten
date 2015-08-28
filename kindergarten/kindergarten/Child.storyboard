@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="e7o-qH-B5h">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="e7o-qH-B5h">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -21,13 +21,13 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wh0-Q9-c9o">
-                                            <rect key="frame" x="10" y="8" width="54.5" height="54.5"/>
+                                            <rect key="frame" x="8" y="1" width="68.5" height="68.5"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="wh0-Q9-c9o" secondAttribute="height" multiplier="1:1" id="BkV-HM-yFD"/>
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gts-EX-nuL">
-                                            <rect key="frame" x="76" y="12" width="511.5" height="0.0"/>
+                                            <rect key="frame" x="88" y="12" width="499.5" height="0.0"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -42,12 +42,12 @@
                                     <constraints>
                                         <constraint firstItem="Gts-EX-nuL" firstAttribute="leading" secondItem="wh0-Q9-c9o" secondAttribute="trailing" constant="12" id="19h-CC-EEB"/>
                                         <constraint firstAttribute="trailing" secondItem="ecS-hn-XMR" secondAttribute="trailing" constant="18" id="66y-GE-BLu"/>
-                                        <constraint firstAttribute="bottom" secondItem="wh0-Q9-c9o" secondAttribute="bottom" constant="8" id="8vH-7r-PnJ"/>
-                                        <constraint firstItem="wh0-Q9-c9o" firstAttribute="top" secondItem="gGp-mq-vhe" secondAttribute="top" constant="8" id="9jQ-HQ-fmq"/>
+                                        <constraint firstAttribute="bottom" secondItem="wh0-Q9-c9o" secondAttribute="bottom" constant="1" id="8vH-7r-PnJ"/>
+                                        <constraint firstItem="wh0-Q9-c9o" firstAttribute="top" secondItem="gGp-mq-vhe" secondAttribute="top" constant="1" id="9jQ-HQ-fmq"/>
                                         <constraint firstItem="Gts-EX-nuL" firstAttribute="top" secondItem="gGp-mq-vhe" secondAttribute="top" constant="12" id="HZD-LZ-fHX"/>
                                         <constraint firstAttribute="trailing" secondItem="Gts-EX-nuL" secondAttribute="trailing" constant="12" id="Vb1-hU-aQt"/>
                                         <constraint firstAttribute="bottom" secondItem="ecS-hn-XMR" secondAttribute="bottom" constant="2" id="gxR-a8-9fZ"/>
-                                        <constraint firstItem="wh0-Q9-c9o" firstAttribute="leading" secondItem="gGp-mq-vhe" secondAttribute="leading" constant="10" id="hak-Dl-wps"/>
+                                        <constraint firstItem="wh0-Q9-c9o" firstAttribute="leading" secondItem="gGp-mq-vhe" secondAttribute="leading" constant="8" id="hak-Dl-wps"/>
                                         <constraint firstItem="ecS-hn-XMR" firstAttribute="top" secondItem="Gts-EX-nuL" secondAttribute="bottom" constant="12" id="oGg-K8-gs3"/>
                                     </constraints>
                                     <variation key="default">

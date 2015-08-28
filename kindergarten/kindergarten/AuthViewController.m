@@ -95,4 +95,8 @@
 }
 */
 
+- (void)dealloc {
+    NSLog(@"dealloc AuthorityVC");
+}
+
 @end

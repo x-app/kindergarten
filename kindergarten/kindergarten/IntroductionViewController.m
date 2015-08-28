@@ -17,6 +17,8 @@
 
 @property (nonatomic, strong) KGPicPicker *picPicker;
 
+@property (nonatomic, strong) PBViewController *pbVC;
+
 @end
 
 @implementation IntroductionViewController
@@ -48,18 +50,35 @@
     return _picPicker;
 }
 
-- (void)showDetail:(UITapGestureRecognizer*) sender {
-    NSLog(@"click image");
-    PBImageInfo *iInfo = [[PBImageInfo alloc] init];
-    iInfo.imageURL = self.picUrl;
-    iInfo.imageTitle = @"";
-    iInfo.imageDesc = self.introContent;
+- (PBViewController *)pbVC {
+    if (_pbVC == nil) {
+        _pbVC = [[PBViewController alloc] init];
+        _pbVC.handleVC = self;
+        
+        PBImageInfo *iInfo = [[PBImageInfo alloc] init];
+        iInfo.imageURL = self.picUrl;
+        iInfo.imageTitle = @"";
+        iInfo.imageDesc = self.introContent;
+        
+        _pbVC.imageInfos = [NSMutableArray arrayWithObject:iInfo];
+    }
+    return _pbVC;
+}
 
-    PBViewController *pbVC = [[PBViewController alloc] init];
-    pbVC.index = 0;
-    pbVC.handleVC = self;
-    pbVC.imageInfos = [NSMutableArray arrayWithObject:iInfo];
-    [pbVC show];
+- (void)showDetail:(UITapGestureRecognizer*)sender {
+    //NSLog(@"click image");
+//    PBImageInfo *iInfo = [[PBImageInfo alloc] init];
+//    iInfo.imageURL = self.picUrl;
+//    iInfo.imageTitle = @"";
+//    iInfo.imageDesc = self.introContent;
+
+//    PBViewController *pbVC = [[PBViewController alloc] init];
+//    pbVC.index = 0;
+//    pbVC.handleVC = self;
+//    pbVC.imageInfos = [NSMutableArray arrayWithObject:iInfo];
+//    [pbVC show];
+//    self.pbVC.imageInfos = [NSMutableArray arrayWithObject:iInfo];
+    [self.pbVC show];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -68,13 +87,7 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    CGRect barFrame = self.navigationController.navigationBar.frame;
-    NSLog(@"barFrame frame: %f %f %f %f", barFrame.origin.x, barFrame.origin.y,
-          barFrame.size.width, barFrame.size.height);
-    NSLog(@"textview frame: %f %f %f %f", self.introTextView.frame.origin.x, self.introTextView.frame.origin.y,
-          self.introTextView.frame.size.width, self.introTextView.frame.size.height);
-    NSLog(@"imageview frame: %f %f %f %f", self.introImageView.frame.origin.x, self.introImageView.frame.origin.y,
-          self.introImageView.frame.size.width, self.introImageView.frame.size.height);
+    [super viewDidDisappear:animated];
 }
 
 - (void)queryIntroductionData {
@@ -94,7 +107,7 @@
     NSDictionary *params = @{@"uid": REQUEST_UID, @"sign": [KGUtil getRequestSign:body], @"body":body};
     NSString *url = [[KGUtil getServerAppURL] stringByAppendingString:urlSuffix];
     [KGUtil postRequest:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"JSON: %@", responseObject);
+        //NSLog(@"JSON: %@", responseObject);
         NSString *code = [responseObject objectForKey:@"code"];
         if ([code isEqualToString:@"000000"]) {
             NSArray *objlist = (NSArray *)[responseObject objectForKey:@"objlist"];
@@ -114,6 +127,7 @@
 
 - (void)showIntroduction {
     __block UIActivityIndicatorView *activityIndicator;
+    __weak IntroductionViewController *wself = self;
     __weak UIImageView *weakImageView = self.introImageView;
     [self.introImageView sd_setImageWithURL:[NSURL URLWithString:self.smallPicUrl]
                            placeholderImage:[UIImage imageNamed:@"image_placeholder"]
@@ -129,8 +143,8 @@
                                   completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                                       [activityIndicator removeFromSuperview];
                                       activityIndicator = nil;
-                                      UITapGestureRecognizer *tapImage = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showDetail:)];
-                                      [self.introImageView addGestureRecognizer:tapImage];
+                                      UITapGestureRecognizer *tapImage = [[UITapGestureRecognizer alloc] initWithTarget:wself action:@selector(showDetail:)];
+                                      [weakImageView addGestureRecognizer:tapImage];
                                   }];
     self.introTextView.text = self.introContent;
 }
@@ -233,44 +247,9 @@
     [self addIntroduction];
 }
 
-
-/*
- {
- "createTime": "2014-12-27 21:41:04",
- "picUrl": "/test/201402.jpg",
- "classId": 101021021,
- "description": "大一班介绍测试",
- "classDescId": 2,
- "smallPicUrl": "/test/201402_l.jpg"
- },
- {
- "createTime": "2014-12-27 21:40:09",
- "picUrl": "/test/2014.jpg",
- "classId": 101021021,
- "description": "大一班介绍",
- "classDescId": 1,
- "smallPicUrl": "/test/2014_l.jpg"
- }
- 
- */
-
-/*
- 
- {
- "kindergartenDescId": 2,
- "createTime": "2014-12-27 21:49:47",
- "picUrl": "/test/2014122704.jpg",
- "description": "园区介绍2",
- "smallPicUrl": "/test/2014122704_l.jpg"
- },
- {
- "kindergartenDescId": 1,
- "createTime": "2014-12-27 21:48:56",
- "picUrl": "/test/2014122703.jpg",
- "description": "园区介绍",
- "smallPicUrl": "/test/2014122703_l.jpg"
- }
- */
+- (void)dealloc {
+    NSLog(@"dealloc IntroductionVC");
+}
 
 /*
 #pragma mark - Navigation

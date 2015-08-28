@@ -235,4 +235,8 @@
     return YES;
 }
 
+- (void)dealloc {
+    NSLog(@"dealloc WebVC");
+}
+
 @end

@@ -392,4 +392,8 @@
     }
 }
 
+- (void)dealloc {
+    NSLog(@"dealloc GrowupEditVC");
+}
+
 @end

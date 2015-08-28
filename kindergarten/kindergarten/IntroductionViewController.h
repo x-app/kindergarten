@@ -22,7 +22,6 @@ typedef enum {
 @property (strong, nonatomic) NSString *introContent;
 
 @property (weak, nonatomic) IBOutlet UIImageView *introImageView;
-
 @property (weak, nonatomic) IBOutlet UITextView *introTextView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *updateButton;
 
