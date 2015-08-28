@@ -141,7 +141,7 @@
     NSString *url = [[KGUtil getServerAppURL] stringByAppendingString:urlSuffix];
     __weak __typeof(self)wself = self;
     [KGUtil postRequest:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"JSON: %@", responseObject);
+//        NSLog(@"JSON: %@", responseObject);
         NSString *code = [responseObject objectForKey:@"code"];
         if ([code isEqualToString:@"000000"]) {
             NSDictionary *obj = [responseObject objectForKey:@"obj"];

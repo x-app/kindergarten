@@ -23,7 +23,7 @@
                                     <constraint firstAttribute="width" secondItem="ybr-1f-K3h" secondAttribute="height" multiplier="720:372" id="blT-rF-HFe"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="head.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="51v-WQ-nDN">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="parent_home_head_img.png" translatesAutoresizingMaskIntoConstraints="NO" id="51v-WQ-nDN">
                                 <rect key="frame" x="16" y="334" width="72" height="72"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="72" id="5QO-bZ-fLF"/>
@@ -449,8 +449,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="head.jpg" width="200" height="200"/>
         <image name="home_top_bg.png" width="720" height="372"/>
+        <image name="parent_home_head_img.png" width="200" height="200"/>
         <image name="park_intro-60.png" width="60" height="60"/>
         <image name="park_menu-60.png" width="60" height="60"/>
         <image name="park_messagebox-60.png" width="60" height="60"/>

@@ -23,7 +23,7 @@
                                     <constraint firstAttribute="width" secondItem="gll-bn-W8T" secondAttribute="height" multiplier="720:372" id="Dyk-aq-pXp"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="head.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="z3b-au-lEb">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="parent_home_head_img.png" translatesAutoresizingMaskIntoConstraints="NO" id="z3b-au-lEb">
                                 <rect key="frame" x="16" y="290" width="72" height="72"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="72" id="Be9-JK-IBo"/>
@@ -768,7 +768,6 @@
     </scenes>
     <resources>
         <image name="down.png" width="20" height="20"/>
-        <image name="head.jpg" width="200" height="200"/>
         <image name="home_check-60.png" width="60" height="60"/>
         <image name="home_goin-60.png" width="60" height="60"/>
         <image name="home_goout-60.png" width="60" height="60"/>
@@ -777,6 +776,7 @@
         <image name="home_messagebox-60.png" width="60" height="60"/>
         <image name="home_pickup-60.png" width="60" height="60"/>
         <image name="home_top_bg.png" width="720" height="372"/>
+        <image name="parent_home_head_img.png" width="200" height="200"/>
         <image name="repeat_img.png" width="38" height="50"/>
     </resources>
 </document>

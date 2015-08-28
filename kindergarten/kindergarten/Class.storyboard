@@ -23,7 +23,7 @@
                                     <constraint firstAttribute="width" secondItem="JpJ-xX-TSm" secondAttribute="height" multiplier="720:372" id="MUf-Av-4Nl"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="head.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Wld-70-fzb">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="parent_home_head_img.png" translatesAutoresizingMaskIntoConstraints="NO" id="Wld-70-fzb">
                                 <rect key="frame" x="16" y="290" width="72" height="72"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="72" id="fha-p6-XVU"/>
@@ -555,7 +555,7 @@
         <image name="class_grow-60.png" width="60" height="60"/>
         <image name="class_intro-60.png" width="60" height="60"/>
         <image name="class_photo-60.png" width="60" height="60"/>
-        <image name="head.jpg" width="200" height="200"/>
         <image name="home_top_bg.png" width="720" height="372"/>
+        <image name="parent_home_head_img.png" width="200" height="200"/>
     </resources>
 </document>

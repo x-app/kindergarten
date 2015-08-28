@@ -40,7 +40,7 @@
     
     [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.url]]];
     
-    _keepUsing = false;
+//    _keepUsing = false;
     
     
     /* 没有动画效果
@@ -66,7 +66,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    NSLog(@"willappear");
+//    NSLog(@"willappear");
 //    [self.navigationController.view sendSubviewToBack:self.navigationController.navigationBar];
     // hide nav bar
 //    [[self navigationController] setNavigationBarHidden:YES animated:YES];
@@ -80,20 +80,19 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    NSLog(@"didappear");
-    
-    self.keepUsing = false;
+//    NSLog(@"didappear");
+//    self.keepUsing = false;
 }
 
 -(void)viewWillDisappear:(BOOL)animated
 {
-    NSLog(@"willdisappear");
+//    NSLog(@"willdisappear");
 //    [self.navigationController.view bringSubviewToFront:self.navigationController.navigationBar];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
-    NSLog(@"diddisappear");
+//    NSLog(@"diddisappear");
     /*
     UIViewController *tmVC = [[UIApplication sharedApplication] topMostViewController];
     if (tmVC == nil) {
