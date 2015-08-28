@@ -68,8 +68,18 @@
 {
     // Enable the gesture again once the new controller is shown
     
+//    if ([self respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+//        self.interactivePopGestureRecognizer.enabled = YES;
+//    }
+    
     if ([self respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
-        self.interactivePopGestureRecognizer.enabled = YES;
+        // disable interactivePopGestureRecognizer in the rootViewController of navigationController
+        if ([[self.viewControllers firstObject] isEqual:viewController]) {
+            self.interactivePopGestureRecognizer.enabled = NO;
+        } else {
+            // enable interactivePopGestureRecognizer
+            self.interactivePopGestureRecognizer.enabled = YES;
+        }
     }
 }
 
