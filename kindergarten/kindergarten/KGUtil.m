@@ -51,7 +51,7 @@ static NSArray *month_cn;
 
 + (NSString *)getMD5Str:(NSString *)sourceStr {
     //NSData *source = [sourceStr dataUsingEncoding:NSUTF8StringEncoding];
-    NSLog(@"getMD5Str.source:%@", sourceStr);
+//    NSLog(@"getMD5Str.source:%@", sourceStr);
     //const char *cStr = [source bytes];
     const char *cStr = [sourceStr UTF8String];
     //NSLog(@"%d%s", strlen(cStr), cStr);
@@ -66,7 +66,7 @@ static NSArray *month_cn;
         //[digest appendFormat:@"%c", hexDigits[result[i] >> 4 & 0xf]];
         //[digest appendFormat:@"%c", hexDigits[result[i] & 0xf]];
     }
-    NSLog(@"getMD5Str.digest:%@", digest);
+//    NSLog(@"getMD5Str.digest:%@", digest);
     return [NSString stringWithFormat:@"%@", digest];
 }
 

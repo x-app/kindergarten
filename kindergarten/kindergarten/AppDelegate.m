@@ -156,6 +156,8 @@
     //这里建议同步存储到磁盘中，但是不是必须的
     [userDefaults synchronize];
     
+    [NSThread sleepForTimeInterval:1.0];//设置启动页面时间
+    
     return YES;
 }
 
@@ -191,7 +193,7 @@
     self.user.verified = NO;
     NSDate *curTime = [[NSDate alloc] init];
     //第一次进入系统或者非激活状态超过一分钟，返回时需要重新lock
-    if (self.resignActiveTime == nil || [curTime timeIntervalSinceDate:self.resignActiveTime] > 600) {
+    if (self.resignActiveTime == nil || [curTime timeIntervalSinceDate:self.resignActiveTime] > 3600) {
         [KGUtil lockTopMostVC];
     }
 }
