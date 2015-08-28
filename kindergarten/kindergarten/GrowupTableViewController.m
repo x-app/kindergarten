@@ -65,15 +65,16 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
+    __weak GrowupTableViewController *wself = self;
     // 设置下拉刷新
     self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [self loadNewData:true];
+        [wself loadNewData:true];
     }];
     [self.tableView.header beginRefreshing];
     
     // 设置上拉刷新
     self.tableView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        [self loadNewData:false];
+        [wself loadNewData:false];
     }];
     // 首次不显示
     self.tableView.footer.hidden = YES;
@@ -500,5 +501,9 @@
 #pragma mark - KGPostImageDelegate
 - (void)reloadData {
     [self loadNewData:YES];
+}
+
+- (void)dealloc {
+    NSLog(@"dealloc GrowupTableVC");
 }
 @end
