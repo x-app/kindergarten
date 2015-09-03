@@ -96,7 +96,8 @@
         _portraitKey = @"teacher_portrait_img";
         _topbgKey = @"teacher_topbg_img";
     }else {
-        _headBGPicName = @"home_top_bg.png";
+        _headBGPicName = @"home_top_bg5.png";
+        
         _headPortraitPicName = @"parent_home_head_img.png";
         _portraitKey = @"parent_portrait_img";
         _topbgKey = @"parent_topbg_img";

@@ -127,7 +127,7 @@
         <!--关于-->
         <scene sceneID="kgg-w2-6eQ">
             <objects>
-                <viewController title="关于" automaticallyAdjustsScrollViewInsets="NO" id="2Rr-xv-DEB" sceneMemberID="viewController">
+                <viewController title="关于" automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="2Rr-xv-DEB" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qe3-Bd-c48"/>
                         <viewControllerLayoutGuide type="bottom" id="Dzn-7x-qeq"/>
@@ -149,11 +149,11 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bBa-yM-27l">
-                                <rect key="frame" x="150" y="450" width="300" height="120"/>
+                                <rect key="frame" x="150" y="500" width="300" height="80"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="0Qt-yL-sna"/>
-                                    <constraint firstAttribute="height" constant="120" id="b6N-QZ-WQB"/>
+                                    <constraint firstAttribute="height" constant="80" id="b6N-QZ-WQB"/>
                                 </constraints>
                                 <string key="text">南京南戈特智能技术有限公司
 全国统一电话：4008879939
@@ -166,7 +166,7 @@ Copyright©2014</string>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="bBa-yM-27l" secondAttribute="bottom" constant="30" id="5Oz-2p-SoO"/>
+                            <constraint firstAttribute="bottom" secondItem="bBa-yM-27l" secondAttribute="bottom" constant="20" id="5Oz-2p-SoO"/>
                             <constraint firstItem="bBa-yM-27l" firstAttribute="top" secondItem="OXF-bd-tpC" secondAttribute="top" constant="200" id="Em8-Zf-dFx"/>
                             <constraint firstItem="RGa-Ku-pMk" firstAttribute="top" secondItem="OXF-bd-tpC" secondAttribute="topMargin" constant="160" id="F2Z-Xi-3E6"/>
                             <constraint firstAttribute="centerX" secondItem="qsO-i1-wJr" secondAttribute="centerX" id="gkb-aU-J1a"/>

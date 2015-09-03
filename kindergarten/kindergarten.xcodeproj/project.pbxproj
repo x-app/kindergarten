@@ -19,6 +19,8 @@
 		127AE59F1B89C02500A8716E /* home_top_bg2.png in Resources */ = {isa = PBXBuildFile; fileRef = 127AE59D1B89C02500A8716E /* home_top_bg2.png */; };
 		127AE5A21B89C03200A8716E /* home_top_bg4.png in Resources */ = {isa = PBXBuildFile; fileRef = 127AE5A11B89C03200A8716E /* home_top_bg4.png */; };
 		127AE5A41B89C0F700A8716E /* parent_home_head_img.png in Resources */ = {isa = PBXBuildFile; fileRef = 127AE5A31B89C0F700A8716E /* parent_home_head_img.png */; };
+		12A9ABF91B95FCBA006DC359 /* home_top_bg5.png in Resources */ = {isa = PBXBuildFile; fileRef = 12A9ABF81B95FCBA006DC359 /* home_top_bg5.png */; };
+		12A9ABFB1B95FD29006DC359 /* home_top_bg6.png in Resources */ = {isa = PBXBuildFile; fileRef = 12A9ABFA1B95FD29006DC359 /* home_top_bg6.png */; };
 		12AC15DA1B48FB4D007C247B /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12AC15D91B48FB4D007C247B /* Login.storyboard */; };
 		12AC15F41B490BD1007C247B /* GartenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AC15F31B490BD1007C247B /* GartenViewController.m */; };
 		12AC15F71B490D80007C247B /* MeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AC15F61B490D80007C247B /* MeViewController.m */; };
@@ -310,6 +312,8 @@
 		127AE59D1B89C02500A8716E /* home_top_bg2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = home_top_bg2.png; path = Resource/home_top_bg2.png; sourceTree = "<group>"; };
 		127AE5A11B89C03200A8716E /* home_top_bg4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = home_top_bg4.png; path = Resource/home_top_bg4.png; sourceTree = "<group>"; };
 		127AE5A31B89C0F700A8716E /* parent_home_head_img.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = parent_home_head_img.png; path = Resource/parent_home_head_img.png; sourceTree = "<group>"; };
+		12A9ABF81B95FCBA006DC359 /* home_top_bg5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = home_top_bg5.png; path = Resource/home_top_bg5.png; sourceTree = "<group>"; };
+		12A9ABFA1B95FD29006DC359 /* home_top_bg6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = home_top_bg6.png; path = Resource/home_top_bg6.png; sourceTree = "<group>"; };
 		12AC15D91B48FB4D007C247B /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		12AC15F21B490BD1007C247B /* GartenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GartenViewController.h; sourceTree = "<group>"; };
 		12AC15F31B490BD1007C247B /* GartenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GartenViewController.m; sourceTree = "<group>"; };
@@ -1526,6 +1530,8 @@
 				127AE59D1B89C02500A8716E /* home_top_bg2.png */,
 				127AE59B1B89C00F00A8716E /* home_top_bg3.png */,
 				127AE5A11B89C03200A8716E /* home_top_bg4.png */,
+				12A9ABF81B95FCBA006DC359 /* home_top_bg5.png */,
+				12A9ABFA1B95FD29006DC359 /* home_top_bg6.png */,
 				1266D5C11B495B8A00E7253F /* repeat_img.png */,
 				99ABD5961B47FC9B00B8DB8B /* help_1.xib */,
 				99ABD59E1B48030400B8DB8B /* help_2.xib */,
@@ -1710,6 +1716,7 @@
 				9997BA0E1B4D580E00B908B6 /* user_name_icon@2x.png in Resources */,
 				99ABD5A21B48030400B8DB8B /* help_3.xib in Resources */,
 				99F17F491B4D5C3600866F8F /* bg_11.png in Resources */,
+				12A9ABFB1B95FD29006DC359 /* home_top_bg6.png in Resources */,
 				12F9F94E1B78ED5900CFDB1B /* clearcache_icon-Small@2x.png in Resources */,
 				9997BA101B4D580E00B908B6 /* CLLockVC.xib in Resources */,
 				12F137781B8DDDB000FD3C23 /* class_photo-60@3x.png in Resources */,
@@ -1773,6 +1780,7 @@
 				12F1379C1B8F515200FD3C23 /* checkmark_false@2x.png in Resources */,
 				12F1379E1B8F515200FD3C23 /* checkmark@2x.png in Resources */,
 				127AE5A41B89C0F700A8716E /* parent_home_head_img.png in Resources */,
+				12A9ABF91B95FCBA006DC359 /* home_top_bg5.png in Resources */,
 				9911C1F91B5A06C80080FFA9 /* default_img.png in Resources */,
 				12F137741B8DDDB000FD3C23 /* class_grow-60@3x.png in Resources */,
 				12F137831B8DDDB000FD3C23 /* home_messagebox-60@2x.png in Resources */,
@@ -2130,7 +2138,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "a87b7131-50b3-4993-852b-5d4237ccae97";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

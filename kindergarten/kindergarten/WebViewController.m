@@ -18,20 +18,25 @@
 
 @implementation WebViewController
 
-//-(instancetype)init {
-//    self = [super init];
-//    
-//    return self;
-//}
+-(instancetype)init {
+    self = [super init];
+    
+    _bgColor = [UIColor whiteColor];
+    
+    return self;
+}
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //    CGRect windowFrame = [[UIScreen mainScreen] bounds];
-    //windowFrame.size.height += 49;//height of tabbar
-    _webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
+        CGRect windowFrame = [[UIScreen mainScreen] bounds];
+//    windowFrame.size.height += 49;//height of tabbar
+//    _webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
+        _webView = [[UIWebView alloc] initWithFrame:windowFrame];
     _webView.delegate=self;
+    
+    _webView.backgroundColor = self.bgColor;
     
     [self.view addSubview: _webView];
     
@@ -40,6 +45,7 @@
     
     [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.url]]];
     
+    [self setNeedsStatusBarAppearanceUpdate];
 //    _keepUsing = false;
     
     
@@ -76,18 +82,25 @@
 //        self.navigationController.interactivePopGestureRecognizer.enabled = YES;
 //        self.navigationController.interactivePopGestureRecognizer.delegate = self;
 //    }
+    
+    [self setNavigationBarStyle];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
 //    NSLog(@"didappear");
 //    self.keepUsing = false;
+    
+    [self setNavigationBarStyle];
+    
 }
 
 -(void)viewWillDisappear:(BOOL)animated
 {
 //    NSLog(@"willdisappear");
 //    [self.navigationController.view bringSubviewToFront:self.navigationController.navigationBar];
+    
+    [self restoreNavigationBarStyle];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -109,6 +122,20 @@
     [self clearWebView];*/
 }
 
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc {
+    NSLog(@"dealloc WebVC");
+}
+
+//-(UIStatusBarStyle)preferredStatusBarStyle{
+//    return UIStatusBarStyleLightContent;
+//}
+
+#pragma mark - web
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     // 处理事件
@@ -134,14 +161,6 @@
     return YES;
 }
 
--(void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
-    //NSLog(@"in delegate!");
-    if (viewController == self) {
-//        [navigationController setNavigationBarHidden:true];
-    } else {
-//        [navigationController setNavigationBarHidden:false];
-    }
-}
 
 - (void)clearWebView
 {
@@ -160,10 +179,6 @@
 //    }
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 - (void) webViewDidStartLoad:(UIWebView *)webView
 {
@@ -215,6 +230,15 @@
 
 #pragma mark - Navigation
 
+-(void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    //NSLog(@"in delegate!");
+    if (viewController == self) {
+        //        [navigationController setNavigationBarHidden:true];
+    } else {
+        //        [navigationController setNavigationBarHidden:false];
+    }
+}
+
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
@@ -234,8 +258,14 @@
     return YES;
 }
 
-- (void)dealloc {
-    NSLog(@"dealloc WebVC");
+#pragma mark -
+- (void)setNavigationBarStyle {
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
+
+- (void)restoreNavigationBarStyle {
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+}
+
 
 @end

@@ -1074,6 +1074,7 @@ static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq
     WebViewController *webvc = [[WebViewController alloc] init];;
     webvc.title = title;
     webvc.url = url;
+    webvc.bgColor = [UIColor colorWithRed:192/255.0 green:218/255.0 blue:216/255.0 alpha:1];
     webvc.hidesBottomBarWhenPushed = true;
     //[KGUtil.getWebVC clearWebView];
     
