@@ -72,6 +72,7 @@
     if ([self.nswrTextField.text isEqualToString:@""]) {
         [KGUtil showAlert:@"请填写密保问题答案" inView:self.view];
         return;
+//        self.nswrTextField.text = @"泉州";
     }
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     if (delegate.user.regMode == 1) {
