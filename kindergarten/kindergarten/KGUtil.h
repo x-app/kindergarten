@@ -86,6 +86,13 @@
 
 + (KGUser *)getUser;
 
+/**
+ *  获取用户类别
+ *  家长/教师/园长
+ *  @return 0/1/2分别对应家长/教师/园长
+ */
++ (NSInteger)getUserCatagory;
+
 + (NSString *)getMonthZn:(NSInteger)index;
 
 + (NSString *)getServerIndexURL;

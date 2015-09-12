@@ -27,16 +27,23 @@
     [super viewDidLoad];
     if (self.type == CLASS) {
         self.title = @"班级介绍";
+        if ([KGUtil getUserCatagory] == 0) { //家长无编辑班级介绍功能
+            self.navigationItem.rightBarButtonItem = nil;
+        }
     } else if (self.type == GARTEN) {
         self.title = @"园区介绍";
+        if ([KGUtil getUserCatagory] != 2) { //非园长无编辑园区介绍功能
+            self.navigationItem.rightBarButtonItem = nil;
+        }
     }
     self.introImageView.contentMode = UIViewContentModeScaleAspectFill;
     self.introImageView.clipsToBounds = YES;
 //    UITapGestureRecognizer *tapImage = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showDetail:)];
 //    [self.introImageView addGestureRecognizer:tapImage];
-    if (![KGUtil isTeacherVersion]) {
-        self.navigationItem.rightBarButtonItem = nil;
-    }
+    //2015-09-12修改:非园长不具备更新园区介绍功能
+    //if (![KGUtil isTeacherVersion]) {
+    //    self.navigationItem.rightBarButtonItem = nil;
+    //}
     
     [self queryIntroductionData];
     // Do any additional setup after loading the view.

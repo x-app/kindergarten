@@ -194,6 +194,22 @@ static NSArray *month_cn;
     return delegate.user;
 }
 
++ (NSInteger)getUserCatagory {
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    if (delegate == nil || delegate.user == nil) {
+        return -1;
+    }
+    if (delegate.user.category == 300) {
+        return 0;
+    } else if (delegate.user.category == 301) {
+        return 2;
+    } else if (delegate.user.category == 302) {
+        return 1;
+    } else {
+        return -1;
+    }
+}
+
 + (NSInteger)getCurClassId {
     if ([KGUtil isTeacherVersion]) {
         return [KGUtil getCurClass].classId;
