@@ -92,7 +92,7 @@
     self.varible = [[KGVarible alloc] init];
     self.varible.server_index_url = @"http://app.nugget-nj.com/kindergarten_index";
     //self.varible.server_app_url = @"http://app.nugget-nj.com/nugget_app";
-    //self.varible.server_push_url = @"http://slice.eu.org:8080/pushservice/api";
+//    self.varible.server_push_url = @"http://slice.eu.org:8080/pushservice/api";
     self.varible.server_push_url = @"http://app.nugget-nj.com/pushservice/api";
 
     
@@ -193,7 +193,7 @@
     self.user.verified = NO;
     NSDate *curTime = [[NSDate alloc] init];
     //第一次进入系统或者非激活状态超过一分钟，返回时需要重新lock
-    if (self.resignActiveTime == nil || [curTime timeIntervalSinceDate:self.resignActiveTime] > 3600) {
+    if (self.resignActiveTime == nil || [curTime timeIntervalSinceDate:self.resignActiveTime] > 3600) {//3600
         [KGUtil lockTopMostVC];
     }
 }
@@ -377,6 +377,12 @@
 -(void)replaceToken:(void (^)())success
 failure:(void (^)())failure
 {
+    //模拟器直接放行
+    if(self.devicetoken == nil) {
+        success();
+        return;
+    }
+
     if(![KGUtil isEmptyString:self.devicetoken] && self.user != nil &&
        ![KGUtil isEmptyString:self.user.uid])
     {

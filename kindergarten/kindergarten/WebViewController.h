@@ -14,6 +14,8 @@
 
 @property (strong, nonatomic) NSString *url;
 
+@property (nonatomic) UIColor *bgColor;
+
 // 保留使用，这次disappear不清空
 @property (nonatomic) BOOL keepUsing;
 
