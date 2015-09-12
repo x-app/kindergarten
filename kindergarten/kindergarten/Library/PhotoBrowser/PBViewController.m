@@ -9,7 +9,7 @@
 #import "PBViewController.h"
 #import "AppDelegate.h"
 #import "KGUtil.h"
-@interface PBViewController ()<UIScrollViewDelegate, UIGestureRecognizerDelegate>
+@interface PBViewController ()<UIScrollViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray *menuItems;
 
@@ -64,13 +64,13 @@ const CGFloat segWidth = 20.f;
     // Do any additional setup after loading the view.
 }
 
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
-    return YES;
-}
-
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldBeRequiredToFailByGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
-    return [gestureRecognizer isKindOfClass:UIScreenEdgePanGestureRecognizer.class];
-}
+//- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+//    return YES;
+//}
+//
+//- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldBeRequiredToFailByGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+//    return [gestureRecognizer isKindOfClass:UIScreenEdgePanGestureRecognizer.class];
+//}
 
 -(UIStatusBarStyle)preferredStatusBarStyle{
     return UIStatusBarStyleLightContent;
