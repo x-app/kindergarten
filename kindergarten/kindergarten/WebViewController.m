@@ -142,6 +142,12 @@
     NSString *requestString = [[request URL] absoluteString];
     NSArray *components = [requestString componentsSeparatedByString:@"::"];//native::popview:
     
+    if([requestString hasPrefix:@"http://finishwebview"])
+    {
+        [self.navigationController popViewControllerAnimated:YES];
+        return NO;
+    }
+
     if (components != nil && [components count] > 0) {
         NSString *pocotol = [components objectAtIndex:0];
         if ([pocotol isEqualToString:@"native"]) {
@@ -158,7 +164,7 @@
             return NO;
         }
     }
-    return YES;
+        return YES;
 }
 
 
