@@ -71,10 +71,13 @@ static NSArray *month_cn;
 }
 
 + (NSDictionary *)getRequestBody:(NSDictionary *)data {
-    NSDate *date = [[NSDate alloc] init];
+    //NSDate *date = [[NSDate alloc] init];
+    NSDate *date = [NSDate date];
+    NSTimeZone* chinaZone = [NSTimeZone timeZoneForSecondsFromGMT:8*3600]; //转化到我们所在的东八区时间
     //现将时间转为2015-07-10 01:00:00的格式
     NSDateFormatter *df = [[NSDateFormatter alloc] init];
     [df setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    [df setTimeZone:chinaZone];
     NSString *dateStr = [df stringFromDate:date];
     NSMutableDictionary *body = [data mutableCopy];
     [body setObject:dateStr forKey:@"dateTime"];
