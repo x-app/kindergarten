@@ -162,7 +162,7 @@
             break;
         }
         case 7:{
-            UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Baby" bundle:nil];
+            UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Growup" bundle:nil];
             vc = [storyBoard instantiateViewControllerWithIdentifier:@"GrowupView"];
             
             [self.navigationController pushViewController:vc animated:YES];

@@ -24,6 +24,7 @@
 		12AC15DA1B48FB4D007C247B /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12AC15D91B48FB4D007C247B /* Login.storyboard */; };
 		12AC15F41B490BD1007C247B /* GartenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AC15F31B490BD1007C247B /* GartenViewController.m */; };
 		12AC15F71B490D80007C247B /* MeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12AC15F61B490D80007C247B /* MeViewController.m */; };
+		12B269221BB7917D00B07C8C /* background@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 12B269211BB7917D00B07C8C /* background@3x.png */; settings = {ASSET_TAGS = (); }; };
 		12C794951B44232300918497 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C794941B44232300918497 /* main.m */; };
 		12C794981B44232300918497 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C794971B44232300918497 /* AppDelegate.m */; };
 		12C7949B1B44232300918497 /* BabyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C7949A1B44232300918497 /* BabyViewController.m */; };
@@ -319,6 +320,7 @@
 		12AC15F31B490BD1007C247B /* GartenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GartenViewController.m; sourceTree = "<group>"; };
 		12AC15F51B490D80007C247B /* MeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeViewController.h; sourceTree = "<group>"; };
 		12AC15F61B490D80007C247B /* MeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeViewController.m; sourceTree = "<group>"; };
+		12B269211BB7917D00B07C8C /* background@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "background@3x.png"; path = "Resource/background@3x.png"; sourceTree = "<group>"; };
 		12C7948F1B44232300918497 /* kindergarten.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = kindergarten.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		12C794931B44232300918497 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		12C794941B44232300918497 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -1506,6 +1508,7 @@
 			isa = PBXGroup;
 			children = (
 				12F9F8A61B74D9F500CFDB1B /* tabicons */,
+				12B269211BB7917D00B07C8C /* background@3x.png */,
 				99F1EDD41B734ED700175CFB /* icon_add.png */,
 				99B860DE1B8849A600495B7B /* icon_add_image.png */,
 				99F1EDD51B734ED700175CFB /* icon_delete.png */,
@@ -1705,6 +1708,7 @@
 				99ABD5941B47FC3500B8DB8B /* help_4.png in Resources */,
 				12D207BF1B8B5426006E8826 /* my_icon_selected-Small@3x.png in Resources */,
 				99ABD5911B47FC3500B8DB8B /* help_1.png in Resources */,
+				12B269221BB7917D00B07C8C /* background@3x.png in Resources */,
 				127AE59A1B89BF9900A8716E /* teacher_home_head_img.png in Resources */,
 				12F9F9511B78ED5900CFDB1B /* feedback_icon-Small@2x.png in Resources */,
 				12F1378B1B8DDDB000FD3C23 /* home_growdoc-60@2x.png in Resources */,
