@@ -87,11 +87,15 @@
     self.progressView.progress = progress;
     
     if(progress >= 1){
-        [UIView animateWithDuration:.5f animations:^{
+        /*[UIView animateWithDuration:.5f animations:^{
             self.alpha = 0;
         } completion:^(BOOL finished) {
             [self removeFromSuperview];
-        }];
+        }];*/
+        self.alpha = 0;
+        if (self && self.superview) {
+            [self removeFromSuperview];
+        }
     }
 }
 
